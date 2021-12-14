@@ -1,0 +1,48 @@
+baseURL = "https://jacksalici.com/"
+paginate = 10
+theme = "salinger"
+title = "jacksalici"
+
+[params]
+DateFormat = "January 2006"
+author = "Jack Salici"
+copyright = 'Jack Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved.</a>'
+dark = "off"
+description = "Developer and designer based in Italy."
+header = "Howdy, I'm Jack Salici. 🍕🌵💻"
+keywords = ["jack salici", "Portfolio", "giacomo salici", "salici"]
+showHeaderOnHomepage = false
+
+
+
+[[params.socialIcons]]
+icon = "fab fa-github"
+name = "github"
+url = "https://github.com/jacksalici"
+
+
+[[params.socialIcons]]
+name = "instagram"
+url = "https://instagram.com/jacksalici"
+
+[[params.socialIcons]]
+name = "email"
+url = "mailto:hi@jacksalici.com"
+
+
+[params.analytics.google]
+siteVerificationTag = "G-ERD6XZB2P5"
+
+
+
+
+[Menu]
+[[Menu.Main]]
+name = "Projects."
+url = "/projects/"
+weight = 1
+
+[[Menu.Main]]
+name = "Contact me."
+url = "mailto:hey@jacksalici.com"
+weight = 2

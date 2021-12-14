@@ -1,0 +1,15 @@
++++
+date = 2020-07-02T22:00:00Z
+summary = "This 3d printing should reduce the ear pain caused by mask."
+keywords = []
+math = false
+slug = "ear-saver"
+tags = ["Crafting"]
+title = "A 3d model against the mask pain."
+toc = false
+
++++
+During the Covid-19 emergency, intending to reduce the ear pain caused by wearing the mask for several hours, I designed this ear saver that can be 3d printed in a few minutes.
+If you want, you can download the 3d model .stl from my [Thingiverse page](https://www.thingiverse.com/thing:4421036)
+
+![](/uploads/ear-saver/render1.jpg)
