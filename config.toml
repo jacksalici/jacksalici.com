@@ -9,8 +9,8 @@ author = "Jack Salici"
 copyright = 'Jack Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved.</a>'
 dark = "off"
 description = "Developer and designer based in Italy."
-header = "Howdy, I'm Jack Salici. 🍕🌵💻"
-keywords = ["jack salici", "Portfolio", "giacomo salici", "salici"]
+header = "Howdy, I'm <span style=\"white-space: nowrap;\">Jack. 🍕🌵💻</span>"
+keywords = ["jack salici", "Portfolio", "giacomo salici", "salici", "developer", "coding", "maker"]
 showHeaderOnHomepage = false
 
 

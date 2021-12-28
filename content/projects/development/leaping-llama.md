@@ -2,12 +2,7 @@
 title: Leaping Llama.
 date: 2021-07-21T22:00:00+00:00
 slug: leaping-llama
-summary: I developed a 2d game for Android.
-keywords: []
-tags:
-- development
-math: false
-toc: true
+summary: In my 2d game for Android, a llama shots and jumps.
 ---
 ![](/uploads/gameLogo.png)  
 

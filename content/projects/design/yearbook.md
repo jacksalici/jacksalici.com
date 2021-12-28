@@ -2,7 +2,7 @@
 title: I made my last year highschool yearbook.
 date: 2019-06-30T22:00:00+00:00
 slug: yearbook
-summary: I designed my high school's 2019 yearbook.
+summary: My high school's 2019 yearbook.
 keywords: []
 tags:
 - GraphicDesign

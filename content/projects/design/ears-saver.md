@@ -7,6 +7,7 @@ slug = "ear-saver"
 tags = ["Crafting"]
 title = "A 3d model against the mask pain."
 toc = false
+draft = true
 
 +++
 During the Covid-19 emergency, intending to reduce the ear pain caused by wearing the mask for several hours, I designed this ear saver that can be 3d printed in a few minutes.

@@ -1,12 +1,8 @@
 +++
 date = 2021-03-17T22:00:00Z
-keywords = []
-math = false
 slug = "3d-printed-drawers"
-tags = ["Crafting"]
 title = "Lack of drawers."
-toc = false
-summary = "I modded my Ikea Table 3d printing some stuffs."
+summary = "A 3d printed mod for my Ikea Table."
 +++
 
 
