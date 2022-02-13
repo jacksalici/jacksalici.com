@@ -6,7 +6,6 @@ summary = "A 3d printed mod for my Ikea Table."
 +++
 
 
-
 ![](/uploads/drawer1.jpg)
 
 The desk where I spend several hours per day is the Ikea Table Norråker. It has a little flaw: it has no drawers. Luckily there about 12 cm from the apron (the wooden panel that connects the legs and the top) to the edge of the surface, so I designed several drawers to put in that space.  

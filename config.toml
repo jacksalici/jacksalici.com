@@ -13,7 +13,11 @@ header = "Howdy, I'm <span style=\"white-space: nowrap;\">Jack. 🍕🌵💻</sp
 keywords = ["jack salici", "Portfolio", "giacomo salici", "salici", "developer", "coding", "maker"]
 showHeaderOnHomepage = false
 googleAnalytics = "G-TCJ26JMX8T"
+enableEmoji = true
 
+[permalinks]
+  '/' = '/:slug/'
+  'projects' = '/:slug/'
 
 
 [[params.socialIcons]]

@@ -4,15 +4,13 @@ date: 2021-12-21T22:00:00+00:00
 slug: notion-cli-list-manager
 summary: A command-line interface to manage Notion databases.
 ---
+
 ![](/uploads/notion-cli.gif)  
 
-
-
-[Notion](https://notion.so) is a very nice online tool for "task management, project management, knowledge management" (from Wikipedia), that allows to use databases for basically everything. I made a CLI (command-line interface) for managing those databases. If you want to give it a try:  
+[Notion](https://notion.so) is a nice tool for "task management, project management, knowledge management" (from Wikipedia), that allows you to use databases as lists of notes and pages. I have been using it for years but sometimes I fount that adding the record was a time wasting, so I have been developing a CLI (command-line interface) in Python for managing those databases. If you want to give it a try:  
 ```
 pip install notion-cli-list-manager
 ```  
-  
 
 You can read more on the [Github repository](https://github.com/jacksalici/notion-cli-list-manager), but basically the syntax is the following:
 
@@ -25,3 +23,4 @@ You can read more on the [Github repository](https://github.com/jacksalici/notio
 | `list set --token [token] --id [database_id]` | to set the token and the ID of the Notion Database you want as default. _This must be executed as the first command_. | You can get the `[token]` as internal api integration [here](https://www.notion.so/my-integrations). <br> You can get the database id from the database url: notion.so/[username]/`[database_id]`?v=[view_id].  | 
 
 Note that the project is not completed yet, so commands could change a bit. 
+
