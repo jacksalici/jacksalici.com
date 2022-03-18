@@ -1,8 +1,8 @@
 ---
-title: I made my last year highschool yearbook.
+summary: My last year highschool yearbook. 📒
 date: 2019-06-30T22:00:00+00:00
 slug: yearbook
-summary: My high school's 2019 yearbook.
+title: My high school's 2019 yearbook. 📒
 tags:
 - GraphicDesign
 ---

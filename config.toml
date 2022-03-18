@@ -8,12 +8,13 @@ DateFormat = "January 2006"
 author = "Jack Salici"
 copyright = 'Jack Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.<br>'
 dark = "off"
-description = "Developer and designer based in Italy."
-header = "Howdy, I'm <span style=\"white-space: nowrap;\">Jack. 🍕🌵💻</span>"
+description = "I'm a computer engineering student based in Modena, Italy. I like developing and designing random stuffs."
+header = "<strong>Hi, people call me Jack. 👨‍💻</strong>"
 keywords = ["jack salici", "Portfolio", "giacomo salici", "salici", "developer", "coding", "maker"]
 showHeaderOnHomepage = false
 googleAnalytics = "G-TCJ26JMX8T"
-enableEmoji = true
+twemoji = true
+
 
 
 [permalinks]
@@ -21,21 +22,47 @@ enableEmoji = true
   'projects' = '/:slug/'
 
 
-[[params.socialIcons]]
-icon = "fab fa-github"
+[[params.social]]
 name = "github"
 url = "https://github.com/jacksalici"
+icon = "fa fa-github"
+before = "Reach me on "
 
 
-[[params.socialIcons]]
+[[params.social]]
 name = "instagram"
 url = "https://instagram.com/jacksalici"
+icon = "fa fa-instagram"
+before = ", "
 
-[[params.socialIcons]]
+
+[[params.social]]
+name = "reddit"
+url = "https://reddit.com/u/jacksalici"
+icon = "fa fa-reddit-alien"
+before = ", "
+
+
+
+[[params.social]]
+name = "twitter"
+url = "https://twitter.com/jacksalici"
+icon = "fa fa-twitter"
+before = "and "
+
+
+[[params.social]]
 name = "email"
+icon = "fa fa-envelope"
 url = "mailto:hi@jacksalici.com"
+before = ", or drop me a line on"
 
-
+[[params.social]]
+name = "email"
+icon = "fa fa-telegram"
+url = "https://twitter.com/jacksalici"
+before = "and on "
+after = "."
 
 
 
@@ -49,3 +76,4 @@ weight = 1
 name = "Contact me."
 url = "mailto:hey@jacksalici.com"
 weight = 2
+

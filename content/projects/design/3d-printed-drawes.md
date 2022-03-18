@@ -1,8 +1,8 @@
 +++
 date = 2021-03-17T22:00:00Z
 slug = "3d-printed-drawers"
-title = "Lack of drawers."
-summary = "A 3d printed mod for my Ikea Table."
+title = "Lack of drawers.🗄"
+summary = "A 3d printed mod 🗄 for my Ikea Table. "
 +++
 
 

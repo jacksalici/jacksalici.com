@@ -1,8 +1,8 @@
 ---
-title: Leaping Llama.
+title: Leaping Llama. 🦙
 date: 2021-07-21T22:00:00+00:00
 slug: leaping-llama
-summary: In my 2d game for Android, a llama shots and jumps.
+summary: In my 2d game for Android, a llama 🦙 shots and jumps.
 ---
 ![](/uploads/gameLogo.png)  
 
