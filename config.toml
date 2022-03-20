@@ -77,3 +77,6 @@ name = "Contact me."
 url = "mailto:hey@jacksalici.com"
 weight = 2
 
+[taxonomies]
+	tag = "tags"
+	category = "categories"
