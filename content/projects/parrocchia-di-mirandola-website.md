@@ -4,7 +4,6 @@ description = ""
 draft = true
 keywords = []
 slug = "parish-website"
-tags = ["WebDesign"]
 title = "I created just another website."
 summary = "I created a new version of my parish' website."
 toc = false

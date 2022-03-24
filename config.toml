@@ -74,9 +74,15 @@ weight = 1
 
 [[Menu.Main]]
 name = "Contact me."
-url = "mailto:hey@jacksalici.com"
+url = "/contact"
 weight = 2
 
 [taxonomies]
 	tag = "tags"
 	category = "categories"
+
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
