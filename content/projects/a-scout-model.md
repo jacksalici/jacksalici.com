@@ -1,8 +1,8 @@
 ---
-title: "Modeling scouts. 🏕"
+title: "Modeling scouts.🏕"
 date: 2016-07-02T22:00:00Z
 slug: "a-scout-model"
-summary: "A model of a patrol area at a scout camp. 🏕"
+description: "A model of a scout camp. 🏕"
 categories: ["crafting"]
 tags: ["Model"]
 ---

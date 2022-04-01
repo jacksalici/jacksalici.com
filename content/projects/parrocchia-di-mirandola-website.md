@@ -1,11 +1,10 @@
 +++
 date = 2020-08-31T22:00:00Z
-description = ""
 draft = true
 keywords = []
 slug = "parish-website"
 title = "I created just another website."
-summary = "I created a new version of my parish' website."
+description = "I created a new version of my parish' website."
 toc = false
 +++
 

@@ -1,12 +1,12 @@
 baseURL = "https://jacksalici.com/"
-paginate = 10
 theme = "salinger"
 title = "jacksalici"
+copyright = 'Jack Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.'
 
 [params]
 DateFormat = "January 2006"
+
 author = "Jack Salici"
-copyright = 'Jack Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.<br>'
 dark = "off"
 description = "I'm a computer engineering student based in Modena, Italy. I like developing and designing random stuffs."
 header = "<strong>Hi, people call me  <span style=\"white-space: nowrap;\">Jack. 👨‍💻</span></strong>"

@@ -2,7 +2,7 @@
 title: Leaping Llama. 🦙
 date: 2021-07-21T22:00:00+00:00
 slug: leaping-llama
-summary: In my 2d game for Android, a llama 🦙 shots and jumps.
+description: A 2d game for Android, where a llama 🦙 shots and jumps.
 categories: ["development"]
 tags: ["Java", "Android", "LibGDX"]
 
