@@ -9,13 +9,9 @@ DateFormat = "January 2006"
 author = "Jack Salici"
 dark = "off"
 description = "I'm a computer engineering student based in Modena, Italy. I like developing and designing random stuffs."
-header = "<strong>Hi, people call me  <span style=\"white-space: nowrap;\">Jack. 👨‍💻</span></strong>"
+header = "Howdy, people call me  <span style=\"white-space: nowrap;\">Jack. 👨‍💻</span>"
 keywords = ["jack salici", "Portfolio", "giacomo salici", "salici", "developer", "coding", "maker"]
-showHeaderOnHomepage = false
-googleAnalytics = "G-TCJ26JMX8T"
-twemoji = true
-text404 = "Since the page you were looking for seems like doesn't exist, we <strong>strongly</strong> suggest you to better investigate the URL and/or go back to the <a href=\"/\">home</a>. </br></br> <iframe src=\"https://giphy.com/embed/aCKMaeduKfFXG\" width=\"480\" height=\"480\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe>"
-fontawesomekitcode = "72deff626f"
+ 
 
 
 [permalinks]
@@ -59,7 +55,7 @@ url = "mailto:hi@jacksalici.com"
 before = ", or drop me a line on"
 
 [[params.social]]
-name = "email"
+name = "telegram"
 icon = "fa fa-telegram"
 url = "https://t.me/jacksalici"
 before = "and on "
