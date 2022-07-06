@@ -1,0 +1,70 @@
+languageCode = 'en-us'
+
+
+
+baseURL = "https://jacksalici.com/"
+theme = "skycraper"
+title = "jacksalici"
+copyright = 'Jack Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.'
+
+[params]
+DateFormat = "January 2006"
+
+author = "Jack Salici"
+description = "I'm a computer engineering student based in Modena, Italy. I like developing and designing random stuffs."
+header = "Howdy, people call me  <span style=\"white-space: nowrap;\">Jack. 👨‍💻</span>"
+keywords = ["jack salici", "Portfolio", "giacomo salici", "salici", "developer", "coding", "maker"]
+showHeaderOnHomepage = false
+twemoji = true
+
+
+[permalinks]
+  '/' = '/:slug/'
+  'projects' = '/:slug/'
+
+
+[[params.social]]
+name = "github"
+url = "https://github.com/jacksalici"
+icon = "fa-brands fa-github white fa-xl"
+
+[[params.social]]
+name = "linkedin"
+url = "https://linkedin.com/in/jacksalici"
+icon = "fa-brands fa-linkedin white fa-xl"
+
+
+[[params.social]]
+name = "email"
+icon = "fa-solid fa-envelope white fa-xl"
+url = "mailto:hi@jacksalici.com"
+
+[[params.social]]
+name = "telegram"
+icon = "fa-brands fa-telegram white fa-xl"
+url = "https://t.me/jacksalici"
+
+
+
+[Menu]
+[[Menu.Main]]
+name = "Projects."
+url = "/projects/"
+weight = 1
+
+[[Menu.Main]]
+name = "Contact me."
+url = "/contact"
+weight = 2
+
+[taxonomies]
+	tag = "tags"
+	category = "categories"
+
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+

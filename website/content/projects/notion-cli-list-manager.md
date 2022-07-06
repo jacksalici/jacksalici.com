@@ -1,0 +1,19 @@
+---
+title: Notion Cli List Manager. 📟
+date: 2021-12-21T22:00:00+00:00
+slug: notion-cli-list-manager
+description: A command-line interface 📟 to manage Notion databases.
+categories: ["development"]
+tags: ["Notion", "Cli", "Python"]
+---
+
+![](/uploads/notion-cli.gif)  
+
+[Notion](https://notion.so) is a nice tool for "task management, project management, knowledge management" (from Wikipedia), that allows you to use databases as lists of notes and pages. I have been using it for years but sometimes I fount that adding the record was a time wasting, so I have been developing a CLI (command-line interface) in Python for managing those databases. If you want to give it a try:  
+```
+pip install notion-cli-list-manager
+```  
+
+You can read more on the [Github repository](https://github.com/jacksalici/notion-cli-list-manager). Note that the project is not completed yet, so commands could change a bit. 
+
+<img class="not-sized" alt="GitHub Repo stars" src="https://img.shields.io/github/stars/jacksalici/notion-cli-list-manager?style=social">

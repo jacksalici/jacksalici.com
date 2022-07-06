@@ -1,0 +1,41 @@
+
+
+{{ define "main" }}
+
+
+<div class="background">
+  <div class="background-content">
+    <h3 class="background-title">creative developer & digital craftsman.</h3>
+</div>
+<div class="foreground">
+    <img class="logo" src="logow.svg"/>
+    <h1 class="text1">Developer and designer from Italy. <a href="/projects">Checkout my projects.</a></h3>
+
+
+      {{- if isset .Site.Params "social" }}<div class="icons">
+        {{ range $index, $elem := .Site.Params.social}}
+        <a class="icon" target="_blank" rel="noopener" href="{{ $elem.url }}" aria-label="{{ $elem.name }}">
+            <i class="{{ $elem.icon }}" aria-hidden="true"></i>
+        </a>
+        {{ end }}
+      </div> 
+        {{ end }}
+  </div>
+</div>
+
+
+
+
+
+   
+
+ <!-- SOCIAL --> 
+   
+
+</div>
+
+
+ <!-- POST LIST --> 
+
+
+{{ end }}

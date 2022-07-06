@@ -1,0 +1,12 @@
+{{ define "main" }}
+    <main>
+        <h2 class="term-title">{{.Title}}</h2>
+        <div class="content">{{- .Content -}}</div>
+
+        {{ range  .RegularPages}}
+            {{.Render "li"}}
+        {{ end }}
+
+        {{.Render "list"}}
+    </main>
+{{ end }}
