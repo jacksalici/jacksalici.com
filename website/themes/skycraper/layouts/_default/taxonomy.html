@@ -1,7 +1,13 @@
 {{ define "main" }}
-<main>
+
+<div id="main-header">
+
   <h2>All {{ .Type }}</h2>
 
+</div>
+
+
+<main>
   <ul>
     {{- $type := .Type }} {{- range $key, $value := .Data.Terms.Alphabetical }}
     <li class="li-post">

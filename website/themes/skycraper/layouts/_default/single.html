@@ -1,8 +1,8 @@
 {{ define "main" }}
-<main>
+
   
 <article>
-  <div class="post-header">
+  <div id="main-header">
     <h1 class="name">{{ .Title }}</h1>
 
     {{with .Params.hideMeta}}
@@ -26,6 +26,9 @@
     {{end}}
   </div>
 
+  <main>
+
+
   {{if .Params.toc}}
   <aside class="toc">
     <h4>Table of Content</h4>
@@ -41,6 +44,7 @@
     <a href="/tags/{{ . | urlize}}">#{{- . -}}</a>
       {{- end -}}</h6> {{- end -}}
 
+    </main>
     </article>
-  </main>
+
 {{ end }}

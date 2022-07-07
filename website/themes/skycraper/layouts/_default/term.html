@@ -1,7 +1,15 @@
 {{ define "main" }}
-<main>
+
+<div id="main-header">
+
   <h3 class="term-type">{{ .Type | singularize}}</h3>
   <h2 class="term-title">{{ .Title }}</h2>
+
+</div>
+
+
+
+<main>
   <ul>
     {{ range .Data.Pages }} {{.Render "li"}} {{ end }}
   </ul>
