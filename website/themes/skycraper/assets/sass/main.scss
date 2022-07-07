@@ -244,6 +244,9 @@ img {
 }
 
 .li-post {
+  display: block;
+  max-width: $content-width;
+  margin: auto;
   list-style-type: none;
   margin-left: 0pt;
   border-radius: $radius;
@@ -299,6 +302,12 @@ Header bar
 header {
   margin-top: 0px;
 
+
+  padding: 4%;
+  @include responsive($big-display) {
+    padding: 50px;
+  }
+
   .navbar {
     display: flex;
     width: 100%;
@@ -337,10 +346,10 @@ header {
 
     .logo {
       display: block;
+      margin-top: auto;
+      margin-bottom: auto;
       margin-left: 0;
-      padding-left: 15px;
       width: unset;
-      align-self: center;
       text-decoration: none;
       font-family: $secondary-font;
       font-weight: bold;
@@ -418,12 +427,15 @@ main {
   background-color: $backgound-color;
   padding: 4%;
   color: black;
+  min-height: 90vh;
   @include responsive($big-display) {
     padding: 50px;
   }
 }
 
 #main-header {
+  max-width: $content-width;
+  margin: auto;
   padding: 4%;
   @include responsive($big-display) {
     padding: 50px;

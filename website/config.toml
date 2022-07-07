@@ -46,17 +46,6 @@ url = "https://t.me/jacksalici"
 
 
 
-[Menu]
-[[Menu.Main]]
-name = "Projects."
-url = "/projects/"
-weight = 1
-
-[[Menu.Main]]
-name = "Contact me."
-url = "/contact"
-weight = 2
-
 [taxonomies]
 	tag = "tags"
 	category = "categories"

@@ -17,6 +17,5 @@ Reach me on <a class="icon" target="_blank" rel="noopener" href="https://github.
     <i class="fa fa-envelope" aria-hidden="true"></i>
   </a> and on <a class="icon" target="_blank" rel="noopener" href="https://t.me/jacksalici" aria-label="email">
     <i class="fa fa-telegram" aria-hidden="true"></i>
-  </a>.
+  </a>. </br>Never mind the  <a href="https://media3.giphy.com/media/Hm3rh1nMYe9BR20ThG/giphy.gif?cid=790b761130400a7fbc970319789d40d7c4179094d6e3b092&rid=giphy.gif&ct=g">gif link.</a>
 
-<div style="width:100%;height:0;padding-bottom:83%;position:relative;"><iframe src="https://giphy.com/embed/Hm3rh1nMYe9BR20ThG" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/theoffice-the-office-diwali-tv-Hm3rh1nMYe9BR20ThG"></a></p>
