@@ -15,7 +15,7 @@ description = "I'm a computer engineering student based in Modena, Italy. I like
 header = "Howdy, people call me  <span style=\"white-space: nowrap;\">Jack. 👨‍💻</span>"
 keywords = ["jack salici", "Portfolio", "giacomo salici", "salici", "developer", "coding", "maker"]
 showHeaderOnHomepage = false
-twemoji = false
+twemoji = true
 
 
 [permalinks]
@@ -47,7 +47,7 @@ url = "https://t.me/jacksalici"
 
 
 [taxonomies]
-	tag = "tags"
+	#tag = "tags"
 	category = "categories"
 
 

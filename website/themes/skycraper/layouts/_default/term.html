@@ -8,11 +8,10 @@
 </div>
 
 
+<li-main>
 
-<main>
-  <ul>
     {{ range .Data.Pages }} {{.Render "li"}} {{ end }}
-  </ul>
   <h6 ><a class="term-back" href="/{{.Type | urlize}}">← All {{.Type}}.</a></h6>
-</main>
+
+</li-main>
 {{ end}}

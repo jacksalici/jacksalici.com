@@ -6,12 +6,12 @@
         <div class="content">{{- .Content -}}</div>
 
         </div>
-        <main>
-
+        
+        <li-main>
         {{ range  .RegularPages}}
             {{.Render "li"}}
         {{ end }}
 
         {{.Render "list"}}
-    </main>
+        </li-main>
 {{ end }}

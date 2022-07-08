@@ -7,10 +7,9 @@
 </div>
 
 
-<main>
-  <ul>
+<li-main>
     {{- $type := .Type }} {{- range $key, $value := .Data.Terms.Alphabetical }}
-    <li class="li-post">
+    <div class="li-post">
       {{- $name := .Name }} {{- $count := .Count }} {{- with $.Site.GetPage
       (printf "/%s/%s" $type $name) }}
       <p class="li-title">
@@ -19,9 +18,8 @@
       </p>
         {{- end }}
       
-    </li>
+    </div>
 
     {{- end }}
-  </ul>
-</main>
+</li-main>
 {{ end }}
