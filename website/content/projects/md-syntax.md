@@ -6,7 +6,7 @@ description: "A guide to Markdown Syntax"
 categories: ["crafting"]
 tags: ["Model"]
 toc: true
-draft: false
+draft: true
 ---
 
 
