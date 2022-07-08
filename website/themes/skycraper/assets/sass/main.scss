@@ -191,6 +191,7 @@ footer {
 
 img {
   width: 100%;
+  border-radius: $radius;
 }
 
 .not-sized {
@@ -243,42 +244,82 @@ img {
   max-width: $content-width;
 }
 
-.li-post {
-  display: block;
+li-main{
   max-width: $content-width;
   margin: auto;
-  list-style-type: none;
-  margin-left: 0pt;
+  padding: 4%;
+  @include responsive($big-display) {
+    padding: 50px;
+  }
+  display: block;
+
+  ul{
+    padding-left: 0px;
+  }
+
+}
+
+
+.li-link{
+  text-decoration: none;
+}:hover{
+  text-decoration: none;
+}
+
+.li-post {
+  background-color: $backgound-color;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
   border-radius: $radius;
   padding: 20px;
-  width: fit-content;
   text-decoration: none;
-  text-align: left;
-  a {
-    text-decoration: none;
-  }
+  color: $article-text-color;
+  
+}
 
-  .li-title {
-    font-weight: 400;
-    font-family: $primary-font;
-    margin: 2px 0px;
-  }
+.li-title {
+  font-weight: 400;
+  font-family: $primary-font;
+  padding: 0;
+  color: $article-text-color;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
-  .li-meta {
-    color: $article-text-sec-color;
-  }
+.li-meta {
+  display: flex;
+  font-size: 0.8em;
+ 
+}
 
-  .li-count {
-    color: $article-text-sec-color;
-    font-family: $secondary-font;
-    font-size: 150%;
-    padding-left: 30px;
-    text-decoration: none;
-    float: right;
-  }
+.li-count {
+  
+  font-family: $secondary-font;
+  font-size: 150%;
+  padding-left: 30px;
+  text-decoration: none;
+  float: right;
+}
+
+.li-categories{
+  display: flex;
+  padding-top: 10px;
+}
+
+.li-date{
+  display: flex;
+  padding-top: 10px;
+  padding-right: 10px;
+  
+}
+
+.li-obj{
+  margin-right: 5px;
 }
 
 .li-post:hover {
+  background-color: white;
   .li-title {
     text-decoration: underline;
   }
@@ -301,7 +342,6 @@ Header bar
 
 header {
   margin-top: 0px;
-
 
   padding: 4%;
   @include responsive($big-display) {
@@ -383,29 +423,39 @@ Emoji and Icons
 }
 
 .background-title {
-  margin-top: 0;
-  margin-bottom: 0;
+  align-self: center;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  left:0;
+  right:0;
   color: white;
-  font-family: "Montserrat", sans-serif;
-  float: right;
   font-weight: 800;
   font-size: 600%;
   opacity: 20%;
   line-height: 80%;
   text-transform: uppercase;
+  max-width:700px;
+  
+  padding: -5%;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
-
+  position: absolute;
   @media only screen and (max-width: 700px) {
     font-size: 450%;
+  }
+  @media only screen and (max-width: 480px) {
+    word-break: break-all;
   }
 }
 
 body {
   margin: 0;
   padding-top: 0px;
+  
 
   background: #005aa7; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -428,15 +478,18 @@ main {
   padding: 4%;
   color: black;
   min-height: 90vh;
+  border-radius: $radius $radius 0 0;
   @include responsive($big-display) {
     padding: 50px;
+    border-radius: 5vw 5vw 0 0;
   }
 }
 
 #main-header {
-  max-width: $content-width;
   margin: auto;
+  max-width: $content-width;
   padding: 4%;
+  color: $primary-color !important;
   @include responsive($big-display) {
     padding: 50px;
   }
@@ -445,33 +498,20 @@ main {
 .background {
   min-height: 100vh;
   max-height: 100vh;
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-}
+  min-width: 100vw;
+  max-width: 100vw;
+  max-width: $content-width;
 
-.background-content {
-  max-width: 550px;
-
-  margin: auto;
   overflow-wrap: break-word;
-  //word-break: break-all;
+
   user-select: none;
 
-  position: absolute;
-
-  align-items: center;
   display: flex;
 
-  justify-content: center;
-  flex-direction: column;
-
-  @media only screen and (max-width: 480px) {
-    word-break: break-all;
-  }
+ 
 }
+
+
 
 .text1 {
   font-family: "Montserrat", sans-serif;
@@ -489,7 +529,6 @@ main {
     text-decoration: underline;
   }
 }
-
 .icons {
   text-align: center;
   margin-top: 15px;
@@ -508,17 +547,13 @@ main {
   margin-right: auto;
   margin-bottom: 15px;
   display: block;
+  border-radius: 0;
 }
 
 .foreground {
-  align-items: center;
   padding: 50px;
   display: block;
-
-  flex: 1;
-
-  -webkit-user-select: all; /* Safari */
-  -moz-user-select: all; /* Firefox */
-  -ms-user-select: all; /* IE10+/Edge */
-  user-select: all; /* Standard */
+  position: relative;
+  margin: auto;
+  margin-top: auto;
 }
