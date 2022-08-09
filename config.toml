@@ -20,7 +20,7 @@ twemoji = true
 
 [permalinks]
   '/' = '/:slug/'
-  'projects' = '/:slug/'
+  'projects' = '/projects/:slug/'
 
 
 [[params.social]]
