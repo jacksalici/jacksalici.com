@@ -11,7 +11,7 @@ tags: ["Model"]
 [emojipoll.jacksalici.com](https://emojipoll.jacksalici.com)  
 
 
-Create a poll using random emoji. Just fill the entries, copy the poll text and paste it on your favorite reaction-featured instant-messaging app.  
+__EmojiPoll__ is a tool for creating polls using random emoji. Just fill the entries, copy the poll text and paste it on your favorite reaction-featured instant-messaging app.  
 
 Created using Vue.js.  
 

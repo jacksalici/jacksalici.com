@@ -9,7 +9,7 @@ tags: ["Model"]
 ---
 
 
-I developed a simple RESTful API for querying emoji, since I needed one for developing [emojipoll](https://jacksalici.com/emojipoll). I used Python and FastAPI, and now is hosted on [Deta](http://emoji.deta.dev).
+I developed a simple RESTful API for querying emoji, since I needed one for developing [EmojiPoll](https://jacksalici.com/projects/emojipoll). I used Python and FastAPI, and now is hosted on [Deta](http://emoji.deta.dev).
 
 ```python
 

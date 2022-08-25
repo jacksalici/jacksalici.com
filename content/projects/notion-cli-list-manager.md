@@ -9,7 +9,7 @@ tags: ["Notion", "Cli", "Python"]
 
 ![](/uploads/notion-cli.gif)  
 
-[Notion](https://notion.so) is a nice tool for "task management, project management, knowledge management" (from Wikipedia), that allows you to use databases as lists of notes and pages. I have been using it for years but sometimes I fount that adding the record was a time wasting, so I have been developing a CLI (command-line interface) in Python for managing those databases. If you want to give it a try:  
+[Notion](https://notion.so) is a nice tool for "task management, project management, knowledge management" (from Wikipedia), that allows you to use databases as lists of notes and pages. I have been using it for years but sometimes I fount that adding the record was a time wasting, so I have been developing a __CLI__ (command-line interface) in Python for managing those databases. If you want to give it a try:  
 ```
 pip install notion-cli-list-manager
 ```  
