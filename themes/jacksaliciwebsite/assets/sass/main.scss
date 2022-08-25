@@ -75,7 +75,7 @@ a {
 
   //cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='30' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='100%'>👆</text></svg>") 16 0, auto;
 
-  @include transition(color 500ms ease-out);
+  @include transition(color 200ms ease-in);
 }
 
 a:hover {
@@ -303,13 +303,17 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 
 .li-categories{
   display: flex;
-  padding-top: 10px;
+  padding: 10px;
+}
+
+.li-langs{
+  display: flex;
+  padding: 10px;
 }
 
 .li-date{
   display: flex;
-  padding-top: 10px;
-  padding-right: 10px;
+  padding: 10px
   
 }
 
@@ -496,7 +500,7 @@ main {
   text-align: justify;
   margin-bottom: 0px;
   margin: auto;
-  background-color: $backgound-color;
+  background-color: white;
   max-width: $content-width;
   color: black;
   min-height: 90vh;

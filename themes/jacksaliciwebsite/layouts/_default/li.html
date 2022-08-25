@@ -16,14 +16,28 @@
         <div class="li-obj">
           {{$myFormat := "January 2, 2006"}}
           {{with .Site.Params.DateFormat}} {{$myFormat = .}} {{end}}
-          {{ time.Format $myFormat .Date}}{{with .Params.Categories}}
+          {{ time.Format $myFormat .Date}}
         </div>
       </div>
 
+      {{with .Params.Categories}}
       <div class="li-categories">
         <div class="li-obj">
           <i class="fa-regular fa-folder icon"></i> 
         </div>
+        <div class="li-obj">
+          {{$n := len .}}
+          {{range $ind, $val := .}} {{ $val }}
+            {{- if lt $ind (sub $n 1) -}},{{- else -}}{{end}} {{ end }} {{else}}
+          {{ end }}
+        </div>
+      </div>
+
+      {{with .Params.Langs}}
+      <div class="li-langs">
+        <div class="li-obj">
+          <i class="fa-solid fa-code icon"></i> 
+      </div>
         <div class="li-obj">
           {{$n := len .}}
           {{range $ind, $val := .}} {{ $val }}

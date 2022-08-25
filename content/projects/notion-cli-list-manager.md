@@ -5,6 +5,8 @@ slug: notion-cli-list-manager
 description: A command-line interface 📟 to manage Notion databases.
 categories: ["development"]
 tags: ["Notion", "Cli", "Python"]
+langs: ["Python"]
+
 ---
 
 ![](/uploads/notion-cli.gif)  

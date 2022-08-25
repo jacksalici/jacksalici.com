@@ -4,7 +4,7 @@ date: 2022-08-09T22:00:00Z
 slug: "emojipoll"
 description: "A tool for creating polls 📮 using random emoji."
 categories: ["development"]
-tags: ["Model"]
+langs: ["Vue"]
 ---
 
 

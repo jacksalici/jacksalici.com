@@ -6,6 +6,8 @@ slug: "salinger-theme"
 description: "A minimalistic theme for Hugo framework."
 categories: ["development"]
 tags: ["Model"]
+langs: ["Hugo"]
+
 ---
 
 

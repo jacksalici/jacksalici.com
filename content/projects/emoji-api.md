@@ -6,6 +6,8 @@ slug: "emoji-list-api"
 description: "A simple API for querying emoji. 😁"
 categories: ["development"]
 tags: ["Model"]
+langs: ["Python"]
+
 ---
 
 

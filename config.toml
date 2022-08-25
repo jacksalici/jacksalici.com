@@ -49,7 +49,7 @@ url = "https://t.me/jacksalici"
 [taxonomies]
 	#tag = "tags"
 	category = "categories"
-
+  lang = "languages"
 
 [markup]
   [markup.goldmark]
