@@ -107,8 +107,8 @@ aside {
 .post-text {
 
   hyphens: auto;
-  max-width: $content-width;
-  margin: auto;
+
+  padding: 30px;
   
 }
 
@@ -272,6 +272,8 @@ li-main{
   padding: 20px;
   text-decoration: none;
   color: $article-text-color;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
   
 }
 
@@ -423,7 +425,7 @@ Emoji and Icons
   color: white;
   font-weight: 800;
   font-size: 600%;
-  opacity: 20%;
+  opacity: 5%;
   line-height: 80%;
   text-transform: uppercase;
   margin-left: -3%;
@@ -474,31 +476,33 @@ body {
   margin: 0;
   padding-top: 0px;
 
-  background: #005aa7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
+  background: #343434; /* fallback for old browsers */
+  /*background: -webkit-linear-gradient(
     to bottom,
     #005aa7,
     #fffde4
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
+  );*/ /* Chrome 10-25, Safari 5.1-6 */
+  /*background: linear-gradient(
     to bottom,
     #005aa7,
     #fffde4
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  );*/ /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-attachment: fixed;
 }
 
 main {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
   text-align: justify;
   margin-bottom: 0px;
+  margin: auto;
   background-color: $backgound-color;
-  padding: 4%;
+  max-width: $content-width;
   color: black;
   min-height: 90vh;
   border-radius: $radius $radius 0 0;
   @include responsive($big-display) {
-    padding: 50px;
-    border-radius: 5vw 5vw 0 0;
+    border-radius: $radius $radius 0 0;
   }
 }
 
@@ -573,4 +577,23 @@ main {
   position: relative;
   margin: auto;
   margin-top: auto;
+}
+
+
+svg{
+  
+  z-index: -1000;
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+circle {
+  fill: white;
+  position: relative;
+  z-index: 100;
 }
