@@ -109,7 +109,8 @@ aside {
   hyphens: auto;
 
   padding: 30px;
-  
+  padding-top: 10px;
+  margin-top: 10px;
 }
 
 blockquote {
@@ -171,10 +172,11 @@ pre {
 }
 
 footer {
-  margin-top: 150px;
-  margin-bottom: 50px;
-  padding-bottom: 30px;
-  position: absolute;
+  max-width: $content-width;
+  width: 100%;
+  margin: auto auto 20px auto;
+  
+
 }
 
 .section-title {
@@ -201,7 +203,8 @@ img {
   text-transform: capitalize;
 }
 .term-title {
-  text-transform: capitalize;
+  text-transform: uppercase;
+  font-family: $secondary-font;
 }
 .term-back {
   color: $secondary-color;
@@ -224,7 +227,7 @@ img {
 .content {
   display: block;
   max-width: $content-width;
-  font-family: $secondary-font;
+  font-family: $primary-font;
   p {
     text-align: justify;
     margin-bottom: 0px;
@@ -279,7 +282,8 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 
 .li-title {
   font-weight: 400;
-  font-family: $primary-font;
+  font-family: $secondary-font;
+  text-transform: uppercase;
   padding: 0;
   color: $article-text-color;
   padding-top: 5px;
@@ -288,7 +292,7 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 .li-meta {
   display: flex;
   font-size: 0.7em;
-  color: rgba(0, 0, 0, 0.35);
+  color: rgb(0, 0, 0);
   padding-top: 15px;
 
 }
@@ -327,7 +331,7 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .li-post:hover {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
   .li-title {
     text-decoration: underline;
   }
@@ -433,10 +437,10 @@ Emoji and Icons
 .background-text{
   color: white;
   
-  font-weight: 800;
+  font-weight: 900;
   font-size: 600%;
   opacity: 10%;
-  line-height: 80%;
+  line-height: 90%;
   text-transform: uppercase;
   margin-left: -3%;
   margin-right: -6%;
@@ -444,7 +448,7 @@ Emoji and Icons
   
 
   @media only screen and (max-width: 700px) {
-    font-size: 540%;
+    font-size: 520%;
   }
   @media only screen and (max-width: 480px) {
     word-break: break-all;
@@ -486,8 +490,11 @@ body {
   margin: 0;
   padding-top: 0px;
 
-  background-color: #343434; /* fallback for old browsers */
+  background-color: $dark; /* fallback for old browsers */
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
 
   /*background: -webkit-linear-gradient(
@@ -511,11 +518,10 @@ main {
   margin: auto;
   background-color: white;
   max-width: $content-width;
-  color: black;
-  min-height: 90vh;
-  border-radius: $radius $radius 0 0;
+  color: $dark;
+  border-radius: $radius;
   @include responsive($big-display) {
-    border-radius: $radius $radius 0 0;
+    border-radius: $radius;
   }
 }
 
@@ -529,7 +535,11 @@ main {
   }
 
   .name{
-    font-size: 1.7em;
+    font-size: 1.9em;
+    font-family: $secondary-font;
+    text-transform: uppercase;
+    line-break: auto;
+    hyphens: auto;
   }
 }
 
@@ -552,11 +562,11 @@ main {
 
 
 .foreground-text {
-  font-family: "Montserrat", sans-serif;
+  font-family:$primary-font;
   color: rgb(255, 255, 255);
   margin: auto;
   text-align: center;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1em;
   max-width: 300px;
 
@@ -597,16 +607,17 @@ main {
 }
 
 
-svg{
-  
+#svg{
+  opacity: 20%;
   z-index: -1000;
   position: fixed;
   top: 0;
   box-sizing: border-box;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 circle {

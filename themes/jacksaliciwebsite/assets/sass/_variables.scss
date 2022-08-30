@@ -4,11 +4,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
 
-//fonts
-$primary-font: "Montserrat", sans-serif;
-$secondary-font: "Montserrat", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700&family=Oswald:wght@600&family=Roboto+Mono:ital,wght@0,500;0,700;1,500;1,700&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+$primary-font: "Merriweather Sans", sans-serif;
+$secondary-font: "Roboto Mono", sans-serif;
 $quote-font: "Amatic SC", cursive;
-$monospace-font: "Fira Mono", monospace;
+$monospace-font: "Roboto Mono", monospace;
 
 //colors light
 
@@ -20,6 +21,7 @@ $article-text-sec-color: black;
 $link-color: #c8087b;
 $backgound-color: #ffffff;
 $backgound-secondary-color: #ffffff;
+$dark: rgb(39, 30, 71);
 
 $secondary-color: white;
 $selected:  rgba(0, 255, 238, 0.754);

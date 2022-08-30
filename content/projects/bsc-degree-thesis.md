@@ -3,7 +3,7 @@ title: "Blockchain technologies applied to the digitalization of governance proc
 date: 2022-07-02T22:00:00Z
 publishDate: 2022-07-02T22:00:00Z
 slug: "bsc-degree-thesis"
-description: "My computer engineering degree's final dissertion ìs about blockchain integration in management software."
+description: "My computer engineering degree's final dissertion is about blockchain integration in management software."
 categories: ["papers"]
 langs: ["Solidity"]
 ---
@@ -18,4 +18,4 @@ Along with the spread of blockchain popularity, the interest of X DataNet in tha
 
 X DataNet e-voting and notary software could integrate the blockchain technology to ensure immutable procedures, called smart contracts, to provide an additional security level to an already established architecture.  Blockchain would represent an innovative way to improve electronic ballots and documents' digital notarization, playing the role of a trusted third party. The prototype of the digital notary service is based on the document digest upload to the blockchain, which could also integrate the e-voting analyzed protocol, a blind-signature scheme over ECC cryptography. 
 
-_For obtain the entire thesis please conctact me._
+_For getting the entire paper please conctact me._
