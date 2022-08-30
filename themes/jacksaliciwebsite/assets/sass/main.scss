@@ -282,14 +282,19 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   font-family: $primary-font;
   padding: 0;
   color: $article-text-color;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 5px;
 }
 
 .li-meta {
   display: flex;
-  font-size: 0.8em;
- 
+  font-size: 0.7em;
+  color: rgba(0, 0, 0, 0.35);
+  padding-top: 15px;
+
+}
+
+.li-meta-page{
+  color: white;
 }
 
 .li-count {
@@ -303,17 +308,17 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 
 .li-categories{
   display: flex;
-  padding: 10px;
+  padding-right: 10px;
 }
 
 .li-langs{
   display: flex;
-  padding: 10px;
+  padding-right: 10px;
 }
 
 .li-date{
   display: flex;
-  padding: 10px
+  padding-right: 10px
   
 }
 
@@ -427,9 +432,10 @@ Emoji and Icons
 
 .background-text{
   color: white;
+  
   font-weight: 800;
   font-size: 600%;
-  opacity: 5%;
+  opacity: 10%;
   line-height: 80%;
   text-transform: uppercase;
   margin-left: -3%;
@@ -480,7 +486,10 @@ body {
   margin: 0;
   padding-top: 0px;
 
-  background: #343434; /* fallback for old browsers */
+  background-color: #343434; /* fallback for old browsers */
+
+
+
   /*background: -webkit-linear-gradient(
     to bottom,
     #005aa7,
@@ -517,6 +526,10 @@ main {
   color: $primary-color !important;
   @include responsive($big-display) {
     padding: 50px;
+  }
+
+  .name{
+    font-size: 1.7em;
   }
 }
 
