@@ -173,7 +173,7 @@ footer {
   padding: 10px;
   padding-top: 50px;
   padding-bottom: 20px;
-  width: 90VW;
+  width: 90vw;
 }
 
 .section-title {
@@ -353,76 +353,62 @@ Emoji and Icons
 
 .icon {
   text-decoration: none;
-  font-size: 125%;
+  font-size: 120%;
   vertical-align: -5%;
   border-radius: 0px;
 }
 
-.background-text {
-  color: white;
-
-  font-weight: 900;
-  font-size: 600%;
-  opacity: 10%;
-  line-height: 90%;
-  text-transform: uppercase;
-  margin-left: -3%;
-  margin-right: -6%;
-
-  @media only screen and (max-width: 700px) {
-    font-size: 520%;
-  }
-  @media only screen and (max-width: 480px) {
-    word-break: break-all;
-  }
-}
 
 .background-title {
-  align-self: center;
-  overflow: hidden;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  writing-mode: vertical-rl;
+  justify-content:space-between;
+  
 
-  left: 0;
-  right: 0;
-
-  @media only screen and (min-width: 700px) {
-    max-width: 700px;
-    overflow: initial;
-    width: min-content;
-  }
-
-  padding: -5%;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
   position: absolute;
+  p {
+    font-family: $secondary-font;
+    display: block;
+    color: white;
+
+    font-weight: 900;
+    font-size: 9vh;
+    opacity: 13%;
+    line-height: 90%;
+    text-transform: uppercase;
+    
+    margin: -5px 0px -100px 0px;
+
+    @media only screen and (max-height: 600px) {
+      font-size: 13vh;
+    }
+
+  }
 }
 
 body {
   padding: 0px;
   margin: 0px;
   width: 100vw;
-  background-color: $dark; 
+  background-color: $dark;
   font-family: $primary-font;
-  
+
   width: 100vw;
   max-width: 100vw;
- 
 }
 
-.mybody{
-  
+.mybody {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-
-
-
+  min-height: 95vh;
 }
 
 main {
@@ -435,7 +421,6 @@ main {
   max-width: $content-width;
   color: $dark;
   border-radius: $radius;
-  
 }
 
 #main-header {
@@ -465,7 +450,6 @@ main {
   max-width: 100vw;
   max-width: $content-width;
   overflow: hidden;
-  overflow-wrap: break-word;
 
   user-select: none;
 
@@ -473,18 +457,19 @@ main {
 }
 
 .foreground-text {
+  display: block;
+  
   font-family: $primary-font;
   color: rgb(255, 255, 255);
-  margin: auto;
   text-align: center;
   font-weight: 400;
   font-size: 1em;
   max-width: 300px;
+  margin: auto;
 
   a {
     margin: 20px 0;
     position: relative;
-    color: #fff;
     text-decoration: underline;
   }
 }
@@ -492,6 +477,7 @@ main {
   text-align: center;
   margin-top: 15px;
   display: block;
+  margin-bottom: auto;
 }
 
 .white {
@@ -500,6 +486,7 @@ main {
 }
 
 .logo {
+  margin-top: auto;
   width: 50%;
   max-width: 50px;
   margin-left: auto;
@@ -510,15 +497,17 @@ main {
 }
 
 .foreground {
-  padding: 50px;
-  display: block;
-  position: relative;
-  margin: auto;
-  margin-top: auto;
+  position: absolute;
+  top:30vh;
+  align-self: center;
+  align-content: center;
+  padding-bottom: 100px;
+  width: 100vw;
+  height: 3vh;
 }
 
 #svg {
-  opacity: 20%;
+  opacity: 30%;
   z-index: -1000;
   position: fixed;
   top: 0;
@@ -574,7 +563,6 @@ circle {
   transition: all 0.3s ease;
   display: none;
   user-select: none;
-
 }
 
 .nav ul {
@@ -591,7 +579,6 @@ circle {
   color: white;
   text-decoration: none;
   transition: all 0.3s ease;
-
 }
 
 .nav li a:hover {
@@ -615,8 +602,8 @@ circle {
   overflow: hidden;
 }
 
-.change{
-  display:inline !important;
+.change {
+  display: inline !important;
 }
 
 .bar {
@@ -650,7 +637,6 @@ Header bar
 */
 
 header {
-
   @include responsive($big-display) {
     position: fixed;
   }
@@ -694,13 +680,12 @@ header {
   }
 }
 
-
-.menu-block{
+.menu-block {
   margin-top: 40px;
   margin-right: 30px;
 }
 
-.menu-closer{
+.menu-closer {
   position: absolute;
   width: 100%;
   height: 100%;
