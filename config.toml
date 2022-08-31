@@ -57,3 +57,18 @@ url = "https://t.me/jacksalici"
       unsafe = true
 
 
+[Menu]
+[[Menu.Main]]
+name = "Homepage"
+url = "/"
+weight = 1
+
+[[Menu.Main]]
+name = "Projects"
+url = "/projects/"
+weight = 2
+
+[[Menu.Main]]
+name = "Contact me"
+url = "/contact"
+weight = 3
