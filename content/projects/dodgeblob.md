@@ -1,9 +1,9 @@
 ---
-title: "DodgeBlob.  🫧"
+title: "DodgeBlob."
 date: 2022-05-02T22:00:00Z
 publishDate: 2022-05-02T22:00:00Z
 slug: "dodgeblob"
-description: "Another 2d game, where the goal is to dodge blobs 🫧."
+description: "Another 2d game, where the goal is to dodge blobs."
 categories: ["development"]
 langs: ["Kotlin"]
 ---

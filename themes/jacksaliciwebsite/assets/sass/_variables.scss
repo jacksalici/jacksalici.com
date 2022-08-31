@@ -12,16 +12,16 @@ $quote-font: "Amatic SC", cursive;
 $monospace-font: "Roboto Mono", monospace;
 
 //colors light
+$dark: rgb(39, 30, 71);
 
 $theme: light;
 $primary-color: white;
-$article-text-color: black;
+$article-text-color: $dark;
 $article-text-sec-color: black;
 
 $link-color: #27ddad;
 $backgound-color: #ffffff;
 $backgound-secondary-color: #ffffff;
-$dark: rgb(39, 30, 71);
 
 $secondary-color: white;
 $selected:  rgba(0, 255, 238, 0.754);

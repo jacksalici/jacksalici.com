@@ -16,7 +16,7 @@ header = "Howdy, people call me <span style=\"white-space: nowrap;\">Jack. ðŸ‘¨â
 keywords = ["jack salici", "Portfolio", "giacomo salici", "salici", "developer", "coding", "maker"]
 showHeaderOnHomepage = false
 twemoji = true
-
+taxonomyShown = ["Categories", "Langs", "Tools"]
 
 [permalinks]
   '/' = '/:slug/'
@@ -46,10 +46,17 @@ url = "https://t.me/jacksalici"
 
 
 
+
 [taxonomies]
-	#tag = "tags"
 	category = "categories"
   lang = "languages"
+  tool = "tools"
+
+[taxonomiesIcons]
+	category = "categories"
+  lang = "languages"
+  tool = "tools"
+
 
 [markup]
   [markup.goldmark]

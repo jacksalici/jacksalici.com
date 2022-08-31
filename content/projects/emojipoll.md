@@ -1,19 +1,17 @@
 ---
-title: "EmojiPoll📮"
+title: "EmojiPoll"
 date: 2022-08-09T22:00:00Z
 slug: "emojipoll"
-description: "A tool for creating polls 📮 using random emoji."
+description: "EmojiPoll: create polls using random emoji."
 categories: ["development"]
 langs: ["Vue"]
 ---
 
+__EmojiPoll__ [(website)](https://emojipoll.jacksalici.com) is a tool for creating polls using random emoji. Just fill the entries, copy the poll text and paste it on your favorite reaction-featured instant-messaging app.  
 
-[emojipoll.jacksalici.com](https://emojipoll.jacksalici.com)  
+![](https://github.com/jacksalici/emojipoll/blob/main/emoji-poll/public/logo2.png)
 
+Create your EmojiPoll text and say goodbye to traditional link polls! Just enter the possible options and share the text on your favorite messaging app. Once they have answered you (with emoji), you can calculate the outcome of the survey with the link above!
 
-__EmojiPoll__ is a tool for creating polls using random emoji. Just fill the entries, copy the poll text and paste it on your favorite reaction-featured instant-messaging app.  
-
-Created using Vue.js.  
-
-⚠️ Description will be updated soon.
+The app is built with Vue framework and the code is [open source](https://github.com/jacksalici/emojipoll). Feel free to suggest edits.
 

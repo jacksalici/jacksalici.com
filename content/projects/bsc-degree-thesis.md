@@ -6,9 +6,9 @@ slug: "bsc-degree-thesis"
 description: "My computer engineering degree's final dissertion is about blockchain integration in management software."
 categories: ["papers"]
 langs: ["Solidity"]
+
 ---
 
-### Abstract
 
 The blockchain, a distributed, digital ledger, is widely seen as one of the technologies that will lead the future. According to numerous experts, thanks to its features, such as immutability and decentralization, we can apply it in various fields and change the way we see Internet-based services.  From financial applications to supply chain problems, blockchain could represent a game-changer. Nevertheless, there are several serious questions about this topic, concerning the actual utility of blockchain but also the consequences that the application of this technology could lead to, such as the environmental footprint and the privacy issues. 
 

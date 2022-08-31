@@ -1,9 +1,9 @@
 ---
-title: "Emoji list API.  😄"
+title: "Emoji list API."
 date: 2022-08-02T22:00:00Z
 publishDate: 2022-08-02T22:00:00Z
 slug: "emoji-list-api"
-description: "A simple API for querying emoji. 😁"
+description: "A simple API for querying emoji."
 categories: ["development"]
 tags: ["Model"]
 langs: ["Python"]

@@ -270,7 +270,6 @@ li-main {
   border-radius: $radius;
   padding: 20px;
   text-decoration: none;
-  color: $article-text-color;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   @include transition(all 200ms ease-in);
 
@@ -289,9 +288,10 @@ li-main {
 
 .li-meta {
   display: flex;
+  flex-wrap: wrap;
   font-size: 0.7em;
-  color: rgb(0, 0, 0);
-  padding-top: 15px;
+  margin-top: 15px;
+  color:$article-text-color;
   @include transition(all 100ms ease-in);
 
 }
@@ -308,19 +308,10 @@ li-main {
   float: right;
 }
 
-.li-categories {
+.li-term {
   display: flex;
   padding-right: 10px;
-}
-
-.li-langs {
-  display: flex;
-  padding-right: 10px;
-}
-
-.li-date {
-  display: flex;
-  padding-right: 10px;
+  margin: 5px 0px 5px;
 }
 
 .li-obj {
@@ -330,13 +321,11 @@ li-main {
 .li-post:hover {
   background-color: $link-color;
   color: white;
-  .li-title {
-  }
+
   .li-count {
     text-decoration: none;
   }
-  .li-meta{
-  }
+ 
 }
 
 .meta {
@@ -446,8 +435,8 @@ main {
     font-size: 1.9em;
     font-family: $secondary-font;
     text-transform: uppercase;
-    line-break: auto;
-    hyphens: auto;
+    line-height: 95%;
+    overflow-wrap: break-word
   }
 }
 
@@ -479,6 +468,7 @@ main {
     margin: 20px 0;
     position: relative;
     text-decoration: underline;
+    
   }
 }
 .icons {

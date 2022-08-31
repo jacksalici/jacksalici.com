@@ -1,5 +1,5 @@
 ---
-title: "Salinger Theme.  📻"
+title: "Salinger Theme."
 date: 2022-04-02T22:00:00Z
 publishDate: 2022-05-02T22:00:00Z
 slug: "salinger-theme"
