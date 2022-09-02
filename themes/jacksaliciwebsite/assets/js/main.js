@@ -15,9 +15,10 @@ var dotRandomMax = 0;
 var mouseMoving = false;
 var mouse = {};
 
+
 var returningSpeed = 1;
 mouse.distances = [];
-mouse.power = 10;
+mouse.power = 80;
 
 function init() {
 
@@ -42,17 +43,39 @@ function init() {
     dots[i].r = 1;
     dots[i].X0 = dots[i].X;
     dots[i].Y0 = dots[i].Y;
+    dots[i].opacity = 0.3;
 
     dots[i].el.setAttribute("cx", dots[i].X);
     dots[i].el.setAttribute("cy", dots[i].Y);
     dots[i].el.setAttribute("r", dots[i].r);
+    dots[i].el.setAttribute("opacity", dots[i].opacity)
     svg.appendChild(dots[i].el);
   }
 }
 
-function move() {
-    for (i = 0, j = 0, k = 0; i < dotColumns * dotRows; i++) {
+function getDistance(obj1, obj2) {
+  return Math.round(
+    Math.sqrt(Math.pow(obj1.X - obj2.X, 2) + Math.pow(obj1.Y - obj2.Y, 2))
+  );
+}
 
+function update() {
+    for (i = 0; i < dotColumns * dotRows; i++) {
+      if (getDistance(dots[i], mouse)<mouse.power/2){
+        dots[i].el.setAttribute("opacity", 0.6)
+        dots[i].el.setAttribute("r", 1.5)
+
+        console.log(i)
+      }else if (getDistance(dots[i], mouse)<mouse.power){
+        dots[i].el.setAttribute("opacity", 0.45)
+        dots[i].el.setAttribute("r", 1.25)
+
+        console.log(i)
+      } else {
+        dots[i].el.setAttribute("opacity", 0.3)
+        dots[i].el.setAttribute("r", 1)
+
+      }
     }
 
 }
@@ -71,5 +94,20 @@ init();
 window.addEventListener("resize", function () {
   destroy();
   init();
+});
+
+
+window.addEventListener("mousemove", function (e) {
+  mouseMoving = true;
+  mouse.X = e.pageX;
+  mouse.Y = e.pageY;
+  update()
+});
+
+window.addEventListener("touchmove", function (e) {
+  mouseMoving = true;
+  mouse.X = e.changedTouches.item(0).pageX;
+  mouse.Y = e.changedTouches.item(0).pageY;
+  update()
 });
 
