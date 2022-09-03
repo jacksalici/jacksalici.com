@@ -79,6 +79,12 @@ a:hover {
   color: $link-color;
 }
 
+.fancy-link:hover {
+  background: $hover-background;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 aside {
   display: none;
   @include responsive($big-display) {
@@ -258,12 +264,13 @@ li-main {
 .li-link {
   text-decoration: none;
 }
-:hover {
+.li-link:hover {
   text-decoration: none;
 }
 
 .li-post {
-  background-color: $backgound-color;
+
+  background: $backgound-color;
   margin: auto;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -271,7 +278,7 @@ li-main {
   padding: 20px;
   text-decoration: none;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  @include transition(all 200ms ease-in);
+  //@include transition(all 200ms ease-in);
 
 }
 
@@ -320,7 +327,8 @@ li-main {
 }
 
 .li-post:hover {
-  background-color: $link-color;
+  background-color: aquamarine;
+  background: $hover-background;
   color: white;
 
   .li-count {
@@ -334,6 +342,7 @@ li-main {
   margin-top: 0px;
   a {
     text-decoration: none;
+    background: unset;
   }
 }
 
@@ -354,6 +363,10 @@ Emoji and Icons
   font-size: 120%;
   vertical-align: -5%;
   border-radius: 0px;
+}
+
+a.icon:hover{
+  color: $link-color;
 }
 
 
@@ -575,13 +588,14 @@ circle {
 }
 
 .nav li a {
+  
   color: white;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .nav li a:hover {
-  font-weight: bold;
+  opacity: 0.7;
 }
 
 
@@ -592,7 +606,7 @@ circle {
   width: 0;
   height: 0;
   right: 0;
-  background: radial-gradient(circle, $link-color, $link-color);
+  background: $hover-background;
   opacity: 90%;
   border-radius: 50%;
   transition: 0.3s ease;

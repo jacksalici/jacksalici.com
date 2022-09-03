@@ -21,12 +21,14 @@ $primary-color: white;
 $article-text-color: $dark;
 $article-text-sec-color: black;
 
-$link-color: #27ddad;
+$link-color: #f200ff;
+
+$hover-background: linear-gradient(90deg, rgba(54,222,226,1) 0%, rgba(117,255,158,1) 100%);
 $backgound-color: #ffffff;
 $backgound-secondary-color: #ffffff;
 
 $secondary-color: white;
-$selected:  rgba(0, 255, 238, 0.754);
+$selected:  rgba(102, 0, 255, 0.468);
 
 /*
 $theme: dark;
