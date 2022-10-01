@@ -62,12 +62,12 @@ function getDistance(obj1, obj2) {
 function update() {
     for (i = 0; i < dotColumns * dotRows; i++) {
       if (getDistance(dots[i], mouse)<mouse.power/2){
-        dots[i].el.setAttribute("opacity", 0.6)
+        dots[i].el.setAttribute("opacity", 0.7)
         dots[i].el.setAttribute("r", 1.5)
 
         console.log(i)
       }else if (getDistance(dots[i], mouse)<mouse.power){
-        dots[i].el.setAttribute("opacity", 0.45)
+        dots[i].el.setAttribute("opacity", 0.5)
         dots[i].el.setAttribute("r", 1.25)
 
         console.log(i)
@@ -99,15 +99,15 @@ window.addEventListener("resize", function () {
 
 window.addEventListener("mousemove", function (e) {
   mouseMoving = true;
-  mouse.X = e.pageX;
-  mouse.Y = e.pageY;
+  mouse.X = e.clientX;
+  mouse.Y = e.clientY;
   update()
 });
 
 window.addEventListener("touchmove", function (e) {
   mouseMoving = true;
-  mouse.X = e.changedTouches.item(0).pageX;
-  mouse.Y = e.changedTouches.item(0).pageY;
+  mouse.X = e.changedTouches.item(0).clientX;
+  mouse.Y = e.changedTouches.item(0).clientY;
   update()
 });
 
