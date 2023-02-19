@@ -26,11 +26,11 @@ The domain name is stored in the `static/CNAME` file, otherwise, GitHub Pages wo
 
 ## Changelog 🕰️
 
-I like to change its style often so I tagged the main last versions, starting from 2021. Sadly, previous versions have been lost (I was not yet an expert in git and made numerous embarrassing mistakes).  
+I like to change its style often so I tagged the main last versions, starting from 2021. Sadly, previous versions have been lost (I was not an expert in git yet and I made some embarrassing mistakes).  
 
 |Version|Description|
 |-|-|
-v1.3.0| Dark blue dotted homepage with a [nice hover effect](https://github.com/jacksalici/jacksalici.github.io/blob/v1.3.0/themes/jacksaliciwebsite/assets/js/main.js)|
-v1.2.0| Cream to Light Blue background gradient, landing homepage. [Screenshot](static/uploads/v1.2.0.png)
-|v1.1.0| Hugo Framework, with Salinger Theme
+v1.3.0| Dark blue dotted homepage with a [nice hover effect](https://github.com/jacksalici/jacksalici.github.io/blob/v1.3.0/themes/jacksaliciwebsite/assets/js/main.js).|
+v1.2.0| Cream to Light Blue background gradient, landing homepage. [(Screenshot)](static/uploads/v1.2.0.png)
+|v1.1.0| __Hugo Framework__, with [Salinger](https://themes.gohugo.io/themes/salinger-theme/) Theme.
 
