@@ -4,15 +4,12 @@ languageCode = 'en-us'
 
 baseURL = "https://jacksalici.com/"
 title = "Giacomo Salici"
-copyright = 'Giacomo Jack Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.'
+copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.'
 
 [params]
 DateFormat = "January 2006"
 
-author = "Jack Salici"
-description = "I'm a computer engineering student based in Modena, Italy. I like developing and designing random stuffs."
-header = "Howdy, people call me <span style=\"white-space: nowrap;\">Jack. 👨‍💻</span>"
-keywords = ["jack salici", "Portfolio", "giacomo salici", "salici", "developer", "coding", "maker"]
+
 showHeaderOnHomepage = false
 twemoji = true
 taxonomyShown = ["Categories", "Langs", "Tools"]
@@ -31,7 +28,6 @@ icon = "fa-brands fa-github white fa-xl"
 name = "linkedin"
 url = "https://linkedin.com/in/jacksalici"
 icon = "fa-brands fa-linkedin white fa-xl"
-
 
 [[params.social]]
 name = "email"

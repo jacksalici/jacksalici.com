@@ -56,7 +56,7 @@ h6 {
 h3,
 h4,
 h5 {
-  font-family: $secondary-font;
+  font-family: $font-secondary;
 }
 
 ::-moz-selection {
@@ -76,7 +76,7 @@ a {
 }
 
 a:hover {
-  color: $link-color;
+  color: $link;
 }
 
 .fancy-link:hover {
@@ -115,14 +115,14 @@ aside {
 }
 
 blockquote {
-  font-family: $quote-font;
+  font-family: $font-quote;
   font-size: 150%;
   padding: 10px;
   width: fit-content;
 }
 
 .twitter-tweet {
-  font-family: $quote-font !important;
+  font-family: $font-quote !important;
   font-size: 150% !important;
 
   p {
@@ -143,7 +143,7 @@ td {
 }
 
 code {
-  font-family: $monospace-font;
+  font-family: $font-monospace;
   padding: 5px;
   border-radius: $radius;
 }
@@ -174,7 +174,7 @@ pre {
 
 footer {
   max-width: $content-width;
-  font-family: $primary-font;
+  font-family: $font-primary;
   margin: auto auto 20px auto;
   padding: 10px;
   padding-top: 50px;
@@ -207,7 +207,7 @@ img {
 }
 .term-title {
   text-transform: uppercase;
-  font-family: $secondary-font;
+  font-family: $font-secondary;
 }
 .term-back {
   color: $secondary-color;
@@ -230,7 +230,7 @@ img {
 .content {
   display: block;
   max-width: $content-width;
-  font-family: $primary-font;
+  font-family: $font-primary;
   p {
     text-align: justify;
     margin-bottom: 0px;
@@ -270,7 +270,8 @@ li-main {
 
 .li-post {
 
-  background: $backgound-color;
+  background: $bg-200;
+  color: white;
   margin: auto;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -280,15 +281,18 @@ li-main {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   //@include transition(all 200ms ease-in);
 
+  a{
+    text-decoration: none;
+
+  }
 }
 
 .li-title {
   font-weight: 500;
   font-size: 110%;
-  font-family: $secondary-font;
+  font-family: $font-secondary;
   text-transform: uppercase;
   padding: 0;
-  color: $article-text-color;
   padding-top: 5px;
   @include transition(all 100ms ease-in);
 
@@ -299,7 +303,6 @@ li-main {
   flex-wrap: wrap;
   font-size: 0.7em;
   margin-top: 15px;
-  color:$article-text-color;
   @include transition(all 100ms ease-in);
 
 }
@@ -309,7 +312,7 @@ li-main {
 }
 
 .li-count {
-  font-family: $secondary-font;
+  font-family: $font-secondary;
   font-size: 150%;
   padding-left: 30px;
   text-decoration: none;
@@ -327,9 +330,8 @@ li-main {
 }
 
 .li-post:hover {
-  background-color: aquamarine;
+  background-color: $hover-background-fallback;
   background: $hover-background;
-  color: white;
 
   .li-count {
     text-decoration: none;
@@ -366,7 +368,7 @@ Emoji and Icons
 }
 
 a.icon:hover{
-  color: $link-color;
+  color: $link;
 }
 
 
@@ -383,7 +385,7 @@ a.icon:hover{
   user-select: none; /* Standard */
   position: absolute;
   p {
-    font-family: $secondary-font;
+    font-family: $font-secondary;
     display: block;
     color: white;
 
@@ -406,20 +408,11 @@ body {
   padding: 0px;
   margin: 0px;
   width: 100vw;
-  background-color: $dark;
-  font-family: $primary-font;
+  background-color: $bg-100;
+  font-family: $font-primary;
 
   width: 100vw;
   max-width: 100vw;
-}
-
-.mybody {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  min-height: 95vh;
 }
 
 main {
@@ -430,7 +423,7 @@ main {
   margin: auto;
   background-color: white;
   max-width: $content-width;
-  color: $dark;
+  color: $bg-100;
   border-radius: $radius;
 }
 
@@ -447,7 +440,7 @@ main {
 
   .name {
     font-size: 1.9em;
-    font-family: $secondary-font;
+    font-family: $font-secondary;
     text-transform: uppercase;
     line-height: 95%;
     overflow-wrap: break-word
@@ -470,7 +463,7 @@ main {
 .foreground-text {
   display: block;
   
-  font-family: $primary-font;
+  font-family: $font-primary;
   color: rgb(255, 255, 255);
   text-align: center;
   font-weight: 400;
@@ -652,6 +645,7 @@ header {
     position: fixed;
   }
   position: relative;
+  top: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -680,7 +674,7 @@ header {
     margin-left: 20px;
     width: unset;
     text-decoration: none;
-    font-family: $secondary-font;
+    font-family: $font-secondary;
     font-weight: bold;
 
     img {

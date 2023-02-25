@@ -8,36 +8,29 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-$primary-font: "Merriweather Sans", sans-serif;
-$secondary-font: "Roboto Mono", sans-serif;
-$quote-font: "Amatic SC", cursive;
-$monospace-font: "Roboto Mono", monospace;
+$font-primary: "Merriweather Sans", sans-serif;
+$font-secondary: "Roboto Mono", sans-serif;
+$font-quote: "Amatic SC", cursive;
+$font-monospace: "Roboto Mono", monospace;
 
 //colors light
-$dark: rgb(39, 30, 71);
+$bg-100: rgb(40, 29, 82);
+$bg-200: rgb(68, 73, 241);
 
-$theme: light;
 $primary-color: white;
-$article-text-color: $dark;
+$article-text-color: $bg-100;
 $article-text-sec-color: black;
 
-$link-color: #f200ff;
+$link: rgb(68, 120, 189);
 
-$hover-background: linear-gradient(90deg, rgba(54,222,226,1) 0%, rgba(117,255,158,1) 100%);
-$backgound-color: #ffffff;
+
+
+$hover-background: linear-gradient(45deg, $link 20%, $bg-200 100%);
+$hover-background-fallback: aqua;
 $backgound-secondary-color: #ffffff;
 
 $secondary-color: white;
 $selected:  rgba(102, 0, 255, 0.468);
-
-/*
-$theme: dark;
-$primary-color: white;
-$link-color: #d9ff19;
-$backgound-color: hsl(218, 44%, 38%);
-$secondary-color: #ffffff;
-$selected:  rgba(255, 250, 175, 0.5);
-*/
 
 //dimensions
 $max-site-width: 1500px;
