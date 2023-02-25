@@ -3,9 +3,8 @@ languageCode = 'en-us'
 
 
 baseURL = "https://jacksalici.com/"
-theme = "jacksaliciwebsite"
-title = "jacksalici"
-copyright = 'Jack Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.'
+title = "Giacomo Salici"
+copyright = 'Giacomo Jack Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.'
 
 [params]
 DateFormat = "January 2006"
@@ -79,3 +78,10 @@ weight = 2
 name = "Contact me"
 url = "/contact"
 weight = 3
+
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    max = ''
+    min = '0.87.0'
