@@ -10,7 +10,7 @@ copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc
 DateFormat = "January 2006"
 
 
-showHeaderOnHomepage = false
+showHeaderOnHomepage = true
 twemoji = true
 taxonomyShown = ["Categories", "Langs", "Tools"]
 

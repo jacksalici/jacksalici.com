@@ -65,12 +65,10 @@ function update() {
         dots[i].el.setAttribute("opacity", 0.7)
         dots[i].el.setAttribute("r", 1.5)
 
-        console.log(i)
       }else if (getDistance(dots[i], mouse)<mouse.power){
         dots[i].el.setAttribute("opacity", 0.5)
         dots[i].el.setAttribute("r", 1.25)
 
-        console.log(i)
       } else {
         dots[i].el.setAttribute("opacity", 0.3)
         dots[i].el.setAttribute("r", 1)

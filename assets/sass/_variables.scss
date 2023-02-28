@@ -26,7 +26,7 @@ $link: rgb(68, 120, 189);
 
 
 $hover-background: linear-gradient(45deg, $link 20%, $bg-200 100%);
-$hover-background-fallback: aqua;
+$hover-background-fallback: rgb(5, 81, 81);
 $backgound-secondary-color: #ffffff;
 
 $secondary-color: white;
@@ -38,8 +38,13 @@ $content-width: 600px;
 $content-smaller-width: 500px;
 
 $big-margin: 10%;
-$padding: 5px;
+
+$padding-sm: 5px;
+$padding-md: 15px;
+$padding-lg: 25px;
+
 $radius: 10px;
+$box-shadow:  0 0 12px rgba(0, 0, 0, 0.2);
 
 //breakpoints
 $big-display: 768px; //64em
