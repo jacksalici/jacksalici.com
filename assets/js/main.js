@@ -1,3 +1,9 @@
+/*
+*
+*   DOTS PATTERN
+*
+*/
+
 var svg = document.getElementById("svg");
 var dotMatrix = document.createElementNS(
   "http://www.w3.org/2000/svg",
@@ -109,3 +115,42 @@ window.addEventListener("touchmove", function (e) {
   update()
 });
 
+/*
+*
+*   HEADER BAR AND NAV MENU
+*
+*/
+
+function menuOnClick() {
+  document.getElementById("hamburger").classList.toggle("change");
+  document.getElementById("menu-closer").classList.toggle("change");
+  document.getElementById("nav").classList.toggle("hide-nav");
+  
+  
+  }
+  
+  function menuCloseOnClick() {
+  document.getElementById("hamburger").classList.toggle("change");
+  document.getElementById("nav").classList.toggle("hide-nav");
+  document.getElementById("menu-closer").classList.toggle("change");
+  }
+
+/*
+*
+*   TOC
+*
+*/
+var collapsibleToc = document.getElementsByClassName("single__toc-button");
+var i;
+
+for (i = 0; i < collapsibleToc.length; i++) {
+  collapsibleToc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = document.getElementsByClassName("single__toc-content")[0];
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}

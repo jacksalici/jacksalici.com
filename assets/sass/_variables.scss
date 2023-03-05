@@ -1,36 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Indie+Flower&family=Montserrat:ital,wght@0,100;0,400;0,700;1,100;1,400;1,800&display=swap');
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,600;0,800;1,300;1,600&family=Playfair+Display:ital@0;1&display=swap");
-
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;0,700;1,500;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700&family=Oswald:wght@600&family=Roboto+Mono:ital,wght@0,500;0,700;1,500;1,700&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+$font-primary: "Montserrat", sans-serif;
+$font-secondary: "Roboto Mono", monospace;
+$font-accent: 'Climate Crisis', cursive;
 
-$font-primary: "Merriweather Sans", sans-serif;
-$font-secondary: "Roboto Mono", sans-serif;
 $font-quote: "Amatic SC", cursive;
 $font-monospace: "Roboto Mono", monospace;
 
 //colors light
-$bg-100: rgb(40, 29, 82);
-$bg-200: rgb(68, 73, 241);
+$primary: #5d00c1;
+$secondary: #25222F;
+$accent: #61E786;
+$base: #ffd900;
+$neutral: #f0eaea;
 
-$primary-color: white;
-$article-text-color: $bg-100;
-$article-text-sec-color: black;
+$primary-content: $secondary;
+$secondary-content: $base;
+$base-content: $secondary;
 
-$link: rgb(68, 120, 189);
+$accent-content:  rgba(102, 0, 255, 0.468);
 
 
-
-$hover-background: linear-gradient(45deg, $link 20%, $bg-200 100%);
-$hover-background-fallback: rgb(5, 81, 81);
-$backgound-secondary-color: #ffffff;
-
-$secondary-color: white;
-$selected:  rgba(102, 0, 255, 0.468);
+$filter-white-to-base: invert(74%) sepia(56%) saturate(909%) hue-rotate(1deg) brightness(106%) contrast(106%);
 
 //dimensions
 $max-site-width: 1500px;
