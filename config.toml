@@ -37,7 +37,7 @@ icon = "fa-brands fa-linkedin white fa-xl"
 [[params.social]]
 name = "email"
 icon = "fa-solid fa-envelope white fa-xl"
-url = "mailto:hi@jacksalici.com"
+url = "mailto:hey@jacksalici.com"
 
 [[params.social]]
 name = "telegram"

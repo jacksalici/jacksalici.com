@@ -7,15 +7,9 @@ description: "A simple API and a npm for querying emoji."
 categories: ["development"]
 tags: ["Model"]
 langs: ["Python", "npm"]
-toc: true
-
+ 
 ---
 
-# title
-## subtitle
-### hdcdcd
-#### gcddc
-##### dfdfada
 I developed a simple RESTful API and a Node package for querying emoji, since I needed one for developing [EmojiPoll](https://jacksalici.com/projects/emojipoll). For the first I used Python and FastAPI, and now is hosted on [Deta](http://emoji.deta.dev).
 
 ```python

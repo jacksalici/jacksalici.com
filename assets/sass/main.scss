@@ -3,7 +3,7 @@
 
 html {
   font-size: 16px;
-  color:$base;
+  color: $base;
   height: 100%;
 }
 
@@ -97,11 +97,7 @@ aside {
     float: right;
     color: $secondary-content;
   }
-
-  
 }
-
-
 
 blockquote {
   font-family: $font-quote;
@@ -132,6 +128,7 @@ td {
 }
 
 code {
+  font-weight: 300;
   font-family: $font-monospace;
   padding: 5px;
   border-radius: $radius;
@@ -171,25 +168,14 @@ footer {
   width: 90vw;
 }
 
-
 img {
   width: 100%;
   border-radius: $radius;
-  
 }
 
 .not-sized {
   width: unset;
   border-radius: 0px;
-}
-
-.tags-footer {
-  color: $secondary;
-  text-decoration: none;
-  padding-top: 50px;
-  a {
-    text-decoration: none;
-  }
 }
 
 /*
@@ -239,7 +225,6 @@ img {
 }
 
 .feed__post {
-
   background: $primary;
   color: $base;
   margin: auto;
@@ -248,17 +233,13 @@ img {
   border-radius: $radius;
   padding: 20px;
   text-decoration: none;
-  box-shadow: $box-shadow
-  //@include transition(all 200ms ease-in);
-
-  a{
+  box-shadow: $box-shadow //@include transition(all 200ms ease-in);
+    a {
     text-decoration: none;
   }
 
   &:hover {
     background: $accent;
-  
- 
   }
 }
 .feed__post-count {
@@ -278,7 +259,6 @@ img {
   padding: 0;
   padding-top: 5px;
   @include transition(all 100ms ease-in);
-
 }
 
 .feed__post-meta {
@@ -287,7 +267,6 @@ img {
   font-size: 0.7em;
   margin-top: 15px;
   @include transition(all 100ms ease-in);
-
 }
 
 .feed__post-meta-item {
@@ -296,8 +275,6 @@ img {
   padding-right: 10px;
   margin: 5px 0px 5px;
 }
-
-
 
 /*
 Emoji and hero__icons
@@ -319,11 +296,6 @@ Emoji and hero__icons
   padding: 4px;
 }
 
-
-
-
-
-
 .single__body {
   box-shadow: $box-shadow;
 
@@ -336,7 +308,10 @@ Emoji and hero__icons
   //border-radius: $radius;
 }
 
-.single__header, .taxonomy__header, .term__header, .section__header {
+.single__header,
+.taxonomy__header,
+.term__header,
+.section__header {
   margin: auto;
   max-width: $content-width;
   padding: 4%;
@@ -346,8 +321,6 @@ Emoji and hero__icons
     padding: 50px;
     margin-top: 150px;
   }
-
-  
 }
 
 .single__title {
@@ -357,11 +330,11 @@ Emoji and hero__icons
   line-height: 95%;
   overflow-wrap: break-word;
   font-weight: 700;
-
 }
 
-.single__body-content, .single__toc {
-  
+.single__body-content,
+.single__toc,
+.single__tags-footer {
   padding: 4%;
   hyphens: auto;
   padding-top: 10px;
@@ -374,7 +347,7 @@ Emoji and hero__icons
   }
 }
 
-.single__toc-button{
+.single__toc-button {
   font-family: $font-secondary;
   background-color: $base;
   color: $secondary;
@@ -388,15 +361,14 @@ Emoji and hero__icons
   border-radius: $radius;
   margin-bottom: $padding-sm;
 
-
   &:after {
-    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    content: "\02795"; /* Unicode character for "plus" sign (+) */
     font-size: 13px;
     float: right;
     margin-left: 5px;
   }
 
-  &.active:after{
+  &.active:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
   }
 }
@@ -408,7 +380,7 @@ Emoji and hero__icons
   color: $base-content;
   font-size: 90%;
   transition: max-height 0.2s ease-out;
-  max-height: 0px;  
+  max-height: 0px;
   ul,
   li {
     margin-top: 10px;
@@ -419,13 +391,18 @@ Emoji and hero__icons
   }
 }
 
+.single__tags-footer {
+  color: $base;
+  text-decoration: none;
+}
 
 .term__term-type {
   color: $primary;
   text-transform: capitalize;
   margin-bottom: 0px;
 }
-.term__title, .section__title {
+.term__title,
+.section__title {
   margin-top: 0px;
   text-decoration: none;
   text-transform: capitalize;
@@ -437,7 +414,7 @@ Emoji and hero__icons
   text-decoration: none;
 }
 
-.primary{
+.primary {
   color: $primary;
 }
 
@@ -452,76 +429,94 @@ Emoji and hero__icons
 
   display: flex;
 }
+
+
 .hero__text {
   display: flex;
   flex-direction: column;
   writing-mode: vertical-rl;
-  justify-content:space-between;
-  
-  user-select: none; 
+  justify-content: space-between;
+
+  user-select: none;
   position: absolute;
 
   z-index: -10;
-  
+
+  left: 20%;
+  top: 50px;
+
   p {
     font-family: $font-secondary;
     display: block;
     color: $primary;
 
     font-weight: 900;
-    font-size: 6em;
+    font-size: 4em;
     line-height: 85%;
     text-transform: uppercase;
-    
+
     margin: -5px 0px -100px 0px;
 
     @media only screen and (max-height: 600px) {
       font-size: 30vw;
     }
-
   }
 }
+
 .hero__foreground-text {
-  display: block;
   
+
   font-family: $font-primary;
   color: $secondary-content;
-  text-align: center;
+  text-align: left;
   font-size: 1em;
-  max-width: 300px;
-  margin: auto;
 
   a {
     margin: 20px 0;
     position: relative;
     text-decoration: underline;
-    
+  }
+  h1{
+    font-size: 3em;
+    line-height: 98%;
   }
 }
+
 .hero__icons {
-  text-align: center;
-  margin-top: $padding-md;
+  margin-top: 50px;
   display: block;
   margin-bottom: auto;
 }
+
 .hero__logo {
-  margin-top: auto;
-  width: 50%;
-  max-width: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
+  svg {
+    path {
+      fill: $primary !important;
+    }
+  }
+
+  position: absolute;
+  right: 30%;
+  top: 30vh;
+
+  overflow: hidden;
+
+  width: 200px;
+ 
   display: block;
   border-radius: 0;
 }
+
+
 .hero__foreground {
-  position: absolute;
-  top:30vh;
-  align-self: center;
-  align-content: center;
-  padding-bottom: 100px;
-  width: 100vw;
-  height: 3vh;
+  z-index: 20;
+  max-width: $content-width;
+  margin: auto;
+  padding: 4%;
+  @include responsive($big-display) {
+    padding: 50px;
+  }
+  display: block;
 }
 
 #svg {
@@ -550,40 +545,29 @@ circle {
   display: block;
   margin-right: $padding-lg;
 
-  #bar{
-  height: 4px;
-  width: 30px;
-  background-color: $base;
-  display: block;
-  border-radius: 5px;
-  transition: 0.3s ease;
+  #bar {
+    height: 4px;
+    width: 30px;
+    background-color: $base;
+    display: block;
+    border-radius: 5px;
+    transition: 0.3s ease;
 
-    &:nth-child(1){
+    &:nth-child(1) {
       margin-bottom: 5px;
     }
-   
-    
-
   }
 }
-.change{
-  #bar{
-    &:nth-child(1){
-      transform:translateY(5px) 
-                translateX(-10px) 
-                rotateZ(+45deg) 
-                scaleX(80%)
+.change {
+  #bar {
+    &:nth-child(1) {
+      transform: translateY(5px) translateX(-10px) rotateZ(+45deg) scaleX(80%);
     }
-    &:nth-child(2){
-      transform: rotateZ(-45deg)
-      translateX(+8px)
-      scaleX(70%)
+    &:nth-child(2) {
+      transform: rotateZ(-45deg) translateX(+8px) scaleX(70%);
     }
-    
-
   }
 }
-
 
 .nav {
   position: absolute;
@@ -598,10 +582,9 @@ circle {
   @include responsive($big-display) {
     position: fixed;
   }
-  
 }
 
-.hide-nav{
+.hide-nav {
   display: none;
 }
 
@@ -612,16 +595,13 @@ circle {
 
   a {
     color: inherit;
-    text-decoration: none;  
+    text-decoration: none;
   }
 
-  &:hover{
+  &:hover {
     background-color: $accent;
   }
-  
-  
 }
-
 
 /*
 Header bar
@@ -638,7 +618,7 @@ header {
   justify-content: space-between;
   align-items: center;
   z-index: 5;
-  margin-top: 5px;
+  margin-top: $padding-md;
 
   .site-name {
     margin-top: auto;
@@ -656,7 +636,7 @@ header {
     }
   }
 
-  .logo{
+  .logo {
     height: 50px;
     width: 100px;
     position: relative;
@@ -669,18 +649,16 @@ header {
     font-family: $font-secondary;
     font-weight: bold;
 
-    svg{
+    svg {
       position: absolute;
       height: 100%;
-      
-      path{
-        fill:$base !important
+
+      path {
+        fill: $base !important;
       }
     }
   }
 }
-
-
 
 .menu-closer {
   position: absolute;
@@ -689,3 +667,76 @@ header {
   display: none;
   margin-right: $padding-lg;
 }
+
+.contact-form{
+  max-width: $content-width;
+  margin: auto;
+  padding: 4%;
+  @include responsive($big-display) {
+    padding: 50px;
+  }
+  display: block;
+}
+
+
+$form-bg         : #fff;
+
+
+//contact form
+    .contact-form__input{
+        background-color: $base;
+        color: $primary;
+        border: 0px;
+        border-radius: $radius;
+        width: 100%;
+        min-height: 100px;
+        position: relative;
+        margin-bottom: $padding-sm;
+        
+        display: inline-block;
+        font-family: $font-secondary;
+        padding: $padding-md;
+        font-size: x-large;
+        
+        &::placeholder{
+          font-family: $font-secondary;
+          font-size: large;
+          text-transform: uppercase;
+          color: $primary;
+
+          margin-top:  0px;
+          
+        }
+
+        &:focus{
+          background-color: $accent;
+        }
+
+    
+        
+    }
+
+    .contact-form__row{
+      display: flex;
+      flex-direction: row;
+      column-gap: $padding-sm;
+      min-height: 100px;
+
+      
+    }
+
+    .contact-form__send-button{
+      width: 100%;
+      max-width: 100px;
+      height: 200px;
+      background-color: $tertiary;
+
+
+      &:hover{
+        background-color: $accent;
+      }
+    }
+
+
+
+
