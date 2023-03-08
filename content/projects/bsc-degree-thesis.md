@@ -6,6 +6,7 @@ slug: "bsc-degree-thesis"
 description: "My computer engineering degree's final dissertion is about blockchain integration in management software."
 categories: ["papers"]
 langs: ["Solidity"]
+featured: true
 
 ---
 

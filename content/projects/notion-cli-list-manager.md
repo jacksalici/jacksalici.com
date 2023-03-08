@@ -6,6 +6,8 @@ description: A command-line interface to manage Notion databases.
 categories: ["development"]
 tags: ["Notion", "Cli", "Python"]
 langs: ["Python"]
+featured: true
+
 
 ---
 

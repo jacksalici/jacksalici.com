@@ -240,6 +240,7 @@ img {
 
   &:hover {
     background: $accent;
+    color: $primary
   }
 }
 .feed__post-count {
@@ -418,6 +419,10 @@ Emoji and hero__icons
   color: $primary;
 }
 
+.tertiary {
+  background-color: $tertiary;
+}
+
 .hero {
   height: 80vh;
   min-width: 100vw;
@@ -432,34 +437,45 @@ Emoji and hero__icons
 
 
 .hero__text {
-  display: flex;
-  flex-direction: column;
-  writing-mode: vertical-rl;
-  justify-content: space-between;
+  //flex-direction: column;
+  //writing-mode: vertical-rl;
+  //justify-content: space-between;
 
   user-select: none;
   position: absolute;
 
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
   z-index: -10;
 
-  left: 20%;
-  top: 50px;
 
   p {
+
     font-family: $font-secondary;
-    display: block;
+    
+    width: min-content;
+    position: absolute;
+    
+    top: 15vh;
+    right: 50px;
+
     color: $primary;
 
     font-weight: 900;
-    font-size: 4em;
+    font-size: 3em;
     line-height: 85%;
     text-transform: uppercase;
 
     margin: -5px 0px -100px 0px;
 
-    @media only screen and (max-height: 600px) {
-      font-size: 30vw;
+    @include responsive($big-display) {
+      right: 40%;
+
     }
+
+    
   }
 }
 

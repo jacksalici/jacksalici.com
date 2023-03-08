@@ -135,6 +135,20 @@ function menuOnClick() {
   document.getElementById("menu-closer").classList.toggle("change");
   }
 
+
+  const circleType = new CircleType(document.getElementById('hero-text'), (string) => (string + ' ').split('') );
+
+
+  const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+  document.addEventListener("scroll", function() {
+    var offset = window.scrollY;
+  
+    document.getElementById('hero-text').style.transform = "rotate(" + offset * .3 + "deg)"
+    document.getElementById('hero-text').style.top = (offset * .3) + (.15 * vh) + "px"
+    
+    
+    
+  })
 /*
 *
 *   TOC

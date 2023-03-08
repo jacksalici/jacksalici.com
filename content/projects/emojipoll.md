@@ -5,6 +5,8 @@ slug: "emojipoll"
 description: "EmojiPoll: create polls using random emoji."
 categories: ["development"]
 langs: ["Vue"]
+featured: true
+
 ---
 
 __EmojiPoll__ [(website)](https://emojipoll.jacksalici.com) is a tool for creating polls using random emoji. Just fill the entries, copy the poll text and paste it on your favorite reaction-featured instant-messaging app.  
