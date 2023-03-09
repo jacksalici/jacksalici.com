@@ -219,6 +219,12 @@ img {
 .feed__link {
   text-decoration: none;
 
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
   &:hover {
     text-decoration: none;
   }
@@ -242,7 +248,7 @@ img {
 
   &:hover {
     background: $accent;
-    color: $primary
+    color: $primary;
   }
 }
 .feed__post-count {
@@ -262,15 +268,6 @@ img {
   padding: 0;
   padding-top: 5px;
   @include transition(all 100ms ease-in);
-}
-
-
-.feed__link{
-   position:absolute; 
-  width:100%;
-  height:100%;
-  top:0;
-  left: 0;
 }
 
 .feed__post-meta {
@@ -445,7 +442,6 @@ Emoji and hero__icons
   display: flex;
 }
 
-
 .hero__text {
   //flex-direction: column;
   //writing-mode: vertical-rl;
@@ -460,14 +456,12 @@ Emoji and hero__icons
 
   z-index: -10;
 
-
   p {
-
     font-family: $font-secondary;
-    
+
     width: min-content;
     position: absolute;
-    
+
     top: 15vh;
     right: 50px;
 
@@ -482,16 +476,11 @@ Emoji and hero__icons
 
     @include responsive($big-display) {
       right: 40%;
-
     }
-
-    
   }
 }
 
 .hero__foreground-text {
-  
-
   font-family: $font-primary;
   color: $secondary-content;
   text-align: left;
@@ -502,7 +491,7 @@ Emoji and hero__icons
     position: relative;
     text-decoration: underline;
   }
-  h1{
+  h1 {
     font-size: 3em;
     line-height: 98%;
   }
@@ -528,11 +517,10 @@ Emoji and hero__icons
   overflow: hidden;
 
   width: 200px;
- 
+
   display: block;
   border-radius: 0;
 }
-
 
 .hero__foreground {
   z-index: 20;
@@ -613,8 +601,6 @@ circle {
     display: none;
   }
 }
-
-
 
 .header__nav-elem {
   text-align: end;
@@ -697,7 +683,7 @@ Header bar
   margin-right: $padding-lg;
 }
 
-.contact-form{
+.contact-form {
   max-width: $content-width;
   margin: auto;
   padding: 4%;
@@ -707,85 +693,69 @@ Header bar
   display: block;
 }
 
-
-
-
 //contact form
-    .contact-form__input{
-        background-color: $base;
-        color: $primary;
-        border: 0px;
-        border-radius: $radius;
-        width: 100%;
-        min-height: 100px;
-        position: relative;
-        margin-bottom: $padding-sm;
-        
-        display: inline-block;
-        font-family: $font-secondary;
-        padding: $padding-md;
-        font-size: x-large;
-        
-        &::placeholder{
-          font-family: $font-secondary;
-          font-size: large;
-          text-transform: uppercase;
-          color: $primary;
+.contact-form__input {
+  background-color: $base;
+  color: $primary;
+  border: 0px;
+  border-radius: $radius;
+  width: 100%;
+  min-height: 100px;
+  position: relative;
+  margin-bottom: $padding-sm;
 
-          margin-top:  0px;
-          
-        }
+  display: inline-block;
+  font-family: $font-secondary;
+  padding: $padding-md;
+  font-size: x-large;
 
-        &:focus{
-          background-color: $accent;
-        }
+  &::placeholder {
+    font-family: $font-secondary;
+    font-size: large;
+    text-transform: uppercase;
+    color: $primary;
 
-    
-        
-    }
+    margin-top: 0px;
+  }
 
-    .contact-form__row{
-      display: flex;
-      flex-direction: row;
-      column-gap: $padding-sm;
-      min-height: 100px;
+  &:focus {
+    background-color: $accent;
+  }
+}
 
-      
-    }
+.contact-form__row {
+  display: flex;
+  flex-direction: row;
+  column-gap: $padding-sm;
+  min-height: 100px;
+}
 
-    .contact-form__send-button{
-      width: 100%;
-      max-width: 100px;
-      height: 200px;
-      background-color: $tertiary;
+.contact-form__send-button {
+  width: 100%;
+  max-width: 100px;
+  height: 200px;
+  background-color: $tertiary;
 
+  &:hover {
+    background-color: $accent;
+  }
+}
 
-      &:hover{
-        background-color: $accent;
-      }
-    }
+.animated {
+  transition: transform 0.3s ease-in, opacity 0.1s ease-in;
 
+  &.animated_hidden-bottom {
+    transform: translateY(100px);
+    opacity: 0;
+  }
 
+  &.animated_hidden-top {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
 
-
-  
-    .animated {
-      transition: transform .3s ease-in, opacity .1s ease-in;
-      
-      &.animated_hidden-bottom{
-        transform: translateY(100px);
-        opacity: 0;
-      }
-
-      &.animated_hidden-top{
-        transform: translateY(-100px);
-        opacity: 0;
-      }
-
-      &.animated_visible {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-    
-    
+  &.animated_visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
