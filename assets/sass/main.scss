@@ -567,12 +567,12 @@ circle {
 
 //MENU
 
-#hamburger {
+.header__hamburger {
   cursor: pointer;
-  display: block;
+  display: blocxwk;
   margin-right: $padding-lg;
 
-  #bar {
+  span {
     height: 4px;
     width: 30px;
     background-color: $base;
@@ -586,7 +586,7 @@ circle {
   }
 }
 .change {
-  #bar {
+  span {
     &:nth-child(1) {
       transform: translateY(5px) translateX(-10px) rotateZ(+45deg) scaleX(80%);
     }
@@ -596,7 +596,7 @@ circle {
   }
 }
 
-.nav {
+.header__nav {
   position: absolute;
   z-index: 10;
   right: 10px;
@@ -609,13 +609,15 @@ circle {
   @include responsive($big-display) {
     position: fixed;
   }
+
+  &_hidden {
+    display: none;
+  }
 }
 
-.hide-nav {
-  display: none;
-}
 
-.nav-elem {
+
+.header__nav-elem {
   text-align: end;
   padding: 12px 22px;
   border-radius: $radius;
@@ -627,6 +629,7 @@ circle {
 
   &:hover {
     background-color: $accent;
+    color: $primary;
   }
 }
 
@@ -634,7 +637,7 @@ circle {
 Header bar
 */
 
-header {
+.header {
   @include responsive($big-display) {
     position: fixed;
   }
@@ -647,7 +650,7 @@ header {
   z-index: 5;
   margin-top: $padding-md;
 
-  .site-name {
+  &__site-name {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 20px;
@@ -663,12 +666,12 @@ header {
     }
   }
 
-  .logo {
+  .header__logo {
     height: 50px;
     width: 100px;
     position: relative;
   }
-  .logo__link {
+  .header__logo-link {
     display: block;
     margin-bottom: auto;
     width: unset;

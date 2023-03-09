@@ -122,15 +122,19 @@ window.addEventListener("touchmove", function (e) {
 
 function menuOnClick() {
   document.getElementById("hamburger").classList.toggle("change");
-  document.getElementById("menu-closer").classList.toggle("change");
-  document.getElementById("nav").classList.toggle("hide-nav");
+  document.getElementById("nav").classList.toggle("header__nav_hidden");
 }
 
 function menuCloseOnClick() {
   document.getElementById("hamburger").classList.toggle("change");
-  document.getElementById("nav").classList.toggle("hide-nav");
-  document.getElementById("menu-closer").classList.toggle("change");
+  document.getElementById("nav").classList.toggle("header__nav_hidden");
 }
+
+/*
+ *
+ *   HERO
+ *
+ */
 
 if (document.getElementById("hero-text") !== null) {
   const circleType = new CircleType(
@@ -203,3 +207,21 @@ const observerList = document.querySelectorAll(".animated");
 observerList.forEach((el) => {
   observer.observe(el);
 });
+
+/*
+ *
+ *   TWEEMOJI
+ *
+ */
+
+
+try {
+    twemoji.parse(document.body, {
+      folder: "svg",
+      ext: ".svg",
+    });
+} catch(e) {
+  if (e instanceof ReferenceError) {
+      console.log("tweemoji not initialized")
+  }
+}
