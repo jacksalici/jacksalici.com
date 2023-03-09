@@ -11,7 +11,7 @@ _This code may not be the prettiest you have ever seen 👀, nor the most gramma
 
 ## Architecture 🏗️
 
-Currently, the website is powered by [Hugo](https://gohugo.io/documentation/) framework. The theme is a custom version of my own [Salinger](https://themes.gohugo.io/themes/salinger-theme/).
+Currently, the website is powered by [Hugo](https://gohugo.io/documentation/) framework. The theme was a custom version of my own [Salinger](https://themes.gohugo.io/themes/salinger-theme/), in the last version of the website it's actually very different.
 
 **Posts are stored in `/content` folder.**
 
@@ -20,9 +20,7 @@ To start the local server just execute the script:
 ./server.sh
 ```
 
-Once the edits have been made, *just push the commits*: GitHub Action will build the website, update the `gh-pages` branch and host it using GitHub Pages. More on the workflow file: `.github/workflows/gh-pages.yml`.
-
-The domain name is stored in the `static/CNAME` file, otherwise, GitHub Pages would reset it at every push.
+Once the edits have been made, *just push the commits*: Netlify will build the website, update the `publish` folder and host it.
 
 ## Changelog 🕰️
 
@@ -30,6 +28,7 @@ I like to change its style often so I tagged the main last versions, starting fr
 
 |Version|Description|
 |-|-|
+v1.4.0| New color palette, removed Hugo theming, added CircleType lib, moved to Netlify to use Netlify forms|
 v1.3.0| Dark blue dotted homepage with a [nice hover effect](https://github.com/jacksalici/jacksalici.github.io/blob/v1.3.0/themes/jacksaliciwebsite/assets/js/main.js).|
 v1.2.0| Cream to Light Blue background gradient, landing homepage. [(Screenshot)](static/uploads/v1.2.0.png)
 |v1.1.0| __Hugo Framework__, with [Salinger](https://themes.gohugo.io/themes/salinger-theme/) Theme.
