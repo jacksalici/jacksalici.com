@@ -1,4 +1,6 @@
-# Just my personal website. 🥸💅
+![Screenshot](https://github.com/jacksalici/jacksalici.com/blob/main/static/uploads/website.png)
+
+# Just my website. 🥸💅
 
 Howdy! If you are reading this, you probably already know that the website simultaneously represents 📺:
 
