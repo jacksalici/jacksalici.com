@@ -356,6 +356,9 @@ Emoji and hero__icons
   }
 }
 
+.single__body-content{
+  min-height: 40vh;
+}
 .single__toc-button {
   font-family: $font-secondary;
   background-color: $base;
