@@ -756,3 +756,21 @@ $form-bg         : #fff;
 
 
 
+  
+    .animated {
+      transition: transform .5s ease-in;
+      
+      &.hidden-bottom{
+        transform: translateY(100px);
+      }
+
+      &.hidden-top{
+        transform: translateY(-100px);
+      }
+
+      &.visible {
+        transform: translateY(0);
+      }
+    }
+    
+    
