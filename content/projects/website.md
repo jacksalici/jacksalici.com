@@ -15,5 +15,7 @@ Since the website is static, it's possible to pay nothing for the hosting. The o
 
 The entire source code is open source and avaible on [this Github repository](https://github.com/jacksalici/jacksalici.com).
 
+I also have added some easter eggs that no one will ever notice so if you are curious look for a 404 error for one istance of my broken humor...
+
 
 
