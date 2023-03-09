@@ -155,6 +155,7 @@ if (document.getElementById("hero-text") !== null) {
       offset * 0.3 + 0.15 * vh + "px";
   });
 }
+
 /*
  *
  *   TOC
