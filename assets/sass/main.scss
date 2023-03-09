@@ -238,6 +238,8 @@ img {
     text-decoration: none;
   }
 
+  position: relative;
+
   &:hover {
     background: $accent;
     color: $primary
@@ -260,6 +262,15 @@ img {
   padding: 0;
   padding-top: 5px;
   @include transition(all 100ms ease-in);
+}
+
+
+.feed__link{
+   position:absolute; 
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
 }
 
 .feed__post-meta {
@@ -695,7 +706,6 @@ header {
 }
 
 
-$form-bg         : #fff;
 
 
 //contact form
@@ -758,18 +768,21 @@ $form-bg         : #fff;
 
   
     .animated {
-      transition: transform .5s ease-in;
+      transition: transform .3s ease-in, opacity .1s ease-in;
       
-      &.hidden-bottom{
+      &.animated_hidden-bottom{
         transform: translateY(100px);
+        opacity: 0;
       }
 
-      &.hidden-top{
+      &.animated_hidden-top{
         transform: translateY(-100px);
+        opacity: 0;
       }
 
-      &.visible {
+      &.animated_visible {
         transform: translateY(0);
+        opacity: 1;
       }
     }
     

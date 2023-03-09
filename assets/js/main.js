@@ -180,21 +180,21 @@ for (i = 0; i < collapsibleToc.length; i++) {
 const observer = new IntersectionObserver((entries) => {
   entries.map((entry) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
+      entry.target.classList.add("animated_visible");
     } else {
-      entry.target.classList.remove("visible");
+      entry.target.classList.remove("animated_visible");
     }
 
     if (entry.boundingClientRect.top < 0) {
-      entry.target.classList.add("hidden-top");
+      entry.target.classList.add("animated_hidden-top");
     } else {
-      entry.target.classList.remove("hidden-top");
+      entry.target.classList.remove("animated_hidden-top");
     }
 
     if (entry.boundingClientRect.top > 0) {
-      entry.target.classList.add("hidden-bottom");
+      entry.target.classList.add("animated_hidden-bottom");
     } else {
-      entry.target.classList.remove("hidden-bottom");
+      entry.target.classList.remove("animated_hidden-bottom");
     }
   });
 });
