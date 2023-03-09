@@ -315,6 +315,10 @@ Emoji and hero__icons
   width: 100%;
   color: $secondary;
   //border-radius: $radius;
+
+  &_page{
+    background-color: unset;
+  }
 }
 
 .single__header,
@@ -329,6 +333,10 @@ Emoji and hero__icons
   @include responsive($big-display) {
     padding: 50px;
     margin-top: 150px;
+  }
+
+  &_absent{
+    margin-top: 50px;
   }
 }
 
@@ -353,6 +361,10 @@ Emoji and hero__icons
 
   @include responsive($big-display) {
     padding: 50px;
+  }
+
+  &_page{
+    color: $base;
   }
 }
 
