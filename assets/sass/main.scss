@@ -239,7 +239,7 @@ img {
   border-radius: $radius;
   padding: 20px;
   text-decoration: none;
-  box-shadow: $box-shadow //@include transition(all 200ms ease-in);
+  box-shadow: $box-shadow; 
     a {
     text-decoration: none;
   }
@@ -289,7 +289,7 @@ img {
 Emoji and hero__icons
 */
 
-.emoji {
+img.emoji {
   display: inline-block;
   width: auto;
   height: 1em;
@@ -403,7 +403,7 @@ Emoji and hero__icons
   background-color: $base;
   color: $base-content;
   font-size: 90%;
-  transition: max-height 0.2s ease-out;
+  @include transition(max-height 200ms ease-in);
   max-height: 0px;
   ul,
   li {
@@ -579,7 +579,7 @@ circle {
     background-color: $base;
     display: block;
     border-radius: 5px;
-    transition: 0.3s ease;
+    @include transition (all 300ms ease);
 
     &:nth-child(1) {
       margin-bottom: 5px;
@@ -606,13 +606,16 @@ circle {
   background-color: $primary;
   border-radius: $radius;
   box-shadow: $box-shadow;
+  @include transition(max-height 500ms ease-in);
+  max-height: 700px;
+  overflow: hidden;
 
   @include responsive($big-display) {
     position: fixed;
   }
 
   &_hidden {
-    display: none;
+    max-height: 0px;
   }
 }
 
@@ -629,7 +632,10 @@ circle {
   &:hover {
     background-color: $accent;
     color: $primary;
+    box-shadow: $box-shadow;
   }
+
+  display: block;
 }
 
 /*
@@ -758,6 +764,7 @@ Header bar
 .animated {
   transition: transform 0.3s ease-in, opacity 0.1s ease-in;
 
+
   &.animated_hidden-bottom {
     transform: translateY(100px);
     opacity: 0;
@@ -771,5 +778,27 @@ Header bar
   &.animated_visible {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+
+.special-link{
+  border-bottom: solid 1.5px $base-content;
+  
+  a{
+    text-decoration: none;
+    &:hover{
+      color: unset;
+    }
+  }
+
+  @include transition( all 200ms ease-in);
+
+  &:hover{
+    background-color: $accent;
+    
+    border-bottom: solid 1.5px $accent;
+
+   
   }
 }

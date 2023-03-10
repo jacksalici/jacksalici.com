@@ -5,7 +5,7 @@ slug: "emojipoll"
 description: "EmojiPoll: create polls using random emoji."
 categories: ["development"]
 langs: ["Vue"]
-featured: true
+featured: false
 
 ---
 
