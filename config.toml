@@ -47,15 +47,14 @@ url = "https://t.me/jacksalici"
 
 
 
+
 [taxonomies]
 	category = "categories"
-  lang = "languages"
+  lang = "langs"
   tool = "tools"
+  tags = "tags"
 
-[taxonomiesIcons]
-	category = "categories"
-  lang = "languages"
-  tool = "tools"
+
 
 
 [markup]
