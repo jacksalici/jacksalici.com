@@ -2,7 +2,7 @@
 title: Smart Bus Stop
 date: 2023-01-21T22:00:00+00:00
 slug: smart-bus-stop
-description: An IoT project aimed to enhancing bus stops.
+description: An IoT project aimed to enhance bus stops.
 categories: ["development"]
 tags: ["IoT", "Smart Bus Stop", "Esp32", "mqtt"]
 langs: ["Flask", "Arduino"]
