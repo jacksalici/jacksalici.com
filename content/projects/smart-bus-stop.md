@@ -22,6 +22,9 @@ Once the network of smart stops is established, it will be possible to perform s
 
 The project was developed on Arduino and Esp32 dev-board. Although all the parts work smoothly, some components have been simplified (e.g., omitting some security best practices) since more realistic solutions would have been too time-consuming.
 
-You can see a deeper documentation on my [Github pages](https://github.com/jacksalici/smart-bus-stop), here is the overview of the architecture.  
+You can see a deeper documentation on the [Github repository](https://github.com/jacksalici/smart-bus-stop) and here is the overview of the architecture.  
+
+{{< link txt="Repository" ref="https://github.com/jacksalici/smart-bus-stop" >}}
+
 
 ![Architecture](https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/architecture.jpg)

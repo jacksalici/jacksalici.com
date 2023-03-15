@@ -293,6 +293,25 @@ img.emoji {
   }
 }
 
+.single__text-link{
+  border-radius: $radius;
+  background-color: $primary;
+  color: $base;
+
+  padding: $padding-md;
+
+  position: relative;
+
+  text-transform: uppercase;
+  font-family: $font-secondary;
+
+
+  &:hover{
+    background-color: $accent;
+    color: $primary;
+  }
+}
+
 .single__header,
 .taxonomy__header,
 .term__header,
