@@ -121,13 +121,16 @@ window.addEventListener("touchmove", function (e) {
  */
 
 function menuOnClick() {
-  document.getElementById("hamburger").classList.toggle("change");
+  document.getElementById("hamburger").classList.toggle("header__hamburger_change");
   document.getElementById("nav").classList.toggle("header__nav_hidden");
+  document.getElementById("nav-closer").classList.toggle("header__nav-close-menu_hidden");
 }
 
 function menuCloseOnClick() {
-  document.getElementById("hamburger").classList.toggle("change");
+  document.getElementById("hamburger").classList.toggle("header__hamburger_change");
   document.getElementById("nav").classList.toggle("header__nav_hidden");
+  document.getElementById("nav-closer").classList.toggle("header__nav-close-menu_hidden");
+
 }
 
 /*
