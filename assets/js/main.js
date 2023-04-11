@@ -241,10 +241,10 @@ try {
 let output = document.getElementById("rustleText")
 if (output){
 
-  var theLetters = "#%&^+=-abcdefjk"; //You can customize what letters it will cycle through
+  var theLetters = "#*$&[⍩acJk"; //You can customize what letters it will cycle through
   var ctnt = "Jack"; // Your text goes here
-  var speed = 50; // ms per frame
-  var increment = 8; // frames per step. Must be >2
+  var speed = 40; // ms per frame
+  var increment = 4; // frames per step. Must be >2
   
       
   var clen = ctnt.length;       
