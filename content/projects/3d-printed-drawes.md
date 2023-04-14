@@ -7,7 +7,6 @@ categories: ["design"]
 tags: ["3d printed", "Ikea"]
 tools: ["3d printer"]
 featured: true
-
 ---
 
 
