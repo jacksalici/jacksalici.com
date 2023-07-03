@@ -2,7 +2,7 @@
  *
  *   DOTS PATTERN
  *
- */
+ 
 
 var svg = document.getElementById("svg");
 var dotMatrix = document.createElementNS(
@@ -114,6 +114,8 @@ window.addEventListener("touchmove", function (e) {
   update();
 });
 
+*/
+
 /*
  *
  *   HEADER BAR AND NAV MENU
@@ -137,7 +139,7 @@ function menuCloseOnClick() {
  *
  *   HERO
  *
- */
+
 
 if (document.getElementById("hero-text") !== null) {
   const circleType = new CircleType(
@@ -158,6 +160,7 @@ if (document.getElementById("hero-text") !== null) {
       offset * 0.3 + 0.15 * vh + "px";
   });
 }
+ */
 
 /*
  *
@@ -212,23 +215,6 @@ observerList.forEach((el) => {
   observer.observe(el);
 });
 
-/*
- *
- *   TWEEMOJI
- *
- */
-
-
-try {
-    twemoji.parse(document.body, {
-      folder: "svg",
-      ext: ".svg",
-    });
-} catch(e) {
-  if (e instanceof ReferenceError) {
-      console.log("tweemoji not initialized")
-  }
-}
 
 
 /*** 
@@ -236,7 +222,7 @@ try {
  * TITLE EFFECT
  * https://codepen.io/teddimagg/pen/NPZmje
  * 
-*/
+
 
 let output = document.getElementById("rustleText")
 if (output){
@@ -280,4 +266,4 @@ if (output){
     output.innerText = fixed + block;
     block = "";
   }
-}
+}*/

@@ -770,12 +770,12 @@ Header bar
   transition: transform 0.3s ease-in, opacity 0.1s ease-in;
 
   &.animated_hidden-bottom {
-    transform: translateY(100px);
+    transform: translateY(10px);
     opacity: 0;
   }
 
   &.animated_hidden-top {
-    transform: translateY(-100px);
+    transform: translateY(-10px);
     opacity: 0;
   }
 
