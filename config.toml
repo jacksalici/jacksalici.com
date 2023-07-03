@@ -6,7 +6,7 @@ baseURL = "https://jacksalici.com/"
 title = "Giacomo Salici ~ Creative developer, digital craftsman."
 copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.'
 
-[Params]
+[params]
 DateFormat = "January 2006"
 
 
