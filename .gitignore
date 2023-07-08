@@ -1,2 +1,4 @@
 content/projects/md-syntax.md
 .env
+node_modules
+resources
