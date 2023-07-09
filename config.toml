@@ -7,7 +7,7 @@ title = "Giacomo Salici ~ Creative developer, digital craftsman."
 copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.'
 
 [params]
-DateFormat = "January 2006"
+DateFormat = "Jan 2006"
 
 
 showHeaderOnHomepage = false
@@ -27,21 +27,21 @@ logo = '<svg width="100%" height="100%" viewBox="0 0 942 1000" version="1.1" xml
 [[params.social]]
 name = "github"
 url = "https://github.com/jacksalici"
-icon = "fa-brands fa-github white fa-xl"
+icon = "fa-brands fa-github"
 
 [[params.social]]
 name = "linkedin"
 url = "https://linkedin.com/in/jacksalici"
-icon = "fa-brands fa-linkedin white fa-xl"
+icon = "fa-brands fa-linkedin"
 
 [[params.social]]
 name = "email"
-icon = "fa-solid fa-envelope white fa-xl"
+icon = "fa-solid fa-envelope"
 url = "mailto:hey@jacksalici.com"
 
 [[params.social]]
 name = "telegram"
-icon = "fa-brands fa-telegram white fa-xl"
+icon = "fa-brands fa-telegram"
 url = "https://t.me/jacksalici"
 
 
@@ -61,6 +61,8 @@ url = "https://t.me/jacksalici"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.highlight]
+    style = 'manni'
 
 
 [Menu]
@@ -85,3 +87,4 @@ weight = 3
     extended = false
     max = ''
     min = '0.87.0'
+
