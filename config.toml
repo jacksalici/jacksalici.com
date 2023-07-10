@@ -61,7 +61,7 @@ url = "https://t.me/jacksalici"
     [markup.goldmark.renderer]
       unsafe = true
   [markup.highlight]
-    style = 'manni'
+    style = 'base16-snazzy'
 
 
 [Menu]

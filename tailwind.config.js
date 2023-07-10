@@ -14,13 +14,7 @@ module.exports = {
   content: ['./layouts/**/*.html', './content/**/*.md'],
   theme: {
     extend: {
-  		typography: {
-				DEFAULT: { css: disabledCss },
-				sm: { css: disabledCss },
-				lg: { css: disabledCss },
-				xl: { css: disabledCss },
-				'2xl': { css: disabledCss },
-			},
+  		
     },
     colors:{
       primary: '#686bed'
