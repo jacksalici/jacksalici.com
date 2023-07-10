@@ -38,7 +38,7 @@ module.exports = {
   ],
   daisyui:{
     logs: false,
-    themes: ['lofi'],
+    themes: ['dracula'],
     
   }
 }
