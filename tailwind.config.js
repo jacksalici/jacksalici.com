@@ -32,7 +32,7 @@ module.exports = {
   ],
   daisyui:{
     logs: false,
-    themes: ['dracula'],
+    themes: ['business'],
     
   }
 }

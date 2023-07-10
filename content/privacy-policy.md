@@ -2,8 +2,10 @@
 title: "Privacy Policy"
 hideMeta: True
 slug: "privacy"
+toc: true
 ---
 
+## Privacy Policy
 
 At jacksalici.com, accessible from https://jacksalici.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by jacksalici.com and how we use it.
 
