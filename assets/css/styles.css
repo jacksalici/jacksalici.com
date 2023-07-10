@@ -6,6 +6,13 @@
 @tailwind components;
 @tailwind utilities;
 
+img {
+    width: 70%;
+    border-radius: 5px;
+    margin: 5px auto;
+}
+
+
 img.emoji {
     height: 1em;
     width: 1em;
