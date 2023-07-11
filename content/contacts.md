@@ -1,6 +1,6 @@
 ---
 title: Contact me.
-slug: contact
+slug: contacts
 hideMeta: true
 hideTitle: false
 ---
