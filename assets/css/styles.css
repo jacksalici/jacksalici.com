@@ -5,6 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .feed {
+    @apply max-w-2xl mx-auto px-2 space-y-7
+  }
+}
+
 img {
     width: 70%;
     border-radius: 5px;
