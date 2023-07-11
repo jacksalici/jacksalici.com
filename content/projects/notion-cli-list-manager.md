@@ -3,7 +3,7 @@ title: Notion Cli List Manager.
 date: 2021-12-21T22:00:00+00:00
 slug: notion-cli-list-manager
 description: A command-line interface to manage Notion databases.
-categories: ["development"]
+categories: ["API Development"]
 tags: ["Notion", "Cli", "Python"]
 langs: ["Python"]
 featured: true

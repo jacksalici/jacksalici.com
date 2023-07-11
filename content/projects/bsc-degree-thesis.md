@@ -4,7 +4,7 @@ date: 2022-07-02T22:00:00Z
 publishDate: 2022-07-02T22:00:00Z
 slug: "bsc-degree-thesis"
 description: "My computer engineering degree's final dissertion is about blockchain integration in management software."
-categories: ["papers"]
+categories: ["Blockchain"]
 langs: ["Solidity"]
 featured: true
 

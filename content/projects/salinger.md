@@ -4,7 +4,7 @@ date: 2022-04-02T22:00:00Z
 publishDate: 2022-05-02T22:00:00Z
 slug: "salinger-theme"
 description: "A minimalistic theme for Hugo framework."
-categories: ["development"]
+categories: ["Web Development"]
 tags: ["Model"]
 langs: ["Hugo"]
 

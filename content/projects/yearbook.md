@@ -3,7 +3,7 @@ title: My high school's 2019 yearbook.
 date: 2019-06-30T22:00:00+00:00
 description: My last year highschool yearbook.
 slug: yearbook
-categories: ["design"]
+categories: ["Graphic Design"]
 tags: ["Yearbook"]
 ---
 

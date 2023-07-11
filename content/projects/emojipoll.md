@@ -3,7 +3,7 @@ title: "EmojiPoll"
 date: 2022-08-09T22:00:00Z
 slug: "emojipoll"
 description: "EmojiPoll: create polls using random emoji."
-categories: ["development"]
+categories: ["Web Development"]
 langs: ["Vue"]
 featured: false
 

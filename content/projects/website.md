@@ -3,7 +3,7 @@ title: "This website"
 date: 2023-02-02T22:00:00Z
 slug: "website"
 description: "I built my own website using Hugo."
-categories: ["development"]
+categories: ["Web Development"]
 langs: ["Hugo"]
 tags: ["website", "portfolio", "Hugo"]
 ---

@@ -3,7 +3,7 @@ title: "Modeling scouts."
 date: 2016-07-02T22:00:00Z
 slug: "a-scout-model"
 description: "A model of a scout camp."
-categories: ["crafting"]
+categories: ["Crafting"]
 tags: ["Model"]
 tools: ["Wood"]
 
