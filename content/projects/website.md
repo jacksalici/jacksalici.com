@@ -18,7 +18,7 @@ The entire source code is open source and avaible on [this Github repository](ht
 
 I also have added some easter eggs that no one will ever notice so if you are curious look for a 404 error for one istance of my broken humor...
 
-Having said that, do you know that I really love pizza, coding and succulent plants? This website is also reachable at <span class="special-link">[🍕💻🌵.tk](http://🍕💻🌵.tk)</span> (emojis order obviously matters).
+Having said that, do you know that I really love pizza, coding and succulent plants? This website is also reachable at <span class="link">[🍕💻🌵.tk](http://🍕💻🌵.tk)</span> (emojis order obviously matters).
 
-Just looking at [these](/projects/emojipoll/) [projects](http://localhost:1313/projects/emoji-list-api/) you know that I also like emojis but normally they change according to the operative system where they are read. So, I've applied the __Tweemoji__ (opensource Twitter Emoji) library to be sure to get the same emoji experience all the devices.
+Just looking at [these](/projects/emojipoll/) [projects](/projects/emoji-list-api/) you know that I also like emojis but normally they change according to the operative system where they are read. So, I've applied the __Tweemoji__ (opensource Twitter Emoji) library to be sure to get the same emoji experience all the devices.
 

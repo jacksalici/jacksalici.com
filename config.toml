@@ -1,10 +1,9 @@
 languageCode = 'en-us'
-
-
-
 baseURL = "https://jacksalici.com/"
 title = "Giacomo Salici ~ Creative developer, digital craftsman."
-copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a>.'
+copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="link">Some rights reserved</a>. <a class="link" href="/privacy">Privacy Policy</a>'
+
+googleAnalytics = 'G-TCJ26JMX8T'
 
 [params]
 DateFormat = "Jan 2006"
