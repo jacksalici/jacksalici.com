@@ -13,6 +13,7 @@ module.exports = {
       'sans': ['Ubuntu', 'sans-serif'],
       'serif': ['Newsreader', 'serif'],
       'mono': ['Ubuntu Mono', 'monospace'],
+
     },
    
   },

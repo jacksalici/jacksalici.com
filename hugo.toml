@@ -6,7 +6,7 @@ copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc
 
 [params]
 DateFormat = "Jan 2006"
-#googleAnalytics = 'G-TCJ26JMX8T'
+googleAnalytics = 'G-TCJ26JMX8T'
 
 
 showHeaderOnHomepage = true
