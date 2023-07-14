@@ -1,8 +1,8 @@
 
 
 module.exports = {
-  content: ['./layouts/**/*.html', './content/**/*.md'],
-  theme: {
+    content: ['./hugo_stats.json'],
+    theme: {
     extend: {
   		
     },

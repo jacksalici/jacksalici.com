@@ -42,18 +42,11 @@ name = "telegram"
 icon = "fa-brands fa-telegram"
 url = "https://t.me/jacksalici"
 
-
-
-
-
 [taxonomies]
 	category = "categories"
   lang = "langs"
   tool = "tools"
   tags = "tags"
-
-
-
 
 [markup]
   [markup.goldmark]
@@ -83,6 +76,25 @@ weight = 3
 [module]
   [module.hugoVersion]
     extended = false
-    max = ''
-    min = '0.87.0'
+    min      = "0.112.0"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "hugo_stats.json"
+    target = "assets/watching/hugo_stats.json"
 
+[build]
+  writeStats = true
+  [[build.cachebusters]]
+    source = "assets/watching/hugo_stats\\.json"
+    target = "styles\\.css"
+  [[build.cachebusters]]
+    source = "(postcss|tailwind)\\.config\\.js"
+    target = "css"
+  [[build.cachebusters]]
+    source = "assets/.*\\.(js|ts|jsx|tsx)"
+    target = "js"
+  [[build.cachebusters]]
+    source = "assets/.*\\.(.*)$"
+    target = "$1"
