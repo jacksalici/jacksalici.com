@@ -37,6 +37,7 @@
     "classes": [
       "backdrop-blur-sm",
       "backdrop-filter",
+      "balanced",
       "bg-base-100",
       "bg-base-200",
       "bg-transparent",

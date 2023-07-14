@@ -3,6 +3,15 @@ baseURL = "https://jacksalici.com/"
 title = "Giacomo Salici ~ Creative developer, digital craftsman."
 copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="link">Some rights reserved</a>. <a class="link" href="/privacy">Privacy Policy</a>'
 
+[taxonomies]
+	category = "categories"
+  lang = "langs"
+  tool = "tools"
+  tags = "tags"
+
+[permalinks]
+  '/' = '/:slug/'
+  'projects' = '/projects/:slug/'
 
 [params]
 DateFormat = "Jan 2006"
@@ -11,42 +20,48 @@ googleAnalytics = 'G-TCJ26JMX8T'
 
 showHeaderOnHomepage = true
 showFooterOnHomepage = true
+showSocialOnHomepage = true
 
 twemoji = true
 taxonomyShown = ["Categories", "Langs", "Tools"]
 
+  [[params.social]]
+  name = "github"
+  url = "https://github.com/jacksalici"
+  icon = "fa-brands fa-github"
+  featured = true
+
+  [[params.social]]
+  name = "linkedin"
+  url = "https://linkedin.com/in/jacksalici"
+  icon = "fa-brands fa-linkedin"
+  featured = true
+
+  [[params.social]]
+  name = "email"
+  icon = "fa-solid fa-envelope"
+  url = "mailto:hey@jacksalici.com"
+  featured = true
+
+  [[params.social]]
+  name = "telegram"
+  icon = "fa-brands fa-telegram"
+  url = "https://t.me/jacksalici"
+  featured = true
+
+  [[params.social]]
+  name = "instagram"
+  icon = "fa-brands fa-instagram"
+  url = "https://instagram.com/jacksalici"
+  featured = false
+
+  [[params.social]]
+  name = "twitter"
+  icon = "fa-brands fa-twitter"
+  url = "https://twitter.com/jacksalici"
+  featured = false
 
 
-[permalinks]
-  '/' = '/:slug/'
-  'projects' = '/projects/:slug/'
-
-
-[[params.social]]
-name = "github"
-url = "https://github.com/jacksalici"
-icon = "fa-brands fa-github"
-
-[[params.social]]
-name = "linkedin"
-url = "https://linkedin.com/in/jacksalici"
-icon = "fa-brands fa-linkedin"
-
-[[params.social]]
-name = "email"
-icon = "fa-solid fa-envelope"
-url = "mailto:hey@jacksalici.com"
-
-[[params.social]]
-name = "telegram"
-icon = "fa-brands fa-telegram"
-url = "https://t.me/jacksalici"
-
-[taxonomies]
-	category = "categories"
-  lang = "langs"
-  tool = "tools"
-  tags = "tags"
 
 [markup]
   [markup.goldmark]
@@ -55,23 +70,21 @@ url = "https://t.me/jacksalici"
   [markup.highlight]
     style = 'base16-snazzy'
 
-
 [Menu]
-[[Menu.Main]]
-name = "Homepage"
-url = "/"
-weight = 1
+  [[Menu.Main]]
+  name = "Homepage"
+  url = "/"
+  weight = 1
 
-[[Menu.Main]]
-name = "Projects"
-url = "/projects/"
-weight = 2
+  [[Menu.Main]]
+  name = "Projects"
+  url = "/projects/"
+  weight = 2
 
-[[Menu.Main]]
-name = "Contact me"
-url = "/contact"
-weight = 3
-
+  [[Menu.Main]]
+  name = "Contact me"
+  url = "/contact"
+  weight = 3
 
 [module]
   [module.hugoVersion]
