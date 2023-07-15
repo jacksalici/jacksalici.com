@@ -1,6 +1,8 @@
 {
   "author": "Jack Salici",
-  "dependencies": {},
+  "dependencies": {
+    "theme-change": "^2.5.0"
+  },
   "description": "![Screenshot](https://github.com/jacksalici/jacksalici.com/blob/main/static/uploads/website.png)",
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",

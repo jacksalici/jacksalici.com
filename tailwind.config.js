@@ -23,7 +23,15 @@ module.exports = {
   ],
   daisyui:{
     logs: false,
-    themes: ['business'],
+    themes: {
+      light: {
+        ...require("daisyui/src/theming/themes")["[data-theme=corporate]"],
+      },
+      dark: {
+        ...require("daisyui/src/theming/themes")["[data-theme=business]"],
+      },
+    }
+      
     
   }
 }
