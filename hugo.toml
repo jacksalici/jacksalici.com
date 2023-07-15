@@ -14,6 +14,7 @@ copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc
   'projects' = '/projects/:slug/'
 
 [params]
+
 DateFormat = "Jan 2006"
 googleAnalytics = 'G-TCJ26JMX8T'
 
@@ -24,6 +25,8 @@ showSocialOnHomepage = true
 
 twemoji = true
 taxonomyShown = ["Categories", "Langs", "Tools"]
+text404 = "Looks like you're lost, but here's a link that takes you back to the <a href='/'>home</a>. If you are confident about your URL, it is likely that the content you were searching for has been moved to a new location. That's awkward... <br><br><img src='https://media.tenor.com/U_z21PJ3E28AAAAM/everybody-stay-calm-steve-carrell.gif'/><img src='https://media.tenor.com/CbhnRg0n7ksAAAAM/kermit-the-frog-looking-for-directions.gif' /><img src='https://media.tenor.com/khjOpd7-ungAAAAM/viggo-mortensen-journey.gif' /><img src='https://media.tenor.com/oTeBa4EVepMAAAAC/business-cat-working.gif' /><img src='https://media.tenor.com/oE7O8I0TvEwAAAAC/thats-all-folks.gif' />"
+
 
   [[params.social]]
   name = "github"
@@ -61,6 +64,10 @@ taxonomyShown = ["Categories", "Langs", "Tools"]
   url = "https://twitter.com/jacksalici"
   featured = false
 
+
+  [params.hero]
+  title = "Digital craftsman, creative developer."
+  description = "My name is Giacomo Salici, I'm a developer and engineer based in Italy. Currently, I'm getting a M.Sc. degree in Computer Engineering, artificial intelligence curriculum." 
 
 
 [markup]
