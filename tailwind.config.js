@@ -23,12 +23,13 @@ module.exports = {
     logs: false,
     themes: [
      { lit: {
-        ...require("daisyui/src/theming/themes")["[data-theme=business]"],
+        ...require("daisyui/src/theming/themes")["[data-theme=corporate]"],
       }},
      { dim: {
-        ...require("daisyui/src/theming/themes")["[data-theme=corporate]"],
+        ...require("daisyui/src/theming/themes")["[data-theme=business]"],
       },}
-    ]
+    ],
+    darkTheme: "dim"
     }
       
     
