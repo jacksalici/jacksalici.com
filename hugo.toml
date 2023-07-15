@@ -70,21 +70,16 @@ taxonomyShown = ["Categories", "Langs", "Tools"]
   [markup.highlight]
     style = 'base16-snazzy'
 
-[Menu]
-  [[Menu.Main]]
+[menu]
+  [[menu.main]]
   name = "Homepage"
   url = "/"
   weight = 1
 
-  [[Menu.Main]]
-  name = "Projects"
-  url = "/projects/"
-  weight = 2
-
-  [[Menu.Main]]
+  [[menu.main]]
   name = "Contact me"
-  url = "/contact"
-  weight = 3
+  url = "/contacts"
+  weight = 2
 
 [module]
   [module.hugoVersion]
