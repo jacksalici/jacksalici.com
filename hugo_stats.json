@@ -3,7 +3,6 @@
     "tags": [
       "a",
       "article",
-      "b",
       "body",
       "br",
       "div",
@@ -55,6 +54,7 @@
       "dropdown",
       "dropdown-content",
       "dropdown-end",
+      "dropdown-hover",
       "fa-arrow-right-long",
       "fa-arrow-up-right-from-square",
       "fa-brands",

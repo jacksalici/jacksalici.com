@@ -6,9 +6,7 @@ module.exports = {
     extend: {
   		
     },
-    colors:{
-      primary: '#686bed'
-    },
+ 
     fontFamily:{
       'sans': ['Ubuntu', 'sans-serif'],
       'serif': ['Newsreader', 'serif'],
@@ -23,15 +21,15 @@ module.exports = {
   ],
   daisyui:{
     logs: false,
-    themes: {
-      light: {
-        ...require("daisyui/src/theming/themes")["[data-theme=corporate]"],
-      },
-      dark: {
+    themes: [
+     { lit: {
         ...require("daisyui/src/theming/themes")["[data-theme=business]"],
-      },
+      }},
+     { dim: {
+        ...require("daisyui/src/theming/themes")["[data-theme=corporate]"],
+      },}
+    ]
     }
       
     
   }
-}
