@@ -1,115 +1,134 @@
-languageCode = 'en-us'
 baseURL = "https://jacksalici.com/"
-title = "Giacomo Salici ~ Creative developer, digital craftsman."
 copyright = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="link">Some rights reserved</a>. <a class="link" href="/privacy">Privacy Policy</a>'
+title = "Giacomo Salici ~ Creative developer, digital craftsman."
 
 [taxonomies]
-	category = "categories"
-  lang = "langs"
-  tool = "tools"
-  tags = "tags"
+category = "categories"
+lang = "langs"
+tags = "tags"
+tool = "tools"
 
 [permalinks]
-  '/' = '/:slug/'
-  'projects' = '/projects/:slug/'
+'/' = '/:slug/'
+'projects' = '/projects/:slug/'
 
 [params]
+author = "Jack Salici"
+logoSvg = '''<svg  width="100%" height="100%" viewBox="0 0 942 1000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/">
+    <g transform="matrix(1,0,0,1,-383.556,-420.583)">
+        <path d="M544.989,1122.5C579.959,1152.47 625.389,1170.58 675.017,1170.58C785.4,1170.58 875.017,1080.97 875.017,970.583L1125.02,970.583C1125.02,1218.94 923.379,1420.58 675.017,1420.58C563.875,1420.58 462.09,1380.2 383.556,1313.34L544.989,1122.5Z"/>
+        <path d="M1324.98,420.583L1324.98,670.583C1214.6,670.583 1124.98,760.2 1124.98,870.583L874.983,870.583C874.983,622.221 1076.62,420.583 1324.98,420.583Z"/>
+        <path d="M1008.84,420.583C921.088,482.377 852.184,569.178 812.535,670.583L540.994,670.583L540.994,420.583L1008.84,420.583Z"/>
+    </g>
+</svg>'''
+#logoLabel = ""
 
 DateFormat = "Jan 2006"
 googleAnalytics = 'G-TCJ26JMX8T'
 
-
-showHeaderOnHomepage = true
 showFooterOnHomepage = true
+showHeaderOnHomepage = true
 showSocialOnHomepage = true
 
-twemoji = true
 taxonomyShown = ["Categories", "Langs", "Tools"]
 text404 = "Looks like you're lost, but here's a link that takes you back to the <a href='/'>home</a>. If you are confident about your URL, it is likely that the content you were searching for has been moved to a new location. That's awkward... <br><br><img src='https://media.tenor.com/U_z21PJ3E28AAAAM/everybody-stay-calm-steve-carrell.gif'/><img src='https://media.tenor.com/CbhnRg0n7ksAAAAM/kermit-the-frog-looking-for-directions.gif' /><img src='https://media.tenor.com/khjOpd7-ungAAAAM/viggo-mortensen-journey.gif' /><img src='https://media.tenor.com/oTeBa4EVepMAAAAC/business-cat-working.gif' /><img src='https://media.tenor.com/oE7O8I0TvEwAAAAC/thats-all-folks.gif' />"
+twemoji = true
 
+[params.meta]
+title = "Giacomo Salici ~ Creative developer, digital craftsman."
+description = "I am a M.Sc. Computer Engineering student based in Modena, Italy. I like developing and designing random stuffs. Here are my latest projects."
+keywords = ["jack salici", "Portfolio", "giacomo salici", "developer", "coding", "maker"]
 
-  [[params.social]]
-  name = "github"
-  url = "https://github.com/jacksalici"
-  icon = "fa-brands fa-github"
-  featured = true
+[[params.social]]
+featured = true
+icon = "fa-brands fa-github"
+name = "github"
+url = "https://github.com/jacksalici"
 
-  [[params.social]]
-  name = "linkedin"
-  url = "https://linkedin.com/in/jacksalici"
-  icon = "fa-brands fa-linkedin"
-  featured = true
+[[params.social]]
+featured = true
+icon = "fa-brands fa-linkedin"
+name = "linkedin"
+url = "https://linkedin.com/in/jacksalici"
 
-  [[params.social]]
-  name = "email"
-  icon = "fa-solid fa-envelope"
-  url = "mailto:hey@jacksalici.com"
-  featured = true
+[[params.social]]
+featured = true
+icon = "fa-solid fa-envelope"
+name = "email"
+url = "mailto:hey@jacksalici.com"
 
-  [[params.social]]
-  name = "telegram"
-  icon = "fa-brands fa-telegram"
-  url = "https://t.me/jacksalici"
-  featured = true
+[[params.social]]
+featured = true
+icon = "fa-brands fa-telegram"
+name = "telegram"
+url = "https://t.me/jacksalici"
 
-  [[params.social]]
-  name = "instagram"
-  icon = "fa-brands fa-instagram"
-  url = "https://instagram.com/jacksalici"
-  featured = false
+[[params.social]]
+featured = false
+icon = "fa-brands fa-instagram"
+name = "instagram"
+url = "https://instagram.com/jacksalici"
 
-  [[params.social]]
-  name = "twitter"
-  icon = "fa-brands fa-twitter"
-  url = "https://twitter.com/jacksalici"
-  featured = false
+[[params.social]]
+featured = false
+icon = "fa-brands fa-twitter"
+name = "twitter"
+url = "https://twitter.com/jacksalici"
 
-
-  [params.hero]
-  title = "Digital craftsman, creative developer."
-  description = "My name is Giacomo Salici, I'm a developer and engineer based in Italy. Currently, I'm getting a M.Sc. degree in Computer Engineering, artificial intelligence curriculum." 
-
+[params.hero]
+description = "My name is Giacomo Salici, I'm a developer and engineer based in Italy. Currently, I'm getting a M.Sc. degree in Computer Engineering, artificial intelligence curriculum."
+title = "Digital craftsman, creative developer."
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-  [markup.highlight]
-    style = 'base16-snazzy'
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+[markup.highlight]
+style = 'base16-snazzy'
 
 [menu]
-  [[menu.main]]
-  name = "Homepage"
-  url = "/"
-  weight = 1
+[[menu.main]]
+name = "Homepage"
+url = "/"
+weight = 1
 
-  [[menu.main]]
-  name = "Contact me"
-  url = "/contacts"
-  weight = 2
+[[menu.main]]
+name = "Contact me"
+url = "/contacts"
+weight = 2
+
+[[menu.footer]]
+name = "Privacy Policy"
+url = "/privacy"
+weight= 1 
+
+[[menu.footer]]
+name = "Privacy Policy"
+url = "/privacy"
+weight= 1 
 
 [module]
-  [module.hugoVersion]
-    extended = false
-    min      = "0.112.0"
-  [[module.mounts]]
-    source = "assets"
-    target = "assets"
-  [[module.mounts]]
-    source = "hugo_stats.json"
-    target = "assets/watching/hugo_stats.json"
+[module.hugoVersion]
+extended = false
+min = "0.112.0"
+[[module.mounts]]
+source = "assets"
+target = "assets"
+[[module.mounts]]
+source = "hugo_stats.json"
+target = "assets/watching/hugo_stats.json"
 
 [build]
-  writeStats = true
-  [[build.cachebusters]]
-    source = "assets/watching/hugo_stats\\.json"
-    target = "styles\\.css"
-  [[build.cachebusters]]
-    source = "(postcss|tailwind)\\.config\\.js"
-    target = "css"
-  [[build.cachebusters]]
-    source = "assets/.*\\.(js|ts|jsx|tsx)"
-    target = "js"
-  [[build.cachebusters]]
-    source = "assets/.*\\.(.*)$"
-    target = "$1"
+writeStats = true
+[[build.cachebusters]]
+source = "assets/watching/hugo_stats\\.json"
+target = "styles\\.css"
+[[build.cachebusters]]
+source = "(postcss|tailwind)\\.config\\.js"
+target = "css"
+[[build.cachebusters]]
+source = "assets/.*\\.(js|ts|jsx|tsx)"
+target = "js"
+[[build.cachebusters]]
+source = "assets/.*\\.(.*)$"
+target = "$1"

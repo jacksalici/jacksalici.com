@@ -78,14 +78,12 @@
       "flex-none",
       "font-bold",
       "font-mono",
-      "font-normal",
       "font-sans",
       "font-serif",
       "h-5",
       "h-screen",
       "highlight",
       "hover:text-secondary",
-      "italic",
       "justify-between",
       "justify-start",
       "link",
@@ -103,6 +101,7 @@
       "mx-auto",
       "my-5",
       "my-7",
+      "my-auto",
       "navbar",
       "not-prose",
       "not-sized",
@@ -133,7 +132,6 @@
       "text-6xl",
       "text-[0.6rem]",
       "text-[0.7rem]",
-      "text-base",
       "text-base-content",
       "text-justify",
       "text-lg",
@@ -162,7 +160,8 @@
       "how-we-use-your-information",
       "information-we-collect",
       "privacy-policy",
-      "third-party-privacy-policies"
+      "third-party-privacy-policies",
+      "you-can-reach-me-saying-_hey-at-jacksalici-dot-com_"
     ]
   }
 }
