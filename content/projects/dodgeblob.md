@@ -6,6 +6,7 @@ slug: "dodgeblob"
 description: "Another 2d game, where the goal is to dodge blobs."
 categories: ["Game Development"]
 langs: ["Kotlin"]
+draft: true
 ---
 
 
