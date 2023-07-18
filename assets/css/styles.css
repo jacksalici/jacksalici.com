@@ -46,3 +46,9 @@ pre {
   white-space: unset;
   text-wrap: balance;
 }
+
+.material-symbols-rounded.symbols-sm{
+  font-size: 0.85rem !important;
+  vertical-align: -12%;
+}
+

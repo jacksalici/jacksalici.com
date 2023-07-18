@@ -93,12 +93,13 @@ style = 'base16-snazzy'
 
 [menu]
 [[menu.main]]
-name = "Homepage"
+name = '<span class="material-symbols-rounded">home</span>Homepage'
 url = "/"
 weight = 1
 
 [[menu.main]]
-name = "Contact me"
+ 
+name = '<span class="material-symbols-rounded">voicemail</span>Contact me'
 url = "/contacts"
 weight = 2
 
@@ -109,10 +110,8 @@ weight= 1
 
 [[menu.footer]]
 name = "Website architecture"
-url = "/projects/website/"
+url = "/project/website/"
 weight= 2
-
-
 
 [module]
 [module.hugoVersion]
