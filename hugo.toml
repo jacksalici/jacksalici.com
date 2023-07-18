@@ -26,6 +26,8 @@ logoSvg = '''<svg  width="100%" height="100%" viewBox="0 0 942 1000" version="1.
 DateFormat = "Jan 2006"
 googleAnalytics = 'G-TCJ26JMX8T'
 
+mainMenuSymbol = "lunch_dining"
+mainMenuShowThemes = true
 showFooterOnHomepage = true
 showHeaderOnHomepage = true
 showSocialOnHomepage = true
@@ -92,7 +94,7 @@ unsafe = true
 style = 'base16-snazzy'
 
 [menu]
-[[menu.main]]
+[[menu.main]] 
 name = '<span class="material-symbols-rounded">home</span>Homepage'
 url = "/"
 weight = 1
