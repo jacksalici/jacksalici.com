@@ -1,11 +1,14 @@
 ---
 title: "This website"
-date: 2023-02-02T22:00:00Z
+date: 2023-02-02
+lastmod: 2023-07-19
 slug: "website"
 description: "I built my own website using Hugo."
 categories: ["Web Development"]
 langs: ["Hugo"]
 tags: ["website", "portfolio", "Hugo"]
+link: "https://github.com/jacksalici/salinger-theme"
+linkText: "Based on Salinger Theme (See the Repo)"
 ---
 
 As you probably have imagined, I built this website myself. Actually, I've built it several times because I can't decide how I want it.

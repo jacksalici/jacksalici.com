@@ -11,7 +11,11 @@ featured: true
 
 ---
 
-I developed a simple RESTful API and a Node package for querying emoji, since I needed one for developing [EmojiPoll](https://jacksalici.com/projects/emojipoll). For the first I used Python and FastAPI, and now is hosted on [Deta](https://emojiapi.jacksalici.com/docs).
+I developed a simple RESTful API and a Node package for querying emoji, since I needed one for developing [EmojiPoll](https://jacksalici.com/projects/emojipoll). The problem is that for emojis, unlike standard alphabet characters, it is not possible to get a random glyph from a set.
+
+## API
+
+For the first I used Python and FastAPI, and now is hosted on [Deta](https://emojiapi.jacksalici.com/docs).
 
 ```python
 
@@ -39,8 +43,9 @@ The data is parsed from the unicode website into a JSON list of dictionaries fro
         "version": "E0.6"
     }
 ```
+## npm
 
-For what concerns the **npm package**, here is an example.
+For what concerns the npm package, here is a very simple script that show how it works.
    
 ```bash
 npm i emoji-random-list
@@ -51,3 +56,5 @@ var emoji = require("emoji-random-list")
 console.log(emoji.random({n: 5, group: 'objects'}))
 //[ '🪒', '📕', '🔋', '🔩', '💷' ]
 ```
+
+{{< link txt="Repository" href="https://github.com/jacksalici/emoji-helper" >}}

@@ -37,7 +37,6 @@ text404 = "Looks like you're lost, but here's a link that takes you back to the 
 twemoji = true
 
 [params.footer]
-hide = false
 copy = 'Giacomo Salici. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="link">Some rights reserved.</a>'
 credit = 'Made with 💖 and 🍕 on 🌍.'
 
@@ -112,7 +111,7 @@ weight= 1
 
 [[menu.footer]]
 name = "Website architecture"
-url = "/project/website/"
+url = "/projects/website/"
 weight= 2
 
 [module]
