@@ -8,6 +8,11 @@
   .feed {
     @apply max-w-2xl mx-auto px-3 space-y-7
   }
+
+  .icon{
+    @apply fill-current inline h-min;
+    vertical-align: -12%;
+  }
 }
 
 img {
@@ -46,10 +51,5 @@ pre {
 .balanced {
   white-space: unset;
   text-wrap: balance;
-}
-
-.material-symbols-rounded.symbols-sm{
-  font-size: 0.85rem !important;
-  vertical-align: -12%;
 }
 

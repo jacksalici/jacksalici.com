@@ -12,8 +12,8 @@ langs: ["Hugo"]
 
 
 __Salinger__ is a new-born clean-mimalistic mobile-first blazing-fast fancy and lightweight but powerful theme for [Hugo framework](https://gohugo.io).
-Why this name? During the development of the minimalism of this theme I was inspired by 'The Catcher in The Rye' Einaudi Italian edition cover, by J.D. Salinger, 
+Why this name? During the development of the minimalism of this theme, I was inspired by 'The Catcher in The Rye' Einaudi Italian edition cover, by J.D. Salinger, 
 
 ![](/uploads/salinger.png)
 
-More info and usage instructions on the [GitHub repository](https://github.com/jacksalici/salinger-theme).
+More info and usage instructions are on the [GitHub](https://github.com/jacksalici/salinger-theme) repository](https://github.com/jacksalici/salinger-theme).
