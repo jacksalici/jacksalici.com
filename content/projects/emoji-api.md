@@ -28,9 +28,9 @@ print(json.loads(data.text))
 # ["☔","🤵‍♀️","🤍","🗿","🎥","👴","🏃","🥄","🧃","✌️"]
 ```
 
-For both the tool there are several parameters, you can see them on the [GitHub repository](https://github.com/jacksalici/emoji-helper). One of them is the random option.
+For both the tool, there are several parameters, you can see them on the [GitHub repository](https://github.com/jacksalici/emoji-helper). One of them is the random option.
 
-The data is parsed from the unicode website into a JSON list of dictionaries from which the emoji are retrieved ([JSON file](https://raw.githubusercontent.com/jacksalici/emoji-list-api/main/src/emoji.json)). Each dictionary presents several information reguarding an emoji, and can be retrieved using the verbose parameter. An example is reported.
+The data is parsed from the Unicode website into a JSON list of dictionaries from which the emoji are retrieved ([JSON file](https://raw.githubusercontent.com/jacksalici/emoji-list-api/main/src/emoji.json)). Each dictionary presents information regarding an emoji and can be retrieved using the verbose parameter. An example is reported.
 
 ```json
 {
@@ -45,7 +45,7 @@ The data is parsed from the unicode website into a JSON list of dictionaries fro
 ```
 ## npm
 
-For what concerns the npm package, here is a very simple script that show how it works.
+For what concerns the npm package, here is a very simple script that shows how it works.
    
 ```bash
 npm i emoji-random-list

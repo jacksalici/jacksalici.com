@@ -7,6 +7,9 @@ categories: ["Computer Vision"]
 tags: ["computer vision", "emotion detection", "gaze estimation", "face retrieval"]
 langs: ["Pytorch", "OpenCV"]
 featured: true
+link: "https://github.com/SLG-Vision/EmotiVision"
+linkText: "Repository and Paper"
+
 ---
 
 _During the university course of computer vision and cognitive systems, two of my fellows and I were asked to develop a project featuring a pipeline with both classical image processing and deep learning techniques._

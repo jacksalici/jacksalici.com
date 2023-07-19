@@ -16,4 +16,4 @@ Why this name? During the development of the minimalism of this theme I was insp
 
 ![](/uploads/salinger.png)
 
-More info and usage instruction on the [GitHub repository](https://github.com/jacksalici/salinger-theme).
+More info and usage instructions on the [GitHub repository](https://github.com/jacksalici/salinger-theme).
