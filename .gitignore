@@ -3,3 +3,4 @@ content/projects/md-syntax.md
 node_modules
 resources
 public
+.DS_store
