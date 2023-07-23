@@ -1,4 +1,5 @@
 ![Screenshot](https://github.com/jacksalici/jacksalici.com/blob/main/static/uploads/website.png)
+![Scores](https://github.com/jacksalici/jacksalici.com/blob/main/static/uploads/scores.png)
 
 # Just my website. 🥸💅
 
@@ -13,7 +14,7 @@ _This code may not be the prettiest you have ever seen 👀, nor the most gramma
 
 ## Architecture 🏗️
 
-Currently, the website is powered by [Hugo](https://gohugo.io/documentation/) framework. The theme was a custom version of my own [Salinger](https://themes.gohugo.io/themes/salinger-theme/), in the last version of the website it's actually very different.
+Currently, the website is powered by [Hugo](https://gohugo.io/documentation/) framework. The theme has also been coded by myself and it's [Salinger](https://themes.gohugo.io/themes/salinger-theme/).
 
 **Posts are stored in `/content` folder.**
 
@@ -30,6 +31,8 @@ I like to change its style often so I tagged the main last versions, starting fr
 
 |Version|Description|
 |-|-|
+v2.0.0| Complete rebuild of both this site and [Salinger](https://themes.gohugo.io/themes/salinger-theme/) Theme using Tailwind and DaisyUI, added it as a submodule|
+v1.4.1| New color palette, removed fancy effects for the sake of minimalism.|
 v1.4.0| New color palette, removed Hugo theming, added CircleType lib, moved to Netlify to use Netlify forms|
 v1.3.0| Dark blue dotted homepage with a [nice hover effect](https://github.com/jacksalici/jacksalici.github.io/blob/v1.3.0/themes/jacksaliciwebsite/assets/js/main.js).|
 v1.2.0| Cream to Light Blue background gradient, landing homepage. [(Screenshot)](static/uploads/v1.2.0.png)
