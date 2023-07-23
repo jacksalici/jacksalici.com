@@ -1,4 +1,6 @@
 ![Screenshot](https://github.com/jacksalici/jacksalici.com/blob/main/static/uploads/website.png)
+
+
 ![Scores](https://github.com/jacksalici/jacksalici.com/blob/main/static/uploads/scores.png)
 
 # Just my website. 🥸💅
