@@ -3,7 +3,6 @@
     "tags": [
       "a",
       "article",
-      "blockquote",
       "body",
       "br",
       "button",
@@ -162,6 +161,7 @@
       "consent",
       "contact-us",
       "cookies-and-web-beacons",
+      "fact",
       "gdpr-data-protection-rights",
       "how-we-use-your-information",
       "information-we-collect",

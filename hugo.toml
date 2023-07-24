@@ -113,6 +113,10 @@ name = "Website architecture"
 url = "/projects/website/"
 weight= 2
 
+[[menu.footer]]
+name = "Random facts"
+url = "/facts"
+weight= 3
 
 [[module.mounts]]
 source = "assets"
@@ -135,3 +139,4 @@ target = "js"
 [[build.cachebusters]]
 source = "assets/.*\\.(.*)$"
 target = "$1"
+
