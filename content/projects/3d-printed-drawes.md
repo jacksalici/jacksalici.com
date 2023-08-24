@@ -6,7 +6,7 @@ description: "A 3d printed mod for my Ikea Table."
 categories: ["3d Design"]
 tags: ["3d printed", "Ikea"]
 tools: ["3d printer"]
-featured: true
+featured: false
 ---
 
 

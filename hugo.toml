@@ -11,6 +11,8 @@ tool = "tools"
 [permalinks]
 '/' = '/:slug/'
 'projects' = '/projects/:slug/'
+'apps' = '/projects/:slug/'
+
 
 [params]
 author = "Jack Salici"
