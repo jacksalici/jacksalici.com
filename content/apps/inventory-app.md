@@ -9,7 +9,7 @@ langs: ["Vue"]
 featured: true
 link: "https://inventory.jacksalici.com"
 linktext: "Check the website."
-
+cover: "https://raw.githubusercontent.com/jacksalici/inventory-app/main/public/screenshot3.png"
 ---
 
 The Inventory App is a fast, open-source and 100% free way to track the equipment of your role-playing games characters.

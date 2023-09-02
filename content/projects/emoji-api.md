@@ -8,6 +8,7 @@ categories: ["Web Development"]
 tags: ["Model"]
 langs: ["Python", "npm"]
 featured: true
+cover: /uploads/emojiscreenshot.png
 
 ---
 
