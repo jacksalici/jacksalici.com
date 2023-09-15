@@ -65,7 +65,6 @@
       "collapse-plus",
       "collapse-title",
       "dark:brightness-50",
-      "dim:brightness-50",
       "dropdown",
       "dropdown-content",
       "dropdown-end",
@@ -136,6 +135,7 @@
       "place-items-start",
       "prose",
       "pt-2",
+      "pt-3",
       "py-24",
       "py-3",
       "py-5",
@@ -187,7 +187,6 @@
       "npm",
       "privacy-policy",
       "security-concerns",
-      "themeButton",
       "third-party-privacy-policies",
       "usage",
       "you-can-reach-me-saying-_hey-at-jacksalici-dot-com_"
