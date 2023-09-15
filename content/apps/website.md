@@ -10,6 +10,7 @@ tags: ["website", "portfolio", "Hugo"]
 link: "https://github.com/jacksalici/salinger-theme"
 linkText: "Based on Salinger Theme (See the Repo)"
 featured: true
+cover: "/uploads/websiteCover.png"
 ---
 
 As you probably have imagined, I built this website myself. Actually, I've built it several times because I can't decide how I want it.

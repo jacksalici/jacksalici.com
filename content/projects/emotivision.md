@@ -9,6 +9,7 @@ langs: ["Pytorch", "OpenCV"]
 featured: true
 link: "https://github.com/SLG-Vision/EmotiVision"
 linkText: "Repository and Paper"
+cover: "/uploads/cvcs_cover.jpg"
 
 ---
 

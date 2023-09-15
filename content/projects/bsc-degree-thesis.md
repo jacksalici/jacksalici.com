@@ -7,6 +7,7 @@ description: "My B.Sc. dissertion is about blockchain integration in management 
 categories: ["Blockchain"]
 langs: ["Solidity"]
 featured: true
+cover: /uploads/blockchainStructure.png
 
 ---
 
