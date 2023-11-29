@@ -9,11 +9,11 @@ export default {
 			'orange': '#ff7849',
 			'green': '#13ce66',
 			'yellow': '#ffc82c',
-			'gray-dark': '#273444',
+			'gray-dark': '#404040',
 			'gray': '#8492a6',
 			'gray-light': '#d3dce6',
 			'primary': '#d3dce6',
-			'foreground': '#202020'
+			'foreground': '#404040'
 		  },
 		  fontFamily: {
 			sans: ['Graphik', 'sans-serif'],

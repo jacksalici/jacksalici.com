@@ -3,3 +3,5 @@ content/projects/md-syntax.md
 node_modules
 resources
 .DS_store
+.astro
+.vscode

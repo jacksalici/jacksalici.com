@@ -213,13 +213,134 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
-"using-mdx.mdx": {
-	id: "using-mdx.mdx";
-  slug: "using-mdx";
+};
+"projects": {
+"3d-printed-drawes.md": {
+	id: "3d-printed-drawes.md";
+  slug: "3d-printed-drawers";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"a-scout-model.md": {
+	id: "a-scout-model.md";
+  slug: "a-scout-model";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"bsc-degree-thesis.md": {
+	id: "bsc-degree-thesis.md";
+  slug: "bsc-degree-thesis";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"dodgeblob.md": {
+	id: "dodgeblob.md";
+  slug: "dodgeblob";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"ears-saver.md": {
+	id: "ears-saver.md";
+  slug: "ear-saver";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"emoji-api.md": {
+	id: "emoji-api.md";
+  slug: "emoji-list-api";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"emojipoll.md": {
+	id: "emojipoll.md";
+  slug: "emojipoll";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"emotivision.md": {
+	id: "emotivision.md";
+  slug: "emotivision";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"inventory-app.md": {
+	id: "inventory-app.md";
+  slug: "inventory-app";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"leaping-llama.md": {
+	id: "leaping-llama.md";
+  slug: "leaping-llama";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"notion-cli-list-manager.md": {
+	id: "notion-cli-list-manager.md";
+  slug: "notion-cli-list-manager";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"parrocchia-di-mirandola-website.md": {
+	id: "parrocchia-di-mirandola-website.md";
+  slug: "parrocchia-di-mirandola-website";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"privacy-policy.md": {
+	id: "privacy-policy.md";
+  slug: "privacy";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"salinger-theme.md": {
+	id: "salinger-theme.md";
+  slug: "salinger-theme";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"smart-bus-stop.md": {
+	id: "smart-bus-stop.md";
+  slug: "smart-bus-stop";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"weather-station.md": {
+	id: "weather-station.md";
+  slug: "weather-station";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"website.md": {
+	id: "website.md";
+  slug: "website";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"yearbook.md": {
+	id: "yearbook.md";
+  slug: "yearbook";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
 };
 
 	};
