@@ -3,21 +3,12 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		colors: {
-			'blue': '#1fb6ff',
-			'purple': '#7e5bef',
-			'pink': '#ff49db',
-			'orange': '#ff7849',
-			'green': '#13ce66',
+			'blue': '#17b3bb',
+			'purple': '#6f73d2',
+			'pink': '#ff57bb',
 			'yellow': '#ffc82c',
-			'gray-dark': '#404040',
-			'gray': '#8492a6',
-			'gray-light': '#d3dce6',
-			'primary': '#d3dce6',
-			'foreground': '#404040'
-		  },
-		  fontFamily: {
-			sans: ['Graphik', 'sans-serif'],
-			serif: ['Merriweather', 'serif'],
+			'primary': '#d4d2d5',
+			'background': '#2b303a'
 		  },
 		  extend: {
 			spacing: {

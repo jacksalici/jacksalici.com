@@ -1,6 +1,6 @@
 ---
 title: "Lack of drawers."
-pubDate: 2021-03-17T22:00:00Z
+date: 2021-03-17T22:00:00Z
 slug: "3d-printed-drawers"
 description: "A 3d printed mod for my Ikea Table."
 categories: ["3d Design"]

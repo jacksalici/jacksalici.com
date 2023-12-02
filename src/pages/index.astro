@@ -1,27 +1,23 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 import PostCard from '../components/PostCard.astro';
+import Base from '../layouts/Base.astro';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+	(a, b) => a.data?.pubDate.valueOf() - b.data?.pubDate.valueOf()
+);
+
+const projects = (await getCollection('projects')).sort(
+	(a, b) => a.data?.date.valueOf() - b.data?.date.valueOf()
 );
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
+<Base>
 		<main>
 			<h1 class="title-font">Digital craftsman, creative developer.</h1>
-			<p class="text-xl">
+			<p class="text-xl mb-72 uppercase">
 				My name is Giacomo Salici, I'm a developer and engineer based in Italy.
 				Currently, I'm getting a master degree in Computer Engineering, Artificial Intelligence Curriculum.
 			</p>
@@ -34,8 +30,15 @@ const posts = (await getCollection('blog')).sort(
 						))
 					}
 			</section>
+
+			<section class="grid gap-3 grid-cols-2">
+				
+				{
+					projects.map((post) => (
+					<PostCard description={post.data.description} pubDate={post.data.pubDate} title={post.data.description} slug={`/projects/${post.slug}/`} />
+					))
+				}
+		</section>
 		
 		</main>
-		<Footer />
-	</body>
-</html>
+</Base>

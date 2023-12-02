@@ -3,26 +3,10 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; 2017 - {today.getFullYear()} Jack Salici. All rights reserved when not specified otherwise.
+	<p class="text-center mb-12 opacity-50 hover:opacity-100 transition-opacity">
+		&copy; 2017 - {today.getFullYear()} Jack Salici. Made with ❤️ and 🍕 on 🌍.<br/> All rights are reserved if not otherwise specified. <br/><br/>
+		<span class="font-[MonaspaceKrypton]">NOT ALL THOSE WHO WANDER ARE LOST</span>
+	</p>
+	
 </footer>
-<style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
-</style>
+

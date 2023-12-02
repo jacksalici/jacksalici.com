@@ -294,7 +294,7 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 "parrocchia-di-mirandola-website.md": {
 	id: "parrocchia-di-mirandola-website.md";
-  slug: "parrocchia-di-mirandola-website";
+  slug: "parish-website";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">

@@ -4,12 +4,6 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
-:root {
-	--accent: #ff2370;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 10, 10, 10;
-	
-}
 
 @font-face {
 	font-family: 'MonaspaceNeon';
@@ -35,24 +29,22 @@
 	font-feature-settings: 'ss01' 1, 'ss02' 1, 'ss03' 1, 'ss04' 1, 'ss05' 1, 'ss06' 1, 'ss07' 1, 'ss08' 1, 'calt' 1, 'dlig' 1;
 }
 
-body {
-	font-family: 'MonaspaceNeon', sans-serif;
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background-color: rgb(var(--gray-dark));
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-light));
-	font-size: 16px;
+i, em{
+	font-family: 'MonaspaceRadon';
 }
 
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+html{
+	font-family: 'MonaspaceNeon';
 }
+
+pre, code{
+	font-family: 'MonaspaceKrypton';
+}
+
+main{
+	@apply max-w-4xl  p-2 md:p-4 mx-auto border
+}
+
 
 h1,
 h2,
@@ -60,10 +52,8 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
 	font-family: Inter, sans-serif;
+	line-height: 100%;
 	font-feature-settings: 'liga' 1, 'calt' 1, 'case' 1, 'ss03' 1;
 }
 
@@ -81,132 +71,3 @@ h6 {
 	}
 }
 
-h1 {
-	font-size: 3.052em;
-	font-weight: 700;
-}
-
-h2 {
-	font-size: 2.441em;
-}
-
-h3 {
-	font-size: 1.953em;
-}
-
-h4 {
-	font-size: 1.563em;
-}
-
-h5 {
-	font-size: 1.25em;
-}
-
-strong,
-b {
-	font-weight: 700;
-}
-
-a {
-	color: var(--accent);
-}
-
-a:hover {
-	color: var(--accent);
-}
-
-p {
-	margin-bottom: 1em;
-}
-
-.prose p {
-	margin-bottom: 2em;
-}
-
-.prose a {
-	font-family: 'MonaspaceRadon';
-}
-
-.prose em {
-	font-family: 'MonaspaceRadon';
-}
-
-code {
-	font-family: 'MonaspaceKrypton';
-	font-weight: 800;
-}
-
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-
-input {
-	font-size: 16px;
-}
-
-table {
-	width: 100%;
-}
-
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-
-code {
-	padding: 2px 5px;
-	background-color: var(--gray-dark);
-	border-radius: 2px;
-}
-
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-	font-family: 'MonaspaceKrypton';
-}
-
-pre>code {
-	all: unset;
-}
-
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
-}
-
-hr {
-	border: none;
-	border-top: 1px solid var(--gray-dark);
-}
-
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-
-	main {
-		padding: 1em;
-	}
-}
-
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
-}

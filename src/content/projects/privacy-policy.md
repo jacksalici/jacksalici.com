@@ -3,6 +3,7 @@ title: "Privacy Policy"
 hideMeta: True
 slug: "privacy"
 toc: true
+date: 2023-11-11
 ---
 
 ## Privacy Policy
