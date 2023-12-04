@@ -1,6 +1,6 @@
 ---
 title: "Modeling scouts."
-date: 2016-07-02T22:00:00Z
+pubDate: 2016-07-02
 slug: "a-scout-model"
 description: "A model of a scout camp."
 categories: ["Crafting"]

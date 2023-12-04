@@ -1,6 +1,6 @@
 ---
 title: "Ecowitt Weather Station Client"
-date: 2023-08-01
+pubDate: 2023-08-01
 slug: "weather-station"
 description: "A custom client for displaying my weather station data."
 categories: ["Web Development"]

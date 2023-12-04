@@ -1,7 +1,7 @@
 ---
 title: "DodgeBlob."
-date: 2022-05-02T22:00:00Z
-publishDate: 2022-05-02T22:00:00Z
+pubDate: 2022-05-02
+publishpubDate: 2022-05-02
 slug: "dodgeblob"
 description: "Another 2d game, where the goal is to dodge blobs."
 categories: ["Game Development"]

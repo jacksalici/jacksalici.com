@@ -1,6 +1,6 @@
 ---
 title: "The Inventory App"
-date: 2023-08-01
+pubDate: 2023-08-01
 slug: "inventory-app"
 description: "A web app to manage your favorite RPG hero inventory."
 categories: ["Web Development"]

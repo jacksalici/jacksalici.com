@@ -1,7 +1,7 @@
 ---
 title: "Emoji list API and npm"
-date: 2022-08-02T22:00:00Z
-publishDate: 2022-08-02T22:00:00Z
+pubDate: 2022-08-02
+publishpubDate: 2022-08-02
 slug: "emoji-list-api"
 description: "A simple API and a npm for querying emoji."
 categories: ["Web Development"]

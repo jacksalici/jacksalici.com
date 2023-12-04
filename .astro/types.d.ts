@@ -184,34 +184,34 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"blog": {
+		"posts": {
 "first-post.md": {
 	id: "first-post.md";
   slug: "first-post";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "posts";
+  data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
 "markdown-style-guide.md": {
 	id: "markdown-style-guide.md";
   slug: "markdown-style-guide";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "posts";
+  data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
 "second-post.md": {
 	id: "second-post.md";
   slug: "second-post";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "posts";
+  data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
 "third-post.md": {
 	id: "third-post.md";
   slug: "third-post";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "posts";
+  data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
 };
 "projects": {
@@ -257,30 +257,9 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"emojipoll.md": {
-	id: "emojipoll.md";
-  slug: "emojipoll";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
 "emotivision.md": {
 	id: "emotivision.md";
   slug: "emotivision";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
-"inventory-app.md": {
-	id: "inventory-app.md";
-  slug: "inventory-app";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
-"leaping-llama.md": {
-	id: "leaping-llama.md";
-  slug: "leaping-llama";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
@@ -292,37 +271,9 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"parrocchia-di-mirandola-website.md": {
-	id: "parrocchia-di-mirandola-website.md";
-  slug: "parish-website";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
-"privacy-policy.md": {
-	id: "privacy-policy.md";
-  slug: "privacy";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
-"salinger-theme.md": {
-	id: "salinger-theme.md";
-  slug: "salinger-theme";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
 "smart-bus-stop.md": {
 	id: "smart-bus-stop.md";
   slug: "smart-bus-stop";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
-"weather-station.md": {
-	id: "weather-station.md";
-  slug: "weather-station";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
@@ -340,6 +291,43 @@ declare module 'astro:content' {
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+};
+"works": {
+"emojipoll.md": {
+	id: "emojipoll.md";
+  slug: "emojipoll";
+  body: string;
+  collection: "works";
+  data: InferEntrySchema<"works">
+} & { render(): Render[".md"] };
+"inventory-app.md": {
+	id: "inventory-app.md";
+  slug: "inventory-app";
+  body: string;
+  collection: "works";
+  data: InferEntrySchema<"works">
+} & { render(): Render[".md"] };
+"leaping-llama.md": {
+	id: "leaping-llama.md";
+  slug: "leaping-llama";
+  body: string;
+  collection: "works";
+  data: InferEntrySchema<"works">
+} & { render(): Render[".md"] };
+"salinger-theme.md": {
+	id: "salinger-theme.md";
+  slug: "salinger-theme";
+  body: string;
+  collection: "works";
+  data: InferEntrySchema<"works">
+} & { render(): Render[".md"] };
+"weather-station.md": {
+	id: "weather-station.md";
+  slug: "weather-station";
+  body: string;
+  collection: "works";
+  data: InferEntrySchema<"works">
 } & { render(): Render[".md"] };
 };
 

@@ -1,6 +1,6 @@
 ---
-date: 2020-08-31T22:00:00Z
-draft: true
+pubDate: 2020-08-31T22:00:00Z
+hide: true
 slug: "parish-website"
 title: "I created just another website."
 description: "I created a new version of my parish' website."

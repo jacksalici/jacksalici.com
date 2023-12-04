@@ -1,6 +1,6 @@
 ---
 title: "EmotiVision: Emotion detection and gaze analysis of retrieved faces."
-date: 2023-07-01T22:00:00+00:00
+pubDate: 2023-07-01
 slug: emotivision
 description: Computer Vision pipeline for gaze analysis and emotion detection.
 categories: ["Computer Vision"]

@@ -14,7 +14,7 @@ const { title, pubDate, description, slug, summary } = Astro.props;
 ---
 
 <a
-  class="group flex max-w-sm cursor-pointer relative flex-col gap-2 rounded-md p-4 transition-all duration-300 hover:-translate-y-2 border border-primary hover:border-pink"
+  class="group flex max-w-full cursor-pointer relative flex gap-2 rounded-md p-4 transition-all duration-300 hover:-translate-y-2 border border-primary hover:border-pink"
   href={slug}
 >
 <svg
@@ -35,14 +35,10 @@ const { title, pubDate, description, slug, summary } = Astro.props;
       </svg>
 
   <div
-    class="flex w-full flex-col justify-between gap-2 md:flex-row md:items-center"
+    class="flex w-full flex-col justify-between"
   >
-    <p class="">{title}</p>
-    <div class="flex flex-row items-center gap-4">
-      <p><FormattedDate date={pubDate} /></p>
-
-      
-    </div>
+  <p class="opacity-50"><FormattedDate date={pubDate} /></p>
+  <p class="">{title}</p> 
   </div>
 
   <p class="truncate">

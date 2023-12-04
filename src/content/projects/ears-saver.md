@@ -1,6 +1,6 @@
 ---
 title: "A 3d model against the mask pain."
-date: 2020-07-02T22:00:00Z
+pubDate: 2020-07-02
 description: "This 3d printing should reduce the ear pain caused by mask."
 slug: "ear-saver"
 categories: ["3d design"]

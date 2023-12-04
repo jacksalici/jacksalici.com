@@ -1,6 +1,6 @@
 ---
 title: "This website"
-date: 2023-02-02
+pubDate: 2023-02-02
 lastmod: 2023-07-19
 slug: "website"
 description: "I built my own website from zero."

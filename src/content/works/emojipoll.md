@@ -1,6 +1,6 @@
 ---
 title: "EmojiPoll"
-date: 2022-08-09T22:00:00Z
+pubDate: 2022-08-09
 slug: "emojipoll"
 description: "EmojiPoll: create polls using random emoji."
 categories: ["Web Development"]

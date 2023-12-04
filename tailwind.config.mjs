@@ -4,7 +4,7 @@ export default {
 	theme: {
 		colors: {
 			'blue': '#17b3bb',
-			'purple': '#6f73d2',
+			'purple': '#3D2B8C',
 			'pink': '#ff57bb',
 			'yellow': '#ffc82c',
 			'primary': '#d4d2d5',

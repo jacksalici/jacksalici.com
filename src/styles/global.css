@@ -49,6 +49,10 @@ main{
 	@apply  opacity-50 hover:opacity-100 transition-opacity
 }
 
+img {
+	@apply rounded-lg shadow-lg
+}
+
 h1,
 h2,
 h3,
@@ -60,13 +64,7 @@ h6 {
 	font-feature-settings: 'liga' 1, 'calt' 1, 'case' 1, 'ss03' 1;
 }
 
-.title-font {
-	font-family: Inter, sans-serif;
-	font-feature-settings: 'liga' 1, 'calt' 1, 'case' 1, 'ss03' 1;
-	/* fix for Chrome */
-	font-size: 4.5em;
-	font-weight: 800;
-}
+
 
 @supports (font-variation-settings: normal) {
 	.title-font {

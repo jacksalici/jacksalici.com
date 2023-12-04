@@ -1,6 +1,6 @@
 ---
 title: "Salinger Theme."
-date: 2022-04-01
+pubDate: 2022-04-01
 lastmod: 2023-08-01
 slug: "salinger-theme"
 description: "A minimalistic theme for Hugo framework."
