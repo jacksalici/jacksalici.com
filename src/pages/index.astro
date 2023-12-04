@@ -1,27 +1,61 @@
 ---
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../components/FormattedDate.astro';
 import PostCard from '../components/PostCard.astro';
 import Base from '../layouts/Base.astro';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('posts')).sort(
 	(a, b) => a.data?.pubDate.valueOf() - b.data?.pubDate.valueOf()
 );
 
 const projects = (await getCollection('projects')).sort(
-	(a, b) => a.data?.date.valueOf() - b.data?.date.valueOf()
-);
+	(a, b) => - a.data?.pubDate.valueOf() + b.data?.pubDate.valueOf()
+).filter((a) => !a.data.draft );
+
+
+const works = (await getCollection('works')).sort(
+	(a, b) => - a.data?.pubDate.valueOf() + b.data?.pubDate.valueOf()
+).filter((a) => a.data.draft != true );
 ---
 
 <Base>
+
 		<main>
-			<h1 class="title-font">Digital craftsman, creative developer.</h1>
-			<p class="text-xl mb-72 mt-12 uppercase" style="text-wrap: balance;">
+			<h1 class="text-[5.4em] font-extrabold">Digital craftsman, creative developer.</h1>
+			<p class="text-xl my-12 uppercase" style="text-wrap: balance;">
 				My name is Giacomo Salici, I'm a <span class="highlight">developer</span> and <span class="highlight">engineer</span> based in Italy.
-				Currently, I'm getting a Computer and AI Engineering master degree in Unimore.
+				Currently, I'm getting a Computer and AI Engineering master degree.
 			</p>
+			<div class="h-3 mb-72 bg-gradient-to-r from-blue via-pink to-yellow rounded"></div>
 			
+			<h2 class="text-3xl font-extrabold mb-5 mt-10">Current involving projects.</h2>
+			<section class="grid gap-3 grid-cols-2">
+				
+				
+					<PostCard description="Formula Student" pubDate={new Date("15 oct 2023")} title="Formula Student" summary="test" slug="#" />
+				
+			</section>
+			<h2 class="text-3xl font-extrabold mb-5 mt-10">Featured interesting projects.</h2>
+			<section class="grid gap-3 grid-cols-2">
+				
+				{
+					projects.map((post) => (
+					<PostCard description={post.data.description} pubDate={post.data.pubDate} title={post.data.description} slug={`/projects/${post.slug}/`} />
+					))
+				}
+			</section>
+
+			<h2 class="text-3xl font-extrabold mb-5 mt-10">Some of the works I made.</h2>
+			<section class="grid gap-3 grid-cols-3">
+				
+				{
+					works.map((post) => (
+					<PostCard description={post.data.description} pubDate={post.data.pubDate} title={post.data.description} slug={`/projects/${post.slug}/`} />
+					))
+				}
+		</section>
+
+		<h2 class="text-3xl font-extrabold mb-5 mt-10">Last thoughts.</h2>
 			<section class="grid gap-3 grid-cols-2">
 				
 					{
@@ -30,15 +64,6 @@ const projects = (await getCollection('projects')).sort(
 						))
 					}
 			</section>
-
-			<section class="grid gap-3 grid-cols-2">
-				
-				{
-					projects.map((post) => (
-					<PostCard description={post.data.description} pubDate={post.data.pubDate} title={post.data.description} slug={`/projects/${post.slug}/`} />
-					))
-				}
-		</section>
 		
 		</main>
 </Base>
