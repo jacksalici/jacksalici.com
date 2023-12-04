@@ -10,6 +10,7 @@ featured: true
 link: "https://weather.jacksalici.com"
 linktext: "Check the website."
 cover: "https://raw.githubusercontent.com/jacksalici/weather_station/main/screenshot.png"
+type: work
 
 ---
 

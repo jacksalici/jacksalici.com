@@ -8,7 +8,7 @@ tags: ["Java", "Android", "LibGDX"]
 langs: ["Java"]
 featured: true
 cover: "/uploads/gameLogo.png"
-
+type: work
 ---
 ![](/uploads/gameLogo.png)  
 

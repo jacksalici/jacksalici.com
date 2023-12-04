@@ -185,13 +185,6 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"posts": {
-"first-post.md": {
-	id: "first-post.md";
-  slug: "first-post";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
 "markdown-style-guide.md": {
 	id: "markdown-style-guide.md";
   slug: "markdown-style-guide";
@@ -199,16 +192,9 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
-"second-post.md": {
-	id: "second-post.md";
-  slug: "second-post";
-  body: string;
-  collection: "posts";
-  data: InferEntrySchema<"posts">
-} & { render(): Render[".md"] };
-"third-post.md": {
-	id: "third-post.md";
-  slug: "third-post";
+"website.md": {
+	id: "website.md";
+  slug: "website";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -257,9 +243,30 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
+"emojipoll.md": {
+	id: "emojipoll.md";
+  slug: "emojipoll";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
 "emotivision.md": {
 	id: "emotivision.md";
   slug: "emotivision";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"inventory-app.md": {
+	id: "inventory-app.md";
+  slug: "inventory-app";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"leaping-llama.md": {
+	id: "leaping-llama.md";
+  slug: "leaping-llama";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
@@ -271,6 +278,13 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
+"salinger-theme.md": {
+	id: "salinger-theme.md";
+  slug: "salinger-theme";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
 "smart-bus-stop.md": {
 	id: "smart-bus-stop.md";
   slug: "smart-bus-stop";
@@ -278,9 +292,9 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"website.md": {
-	id: "website.md";
-  slug: "website";
+"weather-station.md": {
+	id: "weather-station.md";
+  slug: "weather-station";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
@@ -291,43 +305,6 @@ declare module 'astro:content' {
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
-};
-"works": {
-"emojipoll.md": {
-	id: "emojipoll.md";
-  slug: "emojipoll";
-  body: string;
-  collection: "works";
-  data: InferEntrySchema<"works">
-} & { render(): Render[".md"] };
-"inventory-app.md": {
-	id: "inventory-app.md";
-  slug: "inventory-app";
-  body: string;
-  collection: "works";
-  data: InferEntrySchema<"works">
-} & { render(): Render[".md"] };
-"leaping-llama.md": {
-	id: "leaping-llama.md";
-  slug: "leaping-llama";
-  body: string;
-  collection: "works";
-  data: InferEntrySchema<"works">
-} & { render(): Render[".md"] };
-"salinger-theme.md": {
-	id: "salinger-theme.md";
-  slug: "salinger-theme";
-  body: string;
-  collection: "works";
-  data: InferEntrySchema<"works">
-} & { render(): Render[".md"] };
-"weather-station.md": {
-	id: "weather-station.md";
-  slug: "weather-station";
-  body: string;
-  collection: "works";
-  data: InferEntrySchema<"works">
 } & { render(): Render[".md"] };
 };
 

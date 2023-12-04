@@ -25,25 +25,12 @@ const projects = defineCollection({
 		categories: z.string().array().optional(),
 		link: z.string().optional(),
 		summary: z.string().optional(),
-		draft: z.boolean().optional()
-	}),
-});
-
-const works = defineCollection({
-	type: 'content',
-	schema: z.object({
-		title: z.string().optional(),
-		description: z.string().optional(),
-		pubDate: z.coerce.date().optional(),
-		updatedDate: z.coerce.date().optional(),
-		cover: z.string().optional(),
-		tags: z.string().array().optional(),
-		categories: z.string().array().optional(),
-		link: z.string().optional(),
-		summary: z.string().optional(),
-		draft: z.boolean().optional()
+		draft: z.boolean().optional(),
+		featured: z.boolean().optional().default(false),
+		type: z.enum(['work', 'project']).optional().default("project")
 	}),
 });
 
 
-export const collections = { posts, projects, works};
+
+export const collections = { posts, projects};

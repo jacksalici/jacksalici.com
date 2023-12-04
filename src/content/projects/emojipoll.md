@@ -6,6 +6,7 @@ description: "EmojiPoll: create polls using random emoji."
 categories: ["Web Development"]
 langs: ["Vue"]
 featured: false
+type: work
 
 ---
 

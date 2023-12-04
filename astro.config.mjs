@@ -8,5 +8,5 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   site: 'https://jacksalici.com',
   integrations: [mdx(), sitemap(), tailwind()],
-  redirects: {'/projects/': '/#projects',  }
+  redirects: {'/p/': '/#pr', '/p/website':'/blog/website' }
 });

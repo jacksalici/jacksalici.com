@@ -1,0 +1,21 @@
+---
+import { type CollectionEntry, getCollection, getEntry } from 'astro:content';
+import Single from '../../layouts/Single.astro';
+const post = Astro.props;
+
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+// 2. For your template, you can get the entry directly from the prop
+type Props = CollectionEntry<'projects'>;
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Single {...entry.data}>
+	<Content />
+</Single>

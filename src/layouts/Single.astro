@@ -7,9 +7,8 @@ type Props = {
   title: string;
   pubDate: Date;
   updatedDate: Date;
-  heroImage:String
+  heroImage: String
   description: string;
-  slug: string;
   summary: string;
 };
 
@@ -20,10 +19,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			
 			{heroImage && <div class="hero-image"> <img width={1020} height={510} src={heroImage} alt="" /> </div>}
 			
-			<div class="prose prose-invert mx-auto">
+			<div class="prose max-w-3xl prose-invert mx-auto backdrop-blur -m-10 p-10 rounded-lg ">
 				<div class="title">
 					<div class="date">
-						<FormattedDate date={pubDate} />
+						{pubDate && <FormattedDate date={pubDate} />}
 						{
 							updatedDate && (
 								<div class="italic">
@@ -33,7 +32,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						}
 					</div>
 					<h1>{title}</h1>
-					<hr />
+					<div class="h-1 mb-10 bg-gradient-to-r from-blue via-pink to-yellow rounded"></div>
+
 				</div>
 				<slot />
 			</div>
