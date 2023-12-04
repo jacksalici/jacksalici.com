@@ -16,43 +16,39 @@ const { ...props } = Astro.props;
 ---
 
 <a
-  class="group flex max-w-full cursor-pointer relative gap-2 rounded-md p-4 transition-all duration-300 hover:-translate-y-2 border border-primary hover:border-pink"
+  class="group flex max-w-full cursor-pointer relative gap-2 rounded-md p-4 transition-all hover:-translate-y-2 border border-primary border-opacity-50 hover:border-pink"
   href={props.slug}
 >
   <div>
     <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
+      width="24"
+      height="24"
+      viewBox="0 -960 960 960"
       fill="none"
-      class="transition-all duration-300 group-hover:translate-x-1 stroke-pink ml-auto"
+      class="transition-all group-hover:translate-x-1 fill-pink mb-1"
     >
       <path
-        d="M5.25 12.75L12.75 5.25"
-        stroke-linecap="round"
-        stroke-linejoin="round"></path>
-      <path
-        d="M5.25 5.25H12.75V12.75"
-        stroke-linecap="round"
-        stroke-linejoin="round"></path>
+        d="M647.206-643.028 271.64-268.847q-9.897 9.897-23.333 10.205-13.435.308-23.666-10.589-9.897-9.231-9.897-22.82 0-13.59 9.897-23.795l374.848-375.565h-327.9q-14.345 0-24.236-9.93-9.891-9.929-9.891-23.666 0-13.736 9.891-23.864t24.236-10.128h403.59q16.294 0 27.954 11.993 11.661 11.994 11.661 28.288v403.59q0 13.679-9.93 23.57-9.929 9.89-23.666 9.89-14.403 0-24.198-9.89-9.794-9.891-9.794-23.57v-327.9Z"
+      ></path>
     </svg>
     {
-      props.featured && 
+      props.featured && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="24"
           viewBox="0 -960 960 960"
           width="24"
-          class="stroke-yellow"
+          class="transition-all group-hover:scale-75 fill-yellow"
         >
-          <path d="m354-247 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143Zm126 18L314-129q-11 7-23 6t-21-8q-9-7-14-17.5t-2-23.5l44-189-147-127q-10-9-12.5-20.5T140-531q4-11 12-18t22-9l194-17 75-178q5-12 15.5-18t21.5-6q11 0 21.5 6t15.5 18l75 178 194 17q14 2 22 9t12 18q4 11 1.5 22.5T809-488L662-361l44 189q3 13-2 23.5T690-131q-9 7-21 8t-23-6L480-229Zm0-201Z" />
+          <path d="m305.184-701.8 114.355-149.506q11.298-16.022 27.35-23.229 16.053-7.207 33.872-7.207 17.534 0 33.223 7.207 15.69 7.207 27.477 23.229l113.724 149.248 173.839 58.726q25.205 9.025 38.859 29.83 13.654 20.804 13.654 45.247 0 11.281-3.625 23.266-3.625 11.985-10.683 21.604l-111.923 156.42 4 167.502q.257 33.107-23.186 56.951t-55.534 23.844q-3.099 0-19.766-2.616L480-173.925l-179.439 52.522q-5.217 2.132-10.246 1.933-5.029-.198-9.22-.198-32.335 0-56.368-23.234t-23.033-57.561l4-167.195-112.308-156.47q-7.468-10.64-11.093-22.08-3.625-11.44-3.625-22.88 0-24.282 14.02-45.588 14.02-21.305 39.672-29.041L305.184-701.8Zm41.277 57.902L157.513-580q-5.769 1.923-7.885 7.885-2.115 5.962 1.731 10.962l124.051 173.82-7.128 186.537q-.385 6.539 4.615 10.257 5.001 3.719 11.155 2.052L480.5-243.743l196.448 55.922q6.154 1.667 11.154-2.051 5.001-3.718 4.616-10.257l-6.128-187.538 123.051-172.486q3.846-5 1.731-10.962-2.116-5.962-7.885-7.885l-189.282-64.898L489.616-807.41q-3.462-5-9.616-5t-9.616 5L346.461-643.898ZM481-500.359Z" />{" "}
         </svg>
-      
+      )
     }
   </div>
   <div class="flex w-full flex-col justify-between">
-    <p class="opacity-50 text-sm">
-      <FormattedDate date={props.pubDate} /> ~ {props.categories}
+    <p class="opacity-50 text-sm mb-2">
+      <FormattedDate date={props.pubDate} />
+      {props.categories && "~ " + props.categories}
     </p>
     <p class="uppercase font-medium">{props.title}</p>
     <p class="truncate">

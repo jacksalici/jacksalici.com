@@ -1,41 +1,34 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 import Base from './Base.astro';
 
-type Props = {
-  title: string;
-  pubDate: Date;
-  updatedDate: Date;
-  heroImage: String
-  description: string;
-  summary: string;
-};
-
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { frontmatter, ...props } = Astro.props;
 ---
-	<Base>
+	<Base {...props}>
 		<article>
 			
-			{heroImage && <div class="hero-image"> <img width={1020} height={510} src={heroImage} alt="" /> </div>}
+			{props.heroImage && <div class="hero-image"> <img width={1020} height={510} src={props.heroImage} alt="" /> </div>}
 			
-			<div class="prose max-w-3xl prose-invert mx-auto backdrop-blur -m-10 p-10 rounded-lg ">
-				<div class="title">
-					<div class="date">
-						{pubDate && <FormattedDate date={pubDate} />}
+			<div class=" max-w-3xl  mx-auto backdrop-blur -m-10 p-10 rounded-lg ">
+				
+					<div class="opacity-50">
+						{props.pubDate && <FormattedDate date={props.pubDate} />}
 						{
-							updatedDate && (
+							props.updatedDate && (
 								<div class="italic">
-									Last updated on <FormattedDate date={updatedDate} />
+									Last updated on <FormattedDate date={props.updatedDate} />
 								</div>
 							)
 						}
 					</div>
-					<h1>{title}</h1>
-					<div class="h-1 mb-10 bg-gradient-to-r from-blue via-pink to-yellow rounded"></div>
+					<h1 class="text-4xl font-bold">{frontmatter?.title || props.title}</h1>
+					<div class="h-1 my-3 mb-10 bg-gradient-to-r from-blue via-pink to-yellow rounded"></div>
 
+				
+				<div class="prose prose-invert">
+					<slot />
 				</div>
-				<slot />
+				
 			</div>
 		</article>
 	</Base>

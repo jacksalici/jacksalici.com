@@ -8,7 +8,6 @@ tags: ["Notion", "Cli", "Python"]
 langs: ["Python"]
 featured: true
 cover: /uploads/notion-cli.gif
-
 ---
 
 ![](/uploads/notion-cli.gif)  
