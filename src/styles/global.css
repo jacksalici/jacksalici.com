@@ -29,24 +29,27 @@
 	font-feature-settings: 'ss01' 1, 'ss02' 1, 'ss03' 1, 'ss04' 1, 'ss05' 1, 'ss06' 1, 'ss07' 1, 'ss08' 1, 'calt' 1, 'dlig' 1;
 }
 
-i, em{
+i,
+em {
 	font-family: 'MonaspaceRadon';
 }
 
-html{
+html {
 	font-family: 'MonaspaceNeon';
 }
 
-pre, code, kbd{
+pre,
+code,
+kbd {
 	font-family: 'MonaspaceKrypton' !important;
 }
 
-main{
-	@apply max-w-4xl  p-2 md:p-4 mx-auto
+main {
+	@apply max-w-4xl p-2 md:p-4 mx-auto
 }
 
-.opacityOnHover{
-	@apply  opacity-50 hover:opacity-100 transition-opacity
+.opacityOnHover {
+	@apply opacity-50 hover:opacity-100 transition-opacity
 }
 
 img {
@@ -70,7 +73,22 @@ h6 {
 	.title-font {
 		font-family: InterVariable, sans-serif;
 	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: InterVariable, sans-serif;
+	}
+
 }
 
-
-
+img.emoji {
+	height: 1em;
+	width: 1em;
+	margin: 0 .05em 0 .1em;
+	vertical-align: -.1em;
+	display: inline
+}

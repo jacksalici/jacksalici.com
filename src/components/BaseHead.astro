@@ -1,17 +1,29 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
-	title: string;
-	description: string;
-	image?: string;
+  title: string;
+  description: string;
+  image?: string;
+  keywords?: string[];
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+const {
+  title,
+  description = "I am a M.Sc. Computer and AI Engineering student based in Modena, Italy. I develop and design AI projects and cool app.",
+  image = "/website.jpg",
+  keywords = [
+    "computer engineer",
+    "jack salici",
+    "giacomo salici",
+    "developer",
+    "digital craftsman",
+  ],
+} = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -24,25 +36,63 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
+<title>{title ? title + " ~ By Jack." : "Jack's website"}</title>
+<meta
+  name="title"
+  content={title
+    ? title + " ~ By Giacomo Salici"
+    : "Giacomo Salici ~ Creative developer, digital craftsman."}
+/>
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
+<meta
+  property="og:title"
+  content={title
+    ? title + " ~ By Giacomo Salici"
+    : "Giacomo Salici ~ Creative developer, digital craftsman."}
+/>
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
+<meta name="keywords" content={keywords.join(", ")} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
+<meta
+  property="twitter:title"
+  content={title
+    ? title + " ~ By Giacomo Salici"
+    : "Giacomo Salici ~ Creative developer, digital craftsman."}
+/>
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
+<link rel="preconnect" href="https://rsms.me/" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
-<link rel="preconnect" href="https://rsms.me/">
-<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script defer src="https://www.googletagmanager.com/gtag/js?id=G-TCJ26JMX8T"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date()), gtag("config", "G-TCJ26JMX8T");
+</script><link
+  rel="preload"
+  as="style"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+  onload='this.onload=null,this.rel="stylesheet"'
+/><script
+  src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"
+  crossorigin="anonymous"></script>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
