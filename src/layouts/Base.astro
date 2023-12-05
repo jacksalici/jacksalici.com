@@ -10,35 +10,38 @@ const today = new Date();
     <BaseHead {...props} />
   </head>
 
-  <body class="m-0 p-2 text-primary bg-background flex flex-col gap-12 lg:gap-28 min-h-screen">
-    
+  <body
+    class="m-0 p-2 text-primary bg-background flex flex-col gap-12 lg:gap-28 min-h-screen"
+  >
     <Header />
 
     <slot />
 
     <footer class="mt-auto">
       <p class="text-center mb-5 text-sm opacityOnHover">
-        &copy; 2017 - {today.getFullYear()} Jack Salici. <nobr>Made with ❤️ and 🍕 on 🌍.</nobr><br/><br/>
-        <span class="font-[MonaspaceKrypton]">NOT ALL THOSE WHO WANDER ARE LOST</span>
+        &copy; 2017 - {today.getFullYear()} Jack Salici. <nobr
+          >Made with ❤️ and 🍕 on 🌍.</nobr
+        ><br /><br />
+        <span class="font-[MonaspaceKrypton]"
+          >NOT ALL THOSE WHO WANDER ARE LOST</span
+        >
       </p>
-      
     </footer>
 
-  
     <script>
-      try{twemoji.parse(document.body,{folder:"svg",ext:".svg"})}catch(e){e instanceof ReferenceError&&(console.log("Tweemoji not initialized"),console.log(e))}
+      /*
+      try {
+        twemoji.parse(document.body, { folder: "svg", ext: ".svg" });
+      } catch (e) {
+        e instanceof ReferenceError &&
+          (console.log("Tweemoji not initialized"), console.log(e));
+      }*/
     </script>
-  </body>
+  </body><style>
+    body {
+      background-blend-mode: soft-light;
+      background: url("/noise.svg");
+      background-attachment: fixed;
+    }
+  </style>
 </html>
-
-<style>
-  body{
-    background-blend-mode:soft-light;
-    background:  url('/noise.svg');
-    background-attachment: fixed; 
-}
-
-
-  
-</style>
-

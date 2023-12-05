@@ -3,14 +3,14 @@
 import FormattedDate from "../components/FormattedDate.astro";
 
 type Props = {
-  title: string;
-  pubDate: Date;
-  description: string;
-  slug: string;
-  summary: string;
-  categories: string;
-  featured: Boolean;
-  trending: Boolean;
+  title?: string;
+  pubDate?: Date;
+  description?: string;
+  slug?: string;
+  summary?: string;
+  categories?: string[];
+  featured?: Boolean;
+  trending?: Boolean;
 };
 
 const { ...props } = Astro.props;
