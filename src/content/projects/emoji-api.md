@@ -1,15 +1,12 @@
 ---
 title: "Emoji list API and npm"
 pubDate: 2022-08-02
-publishpubDate: 2022-08-02
 slug: "emoji-list-api"
 description: "A simple API and a npm for querying emoji."
 categories: ["Web Development"]
 tags: ["Model"]
 langs: ["Python", "npm"]
-featured: true
 cover: /uploads/emojiscreenshot.png
-
 ---
 
 I developed a simple RESTful API and a Node package for querying emoji, since I needed one for developing [EmojiPoll](https://jacksalici.com/projects/emojipoll). The problem is that for emojis, unlike standard alphabet characters, it is not possible to get a random glyph from a set.

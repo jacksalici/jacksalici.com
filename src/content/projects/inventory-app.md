@@ -6,7 +6,6 @@ description: "A web app to manage your favorite RPG hero inventory."
 categories: ["Web Development"]
 tags: ["Model"]
 langs: ["Vue"]
-featured: true
 link: "https://inventory.jacksalici.com"
 linktext: "Check the website."
 cover: "https://raw.githubusercontent.com/jacksalici/inventory-app/main/public/screenshot3.png"

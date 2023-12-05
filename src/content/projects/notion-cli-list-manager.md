@@ -7,6 +7,7 @@ categories: ["API Development"]
 tags: ["Notion", "Cli", "Python"]
 langs: ["Python"]
 featured: true
+trending: true
 cover: /uploads/notion-cli.gif
 ---
 

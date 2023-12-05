@@ -6,7 +6,6 @@ description: An IoT project aimed to enhance bus stops.
 categories: ["Internet of Things"]
 tags: ["IoT", "Smart Bus Stop", "Esp32", "mqtt"]
 langs: ["Flask", "Arduino"]
-featured: true
 cover: https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/architecture.jpg
 ---
 ![Cover](https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/cover.svg)

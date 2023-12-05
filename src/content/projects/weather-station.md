@@ -6,7 +6,6 @@ description: "A custom client for displaying my weather station data."
 categories: ["Web Development"]
 tags: ["Ecowitt", "Vue", "Ecowitt client"]
 langs: ["Vue"]
-featured: true
 link: "https://weather.jacksalici.com"
 linktext: "Check the website."
 cover: "https://raw.githubusercontent.com/jacksalici/weather_station/main/screenshot.png"

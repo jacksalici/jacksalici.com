@@ -18,7 +18,7 @@ const projects = defineCollection({
 	schema: z.object({
 		title: z.string().optional(),
 		description: z.string().optional(),
-		pubDate: z.coerce.date().optional(),
+		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		cover: z.string().optional(),
 		tags: z.string().array().optional(),
@@ -27,7 +27,9 @@ const projects = defineCollection({
 		summary: z.string().optional(),
 		draft: z.boolean().optional(),
 		featured: z.boolean().optional().default(false),
-		type: z.enum(['work', 'project']).optional().default("project")
+		trending: z.boolean().optional().default(false),
+		type: z.enum(['work', 'project']).optional().default("project"),
+		hidden: z.boolean().optional().default(false)
 	}),
 });
 

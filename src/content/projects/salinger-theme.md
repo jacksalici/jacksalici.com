@@ -7,12 +7,11 @@ description: "A minimalistic theme for Hugo framework."
 categories: ["Web Development"]
 tags: ["Hugo", "Tailwind", "DaisyUI", "hugo theme"]
 langs: ["Hugo"]
-featured: true
 link: "https://github.com/jacksalici/salinger-theme"
 linktext: "Go to the theme repository"
 cover: "https://raw.githubusercontent.com/jacksalici/salinger-theme/main/images/tn.jpg"
 type: work
-
+trending: true
 ---
 
 
