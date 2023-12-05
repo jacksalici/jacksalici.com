@@ -1,9 +1,8 @@
-![Screenshot](https://github.com/jacksalici/jacksalici.com/blob/main/static/uploads/website.png)
 
-
-![Scores](https://github.com/jacksalici/jacksalici.com/blob/main/static/uploads/scores.png)
 
 # Just my website. 🥸💅
+![Scores](https://github.com/jacksalici/jacksalici.com/blob/main/public/uploads/scores.png)
+
 
 Howdy! If you are reading this, you probably already know that the website simultaneously represents 📺:
 
@@ -16,14 +15,22 @@ _This code may not be the prettiest you have ever seen 👀, nor the most gramma
 
 ## Architecture 🏗️
 
-Currently, the website is powered by [Hugo](https://gohugo.io/documentation/) framework. The theme has also been coded by myself and it's [Salinger](https://themes.gohugo.io/themes/salinger-theme/).
+Currently, the website is powered by Astro.
 
 **Posts are stored in `/content` folder.**
 
-To start the local server just execute the script:
-```sh
-./server.sh
-```
+## Commands 🧞
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
 Once the edits have been made, *just push the commits*: Netlify will build the website, update the `publish` folder and host it.
 
@@ -33,6 +40,8 @@ I like to change its style often so I tagged the main last versions, starting fr
 
 |Version|Description|
 |-|-|
+v3.0.0| Switched to Astro |
+v2.0.1| Added post thumnails |
 v2.0.0| Complete rebuild of both this site and [Salinger](https://themes.gohugo.io/themes/salinger-theme/) Theme using Tailwind and DaisyUI, added it as a submodule|
 v1.4.1| New color palette, removed fancy effects for the sake of minimalism.|
 v1.4.0| New color palette, removed Hugo theming, added CircleType lib, moved to Netlify to use Netlify forms|
