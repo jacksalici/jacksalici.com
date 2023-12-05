@@ -29,7 +29,9 @@ const projects = defineCollection({
 		featured: z.boolean().optional().default(false),
 		trending: z.boolean().optional().default(false),
 		type: z.enum(['work', 'project']).optional().default("project"),
-		hidden: z.boolean().optional().default(false)
+		hidden: z.boolean().optional().default(false),
+		langs: z.string().array().optional(),
+
 	}),
 });
 
