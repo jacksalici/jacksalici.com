@@ -5,3 +5,4 @@ resources
 .DS_store
 .astro
 .vscode
+dist
