@@ -55,4 +55,4 @@ console.log(emoji.random({n: 5, group: 'objects'}))
 //[ '🪒', '📕', '🔋', '🔩', '💷' ]
 ```
 
-{{% link txt="Repository" href="https://github.com/jacksalici/emoji-helper" %}}
+##### 👉[Take a look at the repository](https://github.com/jacksalici/emoji-helper)

@@ -29,6 +29,13 @@
 	font-feature-settings: 'ss01' 1, 'ss02' 1, 'ss03' 1, 'ss04' 1, 'ss05' 1, 'ss06' 1, 'ss07' 1, 'ss08' 1, 'calt' 1, 'dlig' 1;
 }
 
+@font-face {
+	font-family: 'Inter';
+	src: url('/fonts/InterVariable.woff2') format('woff2');
+	font-display: swap;
+	font-feature-settings: 'calt' 1, 'dlig' 1 "case" 1;
+}
+
 i,
 em {
 	font-family: 'MonaspaceRadon';
@@ -68,24 +75,7 @@ h6 {
 	font-family: Inter, sans-serif;
 	line-height: 100%;
 	font-feature-settings: 'liga' 1, 'calt' 1, 'case' 1, 'ss03' 1;
-}
-
-
-
-@supports (font-variation-settings: normal) {
-	.title-font {
-		font-family: InterVariable, sans-serif;
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		font-family: InterVariable, sans-serif;
-	}
-
+	font-variant-ligatures: common-ligatures;
 }
 
 img.emoji {

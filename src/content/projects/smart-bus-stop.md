@@ -24,7 +24,7 @@ The project was developed on Arduino and Esp32 dev-board. Although all the parts
 
 You can see a deeper documentation on the [Github repository](https://github.com/jacksalici/smart-bus-stop) and here is the overview of the architecture.  
 
-{{% link txt="Repository" href="https://github.com/jacksalici/smart-bus-stop" %}}
+##### 👉[Take a look at the repository](https://github.com/jacksalici/smart-bus-stop)
 
 
 ![Architecture](https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/architecture.jpg)
