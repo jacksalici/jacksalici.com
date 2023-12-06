@@ -18,7 +18,7 @@ const MyA = props.slug ? 'a': 'div'
 ---
 
 <MyA
-  class:list={["group flex max-w-full relative gap-2 py-4 md:p-4 rounded-2xl", {" cursor-pointer transition-all transition-300 hover:-translate-y-2 hover:bg-black": props.slug}]}
+  class:list={["group flex max-w-full relative gap-2 py-4 md:p-4 rounded-2xl", {" cursor-pointer transition-all transition-300 hover:-translate-y-2": props.slug}]}
   href={props.slug}
 >
   <div class="flex flex-col gap-1 items-center">
