@@ -14,9 +14,10 @@ type Props = {
 };
 
 const { ...props } = Astro.props;
+const MyA = props.slug ? 'a': 'div' 
 ---
 
-<a
+<MyA
   class:list={["group flex max-w-full relative gap-2 py-4 md:p-4 rounded-2xl", {" cursor-pointer transition-all transition-300 hover:-translate-y-2 hover:bg-black": props.slug}]}
   href={props.slug}
 >
@@ -37,4 +38,4 @@ const { ...props } = Astro.props;
       {props.summary}
     </p>
   </div>
-</a>
+</MyA>
