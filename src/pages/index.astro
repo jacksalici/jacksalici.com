@@ -28,9 +28,9 @@ const works = (await getCollection("projects"))
         getting a Computer and AI Engineering master degree at <a class="link" href="https://www.unimore.it">Unimore</a>.
       </p>
       <div class="space-y-2 ">
-        <a class="block" target="_blank" rel="noopener" href="https://github.com/jacksalici" aria-label="github"><i class="fa-brands fa-github text-3xl opacity-50 hover:opacity-100 transition-all hover:-translate-y-2" aria-hidden="true"></i></a>
-        <a class="block" target="_blank" rel="noopener" href="https://linkedin.com/in/jacksalici" aria-label="linkedin"><i class="fa-brands fa-linkedin text-3xl opacity-50 hover:opacity-100 transition-all hover:-translate-y-2  " aria-hidden="true"></i></a>
-        <a class="block" target="_blank" rel="noopener" href="mailto:hey@jacksalici.com" aria-label="email"><i class="fa-solid fa-envelope text-3xl opacity-50 hover:opacity-100 transition-all hover:-translate-y-2 " aria-hidden="true"></i></a>
+        <a class="block" target="_blank" rel="noopener" href="https://github.com/jacksalici" aria-label="github"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+        <a class="block" target="_blank" rel="noopener" href="https://linkedin.com/in/jacksalici" aria-label="linkedin"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+        <a class="block" target="_blank" rel="noopener" href="mailto:hey@jacksalici.com" aria-label="email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
       </div>
     </div>
     
@@ -40,7 +40,7 @@ const works = (await getCollection("projects"))
     >
     </div>
 
-    <h2 class="text-3xl font-extrabold mb-5">
+    <h2>
       Current projects.
     </h2>
     <section class="grid gap-3 md:grid-cols-2 ">
@@ -57,16 +57,43 @@ const works = (await getCollection("projects"))
         summary="Well known daily programming puzzles"
       />
     </section>
-    <h2 id="p" class="text-3xl font-extrabold mb-5 mt-10">
+    <h2 id="p">
       Featured projects.
     </h2>
     <section class="grid gap-4 md:grid-cols-2">
       {projects.map((post) => <PostCard title={post.data.description} pubDate={post.data.pubDate} slug={"/p/"+post.slug} categories={post.data.categories} summary={post.data.summary} featured={post.data.featured} trending={post.data.trending}/>)}
     </section>
 
-    <h2 id="b" class="text-3xl font-extrabold mb-5 mt-10">Last thoughts.</h2>
+    <h2 id="b">Last thoughts.</h2>
     <section class="grid gap-3 grid-cols-2">
       {posts.map((post) => <PostCard title={post.data.description} pubDate={post.data.pubDate} title={post.data.title} summary={post.data.summary} slug={"/b/"+post.slug} />)}
     </section>
+
+
+    <h2 id="contacts">Contact me.</h2>
+    <p>
+      You can reach me saying <code>hey AT jacksalici DOT com</code>.<br/>
+      You can also find me almost everywhere with the username <i>@jacksalici</i>.
+      <div class="space-x-2 py-3">
+        <a class="" target="_blank" rel="noopener" href="https://github.com/jacksalici" aria-label="github"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+        <a class="" target="_blank" rel="noopener" href="https://linkedin.com/in/jacksalici" aria-label="linkedin"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+        <a class="" target="_blank" rel="noopener" href="mailto:hey@jacksalici.com" aria-label="email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+        <a class="" target="_blank" rel="noopener" href="https://t.me/jacksalici" aria-label="telegram"><i class="fa-brands fa-telegram" aria-hidden="true"></i></a>
+        <a class="" target="_blank" rel="noopener" href="https://instagram.com/jacksalici" aria-label="instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a class="" target="_blank" rel="noopener" href="https://twitter.com/jacksalici" aria-label="twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+      </div>
+      </p>
   </main>
 </Base>
+<style>
+  [class*="fa"] {
+    @apply text-3xl opacity-50 hover:opacity-100 transition-all hover:-translate-y-2
+  }
+
+
+  h2 {
+    @apply text-3xl font-extrabold mb-5 mt-14
+  }
+
+
+</style>
