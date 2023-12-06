@@ -1,0 +1,30 @@
+---
+import Single from "../layouts/Single.astro"
+
+let fact = "Loading..." 
+
+try{
+  const res = await fetch(
+    "https://api.api-ninjas.com/v1/facts",
+    {
+      method: "GET",
+      headers: {
+        "X-Api-Key": "8Idmhms+nG6e6Agy9f1jQA==gfaW91jpy9ty2nGz",
+      },
+    }
+  )
+const data = await res.json()
+fact = data[0].fact + "."
+  }
+  catch(e){
+    fact = "Ops, an error occurred."
+  }
+---
+<!-- DON'T USE EXPOSED API KEY! This is for testing purposes only. Do not use the following key for your project.-->
+<Single title="Facts generator">
+  <main>
+    <h3>Relax, read this and then go surfing on the net for the sake of factchecking.</h3>
+    <p class="text-lg" id="fact">{fact}<p>
+  </main>
+</Single>
+
