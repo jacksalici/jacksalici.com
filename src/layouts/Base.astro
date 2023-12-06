@@ -1,13 +1,16 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
-const { props } = Astro.props;
+const { ...props } = Astro.props;
 const today = new Date();
 ---
 
 <html lang="en">
   <head>
-    <BaseHead {...props} />
+    <BaseHead title={props.title},
+    description={props.description}
+    image = {props.image}
+    keywords = {props.keywords} />
   </head>
 
   <body
@@ -17,8 +20,8 @@ const today = new Date();
 
     <slot />
 
-    <footer class="mt-auto">
-      <p class="text-center mb-5 text-sm opacityOnHover">
+    <footer class="mt-auto p-2">
+      <p class="md:text-center mb-5 text-sm opacityOnHover">
         &copy; 2017 - {today.getFullYear()} Jack Salici. <nobr
           >Made with ❤️ and 🍕 on 🌍.</nobr
         ><br /><br />

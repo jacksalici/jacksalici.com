@@ -55,6 +55,9 @@ main {
 img {
 	@apply rounded-lg shadow-lg
 }
+::selection {
+	@apply bg-purple
+  }
 
 h1,
 h2,

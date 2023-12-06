@@ -2,12 +2,12 @@
 import FormattedDate from '../components/FormattedDate.astro';
 import Base from './Base.astro';
 
-const { frontmatter, ...props } = Astro.props;
+const { ...props } = Astro.props;
 ---
-	<Base title={frontmatter?.title || props?.title}, description={props?.description}, tags={props?.tags}, image={props?.cover}>
+	<Base title={props?.title}, description={props?.description}, tags={props?.tags}, image={props?.cover}>
 		<main>
 			
-			<div class=" mx-auto flex flex-col md:flex-row gap">		
+			<div class="max-w-3xl mx-auto flex flex-col md:flex-row gap">		
 				<div>
 					<div class="opacity-50 mb-3">
 						{props.pubDate && <FormattedDate date={props.pubDate} />}{
@@ -30,7 +30,7 @@ const { frontmatter, ...props } = Astro.props;
 							)
 						}
 					</div>
-					<h1 class="text-4xl font-bold">{frontmatter?.title || props.title}</h1>
+					<h1 class="text-4xl font-bold" style="text-wrap:balance">{ props.title}</h1>
 					<p class="text-lg">{props.summary}</p>
 				</div>
 				

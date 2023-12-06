@@ -8,7 +8,8 @@ export default {
 			'pink': '#ff57bb',
 			'yellow': '#ffc82c',
 			'primary': '#d4d2d5',
-			'background': '#0A141F'
+			'background': '#0a141f',
+			'black': '#000500'
 		  },
 		  extend: {
 			spacing: {
