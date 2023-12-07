@@ -1,7 +1,21 @@
 ---
 import Single from "../layouts/Single.astro"
 
+---
+<Single title="Facts generator">
+  <main>
+    <h3>Relax, read this and then go surfing on the net for the sake of factchecking.</h3>
+    <p class="text-lg" id="fact"><p>
+  </main>
+</Single>
+
+<script>
+const f = document.getElementById("fact")
+
+
 let fact = "Loading..." 
+
+// DON'T USE EXPOSED API KEY! This is for testing purposes only. Do not use the following key for your project.
 
 try{
   const res = await fetch(
@@ -19,12 +33,7 @@ fact = data[0].fact + "."
   catch(e){
     fact = "Ops, an error occurred."
   }
----
-<!-- DON'T USE EXPOSED API KEY! This is for testing purposes only. Do not use the following key for your project.-->
-<Single title="Facts generator">
-  <main>
-    <h3>Relax, read this and then go surfing on the net for the sake of factchecking.</h3>
-    <p class="text-lg" id="fact">{fact}<p>
-  </main>
-</Single>
 
+f.innerText = fact
+
+</script>
