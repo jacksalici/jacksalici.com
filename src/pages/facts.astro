@@ -4,8 +4,10 @@ import Single from "../layouts/Single.astro"
 ---
 <Single title="Facts generator">
   <main>
-    <h3>Relax, read this and then go surfing on the net for the sake of factchecking.</h3>
-    <p class="text-lg" id="fact"><p>
+    <h3>Relax, take a peek, and then ride the web waves for a fact-checking adventure¹</h3>
+    <p class="text-lg" id="fact">Loading...<p>
+    <hr>
+      <p class="text-xs opacity-50">¹This page uses online API services to provide random facts. It - obviously -  cannot be considered as a reliable source  😌</p>
   </main>
 </Single>
 
@@ -13,7 +15,7 @@ import Single from "../layouts/Single.astro"
 const f = document.getElementById("fact")
 
 
-let fact = "Loading..." 
+let fact = "" 
 
 // DON'T USE EXPOSED API KEY! This is for testing purposes only. Do not use the following key for your project.
 
