@@ -6,7 +6,6 @@ description: An Android 2d game starring a llama that jumps and shots.
 categories: ["Game Development"]
 tags: ["Java", "Android", "LibGDX"]
 langs: ["Java"]
-featured: true
 cover: "/uploads/gameLogo.png"
 type: work
 ---
