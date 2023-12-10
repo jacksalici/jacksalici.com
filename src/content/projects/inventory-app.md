@@ -44,3 +44,5 @@ Since my goal was to create something simple and free both for users and myself,
 #### Usage
 
 For the usage of the app itself, please rely on the FAQs that are [directly on the website](https://inventory.jacksalici.com/about/).
+
+##### 👉 [Check the web app](https://inventory.jacksalici.com) 

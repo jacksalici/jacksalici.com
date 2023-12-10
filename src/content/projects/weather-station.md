@@ -17,3 +17,5 @@ A custom front-end and middleware for displaying data from my Ecowitt weather st
 The front-end is built using Vue and relies on Tailwind, DaisyUI and GraphJS for the UI. The middleware is a Cloudflare Worker and is needed to hide to the users the token key.
 
 ![screenshot](https://raw.githubusercontent.com/jacksalici/weather_station/main/screenshot.png)  
+
+##### 👉 [Check the website.](https://weather.jacksalici.com) 
