@@ -21,6 +21,7 @@ The widespread adoption of intelligent assistants that has occurred in the last 
 
 
 ##### 👉 [Take a look at the code](https://github.com/SLG-Vision/EmotiVision)  
+
 ##### 👉 [Read the final report](https://github.com/SLG-Vision/EmotiVision/blob/main/emotivision_final_report.pdf) 
 
 
