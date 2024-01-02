@@ -15,24 +15,16 @@ type: work
 
 The Inventory App is a fast, open-source and 100% free way to track the equipment of your role-playing games characters.
 
-
 ![screenshot](https://raw.githubusercontent.com/jacksalici/inventory-app/main/public/screenshot3.png) 
 ![screenshot](https://raw.githubusercontent.com/jacksalici/inventory-app/main/public/screenshot2.png)
 
-
 The web app is built using Vue as frontend, and [Deta Collections](https://deta.space/docs/en/use/your-data/collections) for persistent data storage. The *NoSQL* database has 2 tables (automatically created on the first usage):
 
-- **HEROES**  
-    It contains the info about the characters.
+- **Heroes**  
+    It contains the info about the characters and has the following attributes: `nickname` (pk), `name`, `details`, `equipment`, `slots`, `avatar`. 
 
-    | key (nickname) | name | details |  equipment | slots | avatar |
-    |-|-|-|-|-|-|
-
-- **INVENTORY**  
-    It contains the info about the characters' equipment.
-
-    | key (id) |object | details | quantity | value | used |
-    |-|-|-|-|-|-|
+- **Inventory**  
+    It contains the info about the characters' equipment: `id` (pk), `object`, `details`, `quantity`, `value`, `used`.
 
 Since my goal was to create something simple and free both for users and myself, I decided to **not** handle a database for user data, for the sake of costs, privacy, and security. Therefore, if you (or your party) want to use the website, you will need to get a Deta API key and put it on your client side.
 
