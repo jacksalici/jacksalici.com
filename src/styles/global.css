@@ -4,51 +4,24 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-@font-face {
-	font-family: 'MonaspaceNeon';
-	src: url('/fonts/MonaspaceNeonVarVF[wght,wdth,slnt].woff2') format('woff2');
-	font-style: normal;
-	font-display: swap;
-	font-feature-settings: 'ss01' 1, 'ss02' 1, 'ss03' 1, 'ss04' 1, 'ss05' 1, 'ss06' 1, 'ss07' 1, 'ss08' 1, 'calt' 1, 'dlig' 1;
-}
-
-@font-face {
-	font-family: 'MonaspaceRadon';
-	src: url('/fonts/MonaspaceRadonVarVF[wght,wdth,slnt].woff2') format('woff2');
-	font-style: normal;
-	font-display: swap;
-	font-feature-settings: 'ss01' 1, 'ss02' 1, 'ss03' 1, 'ss04' 1, 'ss05' 1, 'ss06' 1, 'ss07' 1, 'ss08' 1, 'calt' 1, 'dlig' 1;
-}
-
-@font-face {
-	font-family: 'MonaspaceKrypton';
-	src: url('/fonts/MonaspaceKryptonVarVF[wght,wdth,slnt].woff2') format('woff2');
-	font-style: normal;
-	font-display: swap;
-	font-feature-settings: 'ss01' 1, 'ss02' 1, 'ss03' 1, 'ss04' 1, 'ss05' 1, 'ss06' 1, 'ss07' 1, 'ss08' 1, 'calt' 1, 'dlig' 1;
-}
-
-@font-face {
-	font-family: 'Inter';
-	src: url('/fonts/InterVariable.woff2') format('woff2');
-	font-display: swap;
-	font-feature-settings: 'calt' 1, 'dlig' 1 "case" 1;
-}
 
 i,
 em {
-	font-family: 'MonaspaceRadon';
+	font-family: 'DM Sans', sans-serif;
 }
 
 html {
-	font-family: 'MonaspaceNeon';
+	font-family: 'DM Sans', sans-serif;
 }
 
 pre,
 code,
 kbd {
-	font-family: 'MonaspaceKrypton' !important;
+	font-family: 'Space Mono', monospace;
 }
 
 main {
@@ -72,7 +45,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: Inter, sans-serif;
+	font-family: 'Space Grotesk', sans-serif;
 	line-height: 100%;
 	font-feature-settings: 'liga' 1, 'calt' 1, 'case' 1, 'ss03' 1;
 	font-variant-ligatures: common-ligatures;

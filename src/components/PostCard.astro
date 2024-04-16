@@ -18,7 +18,7 @@ const MyA = props.slug ? 'a': 'div'
 ---
 
 <MyA
-  class:list={["group flex max-w-full relative gap-2 py-4 md:p-4 rounded-2xl", {" cursor-pointer transition-all transition-300 hover:-translate-y-2": props.slug}]}
+  class:list={["group flex max-w-full relative gap-2 py-4 md:p-4 rounded-2xl bg-primary border border-primary-content border-opacity-10", {" cursor-pointer transition-all hover:border-opacity-50": props.slug}]}
   href={props.slug}
 >
   <div class="flex flex-col gap-1 items-center">
@@ -33,7 +33,7 @@ const MyA = props.slug ? 'a': 'div'
       <FormattedDate date={props.pubDate} />
       {props.categories &&  ( <span>~ </span> <span class="font-bold">{props.categories}</span>)}
     </p>
-    <p class="uppercase font-semibold">{props.title}</p>
+    <p class="text-lg font-semibold">{props.title}</p>
     <p class="">
       {props.summary}
     </p>
