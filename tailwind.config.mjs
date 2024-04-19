@@ -20,6 +20,11 @@ export default {
 			borderRadius: {
 			  '4xl': '2rem',
 			}
+		  },
+		  fontFamily: {
+			display: ['Space Grotesk', 'ui-serif'],
+			body: ['DM Sans', 'ui-sans-serif'],
+			mono: ['Space Mono', 'ui-monospace']
 		  }
 	},
 	plugins: [
