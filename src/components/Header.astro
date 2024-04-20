@@ -37,7 +37,7 @@ const { href, class: className, ...props } = Astro.props;
 
     <div class="group inline-block relative z-50 transition-all">
       <button
-        class="text-primary-content font-semibold rounded inline-flex items-center opacity-50 group-hover:opacity-100 transition-all"
+        class="text-primary-content font-semibold rounded inline-flex items-center opacity-100 group-hover:opacity-50 transition-all"
         aria-label="Hamburger Menu"
         >
         <svg
@@ -53,15 +53,16 @@ const { href, class: className, ...props } = Astro.props;
         >
       </button>
       <div
-        class="group-hover:flex absolute hidden text-primary-content flex-col space-y-6 p-6 right-0 w-min items-end transition-all bg-primary rounded-xl"
+        class="group-hover:flex absolute hidden text-primary-content flex-col right-0 w-min items-end transition-all bg-primary rounded-2xl max-w-fit
+        *:block *:whitespace-nowrap *:text-right *:transition-all *:border *:border-primary-content *:border-opacity-0 *:p-6 *:w-full *:rounded-2xl"
       >
         <a
-          class="block whitespace-nowrap hover:font-bold hover:-translate-x-2 text-right transition-all"
+          class="hover:border-opacity-30 hover:font-bold hover:underline"
           href="/#p">Projects</a
         >
 
         <a
-          class="block whitespace-nowrap hover:font-bold hover:-translate-x-2 text-right transition-all"
+          class="hover:border-opacity-30 hover:font-bold hover:underline"
           href="/#contacts">Contacts</a
         >
       </div>
