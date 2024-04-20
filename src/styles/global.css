@@ -16,6 +16,13 @@ em {
 
 html {
 	font-family: 'DM Sans', sans-serif;
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+	  scroll-behavior: auto;
+	}
 }
 
 pre,
@@ -36,7 +43,7 @@ img {
 	@apply rounded-lg shadow-lg
 }
 ::selection {
-	@apply bg-purple
+	@apply bg-yellow
   }
 
 h1,

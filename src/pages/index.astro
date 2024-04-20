@@ -22,21 +22,26 @@ const works = (await getCollection("projects"))
 
 <Base>
   <main>
-    <h1
-      class="text-6xl md:text-[8vw] lg:text-[6.5vw] xl:text-[6vw] 2xl:text-[5em] font-extrabold"
+    <div
+      class="grid justify-stretch align-middle gap-4 *:bg-primary *:rounded-xl *:p-5 lg:*:p-10"
     >
-      <span class="inline-block">Digital craftsman,</span>
-      <span class="inline-block">creative developer.</span>
-    </h1>
-    <div class="flex gap-2 my-5 lg:my-12 items-center lg:items-end">
-      <p class="lg:text-xl font-medium" style="text-wrap: balance;">
-        My name is Giacomo Salici, I'm a developer and engineer based in Italy.
-        Currently, I'm getting a Computer and AI Engineering master degree at <a
-          class="link"
-          href="https://www.unimore.it">Unimore</a
-        >.
-      </p>
-      <div class="space-y-2">
+      <h1
+        class="col-span-3 col-start-1 row-start-1 text-5xl md:text-[8vw] lg:text-[6.5vw] xl:text-[5.5vw] 2xl:text-[5em] font-extrabold"
+      >
+        Digital <br class="sm:hidden" /> craftsman, <br />
+        creative <br class="sm:hidden" /> developer.
+      </h1>
+      <div class="col-span-2 col-start-1 row-start-2">
+        <p class="lg:text-xl font-medium text-balance">
+          My name is <span class="font-bold">Giacomo Salici</span>, I'm a
+          developer and engineer based in Italy. Currently, I'm getting a
+          Computer and AI Engineering master degree at <a
+            class="link"
+            href="https://www.unimore.it">UNIMORE</a
+          >.
+        </p>
+      </div>
+      <div class="row-span-2 col-start-3 row-start-2">
         <a
           class="block"
           target="_blank"
@@ -89,35 +94,37 @@ const works = (await getCollection("projects"))
           >
         </a>
       </div>
+
+      <a
+        class="col-span-2 col-start-1 row-start-3 bg-gradient-to-r from-yellow to-blue rounded-xl text-background font-bold font-display text-xl group transition-all hover:rotate-2 hover:border"
+        href="#p"
+      >
+        Check out my <span class="inline-block"
+          >projects
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 384 512"
+            class="fill-background inline ml-2 w-5 group-hover:scale-150 group-hover:-rotate-2 transition-all"
+            ><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path
+              d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+            ></path></svg
+          ></span
+        >
+      </a>
     </div>
 
-    <div
-      class="z-40 h-2 mb-32 lg:mb-72 bg-gradient-to-r from-blue via-pink to-yellow rounded"
-    >
-    </div>
-
-    <h2>Current projects.</h2>
-    <section class="grid gap-4 md:grid-cols-2">
+    <h2 class=" mb-5 mt-20">Current projects.</h2>
+    <section>
       <PostCard
         description="Formula Student"
         pubDate={new Date("15 oct 2023")}
         title="Formula Student"
         summary="Global trajectory optimization with the university driverless team."
       />
-      <!--<PostCard
-        description="Advent of Code"
-        pubDate={new Date("1 dec 2023")}
-        title="Advent of Code"
-        summary="Well known daily programming puzzles"
-      />-->
-      <PostCard
-        description="OVCA survival prediction"
-        pubDate={new Date("1 dec 2023")}
-        title="OVCA survival prediction"
-        summary="Ongoing multimodal approach to predict ovarian cancer overall survival."
-      />
     </section>
-    <h2 id="p" class="!mb-1">Featured projects.</h2>
+    <h2 id="p" class="mb-1 mt-20">Featured projects.</h2>
     <p class="mb-6 text-md opacity-50">
       The
       <svg
@@ -127,55 +134,56 @@ const works = (await getCollection("projects"))
         ><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
         <path
           d="M192 32c17.7 0 32 14.3 32 32V199.5l111.5-66.9c15.2-9.1 34.8-4.2 43.9 11s4.2 34.8-11 43.9L254.2 256l114.3 68.6c15.2 9.1 20.1 28.7 11 43.9s-28.7 20.1-43.9 11L224 312.5V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V312.5L48.5 379.4c-15.2 9.1-34.8 4.2-43.9-11s-4.2-34.8 11-43.9L129.8 256 15.5 187.4c-15.2-9.1-20.1-28.7-11-43.9s28.7-20.1 43.9-11L160 199.5V64c0-17.7 14.3-32 32-32z"
-        ></path> 
+        ></path>
       </svg> marks the best projects while the trending ones have the
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 576 512"
-          class="w-[1.2em] inline-block fill-primary-content"
-          ><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
-          <path
-            d="M384 160c-17.7 0-32-14.3-32-32s14.3-32 32-32H544c17.7 0 32 14.3 32 32V288c0 17.7-14.3 32-32 32s-32-14.3-32-32V205.3L342.6 374.6c-12.5 12.5-32.8 12.5-45.3 0L192 269.3 54.6 406.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160c12.5-12.5 32.8-12.5 45.3 0L320 306.7 466.7 160H384z"
-          ></path>
-          
-        </svg>
-        icon.
-        <section>
-          {
-            projects.map((post) => (
-              <PostCard
-                title={post.data.description}
-                pubDate={post.data.pubDate}
-                slug={"/p/" + post.slug}
-                categories={post.data.categories}
-                summary={post.data.summary}
-                featured={post.data.featured}
-                trending={post.data.trending}
-              />
-            ))
-          }
-        </section>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 576 512"
+        class="w-[1.2em] inline-block fill-primary-content"
+        ><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+        <path
+          d="M384 160c-17.7 0-32-14.3-32-32s14.3-32 32-32H544c17.7 0 32 14.3 32 32V288c0 17.7-14.3 32-32 32s-32-14.3-32-32V205.3L342.6 374.6c-12.5 12.5-32.8 12.5-45.3 0L192 269.3 54.6 406.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160c12.5-12.5 32.8-12.5 45.3 0L320 306.7 466.7 160H384z"
+        ></path>
+      </svg>
+      icon.
+      <section>
+        {
+          projects.map((post) => (
+            <PostCard
+              title={post.data.description}
+              pubDate={post.data.pubDate}
+              slug={"/p/" + post.slug}
+              categories={post.data.categories}
+              summary={post.data.summary}
+              featured={post.data.featured}
+              trending={post.data.trending}
+            />
+          ))
+        }
+      </section>
+    </p>
 
-        <h2 id="b">Last thoughts.</h2>
-        <section>
-          {
-            posts.map((post) => (
-              <PostCard
-                title={post.data.description}
-                pubDate={post.data.pubDate}
-                summary={post.data.summary}
-                slug={"/b/" + post.slug}
-              />
-            ))
-          }
-        </section>
+      <h2 class=" mb-5 mt-20" id="b">Last thoughts.</h2>
+      <section>
+        {
+          posts.map((post) => (
+            <PostCard
+              title={post.data.description}
+              pubDate={post.data.pubDate}
+              summary={post.data.summary}
+              slug={"/b/" + post.slug}
+            />
+          ))
+        }
+      </section>
 
-        <h2 id="contacts">Contact me.</h2>
+      <div class="bg-primary rounded-2xl p-5 lg:p-10  mb-5 mt-20 grid">
+        <h2 class="my-2" id="contacts">Contact me.</h2>
         <p>
-          You can reach me saying <code>hey AT jacksalici DOT com</code>.<br />
-           You can also find me almost everywhere with the username <i
+          You can reach me saying <br/><code class="font-bold">hey AT jacksalici DOT com</code>.<br /><br />
+          You can also find me almost everywhere with the username <i
             >@jacksalici</i
-          >.
+          >.<br/>
           <div class="space-x-2 py-3">
             <a
               target="_blank"
@@ -275,20 +283,20 @@ const works = (await getCollection("projects"))
             </a>
           </div>
         </p>
-      </svg>
-    </p>
-    <style>
-      [class*="fa"] {
-        @apply text-3xl opacity-50 hover:opacity-100 transition-all hover:-translate-y-2 w-[1em] h-[1em];
-      }
-
-      h2 {
-        @apply text-3xl font-extrabold mb-5 mt-14;
-      }
-
-      section {
-        @apply grid gap-3 md:grid-cols-2;
-      }
-    </style>
+      </div>
+    
   </main>
+  <style>
+    [class*="fa"] {
+      @apply text-3xl hover:fill-pink transition-all w-[1em] h-[1em];
+    }
+
+    h2 {
+      @apply text-3xl font-extrabold;
+    }
+
+    section {
+      @apply grid gap-3 md:grid-cols-2;
+    }
+  </style>
 </Base>
