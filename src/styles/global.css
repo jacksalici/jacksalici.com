@@ -40,7 +40,7 @@ main {
 }
 
 img {
-	@apply rounded-lg shadow-lg
+	@apply rounded-xl
 }
 ::selection {
 	@apply bg-yellow

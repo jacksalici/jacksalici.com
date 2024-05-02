@@ -7,7 +7,7 @@ export default {
 			'purple': '#3D2B8C',
 			'pink': '#ff57dd',
 			'yellow': '#ffc82c',
-			'primary-content': '#252525',
+			'primary-content': '#252560',
 			'secondary-content': '#8f8faf',
 			'primary': '#f0f0f8',
 			'background': '#fafaff',
