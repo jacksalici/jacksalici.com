@@ -5,12 +5,14 @@ export default {
 		colors: {
 			'blue': '#17b3bb',
 			'purple': '#3D2B8C',
-			'pink': '#ff57bb',
+			'pink': '#ff57dd',
 			'yellow': '#ffc82c',
-			'primary-content': '#252525',
-			'primary': '#f0f0f0',
-			'background': '#fdfdfd',
+			'primary-content': '#252560',
+			'secondary-content': '#8f8faf',
+			'primary': '#f0f0f8',
+			'background': '#fafaff',
 			'black': '#000500'
+			
 		  },
 		  extend: {
 			spacing: {
