@@ -24,9 +24,9 @@ export default {
 			}
 		  },
 		  fontFamily: {
-			display: ['Space Grotesk', 'ui-serif'],
-			body: ['DM Sans', 'ui-sans-serif'],
-			mono: ['Space Mono', 'ui-monospace']
+			display: ['Space\\ Grotesk', 'ui-serif'],
+			body: ['DM\\ Sans', 'ui-sans-serif'],
+			mono: ['Space\\ Mono', 'ui-monospace']
 		  }
 	},
 	plugins: [

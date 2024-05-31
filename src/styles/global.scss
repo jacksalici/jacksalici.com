@@ -1,0 +1,142 @@
+@tailwind base; 
+@tailwind components; 
+@tailwind utilities; 
+
+@font-face { 
+    font-family: "DM Sans"; 
+    src: url("/fonts/DMSans-Regular.woff2") format('woff2'); 
+    font-display: swap;
+} 
+
+@font-face { 
+    font-family: "DM Sans"; 
+    src: url("/fonts/DMSans-Italic.woff2") format('woff2-variations');
+    font-style: italic;
+    font-display: swap;
+} 
+
+@font-face { 
+    font-family: "DM Sans"; 
+    src: url("/fonts/DMSans-Bold.woff2") format('woff2'); 
+    font-weight: bold;
+    font-display: swap;
+}
+
+@font-face { 
+    font-family: "DM Sans"; 
+    src: url("/fonts/DMSans-BoldItalic.woff2") format('woff2-variations');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face { 
+    font-family: "Space Grotesk"; 
+    src: url("/fonts/SpaceGrotesk-Regular.woff2") format('woff2'); 
+    font-display: swap;
+} 
+
+@font-face { 
+    font-family: "Space Grotesk"; 
+    src: url("/fonts/SpaceGrotesk-Italic.woff2") format('woff2-variations');
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face { 
+    font-family: "Space Grotesk"; 
+    src: url("/fonts/SpaceGrotesk-Bold.woff2") format('woff2'); 
+    font-weight: bold;
+    font-display: swap;
+}
+
+@font-face { 
+    font-family: "Space Grotesk"; 
+    src: url("/fonts/SpaceGrotesk-BoldItalic.woff2") format('woff2-variations');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+@font-face { 
+    font-family: "Space Mono"; 
+    src: url("/fonts/SpaceMono-Regular.woff2") format('woff2'); 
+} 
+
+i,
+em {
+	font-family: 'DM Sans', sans-serif;
+	font-weight: normal;
+}
+
+html {
+	font-family: 'DM Sans', sans-serif;
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+	  scroll-behavior: auto;
+	}
+}
+
+pre,
+code,
+kbd {
+	font-family: 'Space Mono', monospace;
+}
+
+main {
+	@apply container p-2 md:p-5 md:px-12 md:max-w-4xl mx-auto
+}
+
+.opacityOnHover {
+	@apply opacity-50 hover:opacity-100 transition-opacity
+}
+
+img {
+	@apply rounded-xl
+}
+::selection {
+	@apply bg-yellow
+  }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Space Grotesk', sans-serif;
+	line-height: 100%;
+}
+
+img.emoji {
+	height: 1em;
+	width: 1em;
+	margin: 0 .05em 0 .1em;
+	vertical-align: -.1em;
+	display: inline
+}
+
+@layer utilities {
+	$font-weights: (
+	  thin: 100,
+	  extralight: 200,
+	  light: 300,
+	  normal: 400,
+	  medium: 500,
+	  semibold: 600,
+	  bold: 700,
+	  extrabold: 800,
+	  "black": 900,
+	  "extrablack": 1000
+	);
+  
+	@each $class, $weight in $font-weights {
+	  .font-#{$class} {
+		font-variation-settings: 'wght' #{$weight} !important;
+	  }
+	}
+  }

@@ -20,6 +20,7 @@
     "typescript": "latest"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "latest"
+    "@tailwindcss/typography": "latest",
+    "sass": "^1.77.1"
   }
 }
