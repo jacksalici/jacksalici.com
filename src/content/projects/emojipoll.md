@@ -7,6 +7,7 @@ categories: ["Web Development"]
 langs: ["Vue"]
 featured: false
 type: work
+hidden: true
 
 ---
 
