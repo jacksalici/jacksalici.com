@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import PostCard from "../components/PostCard.astro";
 import Base from "../layouts/Base.astro";
 
-const posts = (await getCollection("posts")).sort(
+const notes = (await getCollection("notes")).sort(
   (a, b) => a.data?.pubDate.valueOf() - b.data?.pubDate.valueOf()
 );
 
@@ -133,7 +133,7 @@ const works = (await getCollection("projects"))
 
       
     </section>
-    <h2 id="p" class="mb-1 mt-20">Featured projects.</h2>
+    <h2 id="projects" class="mb-1 mt-20">Featured projects.</h2>
     <p class="mb-6 text-md text-secondary-content">
       The
       <svg
@@ -157,15 +157,15 @@ const works = (await getCollection("projects"))
       icon.
       <section>
         {
-          projects.map((post) => (
+          projects.map((single) => (
             <PostCard
-              title={post.data.description}
-              pubDate={post.data.pubDate}
-              slug={"/p/" + post.slug}
-              categories={post.data.categories}
-              summary={post.data.summary}
-              featured={post.data.featured}
-              trending={post.data.trending}
+              title={single.data.description}
+              pubDate={single.data.pubDate}
+              slug={"/projects/" + single.slug}
+              categories={single.data.categories}
+              summary={single.data.summary}
+              featured={single.data.featured}
+              trending={single.data.trending}
             />
           ))
         }
@@ -175,12 +175,12 @@ const works = (await getCollection("projects"))
     <h2 class="mb-5 mt-20" id="b">Last thoughts.</h2>
     <section>
       {
-        posts.map((post) => (
+        notes.map((single) => (
           <PostCard
-            title={post.data.description}
-            pubDate={post.data.pubDate}
-            summary={post.data.summary}
-            slug={"/b/" + post.slug}
+            title={single.data.description}
+            pubDate={single.data.pubDate}
+            summary={single.data.summary}
+            slug={"/notes/" + single.slug}
           />
         ))
       }
