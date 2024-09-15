@@ -20,7 +20,7 @@ const today = new Date();
   >
     <Header />
     <slot/>
-    <footer class="mt-auto p-2 text-secondary-content group">
+    <footer class="mt-auto p-2 text-secondary-content group opacity-50">
       <p class="md:text-center mb-5 text-sm">
         &copy; 2017 - {today.getFullYear()} Jack Salici. <nobr
           >Made with 
@@ -32,7 +32,7 @@ const today = new Date();
         > 
       </p>
           <a href="/facts" class="block md:w-max mx-auto 
-          group-hover:border group-hover:border-secondary-content border-opacity-0 px-2 py-1px mt-4 rounded-md hover:underline
+          border-opacity-0 px-2 py-1px mt-4 rounded-md group-hover:underline
           transition-all">
             <span class="font-display text-sm">NOT ALL THOSE WHO WANDER ARE LOST</span>
           </a>

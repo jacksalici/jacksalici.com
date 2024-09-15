@@ -6,7 +6,7 @@ description: Multimodal data integration for OVCA survival prediction.
 categories: ["Multimodal Learning"]
 tags: ["Ovarian Cancer", "Survival prediction"]
 langs: ["PyTorch"]
-featured: true
+featured: false
 trending: false
 cover: ""
 ---
