@@ -5,11 +5,11 @@ export default {
 		colors: {
 			'blue': '#17b3bb',
 			'purple': '#3D2B8C',
-			'pink': '#ff57dd',
+			'pink': '#FF6886',
 			'yellow': '#ffc82c',
 			'primary-content': '#232360',
 			'secondary-content': '#676793',
-			'primary': '#F4F4FB',
+			'primary': '#F0F0F8',
 			'background': '#fafaff',
 			'black': '#000500'
 			
