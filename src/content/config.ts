@@ -31,6 +31,8 @@ const projects = defineCollection({
 		type: z.enum(['work', 'project']).optional().default("project"),
 		hidden: z.boolean().optional().default(false),
 		langs: z.string().array().optional(),
+		cta_text: z.string().array().optional(),
+		cta_link: z.string().array().optional()
 
 	}),
 });
