@@ -49,10 +49,10 @@ const { ...props } = Astro.props;
 					
 				
 				<!-- <div class="h-4 col-span-2 !p-0 bg-gradient-to-r from-blue via-pink to-yellow rounded"></div>-->
-				<div class:list={[{"col-span-1": props.cover}, {"col-span-2": !props.cover} ]}>		
+				{(props.description || props.summary) && <div class:list={[{"col-span-1": props.cover}, {"col-span-2": !props.cover} ]}>		
 					{props.description && <p class="text-xl">{props.description}</p>}
 					{props.summary && <p class="text-lg">{props.summary}</p>}
-				</div>
+				</div>}
 
 
 				{props.cover && <img src={props.cover} class="!p-0 col-span-1 border border-primary"/>}
