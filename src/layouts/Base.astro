@@ -20,8 +20,8 @@ const today = new Date();
   >
     <Header />
     <slot/>
-    <footer class="mt-auto p-2 text-secondary-content group opacity-50">
-      <p class="md:text-center mb-5 text-sm">
+    <footer class="mt-auto p-2 text-secondary-content group opacity-50 select-none	">
+      <p class="md:text-center mb-1 text-xs md:text-sm">
         &copy; 2017 - {today.getFullYear()} Jack Salici. <nobr
           >Made with 
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="mb-1 w-[1em] h-auto inline fill-secondary-content"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. --><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
@@ -32,12 +32,35 @@ const today = new Date();
         > 
       </p>
           <a href="/facts" class="block md:w-max mx-auto 
-          border-opacity-0 px-2 py-1px mt-4 rounded-md group-hover:underline
+          border-opacity-0 py-1px my-1 rounded-md group-hover:underline decoration-wavy
           transition-all">
             <span class="font-display text-sm">NOT ALL THOSE WHO WANDER ARE LOST</span>
           </a>
         
-     
+          <a href="/" aria-label="Logo of Jack">
+            <svg
+              id="logo"
+              class="max-h-10 mt-3 w-12 ml-auto md:mx-auto  transition-fill fill-secondary-content opacity-50"
+              viewBox="0 0 942 1000"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xml:space="preserve"
+              style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+            >
+              <g transform="matrix(1,0,0,1,-383.556,-420.583)">
+                <path
+                  d="M544.989,1122.5C579.959,1152.47 625.389,1170.58 675.017,1170.58C785.4,1170.58 875.017,1080.97 875.017,970.583L1125.02,970.583C1125.02,1218.94 923.379,1420.58 675.017,1420.58C563.875,1420.58 462.09,1380.2 383.556,1313.34L544.989,1122.5Z"
+                ></path>
+                <path
+                  d="M1324.98,420.583L1324.98,670.583C1214.6,670.583 1124.98,760.2 1124.98,870.583L874.983,870.583C874.983,622.221 1076.62,420.583 1324.98,420.583Z"
+                ></path>
+                <path
+                  d="M1008.84,420.583C921.088,482.377 852.184,569.178 812.535,670.583L540.994,670.583L540.994,420.583L1008.84,420.583Z"
+                ></path>
+              </g>
+            </svg>
+          </a>
     </footer>
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
