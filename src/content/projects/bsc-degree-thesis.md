@@ -1,5 +1,5 @@
 ---
-title: '"Blockchain technologies applied to the digitalization of governance processes in business contexts"'
+title: '“Blockchain technologies applied to the digitalization of governance processes in business contexts”'
 pubDate: 2022-07-02
 slug: "bsc-degree-thesis"
 description: "My B.Sc. dissertion is about blockchain integration in management software."
