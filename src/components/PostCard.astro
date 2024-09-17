@@ -11,6 +11,7 @@ type Props = {
   categories?: string[];
   featured?: Boolean;
   trending?: Boolean;
+  cta?: string[];
 };
 
 const { ...props } = Astro.props;
@@ -36,8 +37,11 @@ const MyA = props.slug ? 'a': 'div'
     <p 
     class:list={["text-lg font-semibold", {"group-hover:underline": props.slug}]}
     >{props.title}</p>
-    <p class="">
+    <p >
       {props.summary}
     </p>
+    {props.cta && 
+      <a href={props.cta[1]} class="bg-blue hover:bg-opacity-70 text-background rounded-md text-xs font-bold w-fit p-2 ">{props.cta[0]}</a>
+    }
   </div>
 </MyA>
