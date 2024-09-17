@@ -1,0 +1,27 @@
+---
+import Base from "./Base.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Base
+  title={frontmatter.title},
+  description={frontmatter.description},
+  tags={frontmatter.tags},
+  image={frontmatter.cover}
+>
+  <main>
+    <div class="mt-5 mb-16 text-center">
+      <h1 class="text-5xl font-bold">{frontmatter.title}</h1>
+    </div>
+
+    <div
+    class="prose mb-10 prose-img:mx-auto prose-p:text-primary-content prose-headings:text-secondary-content prose-a:text-secondary-content prose-ul:text-secondary-content max-w-xl prose-p:text-justify prose-p:hyphens-auto mx-auto"
+  >
+    <slot />
+  </div>
+
+  </main>
+
+ 
+</Base>
