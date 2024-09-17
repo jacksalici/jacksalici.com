@@ -42,3 +42,8 @@ The theme also uses some _Google Symbols_ and _Font Awesome_ icons, both importe
 <!--Having said that, do you know that I love pizza, coding, and succulent plants? This website is also reachable at [🍕💻🌵.tk](http://🍕💻🌵.tk) (emojis order matters).
 
 Just looking at [these](/p/emojipoll/) [projects](/p/emoji-list-api/), you know that I also like emojis, but normally, they change according to the operating system where they are read. So, for a long time, I've applied the _Tweemoji_ (open-source Twitter Emoji) library to be sure to get the same emoji experience on all devices, but when I rebuilt the website in Astro, I decided to drop that for the sake of performance (the change is not a big deal, but PageSpeed waits for no man). At the same time, the theme also uses some _Google Symbols_ and _Font Awesome_ icons, both imported directly as SVGs, and the fonts I use are all in local. Without any external script, I achieved the perfomances you have seen at the begin of the article.  -->
+
+Since September 2024, I use [Simple Analytics](https://www.simpleanalytics.com/) to see how many of you read my gibberish posts. 
+ > Simple Analytics is a privacy-friendly and simple alternative to Google Analytics. No cookies. No trackers. No consent required from your visitors. Just straightforward analytics. [...] Built and hosted in the EU 🇪🇺, we believe in an internet that is friendly to website visitors.
+
+

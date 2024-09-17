@@ -7,6 +7,9 @@ categories: ["Web Development"]
 tags: ["Model"]
 langs: ["Python", "npm"]
 cover: /uploads/emojiscreenshot.png
+cta_text: ["Take a look at the repository"]
+cta_link: ["https://github.com/jacksalici/emoji-helper"]
+hidden: true
 ---
 
 I developed a simple RESTful API and a Node package for querying emoji, since I needed one for developing [EmojiPoll](https://jacksalici.com/projects/emojipoll). The problem is that for emojis, unlike standard alphabet characters, it is not possible to get a random glyph from a set.
@@ -55,4 +58,3 @@ console.log(emoji.random({n: 5, group: 'objects'}))
 //[ '🪒', '📕', '🔋', '🔩', '💷' ]
 ```
 
-##### 👉[Take a look at the repository](https://github.com/jacksalici/emoji-helper)

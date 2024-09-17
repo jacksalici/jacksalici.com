@@ -13,7 +13,7 @@ cover: "/uploads/cvcs_cover.jpg"
 
 ---
 
-_During the university course of computer vision and cognitive systems, two of my fellows and I were asked to develop a project featuring a pipeline with both classical image processing and deep learning techniques._
+_During the university course of computer vision and cognitive systems, Michele, Vincenzo and I were asked to develop a project featuring a pipeline with both classical image processing and deep learning techniques._
 
 ## Abstract  
 

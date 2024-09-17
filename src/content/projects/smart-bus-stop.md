@@ -6,8 +6,10 @@ description: An IoT project aimed to enhance bus stops.
 categories: ["Internet of Things"]
 tags: ["IoT", "Smart Bus Stop", "Esp32", "mqtt"]
 langs: ["Flask", "Arduino"]
-featured: true
+featured: false
 cover: https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/architecture.jpg
+cta_link: ["https://github.com/jacksalici/smart-bus-stop"]
+cta_text: ["Take a look at the repository"]
 ---
 ![Cover](https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/cover.svg)
 
@@ -25,7 +27,5 @@ The project was developed on Arduino and Esp32 dev-board. Although all the parts
 
 You can see a deeper documentation on the [Github repository](https://github.com/jacksalici/smart-bus-stop) and here is the overview of the architecture.  
 
-##### 👉[Take a look at the repository](https://github.com/jacksalici/smart-bus-stop)
 
 
-![Architecture](https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/architecture.jpg)

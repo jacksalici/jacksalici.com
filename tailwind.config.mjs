@@ -14,22 +14,30 @@ export default {
 			'black': '#000500'
 			
 		  },
-		  extend: {
+		extend: {
 			spacing: {
 			  '128': '32rem',
 			  '144': '36rem',
 			},
 			borderRadius: {
 			  '4xl': '2rem',
-			},
-			
-			  	  
-			},
-		  fontFamily: {
+			},	  	 
+			typography: {
+				DEFAULT: {
+					css: {
+					  'blockquote p:first-of-type::before': false,
+					  'blockquote p:first-of-type::after': false,
+					},
+				}
+			} 
+		},
+		fontFamily: {
 			display: ['Space\\ Grotesk', 'ui-serif'],
 			body: ['DM\\ Sans', 'ui-sans-serif'],
 			mono: ['Space\\ Mono', 'ui-monospace']
-		  }
+		  },
+	
+		
 	},
 	plugins: [
 		require('@tailwindcss/typography'),
