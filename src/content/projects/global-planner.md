@@ -15,18 +15,16 @@ cover: "/uploads/global.png"
       
 During the ay 23-24 I was member of the university Formula Student team, in particular I was part of the driverless team. In an autonomous car software stack, the global planner starts at the beginning of the second lap and optimizes the centerline recorded in the previous first lap. This optimization aims to minimize curvature, thereby enhancing performance through a refined speed profile. Mathematically, this involves solving a quadratic programming problem that is obtained from the smoothed cubic spline track-line that represent the curvature. The actual speed profile is then generated considering the GGV diagram - that is the maximum achievable accelerations at different speeds -, as well as the car's actual dynamic and mechanic characteristics.
 
-
-
-
 #### Main objectives
-1. Curvature minimization:
-    - minimizing curvature generally leads to smoother, faster trajectories
-    - allows for higher entry speeds into corners and more stable vehicle dynamics
-2. Speed profile optimization:
-    - the optimal speed profile ensures the car is traveling as fast as possible at each point of the track
-    - it is crucial for achieving competitive lap times
+
+- Curvature minimization:
+
+  1. minimizing curvature generally leads to smoother, faster trajectories
+  2. allows for higher entry speeds into corners and more stable vehicle dynamics
+
+- Speed profile optimization:
+
+  1. the optimal speed profile ensures the car is traveling as fast as possible at each point of the track
+  2. it is crucial for achieving competitive lap times
   
-    
-      
-      
-> ⚠️ **Page under construction**
+> ⚠️ **Page under construction**  

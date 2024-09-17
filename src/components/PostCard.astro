@@ -41,7 +41,9 @@ const MyA = props.slug ? 'a': 'div'
       {props.summary}
     </p>
     {props.cta && 
-      <a href={props.cta[1]} class="bg-blue hover:bg-opacity-70 text-background rounded-md text-xs font-bold w-fit p-2 ">{props.cta[0]}</a>
+      <a href={props.cta[1]} class="bg-blue hover:bg-opacity-70 text-background hover:border-secondary-content border hover:underline border-blue rounded-md text-sm p-2 ">
+        
+        {props.cta[0]}</a>
     }
   </div>
 </MyA>
