@@ -12,9 +12,11 @@ I am recording a dataset aimed to leverage the human robot interaction research 
 
 I am looking for volunteers that want to help me for the last step of my M.Sc. thesis. If you are curious, take a look down below, ***thank you so much for the interest!***  
 
+<span class="text-xs text-secondary-content"> [English is not your strongest language? [Read the italian version 🇮🇹](https://jacksalici-com.translate.goog/gaze-dataset/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp)] </span>
+
 ## The goal 🚀
 
-The goal of my thesis was to create a framework for doing gaze estimation *in the wild*, that means not in laboratory. Using some nerdy goggles we can record where who wear them is looking at, and with my framework we can the gaze in a 3d space. Now we wants to record some data and elaborate them to create a dataset that can be used to benchmark other models and leverage the research in this field.  
+The goal of my thesis is to create a framework for doing gaze estimation *in the wild*, that means not in laboratory. Using some _nerdy goggles_ (more about them later) we can record where who wear them is looking at, and with my framework we can the gaze in a 3d space. Now we wants to record some data and elaborate them to create a dataset that can be used to benchmark other models and leverage the research in this field.  
 
 Understanding where a person is looking at is fundamental in an huge amount of fields. In human robot interaction (HRI) gaze estimation represent a forced step to have robots more intelligent and more able to understand humans intentions.
 
