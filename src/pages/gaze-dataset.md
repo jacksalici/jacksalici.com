@@ -1,6 +1,7 @@
 ---
 title: "Gaze Estimation Dataset"
 description: "A dataset for benchmarking gaze estimation"
+cover: "/uploads/ariaglasses.png"
 layout: "../layouts/Page.astro"
 ---
 
@@ -38,23 +39,26 @@ In this way we will have a fist-person-view (FPV, your point of view) of the gaz
 
 ### FAQ  
 
-**How long it will take?**  
-A recording session doesn't last more than a few minutes. Before we start I will briefly introduce you what we will done. The whole thing we last 20 minutes presumably.
+**→ How long it will take?**  
+A recording session doesn't last more than a few minutes. Before we start I will briefly introduce you what we will done. The whole thing should presumably last 20 minutes.
 
-**What do I get out?**  
+**→ When and where the recording sessions will take place?**  
+I will available every day starting from September 24, 2024. Just contact me and we will schedule a session.
+According to your preferences we can meet where I work, at the *Department of Engineering 'Enzo Ferrari'* in Modena or where I live, in Mirandola (MO).
+
+**→ What do I get out?**  
 Eternal gratitude, nothing more, nothing less.
 
-**I wear prescription glasses. Can I participate?**  
+**→ I wear prescription glasses. Can I participate?**  
 Yes, it's not a problem. You will be asked to wear the Project Aria glasses during the recording, but during that time you don't have to read or move. You can gaze at random objects, the recording works also if they look blurred to you.
 
-**What are you doing with my images?**  
+**→ What are you doing with my images?**  
 The goal is to collect a dataset that will be used for gaze estimation research. Possibly it may be used also by other universities and research laboratories. Some images may be used in my thesis or in other future publications both mine or by others as well as in some topic-related websites. The images will never be sold commercially or in context other than research. It will be never appear your name or other data from you other than the images.  
 
 You will be asked to sign a privacy policy.
 
-
 ## Who I am and how to contact me 📮
 
-I am Giacomo (Jack) Salici, I am graduating in Computer Engineering M.Sc., AI curriculum. I should start a PhD in ICT later this year.  
+I am Giacomo (Jack) Salici, I am graduating in Computer Engineering M.Sc. - AI curriculum - with a thesis title *"Leveraging Gaze Estimation in Human-Robot Interaction: Implications during the Development of a Framework for Eye Tracking in the Wild"*, made under the supervision of Prof. Vezzani. I won a scholarship for a PhD course in ICT and I should start later this year.  
 
-If you are interested, please write me an email at `270385 AT studenti.unimore.it` or reach me on Telegram @ _jacksalici_.
+If you are interested in collaborating, please write me an email at `270385 AT studenti.unimore.it` or reach me on Telegram @ _jacksalici_.
