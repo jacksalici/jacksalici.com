@@ -56,7 +56,7 @@ Yes, it's not a problem. You will be asked to wear the Project Aria glasses duri
 **→ What are you going to do with my images?**  
 The goal is to collect a dataset that will be used for gaze estimation research. Possibly it may be used also by other universities and research laboratories. Some images may be used in my thesis or other future publications both mine and by others as well as in some topic-related websites. The images will never be sold commercially or in a context other than research. It will never appear your name or other data from you other than the images.  
 
-You will be asked to sign a privacy policy.
+You will be asked to sign [this](https://drive.google.com/file/d/1yr69bI2nbvHMglRYa7zvgp_mEGDfDvZ4/view?usp=drive_link) privacy policy.
 
 ## Who I am and how to contact me 📮
 
