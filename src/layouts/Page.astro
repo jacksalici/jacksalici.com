@@ -2,6 +2,7 @@
 import Base from "./Base.astro";
 
 const { frontmatter } = Astro.props;
+
 ---
 
 <Base
@@ -11,13 +12,27 @@ const { frontmatter } = Astro.props;
   image={frontmatter.cover}
 >
   <main>
+    
+
     <div class="mt-5 mb-16 text-center">
       <h1 class="text-5xl font-bold text-balance">{frontmatter.title}</h1>
     </div>
 
+ 
+
     <div
     class="prose mb-10 prose-img:mx-auto prose-strong:text-primary-content prose-p:text-primary-content prose-headings:text-secondary-content prose-a:text-secondary-content prose-ul:text-secondary-content max-w-xl prose-p:text-justify prose-p:hyphens-auto mx-auto"
   >
+  {
+    frontmatter.summary &&
+    <div class="bg-primary rounded-xl text-primary-content font-display text-xl p-5 mb-8 md:-mx-8">
+      {frontmatter.summary}
+    </div>
+  }
+  {
+    frontmatter.translateLink &&
+    <span class="text-xs text-secondary-content opacity-50"> English is not your strongest language? 🇮🇹 Read the machine-translated <a href={"https://jacksalici-com.translate.goog" + frontmatter.url + "/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp"}> Italian version</a>.</span>
+  }  
     <slot />
   </div>
 
