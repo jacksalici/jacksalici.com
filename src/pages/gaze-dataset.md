@@ -3,15 +3,18 @@ title: "Join us! Gaze Estimation Dataset Collection"
 description: "Seeking volunteers to participate in recording a dataset for gaze estimation benchmarking."
 cover: "/uploads/ariaglasses.png"
 layout: "../layouts/Page.astro"
+summary: "I am recording a dataset aimed to leverage the human-robot interaction research about gaze estimation. 👀"
+translateLink: True
 ---
 
-<div class="bg-primary rounded-xl text-primary-content font-display text-xl p-5 mb-4">
-I am recording a dataset aimed at leveraging the human-robot interaction research about gaze estimation. 👀
-</div>
+#### 29/09/2024 update
+
+Thank you all! The dataset has been recorded and no more clip are required as for now.
+However, if you are interested in this topic, please don't hesitate to contact me anyway. Many other things could be developed...
+___
 
 I am looking for volunteers who want to help me with the last step of my M.Sc. thesis. If you are curious, take a look down below, ***thank you so much for the interest!***  
 
-<span class="text-xs text-secondary-content"> [English is not your strongest language? 🇮🇹 Read the machine-translated [Italian version](https://jacksalici-com.translate.goog/gaze-dataset/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp)] </span>
 
 ## The goal 🚀
 
