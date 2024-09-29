@@ -18,9 +18,11 @@ const projects = (await getCollection("projects"))
 const works = (await getCollection("projects"))
   .sort((a, b) => -a.data?.pubDate.valueOf() + b.data?.pubDate.valueOf())
   .filter((a) => a.data.draft !== false && a.data.type === "work");
+
+const props = {image: '/website.png'}
 ---
 
-<Base>
+<Base image = {props.image} >
   <main>
     <div
       class="grid justify-items-stretch align-middle gap-3 *:rounded-xl *:p-5 lg:*:p-10"

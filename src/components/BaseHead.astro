@@ -8,7 +8,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
   title,
   description = "I am a M.Sc. Computer and AI Engineering student based in Modena, Italy. I develop and design AI projects and cool app.",
-  image = "/website.jpg",
+  image, //= "/website.jpg", decomment for default image
   keywords = [
     "computer engineer",
     "jack salici",
@@ -49,7 +49,7 @@ const {
     : "Giacomo Salici ~ Creative developer, digital craftsman."}
 />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+{image && <meta property="og:image" content={new URL(image, Astro.url)} />}
 <meta name="keywords" content={keywords.join(", ")} />
 
 <!-- Twitter -->
@@ -62,6 +62,8 @@ const {
     : "Giacomo Salici ~ Creative developer, digital craftsman."}
 />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
-
+{
+  image && 
+  <meta property="twitter:image" content={new URL(image, Astro.url)} />
+}
 

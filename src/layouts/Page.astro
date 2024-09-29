@@ -2,6 +2,7 @@
 import Base from "./Base.astro";
 
 const { frontmatter } = Astro.props;
+const titleClass = frontmatter.title.length > 50 ? 'text-4xl' : 'text-5xl';
 
 ---
 
@@ -15,7 +16,7 @@ const { frontmatter } = Astro.props;
     
 
     <div class="mt-5 mb-16 text-center">
-      <h1 class="text-5xl font-bold text-balance">{frontmatter.title}</h1>
+      <h1 class={`${titleClass} font-bold text-balance`}>{frontmatter.title}</h1>
     </div>
 
  
@@ -31,7 +32,10 @@ const { frontmatter } = Astro.props;
   }
   {
     frontmatter.translateLink &&
-    <span class="text-xs text-secondary-content opacity-50"> English is not your strongest language? 🇮🇹 Read the machine-translated <a href={"https://jacksalici-com.translate.goog" + frontmatter.url + "/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp"}> Italian version</a>.</span>
+    <div class="text-xs text-secondary-content opacity-50 not-prose mb-8">
+      <span class="inline-block !leading-none">English is not your strongest language?</span>
+      <span class="inline-block !leading-none">🇮🇹 Read the machine-translated <a class="underline" href={"https://jacksalici-com.translate.goog" + frontmatter.url + "/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp"}> Italian version</a>.</span>
+      </div>
   }  
     <slot />
   </div>
