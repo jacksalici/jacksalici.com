@@ -32,7 +32,7 @@ const MyA = props.slug ? 'a': 'div'
   <div class="flex w-full flex-col gap-2">
     <p class=" text-secondary-content text-sm">
       <FormattedDate date={props.pubDate} />
-      {props.categories &&  ( <span>~ </span> <span class="font-bold">{props.categories}</span>)}
+      {props.categories &&  ( <span>~ </span> <span class="font-bold">{props.categories.join(", ")}</span>)}
     </p>
     <p 
     class:list={["text-lg font-semibold", {"group-hover:underline": props.slug}]}

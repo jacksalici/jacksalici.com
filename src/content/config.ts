@@ -5,6 +5,8 @@ const posts = defineCollection({
 	schema: z.object({
 		title: z.string().optional(),
 		description: z.string().optional(),
+		longDescription: z.string().optional(),
+
 		// Transform string to Date object
 		pubDate: z.coerce.date().optional(),
 		updatedDate: z.coerce.date().optional(),
@@ -18,6 +20,7 @@ const projects = defineCollection({
 	schema: z.object({
 		title: z.string().optional(),
 		description: z.string().optional(),
+		longDescription: z.string().optional(),
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		cover: z.string().optional(),
