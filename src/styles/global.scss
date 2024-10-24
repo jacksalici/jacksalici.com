@@ -144,3 +144,7 @@ img.emoji {
 	  }
 	}
   }
+
+  .link {
+    @apply text-blue font-bold hover:underline
+  }

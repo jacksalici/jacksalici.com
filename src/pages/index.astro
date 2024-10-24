@@ -4,7 +4,7 @@ import PostCard from "../components/PostCard.astro";
 import Base from "../layouts/Base.astro";
 
 const notes = (await getCollection("notes")).sort(
-  (a, b) => a.data?.pubDate.valueOf() - b.data?.pubDate.valueOf()
+  (a, b) => b.data?.pubDate.valueOf() -a.data?.pubDate.valueOf()
 );
 
 const projects = (await getCollection("projects"))
@@ -37,7 +37,7 @@ const props = {image: '/website.png'}
         <!--  <div class="max-w-16 p-2">
           <img src="photo.jpg" class="rounded-full"></div>
          --><p class="lg:text-xl font-medium text-balance">
-          My name is <span class="font-bold">Giacomo Salici</span>, and I'm a computer engineer based in Italy. I am currently pursuing a Master's degree in AI Engineering at <a class="link" href="https://www.unimore.it">UniMoRe</a> and working as a freelance developer and designer.
+          My name is <strong>Giacomo Salici</strong> and I am a <strong>computer engineer, developer</strong>, and sometimes <strong>designer</strong> based in Italy. Starting from November 2024, I will be a <strong>PhD student in ICT</strong> at <a class="link" href="https://www.unimore.it">Unimore</a>, working with the <a class="link" href="https://aimagelab.ing.unimore.it/imagelab/index.asp">AImageLab</a> research group.
         </p>
       </div>
       <a  href="#contacts" class="row-span-2 col-start-3 row-start-2 bg-pink relative hover:bg-opacity-70 font-bold font-display text-primary-content md:text-2xl group transition-all border border-pink hover:border-secondary-content"
@@ -45,7 +45,7 @@ const props = {image: '/website.png'}
  
        
         <div class="top-1 sticky" style="writing-mode: vertical-rl;
-        text-orientation: mixed;">CONTACT ME!</div>
+        text-orientation: mixed;">Contact me!</div>
         </a>
 
       <a
@@ -85,7 +85,7 @@ const props = {image: '/website.png'}
 
       
     </section>
-    <h2 id="projects" class="mb-1 mt-28">Featured projects.</h2>
+    <h2 id="projects" class="mb-1 mt-28">Featured projects</h2>
     <p class="mb-6 text-md text-secondary-content">
       The
       <svg
@@ -124,7 +124,7 @@ const props = {image: '/website.png'}
       </section>
     </p>
 
-    <h2 class="mb-5 mt-20" id="notes">Recent notes.</h2>
+    <h2 class="mb-5 mt-20" id="notes">Recent notes</h2>
     <section>
       {
         notes.map((single) => (
@@ -138,7 +138,7 @@ const props = {image: '/website.png'}
       }
     </section>
 
-    <h2 class="mt-20 mb-5" id="contacts">Contact me.</h2>
+    <h2 class="mt-20 mb-5" id="contacts">Contacts</h2>
     <div class=" *:rounded-2xl mb-5 gap-3 grid">
       <a class="col-span-4 row-span-2 group col-start-1 row-start-1 p-5 lg:p-10 bg-primary-content text-primary hover:bg-opacity-70"
       target="_blank"

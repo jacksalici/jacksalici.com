@@ -4,10 +4,8 @@ pubDate: 2023-02-02
 updatedDate: 2023-10-19
 slug: "website"
 description: "I rebuild this website too often."
-categories: ["Web Development"]
-tags: ["website", "portfolio", "Hugo"]
-link: "https://github.com/jacksalici/salinger-theme"
-linkText: "Based on Salinger Theme (See the Repo)"
+categories: ["Notes"]
+tags: ["website", "portfolio"]
 featured: true
 cover: "/website.jpg"
 ---
