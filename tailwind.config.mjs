@@ -3,18 +3,18 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		colors: {
-			'blue': '#17b3dd',
+			'blue': '#07a3cc',
 			'purple': '#3D2B8C',
-			'pink': '#FF6886',
-			'yellow': '#ffc82c',
-			'primary-content': '#232360',
-			'secondary-content': '#676793',
-			'primary': '#F0F0F8',
-			'background': '#fafaff',
-			'black': '#000500'
+			'pink': '#c02D22',
+			'yellow': '#ba8e23',
+			'primary-content': '#1F1F1F',
+			'secondary-content': '#333333',
+			'primary': '#C2C2C2',
+			'background': '#CCCCCC',
+			'black': '#1F1F1F'
 			
 		  },
-		extend: {
+		extend: { 
 			spacing: {
 			  '128': '32rem',
 			  '144': '36rem',
@@ -33,7 +33,7 @@ export default {
 		},
 		fontFamily: {
 			display: ['Space\\ Grotesk', 'ui-serif'],
-			body: ['DM\\ Sans', 'ui-sans-serif'],
+			body: ['IBM\\ Plex\\ Serif', 'ui-sans-serif'],
 			mono: ['Space\\ Mono', 'ui-monospace']
 		  },
 	
