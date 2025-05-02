@@ -9,8 +9,7 @@ export default defineConfig({
   site: "https://jacksalici.com",
   integrations: [mdx(), sitemap(), tailwind()],
   redirects: {
-    "/projects/": "/#projects",
-    "/b/": "/#notes",
+    "/b/": "/notes",
     "/notes": "/#notes",
     "/projects/website": "/blog/website",
     "/p/[...slug]": "/projects/[...slug]",

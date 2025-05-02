@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "../../components/PostCard.astro";
+import Base from "../../layouts/Base.astro";
+
+const notes = (await getCollection("notes")).sort(
+  (a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf()
+);
+
+const projects = (await getCollection("projects"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const works = (await getCollection("projects"))
+  .sort((a, b) => -a.data?.pubDate.valueOf() + b.data?.pubDate.valueOf())
+  .filter((a) => a.data.draft !== false && a.data.type === "work");
+
+const props = { image: "/website.png" };
+---
+
+<Base image={props.image}>
+  <main>
+    <h1 class="mb-5 mt-20 text-4xl font-extrabold" id="notes">Recent notes</h1>
+    <section class="flex flex-col gap-4">
+      {
+        notes.map((single) => (
+          <PostCard
+            title={single.data.description}
+            pubDate={single.data.pubDate}
+            summary={single.data.summary}
+            slug={"/notes/" + single.slug}
+          />
+        ))
+      }
+    </section>
+  </main>
+</Base>

@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "../../components/PostCard.astro";
+import Base from "../../layouts/Base.astro";
+
+const projects = (await getCollection("projects"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const props = {image: '/website.png'}
+---
+
+<Base image = {props.image} >
+  <main>
+   
+    <!-- 
+    <h2 class="mb-5 mt-20">Ongoing activities.</h2>
+    <section>
+      <PostCard
+        description="Human Robot Interaction"
+        pubDate={new Date("15 jun 2024")}
+        title="Human-Robot Interaction"
+        summary="Researching for my Master's thesis on the importance of gaze cues and pose estimation in interactions with robots."
+        cta = {["Wanna help? I'm looking for volunteers! 🤙", "/gaze-dataset"]}
+      />
+      
+     -->
+
+      
+    </section>
+    <h1 id="projects" class="mb-1 mt-28  text-4xl font-extrabold">Featured projects</h1>
+    <p class="mb-6 text-md text-secondary-content">
+      The
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 384 512"
+        class="w-[1em] inline-block fill-secondary-content"
+        ><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+        <path
+          d="M192 32c17.7 0 32 14.3 32 32V199.5l111.5-66.9c15.2-9.1 34.8-4.2 43.9 11s4.2 34.8-11 43.9L254.2 256l114.3 68.6c15.2 9.1 20.1 28.7 11 43.9s-28.7 20.1-43.9 11L224 312.5V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V312.5L48.5 379.4c-15.2 9.1-34.8 4.2-43.9-11s-4.2-34.8 11-43.9L129.8 256 15.5 187.4c-15.2-9.1-20.1-28.7-11-43.9s28.7-20.1 43.9-11L160 199.5V64c0-17.7 14.3-32 32-32z"
+        ></path>
+      </svg> marks the best projects while the trending ones have the
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 576 512"
+        class="w-[1.2em] inline-block fill-secondary-content"
+        ><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. -->
+        <path
+          d="M384 160c-17.7 0-32-14.3-32-32s14.3-32 32-32H544c17.7 0 32 14.3 32 32V288c0 17.7-14.3 32-32 32s-32-14.3-32-32V205.3L342.6 374.6c-12.5 12.5-32.8 12.5-45.3 0L192 269.3 54.6 406.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160c12.5-12.5 32.8-12.5 45.3 0L320 306.7 466.7 160H384z"
+        ></path>
+      </svg>
+      icon.
+      <section class="grid gap-6 md:grid-cols-2">
+        {
+          projects.map((single) => (
+            <PostCard
+              title={single.data.description}
+              pubDate={single.data.pubDate}
+              slug={"/projects/" + single.slug}
+              categories={single.data.categories}
+              summary={single.data.summary}
+              featured={single.data.featured}
+              trending={single.data.trending}
+            />
+          ))
+        }
+      </section>
+
+  
+  </main>
+ 
+</Base>
