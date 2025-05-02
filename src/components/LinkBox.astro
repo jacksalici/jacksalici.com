@@ -6,22 +6,23 @@ type Props = {
     dark?: Boolean;
     external?: Boolean;
     ariaLabel?: string;
+    span?: string;
 };
 
-const { text, hiddenText, link, dark = false, external = false, ariaLabel = "" } = Astro.props;
+const { text, hiddenText, link, dark = false, external = false, ariaLabel = "", span = "col-span-1 row-span-1" } = Astro.props;
 ---
-<a class:list={["rounded hover:bg-yellow font-display uppercase flex flex-col justify-between group transition-all", {"bg-secondary text-primary-content": !dark, "bg-primary-content text-primary hover:text-primary-content": dark} ]} href={link} target={external === true ? '_blank' : '_self'} rel={external === true ? 'noreferrer' : undefined} aria-label={ariaLabel}>
+<a class:list={[span + " rounded hover:bg-yellow font-display uppercase flex flex-col justify-between group transition-all", {"bg-secondary text-primary-content": !dark, "bg-primary-content text-primary hover:text-primary-content": dark} ]} href={link} target={external === true ? '_blank' : '_self'} rel={external === true ? 'noreferrer' : undefined} aria-label={ariaLabel}>
   
-    {!hiddenText && <p class="p-4">
+    {!hiddenText && <p class="p-3 md:p-4">
       {text}
     </p>
     }
 
     {hiddenText && 
-    <p class:list={["p-4 group-hover:hidden"]}>
+    <p class:list={["p-3 md:p-4 group-hover:hidden"]}>
       {text}
     </p>
-    <p class:list={["p-4 hidden group-hover:inline"]}>
+    <p class:list={["p-3 md:p-4 hidden group-hover:inline"]}>
       {hiddenText}
     </p>
     }

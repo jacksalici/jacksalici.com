@@ -23,14 +23,14 @@ const props = { image: "/website.png" };
 ---
 
 <Base image={props.image}>
-  <main class="grid gap-6 grid-cols-3 *:p-2">
-    <h1 class="text-5xl font-bold text-primary-content col-span-3">
+  <main class="grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 *:py-2">
+    <h1 class="text-4xl md:text-5xl font-bold text-primary-content col-span-2 md:col-span-3">
       I am a digital craftsman and a creative engineer. I use deep learning to predict the future.
     </h1>
   
 
   
-    <div class="col-span-3">
+    <div class="col-span-2 md:col-span-3">
       <p class="lg:text-xl font text-balance" >
         My name is <strong>Giacomo Salici</strong> and I work with the UniMoRe's AImageLab research
         group as a <strong>PhD student in ICT</strong>.
@@ -55,6 +55,7 @@ const props = { image: "/website.png" };
         link="/projects"
         dark
         ariaLabel="projects"
+        span="col-span-2 md:col-span-1"
       />
 
       <LinkBox
