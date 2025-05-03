@@ -6,7 +6,7 @@ const { href, class: className, ...props } = Astro.props;
 ---
 
 <header class="sticky top-0 z-50 backdrop-blur-sm bg-opacity-25 bg-background bg-blur-lg">
-  <nav class="py-4 px-2 flex items-center justify-between text-primary-content">
+  <nav class="py-4 px-2 lg:px-4 flex items-center justify-between text-primary-content">
     <a href="/" aria-label="Logo of Jack">
       <svg
         id="logo"
@@ -52,7 +52,7 @@ const { href, class: className, ...props } = Astro.props;
         </svg>
       </button>
       <div
-        class="group-hover:flex absolute hidden text-primary font-display uppercase flex-col -right-2 w-min items-end bg-primary-content rounded max-w-fit
+        class="group-hover:flex absolute hidden text-primary font-display uppercase flex-col right-0 lg:-right-2 w-min items-end bg-primary-content rounded max-w-fit
         *:block *:whitespace-nowrap *:text-right *:text-lg *:p-4 *:px-12 *:w-full *:rounded duration-500 *:border-b *:border-secondary-content *:shadow-lg"
       >
       <a

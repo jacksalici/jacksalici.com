@@ -97,10 +97,10 @@ main {
 }
 
 img {
-	@apply rounded-xl
+	@apply rounded
 }
 ::selection {
-	@apply bg-yellow
+	@apply bg-pink
   }
 
 mark{
