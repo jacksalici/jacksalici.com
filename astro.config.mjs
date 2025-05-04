@@ -10,7 +10,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), tailwind()],
   redirects: {
     "/b/": "/notes",
-    "/notes": "/#notes",
+    "/notes": "/notes",
     "/projects/website": "/blog/website",
     "/p/[...slug]": "/projects/[...slug]",
     "/thesis": "/projects/sfm-gaze-framework"
