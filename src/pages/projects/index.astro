@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import PostCard from "../../components/PostCard.astro";
 import Base from "../../layouts/Base.astro";
+import activities from "../../content/activities.json";
 
 const projects = (await getCollection("projects"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -17,19 +18,22 @@ const props = {image: '/website.png'}
 <Base image = {props.image} >
   <main>
    
-    <!-- 
-    <h2 class="mb-5 mt-20">Ongoing activities.</h2>
-    <section>
-      <PostCard
-        description="Human Robot Interaction"
-        pubDate={new Date("15 jun 2024")}
-        title="Human-Robot Interaction"
-        summary="Researching for my Master's thesis on the importance of gaze cues and pose estimation in interactions with robots."
-        cta = {["Wanna help? I'm looking for volunteers! 🤙", "/gaze-dataset"]}
-      />
-      
-     -->
-
+     
+    <h1 class="mb-1 text-4xl font-extrabold">Ongoing activities.</h2>
+      <p class="mb-6 text-md text-secondary-content">
+        Projects I am currently working on. They may or may not become public or become a future publication.
+      </p>
+    <section  class="grid gap-6 md:grid-cols-2 mb-12">
+      {
+        activities.map((single) => (
+          <PostCard
+            title={single.description}
+            pubDate={new Date(single.date)}
+            categories={single.categories}
+            summary={single?.summary}
+          />
+        ))
+      }
       
     </section>
     <h1 id="projects" class="mb-1 text-4xl font-extrabold">Featured projects</h1>

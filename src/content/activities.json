@@ -1,0 +1,21 @@
+[
+    {
+      "title": "Time Series Analysis",
+      "description": "Time Series Analysis and Anomaly Detection",
+      "date": "Jan 2025",
+      "categories": ["Deep Learning", "Time Series"]
+    },
+    {
+        "title": "Robot Pose",
+        "description": "HRI and Social robot poses",
+        "date": "Mar 2025",
+        "categories": ["Robotics"]
+    },
+    {
+        "title": "V2X Communication",
+        "description": "Smart vehicles and V2X communication",
+        "date": "May 2025", 
+        "categories": ["Internet of Things", "V2X"]
+    }
+  ]
+  

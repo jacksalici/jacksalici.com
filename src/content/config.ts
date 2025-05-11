@@ -1,6 +1,8 @@
+import { date } from 'astro/zod';
 import { defineCollection, z } from 'astro:content';
+import { glob, file } from 'astro/loaders'; 
 
-const posts = defineCollection({
+const notes = defineCollection({
 	// Type-check frontmatter using a schema
 	schema: z.object({
 		title: z.string().optional(),
@@ -42,4 +44,4 @@ const projects = defineCollection({
 
 
 
-export const collections = { posts, projects};
+export const collections = { notes, projects };
