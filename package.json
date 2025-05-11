@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@astrojs/check": "latest",
-    "@astrojs/mdx": "latest",
+    "@astrojs/mdx": "^4.2.6",
     "@astrojs/rss": "latest",
     "@astrojs/sitemap": "latest",
-    "@astrojs/tailwind": "latest",
+    "@astrojs/tailwind": "^6.0.2",
     "astro": "latest",
     "tailwindcss": "latest",
     "typescript": "latest"
