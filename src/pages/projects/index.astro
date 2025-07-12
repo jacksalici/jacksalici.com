@@ -2,9 +2,16 @@
 import { getCollection } from "astro:content";
 import PostCard from "../../components/PostCard.astro";
 import Base from "../../layouts/Base.astro";
-import activities from "../../content/activities.json";
 
 const projects = (await getCollection("projects"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const activities = (await getCollection("activities"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .sort(
     (a, b) =>
@@ -27,9 +34,10 @@ const props = {image: '/website.png'}
       {
         activities.map((single) => (
           <PostCard
-            title={single.description}
-            pubDate={new Date(single.date)}
-            categories={single.categories}
+            title={single.data.title}
+            pubDate={single.data.pubDate}
+            categories={single.data.categories}
+            slug={"/activities/" + single.slug}
           />
         ))
       }

@@ -5,7 +5,7 @@ import Base from "../../layouts/Base.astro";
 
 const notes = (await getCollection("notes")).sort(
   (a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf()
-);
+).filter((a) => a.data.draft !== false && a.data.hidden != true);
 
 const props = { image: "/website.png" };
 ---

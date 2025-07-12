@@ -1,0 +1,55 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Single from '../../layouts/Single.astro';
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+
+export async function getStaticPaths() {
+	const activities = await getCollection('activities');
+	return activities.map((activity) => ({
+		params: { slug: activity.slug },
+		props: activity,
+	}));
+}
+
+
+const activity = Astro.props;
+const { Content } = await activity.render();
+
+const papers = (await getCollection('papers')).filter(paper =>
+	Array.isArray(paper.data.activities) &&
+	paper.data.activities.includes(activity.slug)
+);
+
+
+
+---
+
+<Base {...activity.data}>
+	<main>
+	<h2 class="text-2xl font-bold text-primary"> Research Activity</h2>
+	<h1 class="text-4xl font-bold mb-5">{activity.data.title}</h1>
+			
+						
+	<Content />
+
+	{ papers.length > 0 && <h2 class="text-3xl font-bold my-6">Related Papers</h2>
+	<div class="flex flex-col gap-4 not-prose">
+      {
+        papers.map((single) => (
+          <PostCard
+            title={single.data.title}
+            location={single.data.location}
+            venue={single.data.venue}
+            authors={single.data.authors}
+            pubDate={single.data.pubDate}
+            slug={"/papers/" + single.slug}
+          />
+        ))
+      }
+    </div>}
+</main>
+
+</Base>

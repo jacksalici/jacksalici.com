@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "../../components/PostCard.astro";
+import Base from "../../layouts/Base.astro";
+
+const activities = (await getCollection("activities"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const props = {image: '/website.png'}
+---
+
+<Base image = {props.image} >
+  <main>
+   
+     
+    <h1 class="mb-1 text-4xl font-extrabold">Ongoing activities</h2>
+      <p class="mb-6 text-md text-secondary-content">
+        Projects I am currently working on. They may or may not become public or become a future publication.
+      </p>
+    <section  class="grid gap-6 md:grid-cols-2 mb-12">
+      {
+        activities.map((single) => (
+          <PostCard
+            title={single.data.title}
+            pubDate={single.data.pubDate}
+            categories={single.data.categories}
+            slug={"/activities/" + single.slug}
+          />
+        ))
+      }
+      
+    </section>
+    
+  
+  </main>
+ 
+</Base>

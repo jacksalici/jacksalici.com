@@ -6,7 +6,7 @@ slug: "llm-robot-motion"
 authors: "Riccardo Catalini*, Giacomo Salici*, Federico Biagi, Guido Borghi, Luigi Biagiotti, Roberto Vezzani"
 venue: "13th International Workshop on Assistive Computer Vision and Robotics (ACVR) - in Conjunction With ICCV 2025"
 location: "Honolulu, Hawaii, USA"
-
+activities: ["robotics"]
 
 
 

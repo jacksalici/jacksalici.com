@@ -6,7 +6,8 @@ slug: "emma"
 authors: "Niyati Rawal, Rahul Singh Maharjan, Giacomo Salici, Riccardo Catalini, Marta Romeo, Roberto Bigazzi, Lorenzo Baraldi, Roberto Vezzani, Rita Cucchiara, Angelo Cangelosi"
 venue: "17th International Conference on Social Robotics + AI (ICSR+AI 2025)"
 location: "Naples, Italy"
-
+draft: True
+hidden: True
 
 
 
