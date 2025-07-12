@@ -12,6 +12,9 @@ type Props = {
   featured?: Boolean;
   trending?: Boolean;
   cta?: string[];
+  location?: string;
+  authors?: string;
+  venue?: string;
 };
 
 const { ...props } = Astro.props;
@@ -32,13 +35,18 @@ const MyA = props.slug ? 'a': 'div'
   <div class="flex w-full flex-col gap-2">
     <p class=" text-secondary-content text-sm">
       {props.pubDate && <FormattedDate date={props.pubDate} />}
+      {props.location && <span>~ {props.location}</span>}
       {props.categories &&  ( <span>~ </span> <span class="font-bold">{props.categories.join(", ")}</span>)}
     </p>
     <p 
     class:list={["text-lg font-semibold", {"group-hover:underline": props.slug}]}
     >{props.title}</p>
+    {props.authors && <p class="font-bold">{props.authors}</p>}
+    
     <p >
       {props.summary}
+      {props.venue}
+
     </p>
     {props.cta && 
       <a href={props.cta[1]} class="bg-blue hover:bg-opacity-70 text-background hover:border-secondary-content border hover:underline border-blue rounded-md text-sm p-2 ">

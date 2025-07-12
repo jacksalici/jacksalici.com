@@ -7,18 +7,6 @@ const notes = (await getCollection("notes")).sort(
   (a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf()
 );
 
-const projects = (await getCollection("projects"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .sort(
-    (a, b) =>
-      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
-  )
-  .filter((a) => a.data.draft !== false && a.data.hidden != true);
-
-const works = (await getCollection("projects"))
-  .sort((a, b) => -a.data?.pubDate.valueOf() + b.data?.pubDate.valueOf())
-  .filter((a) => a.data.draft !== false && a.data.type === "work");
-
 const props = { image: "/website.png" };
 ---
 

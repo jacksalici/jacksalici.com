@@ -2,35 +2,18 @@
 import { getCollection } from "astro:content";
 import LinkBox from "../components/LinkBox.astro";
 import Base from "../layouts/Base.astro";
-
-const notes = (await getCollection("notes")).sort(
-  (a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf()
-);
-
-const projects = (await getCollection("projects"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .sort(
-    (a, b) =>
-      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
-  )
-  .filter((a) => a.data.draft !== false && a.data.hidden != true);
-
-const works = (await getCollection("projects"))
-  .sort((a, b) => -a.data?.pubDate.valueOf() + b.data?.pubDate.valueOf())
-  .filter((a) => a.data.draft !== false && a.data.type === "work");
-
 const props = { image: "/website.png" };
 ---
 
 <Base image={props.image}>
-  <main class="grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 *:py-2">
-    <h1 class="text-4xl md:text-5xl font-bold text-primary-content col-span-2 md:col-span-3 text-balance">
+  <main class="grid gap-4 md:gap-6 grid-cols-2 *:py-2">
+    <h1 class="text-4xl md:text-5xl font-bold text-primary-content col-span-2 text-balance">
       A digital craftsman who designs systems that matter.
     </h1>
   
 
   
-    <div class="col-span-2 md:col-span-3">
+    <div class="col-span-2">
       <p class="lg:text-xl font text-balance" >
         I'm <strong>Giacomo Salici</strong>, an <strong>AI and computer engineer</strong>, <strong>developer</strong>, and
         occasionally designer based in Italy. I work with the AImageLab research
@@ -52,16 +35,25 @@ const props = { image: "/website.png" };
   
       <LinkBox
         text="Check out my projects"
-        hiddenText="Check out my fav projects"
+        hiddenText="Check out them out"
         link="/projects"
         dark
         ariaLabel="projects"
         span="col-span-2 md:col-span-1"
       />
 
+       <LinkBox
+        text="Read my pubblications"
+        hiddenText="Papers ahead"
+        link="/papers"
+        dark
+        ariaLabel="papers"
+        span="col-span-2 md:col-span-1"
+      />
+
       <LinkBox
       text="Reach me anytime"
-      hiddenText="Mail me or DM @ jacksalici"
+      hiddenText="Mail or DM me"
       link="/contacts"
       ariaLabel="contacts"
     />

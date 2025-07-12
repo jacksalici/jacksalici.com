@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "../../components/PostCard.astro";
+import Base from "../../layouts/Base.astro";
+
+const papers = (await getCollection("papers"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const props = { image: "/website.png" };
+---
+
+<Base image={props.image}>
+  <main>
+    <h1 class="mb-1 text-4xl font-extrabold" id="notes">Featured articles</h1>
+    <p class="mb-6 text-md text-secondary-content">
+      An asterisk * beside the authors' names indicates that those authors contributed equally to the work.
+      </p>
+    <section class="flex flex-col gap-4">
+      {
+        papers.map((single) => (
+          <PostCard
+            title={single.data.title}
+            location={single.data.location}
+            venue={single.data.venue}
+            authors={single.data.authors}
+            pubDate={single.data.pubDate}
+            slug={"/papers/" + single.slug}
+          />
+        ))
+      }
+    </section>
+  </main>
+</Base>

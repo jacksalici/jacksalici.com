@@ -26,6 +26,7 @@ const { ...props } = Astro.props;
 									</span>
 								)
 							}
+							 {props.location && <span class=" inline-block">~ {props.location}</span>}
 							
 							{
 								props.langs && (
@@ -51,14 +52,20 @@ const { ...props } = Astro.props;
 					
 				
 				<!-- <div class="h-4 col-span-2 !p-0 bg-gradient-to-r from-blue via-pink to-yellow rounded"></div>-->
-				{(props.description || props.summary || props.longDescription) && <div class:list={[{"col-span-2 md:col-span-1": props.cover}, {"col-span-2": !props.cover} ]}>		
+				{(props.description || props.summary || props.longDescription) && <div class="col-span-2">		
 					{props.longDescription && <p class="text-xl">{props.longDescription}</p>}
 					{!props.longDescription && props.description && <p class="text-xl">{props.description}</p>}
 					{props.summary && <p class="text-lg">{props.summary}</p>}
 				</div>}
+				{props.authors && <div class="col-span-2 md:col-span-1">
+					<p class="text-secondary-content text-lg">By {props.authors}</p>
+				
+				</div>}
+				{props.venue && <div class="col-span-2 md:col-span-1">
+					<p class="text-secondary-content text-lg">{props.venue}</p>
+				</div>}
 
-
-				{props.cover && <div class=" !p-0  col-span-2 md:col-span-1"><img src={props.cover} class="!p-0"/></div>}
+				{props.cover && <div class=" !p-0  col-span-2"><img src={props.cover} class="!p-0"/></div>}
 			</div>
 			
 

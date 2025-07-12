@@ -43,5 +43,33 @@ const projects = defineCollection({
 });
 
 
+const papers = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string().optional(),
+		authors: z.string().optional(),
+		year: z.coerce.number().optional(),
+		location: z.string().optional(),
+		venue: z.string().optional(),
+		description: z.string().optional(),
+		longDescription: z.string().optional(),
+		pubDate: z.coerce.date(),
+		updatedDate: z.coerce.date().optional(),
+		cover: z.string().optional(),
+		tags: z.string().array().optional(),
+		categories: z.string().array().optional(),
+		link: z.string().optional(),
+		summary: z.string().optional(),
+		draft: z.boolean().optional(),
+		featured: z.boolean().optional().default(false),
+		trending: z.boolean().optional().default(false),
+		hidden: z.boolean().optional().default(false),
+		langs: z.string().array().optional(),
+		cta_text: z.string().array().optional(),
+		cta_link: z.string().array().optional()
 
-export const collections = { notes, projects };
+	}),
+});
+
+
+export const collections = { notes, projects, papers};
