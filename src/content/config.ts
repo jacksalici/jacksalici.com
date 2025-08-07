@@ -80,6 +80,7 @@ const papers = defineCollection({
 		year: z.coerce.number().optional(),
 		location: z.string().optional(),
 		venue: z.string().optional(),
+		acronym: z.string().optional(),
 		description: z.string().optional(),
 		longDescription: z.string().optional(),
 		pubDate: z.coerce.date(),

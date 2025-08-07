@@ -41,7 +41,7 @@ const MyA = props.slug ? 'a': 'div'
     <p 
     class:list={["text-lg font-semibold", {"group-hover:underline": props.slug}]}
     >{props.title}</p>
-    {props.authors && <p class="font-bold">{props.authors}</p>}
+    {props.authors && <p>{props.authors}</p>}
     
     <p >
       {props.summary}

@@ -42,7 +42,7 @@ const papers = (await getCollection('papers')).filter(paper =>
           <PostCard
             title={single.data.title}
             location={single.data.location}
-            venue={single.data.venue}
+            venue={single.data.acronym ||   single.data.venue}
             authors={single.data.authors}
             pubDate={single.data.pubDate}
             slug={"/papers/" + single.slug}
