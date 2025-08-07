@@ -7,9 +7,7 @@ authors: "Riccardo Catalini*, Federico Biagi*, Giacomo Salici*, Guido Borghi, Ro
 venue: "17th International Conference on Social Robotics + AI (ICSR+AI 2025)"
 location: "Naples, Italy"
 activities: ["robotics"]
-
-
-
+acronym: "ICSR 2025"
 cta_link: ["https://hdl.handle.net/11380/1382389", "https://github.com/iot-unimore/llm-robot-pose"]
 cta_text: ["Full Text", "Project Repository"]
 
