@@ -7,6 +7,9 @@ longDescription: "The following text is a glimpse of my master degree thesis in 
 categories: ["Computer Vision", "Robotics"]
 langs: ["Python"]
 featured: true
+cta_link: ["https://github.com/jacksalici/sfm-gaze-framework", "https://morethesis.unimore.it/theses/available/etd-09262024-135659/"]
+cta_text: ["Project Repository", "Full text thesis"]
+cover: "https://raw.githubusercontent.com/jacksalici/sfm-gaze-framework/refs/heads/main/imgs/fw-example.png"
 
 ---
 
@@ -44,6 +47,4 @@ A dataset for benchmarking gaze estimation model has been recorded and elaborate
 Part IV begins with a presentation of a case study about HRI (Chapter 9), which was developed during the same period and it is a perfect example of a gaze-driven application that could increase the quality of how a pick and place robot manipulator is used.
 In the same part are present the conclusion and possible future developments of this work (Chapter 10). This thesis covers a broad range of topics, and it would be impossible to deeply dive into each of them. However, it is hoped that this work will provide a solid foundation for any additional future work and give a glimpse of every touched aspect.
 
-## Repositories and other details
 
-Repositories and other details will be available in the next weeks, after the thesis discussion. Until then, this page is under construction. 🏗️
