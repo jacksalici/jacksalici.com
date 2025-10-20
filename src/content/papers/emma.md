@@ -1,6 +1,6 @@
 ---
 title: "Multimodal Dialogue for Empathetic Human-Robot Interaction"
-pubDate: 2025-09-25
+pubDate: 2025-01-01
 year: 2025
 slug: "emma"
 authors: "Niyati Rawal, Rahul Singh Maharjan, Giacomo Salici, Riccardo Catalini, Marta Romeo, Roberto Bigazzi, Lorenzo Baraldi, Roberto Vezzani, Rita Cucchiara, Angelo Cangelosi"
