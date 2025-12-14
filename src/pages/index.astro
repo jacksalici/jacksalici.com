@@ -1,35 +1,105 @@
 ---
 import { getCollection } from "astro:content";
-import LinkBox from "../components/LinkBox.astro";
+import PostCard from "../components/PostCard.astro";
 import Base from "../layouts/Base.astro";
 import "../styles/global.css";
+
+const notes = (await getCollection("notes")).sort(
+  (a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf()
+).filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const papers = (await getCollection("papers"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  ).filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const projects = (await getCollection("projects"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const activities = (await getCollection("activities"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
 const props = { image: "/website.png" };
 ---
 
 <Base image={props.image}>
-  <main class="grid gap-4 md:gap-6 md:grid-cols-2 *:py-2">
-    <h1 class="text-3xl text-balance">
-      A digital craftsman who designs systems that matter.
-    </h1>
-  
-
-  
-      <p class="text-balance" >
-        👋 I'm <strong>Giacomo Salici</strong> <span class="font-extralight">[/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/]</span>, an <strong>AI and computer engineer</strong>, <strong>developer</strong>, and
-        occasionally designer based in Italy 🍕. I work with the AImage<sup>Lab</sup> research
-        group of UniMoRe as a <strong>PhD student in ICT</strong>.
-        My research topics include <strong>deep learning</strong> applied to <strong>time series forecasting</strong> and anomaly detection, robotics and <strong>IoT</strong>⚙️.
-
-        
-
-        
-      </p>
+  <main>
+    <div class="grid gap-10 gap-y-32 md:grid-cols-2">
+      <h1 class="text-3xl text-balance">
+        A digital craftsman who designs systems that matter.
+      </h1>
       
+      <p class="text-balance">
+        I'm <strong>Giacomo Salici</strong> <span class="font-extralight">[/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/]</span>, an <strong>AI and computer engineer</strong>, <strong>developer</strong>, and
+        occasionally designer based in Italy. I work with the AImage<sup>Lab</sup> research
+        group of UniMoRe as a <strong>PhD student in ICT</strong>.
+        My research topics include <strong>deep learning</strong> applied to <strong>time series forecasting</strong> and anomaly detection, robotics and <strong>IoT</strong>.
+      </p>
     
-  
-   
-  
-     
+
+    <section >
+      <h2 class="text-2xl mb-4">Recent Papers</h2>
+      <div class="flex flex-col gap-4">
+        {
+          papers.map((single) => (
+            <PostCard
+              title={single.data.title}
+              location={single.data.location}
+              venue={single.data.acronym || single.data.venue}
+              authors={single.data.authors}
+              slug={"/papers/" + single.slug}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl mb-4">Featured Projects</h2>
+      <div class="flex flex-col gap-4">
+        {
+          projects.map((single) => (
+            <PostCard
+              title={single.data.description}
+              pubDate={single.data.pubDate}
+              slug={"/projects/" + single.slug}
+              categories={single.data.categories}
+              summary={single.data.summary}
+              featured={single.data.featured}
+              trending={single.data.trending}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl mb-4">Recent Notes</h2>
+      <div class="flex flex-col gap-4">
+        {
+          notes.map((single) => (
+            <PostCard
+              title={single.data.description}
+              pubDate={single.data.pubDate}
+              summary={single.data.summary}
+              slug={"/notes/" + single.slug}
+            />
+          ))
+        }
+      </div>
+    </section>
+    </div>
   </main>
-  
 </Base>
