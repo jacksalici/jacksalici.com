@@ -2,96 +2,34 @@
 import { getCollection } from "astro:content";
 import LinkBox from "../components/LinkBox.astro";
 import Base from "../layouts/Base.astro";
+import "../styles/global.css";
 const props = { image: "/website.png" };
 ---
 
 <Base image={props.image}>
-  <main class="grid gap-4 md:gap-6 grid-cols-2 *:py-2">
-    <h1 class="text-4xl md:text-5xl font-bold text-primary-content col-span-2 text-balance">
+  <main class="grid gap-4 md:gap-6 md:grid-cols-2 *:py-2">
+    <h1 class="text-3xl text-balance">
       A digital craftsman who designs systems that matter.
     </h1>
   
 
   
-    <div class="col-span-2">
-      <p class="lg:text-xl font text-balance" >
-        I'm <strong>Giacomo Salici</strong>, an <strong>AI and computer engineer</strong>, <strong>developer</strong>, and
-        occasionally designer based in Italy. I work with the AImageLab research
+      <p class="text-balance" >
+        👋 I'm <strong>Giacomo Salici</strong> <span class="font-extralight">[/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/]</span>, an <strong>AI and computer engineer</strong>, <strong>developer</strong>, and
+        occasionally designer based in Italy 🍕. I work with the AImage<sup>Lab</sup> research
         group of UniMoRe as a <strong>PhD student in ICT</strong>.
+        My research topics include <strong>deep learning</strong> applied to <strong>time series forecasting</strong> and anomaly detection, robotics and <strong>IoT</strong>⚙️.
+
         
 
-        <span class=" block mt-2">
-
-        My research topics include <strong>deep learning</strong> applied to <strong>time series forecasting</strong> and anomaly detection, robotics and <strong>IoT</strong>.
-        </span>
         
       </p>
       
-    </div>
-
-
+    
   
    
   
-      <LinkBox
-        text="Check out my projects"
-        hiddenText="Check out them out"
-        link="/projects"
-        dark
-        ariaLabel="projects"
-        span="col-span-2 md:col-span-1"
-      />
-
-       <LinkBox
-        text="Read my publications"
-        hiddenText="Papers ahead"
-        link="/papers"
-        dark
-        ariaLabel="papers"
-        span="col-span-2 md:col-span-1"
-      />
-
-      <LinkBox
-      text="Reach me anytime"
-      hiddenText="Mail or DM me"
-      link="/contacts"
-      ariaLabel="contacts"
-    />
-
-      <LinkBox
-        text="Check my résumé"
-        hiddenText="Let's connect"
-        link="https://linkedin.com/in/jacksalici"
-        ariaLabel="linkedin"
-        external
-      />
-
+     
   </main>
   
-  <style>
-    /* Icon styles */
-    [class*="fa"] {
-      @apply text-3xl hover:fill-secondary-content transition-all w-[1em] h-[1em];
-    }
-  
-    .fa-boxed {
-      @apply text-2xl transition-all w-[1em] h-[1em] inline;
-    }
-    
-    .group:hover .fa-boxed {
-      @apply fill-secondary-content;
-    }
-  
-  
-    
-    /* Other styles maintained from the original */
-
-    h2 {
-      @apply text-3xl font-extrabold;
-    }
-  
-    section {
-      @apply grid gap-3 md:grid-cols-2;
-    }
-  </style>
 </Base>

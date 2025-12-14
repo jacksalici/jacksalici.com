@@ -15,9 +15,11 @@
     "@astrojs/rss": "latest",
     "@astrojs/sitemap": "latest",
     "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/typography": "latest",
     "astro": "latest",
     "tailwindcss": "^4.1.18",
     "typescript": "latest"
+    
   },
   "devDependencies": {
     "@tailwindcss/typography": "latest",

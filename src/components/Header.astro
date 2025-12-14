@@ -5,12 +5,12 @@ type Props = HTMLAttributes<"a">;
 const { href, class: className, ...props } = Astro.props;
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-sm bg-opacity-25 bg-background bg-blur-lg">
-  <nav class="py-4 px-2 lg:px-4 flex items-center justify-between text-primary-content">
+<header class="sticky top-0 z-50 backdrop-blur-sm bg-opacity-25 bg-base-100 bg-blur-lg">
+  <nav class="py-4 px-2 lg:px-4 flex items-center justify-between text-base-content">
     <a href="/" aria-label="Logo of Jack">
       <svg
         id="logo"
-        class="max-h-10 w-12 transition-fill fill-primary-content group"
+        class="max-h-10 w-12 transition-fill fill-base-content group"
         viewBox="0 0 942 1000"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -35,47 +35,6 @@ const { href, class: className, ...props } = Astro.props;
       </svg>
     </a>
 
-    <div class="group inline-block relative z-50 transition-all ">
-      <button
-        class=" rounded inline-flex items-center duration-300"
-        aria-label="Hamburger Menu"
-        >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="36"
-          viewBox="0 0 24 24"
-          width="36"
-          class="fill-primary-content transition-transform duration-300 group-active:rotate-90"
-        >
-          <title>Hamburger Menu Icon</title>
-          <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
-        </svg>
-      </button>
-      <div
-        class="group-hover:flex absolute hidden text-primary font-display uppercase flex-col right-0 lg:-right-2 w-min items-end bg-primary-content rounded max-w-fit
-        *:block *:whitespace-nowrap *:text-right *:text-lg *:p-4 *:px-12 *:w-full *:rounded duration-500 *:border-b *:border-secondary-content *:shadow-lg"
-      >
-      <a
-      class=" hover:bg-secondary-content"
-      href="/">Home</a
-    >
-        <a
-          class=" hover:bg-secondary-content"
-          href="/projects">Projects</a
-        >
-        <a
-          class=" hover:bg-secondary-content"
-          href="/papers">Publications</a
-        >
-        <a
-          class=" hover:bg-secondary-content"
-          href="/notes">Notes</a>
-
-        <a
-          class=" hover:bg-secondary-content"
-          href="/contacts">Contacts</a
-        >
-      </div>
-    </div>
+    
   </nav>
 </header>

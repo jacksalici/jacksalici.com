@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+
+@theme{
+    --color-blue: #087E8B;
+    --color-purple: #3D2B8C;
+    --color-pink: #ea5c1f;
+    --color-yellow: #F9C74F;
+    --color-base-100: #101010;
+    --color-base-200: #2A2A2A;
+    --color-base-300: #3D3D3D;
+    --color-base-content: #f5f5f5;
+    --color-neutral: #737373;
+  }
+
+
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+	  scroll-behavior: auto;
+	}
+}
+
+pre,
+code,
+kbd {
+	font-family: 'Space Mono', monospace;
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Space Grotesk', sans-serif;
+	line-height: 100%;
+}
+
+img.emoji {
+	height: 1em;
+	width: 1em;
+	margin: 0 .05em 0 .1em;
+	vertical-align: -.1em;
+	display: inline
+}
+
+main {
+	@apply container p-4 md:p-5 md:px-12 md:max-w-4xl mx-auto
+}
+
+.opacityOnHover {
+	@apply opacity-50 hover:opacity-100 transition-opacity
+}
+
+img {
+	@apply rounded
+}
+::selection {
+	@apply bg-pink
+  }
+
+mark{
+  @apply bg-yellow p-1 rounded
+}
