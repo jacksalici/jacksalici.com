@@ -50,7 +50,7 @@ img.emoji {
 }
 
 main {
-	@apply container p-4 md:p-5 md:px-12 md:max-w-4xl mx-auto
+	@apply container p-4 md:p-5 md:px-12 md:max-w-5xl mx-auto
 }
 
 .opacityOnHover {
@@ -61,7 +61,8 @@ img {
 	@apply rounded
 }
 ::selection {
-	@apply bg-pink
+	color: var(--color-base-100);
+	background: var(--color-base-content);
   }
 
 mark{
