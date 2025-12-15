@@ -26,8 +26,7 @@ const MyA = props.slug ? 'a': 'div'
 >
 
   
-  <div class="flex w-full flex-col gap-2">
- 
+  <div class="w-full">
     <p 
     class:list={["", {"group-hover:text-yellow": props.slug && !props.featured && !props.trending, 
     "group-hover:text-blue": props.slug && props.trending, "group-hover:text-pink": props.slug && props.featured && !props.trending }]}
