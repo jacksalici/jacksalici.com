@@ -2,7 +2,7 @@
 title: "A Workflow for Cost- and Time-Aware Refueling Itinerary Optimization"
 pubDate: 2025-9-1
 year: 2025
-slug: "ripieno"
+slug: "pieno-workflow"
 authors: "Marco Savarese, Carmine Zaccagnino, Antonio De Blasi, Giacomo Salici, Silvia Cascianelli, Roberto Vezzani, Carlo Augusto Grazia"
 venue: "IEEE Consumer Communications & Networking Conference 2026"
 acronym: "CCNC2026"
