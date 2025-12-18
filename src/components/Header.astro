@@ -1,11 +1,12 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import GlassChip from "./GlassChip.astro";
 
 type Props = HTMLAttributes<"a">;
 const { href, class: className, ...props } = Astro.props;
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-sm bg-opacity-25 bg-base-100 bg-blur-lg">
+<header class="sticky top-0 z-50 backdrop-blur-md bg-base-100/40 bg-blur-lg">
   <nav class="py-4 px-2 lg:px-4 flex items-center justify-between text-base-content">
     <a href="/" aria-label="Logo of Jack">
       <svg
@@ -34,6 +35,11 @@ const { href, class: className, ...props } = Astro.props;
         </g>
       </svg>
     </a>
+
+    <div>
+    <GlassChip label="Notes ↗" ariaLabel="Link to notes page" href="/notes" />
+    </div>
+
 
     
   </nav>

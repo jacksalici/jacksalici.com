@@ -1,19 +1,21 @@
 ---
 import { getCollection } from "astro:content";
 import PostCard from "../components/PostCard.astro";
+import GlassChip from "../components/GlassChip.astro";
 import Base from "../layouts/Base.astro";
 import "../styles/global.css";
 
-const notes = (await getCollection("notes")).sort(
-  (a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf()
-).filter((a) => a.data.draft !== false && a.data.hidden != true);
+const notes = (await getCollection("notes"))
+  .sort((a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf())
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
 
 const papers = (await getCollection("papers"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .sort(
     (a, b) =>
       Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
-  ).filter((a) => a.data.draft !== false && a.data.hidden != true);
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
 
 const projects = (await getCollection("projects"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -31,25 +33,54 @@ const activities = (await getCollection("activities"))
   )
   .filter((a) => a.data.draft !== false && a.data.hidden != true);
 
-const props = { image: "/website.png" };
+const props = { image: "/sky.png" };
 ---
 
-<Base image={props.image}>
-  <main>
-    <div class="grid gap-x-10 md:gap-x-25 gap-y-32 md:grid-cols-2">
-      <h1 class="text-3xl text-balance">
-        A digital craftsman who designs systems that matter.
-      </h1>
-      
-      <p class="text-balance">
-        I'm <strong>Giacomo Salici</strong> <span class="font-extralight text-xs">/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/</span>, an <strong>AI and computer engineer</strong>, <strong>developer</strong>, and
-        occasionally designer based in Italy. I work with the AImage<sup>Lab</sup> research
-        group of UniMoRe as a <strong>PhD student in ICT</strong>.
-        My research topics include <strong>deep learning</strong> applied to <strong>time series forecasting</strong> and anomaly detection, robotics and <strong>IoT</strong>.
-      </p>
+<Base image={props.image} hideFooter={true} >
+    <div class=" max-w-4xl mx-auto md:mt-32 p-6">
+    
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>   
+        <h1 class="text-3xl leading-9 text-balance">
+          A digital craftsman</br> who designs systems</br> that matter.
+        </h1>
+        <div class="mt-6 mb-8 flex flex-wrap gap-3">
+          <GlassChip
+            href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ"
+            label="Read my papers on Google Scholar ↗"
+          >
+          </GlassChip>
+          <GlassChip
+            href="https://github.com/jacksalici"
+            label="Checkout my projects on GitHub ↗"
+          >
+          </GlassChip>
+        </div>
+        </div>  
+
+
+      <p class="">
+        I'm <span class="font-bold">Giacomo Salici</span>
+        <sup class="font-extralight text-xs">/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/</sup>, an AI
+        & <span
+          class="">computer engineer</span
+        >, developer, and occasionally designer based in
+        Italy. I work with the <a
+          href="https://aimagelab.unimore.it/"
+          >AImageLab</a
+        > research group of <span class="">University of Modena and Reggio Emilia</span> as a PhD candidate</span
+        > in ICT.
+        <br /><br />
+        My <span >research topics</span> include artificial intelligence of things (AIoT), efficient deep learning
+      and time series analysis.
+    <br /><br />
+          If you want to get in touch, feel free to <a href="/contact">reach out&nbsp;↗</a> or to <a href="https://linkedin.com/in/jacksalici">connect with me&nbsp;↗</a>.
+</p> 
+
+    </div>
     
 
-    <section >
+    <!--<section >
       <h2 class="text-2xl mb-4">Recent Papers</h2>
       <div class="flex flex-col gap-4">
         {
@@ -99,7 +130,5 @@ const props = { image: "/website.png" };
           ))
         }
       </div>
-    </section>
-    </div>
-  </main>
+    </section> -->
 </Base>
