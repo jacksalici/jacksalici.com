@@ -1,0 +1,72 @@
+---
+
+import Base from "../layouts/Base.astro";
+
+
+---
+
+<Base>
+  <main>
+<div
+  class="grid grid-cols-3 -mx-24 gap-4 mb-12
+         *:aspect-square
+         *:h-24
+         *:w-full
+         *:rounded-lg
+         *:bg-gradient-to-tr
+         *:from-gray-200/2
+         *:to-gray-200/8
+         *:animate-[pulse_3s_ease-in-out_infinite]">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+    <div></div>
+  <div></div>
+
+</div>
+
+
+
+  The elves who are supposedly building this page are, for some unbelievable reason, on an extended break at the North Pole. While they "recharge", here's a random fact for you.
+    <span id="fact" class="block my-4 text-pink">
+      Loading a random fact...
+    </span>
+
+    This page uses online API services to provide random facts. It - obviously -  cannot be considered as a reliable source.
+    
+  </main>
+ 
+</Base>
+
+
+<script>
+const f = document.getElementById("fact")
+
+
+let fact = "" 
+
+// DON'T USE EXPOSED API KEY! This is for testing purposes only.
+// Do not use the following key for your project.
+// Also becouse a limit on the API calls rate will keep your app down, so spend some money to get a key on your own and shut the freak up. 
+
+try{
+  const res = await fetch(
+    "https://api.api-ninjas.com/v1/facts",
+    {
+      method: "GET",
+      headers: {
+        "X-Api-Key": "8Idmhms+nG6e6Agy9f1jQA==gfaW91jpy9ty2nGz",
+      },
+    }
+  )
+const data = await res.json()
+fact = data[0].fact + "."
+  }
+  catch(e){
+    fact = "Ops, an error occurred."
+  }
+
+f.innerText = fact
+
+</script>

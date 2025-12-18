@@ -69,5 +69,5 @@ mark{
 }
 
 p a {
-	@apply underline decoration-dotted hover:text-yellow transition-colors
+	@apply underline hover:text-yellow transition-colors duration-100
 }
