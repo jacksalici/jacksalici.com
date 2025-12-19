@@ -28,10 +28,10 @@ const MyA = props.slug ? 'a': 'div'
   
   <div class="w-full">
     <p 
-    class:list={["", {"group-hover:text-yellow": props.slug && !props.featured && !props.trending, 
-    "group-hover:text-blue": props.slug && props.trending, "group-hover:text-pink": props.slug && props.featured && !props.trending }]}
+    class:list={["", {"group-hover:text-accent-1": props.slug && !props.featured && !props.trending, 
+    "group-hover:text-accent-2": props.slug && props.trending, "group-hover:text-accent-3": props.slug && props.featured && !props.trending }]}
     >
-    <span class:list={["", {"text-pink": props.featured && !props.trending,  "text-blue": props.trending}]}>—</span>
+    <span class:list={["", {"text-accent-3": props.featured && !props.trending,  "text-accent-2": props.trending}]}>—</span>
     {props.title} {props.summary}
     {props.authors && <span class="text-xs">~ {props.authors}</span>}
     {props.venue && <span class="text-xs font-bold">~ {props.venue}</span>}
@@ -45,7 +45,7 @@ const MyA = props.slug ? 'a': 'div'
   </p>
     
     {props.cta && 
-      <a href={props.cta[1]} class="bg-blue hover:bg-opacity-70 text-base-100 hover:border-neutral-content border hover:underline border-blue rounded-md text-sm p-2 ">
+      <a href={props.cta[1]} class="bg-accent-2 hover:bg-opacity-70 text-base-100 hover:border-neutral-content border hover:underline border-accent-2 rounded-md text-sm p-2 ">
         
         {props.cta[0]}</a>
     }

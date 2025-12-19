@@ -11,7 +11,7 @@ type Props = {
 
 const { text, hiddenText, link, dark = false, external = false, ariaLabel = "", span = "col-span-1 row-span-1" } = Astro.props;
 ---
-<a class:list={[span + " rounded hover:border-yellow hover:font-yellow font-display uppercase flex flex-col justify-between group transition-all", {"bg-neutral text-base-content": !dark, "bg-base-content text-base-content hover:text-base-content": dark} ]} href={link} target={external === true ? '_blank' : '_self'} rel={external === true ? 'noreferrer' : undefined} aria-label={ariaLabel}>
+<a class:list={[span + " rounded hover:border-accent-1 hover:font-accent-1 font-display uppercase flex flex-col justify-between group transition-all", {"bg-neutral text-base-content": !dark, "bg-base-content text-base-content hover:text-base-content": dark} ]} href={link} target={external === true ? '_blank' : '_self'} rel={external === true ? 'noreferrer' : undefined} aria-label={ariaLabel}>
   
     {!hiddenText && <p class="p-3 md:p-4">
       {text}
