@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+
+@theme{
+    --color-blue: #19bdd0;
+    --color-purple: #3D2B8C;
+    --color-pink: #ea5c1f;
+    --color-yellow: #F9C74F;
+    --color-base-100: #101010;
+    --color-base-200: #2A2A2A;
+    --color-base-300: #3D3D3D;
+    --color-base-content: #f5f5f5;
+    --color-neutral: #737373;
+	--color-neutral-content: #e0e0e0;
+  }
+
+
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+	  scroll-behavior: auto;
+	}
+}
+
+
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1, 'ss02' 1; /* fix for Chrome */
+}
+@supports (font-variation-settings: normal) {
+  :root { font-family: InterVariable, sans-serif; }
+}
+pre,
+code,
+kbd {
+	font-family: 'Space Mono', monospace;
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Space Grotesk Variable', sans-serif;
+}
+
+img.emoji {
+	height: 1em;
+	width: 1em;
+	margin: 0 .05em 0 .1em;
+	vertical-align: -.1em;
+	display: inline
+}
+
+main {
+	@apply container p-4 md:p-5 md:px-12 md:max-w-2xl mx-auto
+}
+
+.opacityOnHover {
+	@apply opacity-50 hover:opacity-100 transition-opacity
+}
+
+img {
+	@apply rounded
+}
+::selection {
+	color: var(--color-base-100);
+	background: var(--color-base-content);
+  }
+
+mark{
+  @apply bg-yellow p-1 rounded
+}
+
+p a {
+	@apply underline hover:text-yellow transition-colors duration-100
+}

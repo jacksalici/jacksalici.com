@@ -1,97 +1,135 @@
 ---
 import { getCollection } from "astro:content";
-import LinkBox from "../components/LinkBox.astro";
+import PostCard from "../components/PostCard.astro";
+import GlassChip from "../components/GlassChip.astro";
 import Base from "../layouts/Base.astro";
-const props = { image: "/website.png" };
+import "../styles/global.css";
+
+const notes = (await getCollection("notes"))
+  .sort((a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf())
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const papers = (await getCollection("papers"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const projects = (await getCollection("projects"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const activities = (await getCollection("activities"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort(
+    (a, b) =>
+      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
+  )
+  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+
+const props = { image: "/sky.png" };
 ---
 
-<Base image={props.image}>
-  <main class="grid gap-4 md:gap-6 grid-cols-2 *:py-2">
-    <h1 class="text-4xl md:text-5xl font-bold text-primary-content col-span-2 text-balance">
-      A digital craftsman who designs systems that matter.
-    </h1>
-  
+<Base image={props.image} hideFooter={true} >
+    <div class=" max-w-4xl mx-auto md:mt-32 p-6">
+    
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>   
+        <h1 class="text-3xl leading-9 text-balance">
+          A digital craftsman</br> who designs systems</br> that matter.
+        </h1>
+        <div class="mt-6 mb-8 flex flex-wrap gap-3">
+          <GlassChip
+            href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ"
+            label="Read my papers on Google Scholar ↗"
+          >
+          </GlassChip>
+          <GlassChip
+            href="https://github.com/jacksalici"
+            label="Checkout my projects on GitHub ↗"
+          >
+          </GlassChip>
+        </div>
+        </div>  
 
-  
-    <div class="col-span-2">
-      <p class="lg:text-xl font text-balance" >
-        I'm <strong>Giacomo Salici</strong>, an <strong>AI and computer engineer</strong>, <strong>developer</strong>, and
-        occasionally designer based in Italy. I work with the AImageLab research
-        group of UniMoRe as a <strong>PhD student in ICT</strong>.
-        
 
-        <span class=" block mt-2">
+      <p class="group *:transition-colors *:duration-1000">
+        <span
+          class="">I'm</span> <span class="font-bold">Giacomo Salici</span>
+        <sup class="font-extralight text-xs">/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/</sup>, <span
+          class="">an AI
+        & computer engineer</span
+        >, developer, and occasionally designer based in
+        Italy. I work with the <a
+          href="https://aimagelab.unimore.it/"
+          >AImageLab</a
+        > research group of University of Modena <span class="">and</span> Reggio Emilia as <span class=""> a PhD candidate</span
+        > in ICT.
+        <br /><br />
+        My <span >research topics</span> include artificial intelligence of things (AIoT), efficient deep learning
+      and time series analysis.
+    <br /><br />
+          If you want to get in touch, feel free to <a href="/contact">reach out&nbsp;↗</a> or to <a href="https://linkedin.com/in/jacksalici">connect with me&nbsp;↗</a>.
+</p> 
 
-        My research topics include <strong>deep learning</strong> applied to <strong>time series forecasting</strong> and anomaly detection, robotics and <strong>IoT</strong>.
-        </span>
-        
-      </p>
-      
     </div>
-
-
-  
-   
-  
-      <LinkBox
-        text="Check out my projects"
-        hiddenText="Check out them out"
-        link="/projects"
-        dark
-        ariaLabel="projects"
-        span="col-span-2 md:col-span-1"
-      />
-
-       <LinkBox
-        text="Read my publications"
-        hiddenText="Papers ahead"
-        link="/papers"
-        dark
-        ariaLabel="papers"
-        span="col-span-2 md:col-span-1"
-      />
-
-      <LinkBox
-      text="Reach me anytime"
-      hiddenText="Mail or DM me"
-      link="/contacts"
-      ariaLabel="contacts"
-    />
-
-      <LinkBox
-        text="Check my résumé"
-        hiddenText="Let's connect"
-        link="https://linkedin.com/in/jacksalici"
-        ariaLabel="linkedin"
-        external
-      />
-
-  </main>
-  
-  <style>
-    /* Icon styles */
-    [class*="fa"] {
-      @apply text-3xl hover:fill-secondary-content transition-all w-[1em] h-[1em];
-    }
-  
-    .fa-boxed {
-      @apply text-2xl transition-all w-[1em] h-[1em] inline;
-    }
     
-    .group:hover .fa-boxed {
-      @apply fill-secondary-content;
-    }
-  
-  
-    
-    /* Other styles maintained from the original */
 
-    h2 {
-      @apply text-3xl font-extrabold;
-    }
-  
-    section {
-      @apply grid gap-3 md:grid-cols-2;
-    }
-  </style>
+    <!--<section >
+      <h2 class="text-2xl mb-4">Recent Papers</h2>
+      <div class="flex flex-col gap-4">
+        {
+          papers.map((single) => (
+            <PostCard
+              title={single.data.title}
+              location={single.data.location}
+              venue={single.data.acronym || single.data.venue}
+              authors={single.data.authors}
+              slug={"/papers/" + single.slug}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl mb-4">Featured Projects</h2>
+      <div class="flex flex-col gap-4">
+        {
+          projects.map((single) => (
+            <PostCard
+              title={single.data.description}
+              pubDate={single.data.pubDate}
+              slug={"/projects/" + single.slug}
+              categories={single.data.categories}
+              summary={single.data.summary}
+              featured={single.data.featured}
+              trending={single.data.trending}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl mb-4">Recent Notes</h2>
+      <div class="flex flex-col gap-4">
+        {
+          notes.map((single) => (
+            <PostCard
+              title={single.data.description}
+              pubDate={single.data.pubDate}
+              summary={single.data.summary}
+              slug={"/notes/" + single.slug}
+            />
+          ))
+        }
+      </div>
+    </section> -->
 </Base>

@@ -2,16 +2,23 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
-import tailwind from "@astrojs/tailwind";
+
+import tailwindcss from "@tailwindcss/vite";
+
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://jacksalici.com",
-  integrations: [mdx(), sitemap(), tailwind()],
+  integrations: [mdx(), sitemap()],
+
   redirects: {
     "/b/": "/notes",
     "/projects/website": "/blog/website",
     "/p/[...slug]": "/projects/[...slug]",
     "/thesis": "/projects/sfm-gaze-framework"
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

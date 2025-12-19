@@ -1,5 +1,6 @@
 ---
 import FormattedDate from '../components/FormattedDate.astro';
+import GlassChip from '../components/GlassChip.astro';
 import Base from './Base.astro';
 
 const { ...props } = Astro.props;
@@ -7,13 +8,19 @@ const { ...props } = Astro.props;
 	<Base title={props?.title}, description={props?.description}, tags={props?.tags}, image={props?.cover}>
 		
 		<main>
-			<div class="grid w-full content-stretch justify-stretch justify-items-stretch align-middle gap-3 mb-16 ">		
+			<div class="grid  w-full content-stretch justify-stretch justify-items-stretch align-middle gap-3 mb-16">		
 
-					<div class=" col-span-2 w-full">
+					<div class="w-full">
 						
-						<div class="flex"> 
-						<div><p class="text-secondary-content">
-							{props.pubDate && <FormattedDate date={props.pubDate} />}{
+						{ (props.featured || props.trending) &&	
+			<div class="text-xs">
+				{props.featured && <span class="text-pink">Featured</span>}
+				{props.trending && <span class="text-blue">Trending</span>}
+			</div>}
+						
+						
+						<p class="text-xs">
+							{props.pubDate && <span>Published on <FormattedDate date={props.pubDate} /></span>}{
 								props.updatedDate && (
 									<span class="italic inline-block">
 										~ Updated on <FormattedDate date={props.updatedDate} />
@@ -38,51 +45,47 @@ const { ...props } = Astro.props;
 			
 			</p>
 				
-			<h1 class="my-5 text-4xl font-bold text-balance">{ props.title}</h1></div>
+			<h1 class="my- text-4xl text-balance">{ props.title}</h1></div>
 		
-	
-		{ (props.featured || props.trending) &&	
-			<div class="ml-auto">
-				{props.featured && <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="w-6 mx-auto mb-2 transition-all group-hover:scale-75 fill-primary-content"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. --><path d="M192 32c17.7 0 32 14.3 32 32V199.5l111.5-66.9c15.2-9.1 34.8-4.2 43.9 11s4.2 34.8-11 43.9L254.2 256l114.3 68.6c15.2 9.1 20.1 28.7 11 43.9s-28.7 20.1-43.9 11L224 312.5V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V312.5L48.5 379.4c-15.2 9.1-34.8 4.2-43.9-11s-4.2-34.8 11-43.9L129.8 256 15.5 187.4c-15.2-9.1-20.1-28.7-11-43.9s28.7-20.1 43.9-11L160 199.5V64c0-17.7 14.3-32 32-32z"/></svg>}
-				{props.trending && <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-8 mx-auto transition-all group-hover:-translate-x-1 fill-primary-content"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. --><path d="M384 160c-17.7 0-32-14.3-32-32s14.3-32 32-32H544c17.7 0 32 14.3 32 32V288c0 17.7-14.3 32-32 32s-32-14.3-32-32V205.3L342.6 374.6c-12.5 12.5-32.8 12.5-45.3 0L192 269.3 54.6 406.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160c12.5-12.5 32.8-12.5 45.3 0L320 306.7 466.7 160H384z"/></svg>}
-			</div>}	</div>
-					</div>
-					
-				
-					
-				
-				<!-- <div class="h-4 col-span-2 !p-0 bg-gradient-to-r from-blue via-pink to-yellow rounded"></div>-->
-				{(props.description || props.summary || props.longDescription) && <div class="col-span-2">		
-					{props.longDescription && <p class="text-xl">{props.longDescription}</p>}
+								{props.longDescription && <p class="text-xl">{props.longDescription}</p>}
 					{!props.longDescription && props.description && <p class="text-xl">{props.description}</p>}
 					{props.summary && <p class="text-lg">{props.summary}</p>}
-				</div>}
-				{props.authors && <div class="col-span-2 md:col-span-1">
-					<p class="text-secondary-content text-lg">By {props.authors}</p>
+{props.authors && 
+					<p class="text-neutral-content text-lg">By {props.authors}</p>
 				
-				</div>}
-				{props.venue && <div class="col-span-2 md:col-span-1">
-					<p class="text-secondary-content text-lg">{props.venue}</p>
-				</div>}
+				}
+				{props.venue && 
+					<p class="text-neutral-content text-lg">{props.venue}</p>
+				}
 
-				{props.cover && <div class=" !p-0  col-span-2"><img src={props.cover} class="!p-0"/></div>}
+				
+	
+			</div>
+					
+				
+					
+				
+					
+
+
+				
 			</div>
 			
 
 			
 
 		
-			<div class="prose font-body mb-10 prose-img:mx-auto prose-strong:text-primary-content prose-p:text-primary-content prose-headings:text-secondary-content prose-a:text-secondary-content prose-ul:text-secondary-content max-w-xl prose-p:text-justify prose-p:hyphens-auto mx-auto ">
+			<div class="prose prose-invert font-body my-10 prose-img:mx-auto prose-strong:text-base-content prose-p:text-base-content prose-headings:text-neutral-content  prose-ul:text-neutral-content max-w-xl prose-p:text-justify prose-p:hyphens-auto mx-auto ">
 				<slot />
 			</div>
 
-			{props.cta_link && <div class="flex gap-3 justify-evenly  *:p-5 lg:*:p-10 mb-3">		
+			{props.cta_link && <div class="flex gap-3 justify-evenly  *:p-3 lg:*:p-5 mb-3">		
 
-			{props.cta_link.map((link: string | URL, index: string | number) =>( <a class="
-			 rounded bg-secondary hover:bg-yellow block transition-all font-display uppercase text-lg w-full
-			 " href={link}><svg xmlns="http://www.w3.org/2000/svg" class="fill-secondary-content w-5 mr-2 inline-block " viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M448 128l-177.6 0c1 5.2 1.6 10.5 1.6 16l0 16 32 0 144 0c8.8 0 16-7.2 16-16s-7.2-16-16-16zM224 144c0-17.7-14.3-32-32-32c0 0 0 0 0 0l-24 0c-66.3 0-120 53.7-120 120l0 48c0 52.5 33.7 97.1 80.7 113.4c-.5-3.1-.7-6.2-.7-9.4c0-20 9.2-37.9 23.6-49.7c-4.9-9-7.6-19.4-7.6-30.3c0-15.1 5.3-29 14-40c-8.8-11-14-24.9-14-40l0-40c0-13.3 10.7-24 24-24s24 10.7 24 24l0 40c0 8.8 7.2 16 16 16s16-7.2 16-16l0-40 0-40zM192 64s0 0 0 0c18 0 34.6 6 48 16l208 0c35.3 0 64 28.7 64 64s-28.7 64-64 64l-82 0c1.3 5.1 2 10.5 2 16c0 25.3-14.7 47.2-36 57.6c2.6 7 4 14.5 4 22.4c0 20-9.2 37.9-23.6 49.7c4.9 9 7.6 19.4 7.6 30.3c0 35.3-28.7 64-64 64l-64 0-24 0C75.2 448 0 372.8 0 280l0-48C0 139.2 75.2 64 168 64l24 0zm64 336c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0-16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l64 0zm16-176c0 5.5-.7 10.9-2 16l2 0 32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0 0 16zm-24 64l-40 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l48 0 16 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-24 0z"/>
-			  </svg>{props.cta_text[index]}
-			  </a>
+			{props.cta_link.map((link: string | URL, index: string | number) =>( 
+			  <GlassChip label={props.cta_text[index]} ariaLabel={"Link to " + props.cta_text[index]} full href={link.toString()}>
+					<svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-5 mr-2 inline-block " viewBox="0 0 512 512" slot="icon"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M448 128l-177.6 0c1 5.2 1.6 10.5 1.6 16l0 16 32 0 144 0c8.8 0 16-7.2 16-16s-7.2-16-16-16zM224 144c0-17.7-14.3-32-32-32c0 0 0 0 0 0l-24 0c-66.3 0-120 53.7-120 120l0 48c0 52.5 33.7 97.1 80.7 113.4c-.5-3.1-.7-6.2-.7-9.4c0-20 9.2-37.9 23.6-49.7c-4.9-9-7.6-19.4-7.6-30.3c0-15.1 5.3-29 14-40c-8.8-11-14-24.9-14-40l0-40c0-13.3 10.7-24 24-24s24 10.7 24 24l0 40c0 8.8 7.2 16 16 16s16-7.2 16-16l0-40 0-40zM192 64s0 0 0 0c18 0 34.6 6 48 16l208 0c35.3 0 64 28.7 64 64s-28.7 64-64 64l-82 0c1.3 5.1 2 10.5 2 16c0 25.3-14.7 47.2-36 57.6c2.6 7 4 14.5 4 22.4c0 20-9.2 37.9-23.6 49.7c4.9 9 7.6 19.4 7.6 30.3c0 35.3-28.7 64-64 64l-64 0-24 0C75.2 448 0 372.8 0 280l0-48C0 139.2 75.2 64 168 64l24 0zm64 336c8.8 0 16-7.2 16-16s-7.2-16-16-16l-48 0-16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l64 0zm16-176c0 5.5-.7 10.9-2 16l2 0 32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0 0 16zm-24 64l-40 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l48 0 16 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-24 0z"/>
+			  </svg>
+			  </GlassChip>
 			
 			))}
 			

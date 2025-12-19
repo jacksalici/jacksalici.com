@@ -1,0 +1,30 @@
+---
+interface Props {
+  href: string
+  label: string
+  ariaLabel?: string
+  full?: boolean
+}
+
+const { href, label, ariaLabel, full } = Astro.props
+---
+
+<a
+    href={href}
+    target={href.startsWith("http") ? "_blank" : "_self"}
+    rel="noopener"
+    aria-label={ariaLabel ?? label}
+    class:list={["relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white/90 bg-gradient-to-br from-white/8 via-white/4 to-transparent border border-white/10 backdrop-blur-md shadow-[0_0_0_1px_rgba(255,255,255,0.03)] transition-all duration-300 ease-out hover:from-white/[0.14] hover:via-blue/15 hover:border-blue/50 hover:shadow-[0_0_24px_rgba(255,255,255,0.12)] focus:outline-none focus:ring-2 focus:ring-white/20 group", {"w-full justify-center": full}]}
+>
+
+    <!-- icon slot -->
+    {Astro.slots.icon && (
+        <span class="relative z-10 flex items-center">
+            <slot name="icon" />
+        </span>
+    )}
+
+  <span class="relative z-10  transition-all">{label}</span>
+
+  
+</a>

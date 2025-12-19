@@ -16,23 +16,23 @@ const titleClass = frontmatter.title.length > 50 ? 'text-4xl' : 'text-5xl';
     
 
     <div class="mt-5 mb-16 text-center">
-      <h1 class={`${titleClass} font-bold text-balance`}>{frontmatter.title}</h1>
+      <h1 class={`${titleClass} text-balance`}>{frontmatter.title}</h1>
     </div>
 
  
 
     <div
-    class="prose mb-10 prose-img:mx-auto prose-strong:text-primary-content prose-p:text-primary-content prose-headings:text-secondary-content prose-a:text-secondary-content prose-ul:text-secondary-content max-w-xl prose-p:text-justify prose-p:hyphens-auto mx-auto"
+    class="prose mb-10 prose-img:mx-auto prose-strong:text-base-content prose-p:text-base-content prose-headings:text-neutral-content prose-a:text-neutral-content prose-ul:text-neutral-content max-w-xl prose-p:text-justify prose-p:hyphens-auto mx-auto"
   >
   {
     frontmatter.summary &&
-    <div class="bg-primary rounded-xl text-primary-content font-display text-xl p-5 mb-8 md:-mx-8">
+    <div class="bg-base-content rounded-xl text-base-content font-display text-xl p-5 mb-8 md:-mx-8">
       {frontmatter.summary}
     </div>
   }
   {
     frontmatter.translateLink &&
-    <div class="text-xs text-secondary-content opacity-50 not-prose mb-8">
+    <div class="text-xs text-neutral-content opacity-50 not-prose mb-8">
       <span class="inline-block !leading-none">English is not your strongest language?</span>
       <span class="inline-block !leading-none">🇮🇹 Read the machine-translated <a class="underline" href={"https://jacksalici-com.translate.goog" + frontmatter.url + "/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp"}> Italian version</a>.</span>
       </div>
