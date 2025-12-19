@@ -25,13 +25,12 @@
 
 
 :root {
-  font-family: 'Inter', sans-serif;
-  font-feature-settings: 'liga' 1, 'calt' 1, 'ss04' 1; /* fix for Chrome */
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1, 'ss02' 1; /* fix for Chrome */
 }
 @supports (font-variation-settings: normal) {
-  :root { font-family: 'Inter Variable', sans-serif; }
+  :root { font-family: InterVariable, sans-serif; }
 }
-
 pre,
 code,
 kbd {
