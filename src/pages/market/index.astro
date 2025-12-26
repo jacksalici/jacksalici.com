@@ -1,0 +1,35 @@
+---
+import Base from "../../layouts/Base.astro";
+import PostCard from "../../components/PostCard.astro";
+
+import { getCollection } from 'astro:content';
+
+const products = (await getCollection('market')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+---
+
+<Base>
+  <main>
+    <h1 class="mb-4 text-4xl">Garage Sales 🏷️</h1>
+    <p class="mb-6 text-lg">Di tanto in tanto cerco nuovi possessori per qualche oggetto hardware che ho usato e amato. Se sei interessatə, <a href="/contacts" class="underline">contattami</a>.</p>    
+
+  
+
+    <div class="space-y-6">
+        {products.map((item) => (
+            
+          <PostCard
+            title={item.data.title}
+            description={item.data.description}
+            pubDate={item.data.pubDate}
+            slug={"/market/" + item.slug}
+          />
+            
+        ))} 
+        
+    </div>
+    
+  </main>
+</Base>

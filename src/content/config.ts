@@ -102,5 +102,21 @@ const papers = defineCollection({
 	}),
 });
 
+const market = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string().optional(),
+		description: z.string().optional(),
+		pubDate: z.coerce.date(),
+		updatedDate: z.coerce.date().optional(),
+		cover: z.string().optional(),
+		draft: z.boolean().optional(),
+		featured: z.boolean().optional().default(false),
+		trending: z.boolean().optional().default(false),
+		hidden: z.boolean().optional().default(false),
+		status: z.enum(['available', 'sold']).optional().default('available'),
+	}),
+});
 
-export const collections = { notes, projects, papers, activities};
+
+export const collections = { notes, projects, papers, activities, market};
