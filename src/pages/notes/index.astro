@@ -5,7 +5,7 @@ import Base from "../../layouts/Base.astro";
 
 const notes = (await getCollection("notes")).sort(
   (a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf()
-).filter((a) => a.data.draft !== false && a.data.hidden != true);
+).filter((a) => a.data.draft !== true && a.data.hidden !== true);
 
 const props = { image: "/website.png" };
 ---
@@ -19,7 +19,7 @@ const props = { image: "/website.png" };
           <PostCard
             title={single.data.description}
             pubDate={single.data.pubDate}
-            summary={single.data.summary}
+            description={single.data.description}
             slug={"/notes/" + single.slug}
           />
         ))

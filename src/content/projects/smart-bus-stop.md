@@ -4,12 +4,11 @@ pubDate: 2023-01-21
 slug: smart-bus-stop
 description: An IoT project aimed to enhance bus stops.
 categories: ["Internet of Things"]
-tags: ["IoT", "Smart Bus Stop", "Esp32", "mqtt"]
-langs: ["Flask", "Arduino"]
-featured: false
+tags: ["IoT", "MQTT"]
+stack: ["Flask", "Arduino", "ESP32"]
 cover: https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/architecture.jpg
-cta_link: ["https://github.com/jacksalici/smart-bus-stop"]
-cta_text: ["Take a look at the repository"]
+cta:
+  - { url: "https://github.com/jacksalici/smart-bus-stop", label: "Take a look at the repository" }
 ---
 ![Cover](https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/cover.svg)
 

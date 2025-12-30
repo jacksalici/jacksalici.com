@@ -1,14 +1,14 @@
 ---
-title: "ESP-VANET: a ESP32-based, VANET-like inter-vehicular communication project."
+title: "ESP-VANET: ESP32-based inter-vehicular communication"
 pubDate: 2024-03-25
 slug: espvanet
 description: A low-cost inter-vehicular communication network.
 categories: ["Internet of Things"]
-tags: ["esp32", "ETSI", "CAM", "Auutomotive"]
-langs: ["Arduino", "ESP32"]
-featured: false
-cta_link: ["https://github.com/jacksalici/esp-vanet", "https://drive.google.com/file/d/1W78rSVu3EVsvEumKGcSFqNU1EVi18FQa"]
-cta_text: ["Code and Documentation", "Slides"]
+tags: ["ESP32", "ETSI", "CAM", "Automotive"]
+stack: ["Arduino", "ESP32"]
+cta:
+  - { url: "https://github.com/jacksalici/esp-vanet", label: "Code and Documentation" }
+  - { url: "https://drive.google.com/file/d/1W78rSVu3EVsvEumKGcSFqNU1EVi18FQa", label: "Slides" }
 cover: "https://raw.githubusercontent.com/jacksalici/esp-vanet/refs/heads/main/misc/architecture.svg"
 
 ---

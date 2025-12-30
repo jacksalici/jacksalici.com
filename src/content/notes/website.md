@@ -1,13 +1,13 @@
 ---
 title: "Is my website's style to my taste?"
 pubDate: 2023-02-02
-updatedDate: 2023-10-19
-slug: "website"
+updatedDate: 2025-12-30
+slug: website
 description: "I rebuild this website too often."
+summary: "A brief overview of the major versions of my personal website and the reasons behind my choices."
 categories: ["Notes"]
 tags: ["website", "portfolio"]
 featured: true
-cover: "/website.jpg"
 ---
 
 As you probably have imagined, I built this website myself. Actually, I've rebuilt it several times because I can't decide how I want it. I think that this is due to the fact that as soon as I find new inspiration or a framework I like, I cannot stop thinking about it. If you like to tidy your home before hosting guests, well, I like to tidy MY home, my digital home, that is, in a certain way — the website you are reading. So, it has to be the thing that better represents me, what I did, and what my tastes are, even if this means rebuilding it twice a year. I want to spend some words about the major versions of it and why I chose them.
@@ -34,7 +34,7 @@ Since the website is static, it's really good both in performance and lightweigh
 
 I also added some easter eggs that no one will ever notice, so if you are curious, look for a 404 error for one instance of my broken humor...
 
-The theme also uses some _Google Symbols_ and _Font Awesome_ icons, both imported directly as SVGs, and the fonts I use are all in local. Without any external script, I achieved the performances you have seen at the begin of the article.
+The theme also uses some _Google Symbols_ and _Font Awesome_ icons, both imported directly as SVGs, and the fonts I use are all in local. Without any external script, I achieved the performances you have seen at the begin of the article. The fonts are offered by [_Fontsource_](https://fontsource.org/), an open-source project that allows self-hosting fonts easily.
 
 
 <!--Having said that, do you know that I love pizza, coding, and succulent plants? This website is also reachable at [🍕💻🌵.tk](http://🍕💻🌵.tk) (emojis order matters).

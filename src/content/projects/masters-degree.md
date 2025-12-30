@@ -1,16 +1,16 @@
 ---
-title: '“Leveraging Gaze Estimation in Human-Robot Interaction: development of a Framework for Eye Tracking in the Wild”'
+title: "Leveraging Gaze Estimation in Human-Robot Interaction"
 pubDate: 2024-10-17
-slug: "sfm-gaze-framework"
+slug: sfm-gaze-framework
 description: "Gaze-Driven Human-Robot Interaction is the core of my thesis."
-longDescription: "The following text is a glimpse of my master degree thesis in Computer Engineering. During its development, I applied the gaze direction on human-robot interaction, using a humanoid robot and two pair of eye-tracking glasses to build a pipeline for estimate it in common - not laboratory-based - environments."
+summary: "The following text is a glimpse of my master degree thesis in Computer Engineering. During its development, I applied the gaze direction on human-robot interaction, using a humanoid robot and two pair of eye-tracking glasses to build a pipeline for estimate it in common - not laboratory-based - environments."
 categories: ["Computer Vision", "Robotics"]
-langs: ["Python"]
+stack: ["Python"]
 featured: true
-cta_link: ["https://github.com/jacksalici/sfm-gaze-framework", "https://morethesis.unimore.it/theses/available/etd-09262024-135659/"]
-cta_text: ["Project Repository", "Full text thesis"]
+cta:
+  - { url: "https://github.com/jacksalici/sfm-gaze-framework", label: "Project Repository" }
+  - { url: "https://morethesis.unimore.it/theses/available/etd-09262024-135659/", label: "Full text thesis" }
 cover: "https://raw.githubusercontent.com/jacksalici/sfm-gaze-framework/refs/heads/main/imgs/fw-example.png"
-
 ---
 
 ## Abstract

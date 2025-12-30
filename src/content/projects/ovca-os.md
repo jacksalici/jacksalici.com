@@ -3,13 +3,12 @@ title: Multimodal Ovarian Cancer Overall Survival
 pubDate: 2024-01-21
 slug: ovca-overall-survival
 description: Multimodal data integration for OVCA survival prediction.
-categories: ["Multimodal Learning"]
-tags: ["Ovarian Cancer", "Survival prediction"]
-langs: ["PyTorch"]
-featured: false
-trending: false
-cta_link: ["https://github.com/cosimop2000/Multimodal-data-integration-for-OVCA-survival-prediction", "https://github.com/cosimop2000/Multimodal-data-integration-for-OVCA-survival-prediction/blob/main/Report.pdf"]
-cta_text: ["Check the code", "Read the paper"]
+categories: ["Deep Learning"]
+tags: ["Ovarian Cancer", "Survival prediction", "Multimodal"]
+stack: ["PyTorch"]
+cta:
+  - { url: "https://github.com/cosimop2000/Multimodal-data-integration-for-OVCA-survival-prediction", label: "Check the code" }
+  - { url: "https://github.com/cosimop2000/Multimodal-data-integration-for-OVCA-survival-prediction/blob/main/Report.pdf", label: "Read the paper" }
 ---
 
 _The following is the abstract of the project developed by Cosimo, Davide and I as the final project for the course of AI for Bioinformatics, within the master degree in Computer/AI engineering._

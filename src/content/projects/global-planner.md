@@ -3,13 +3,15 @@ title: MMR Driverless' Global Planner
 pubDate: 2024-09-01
 slug: global-planner
 description: Trajectory global planner for a Formula Student autonomous car.
-categories: ["Computer Engineering"]
+categories: ["Robotics"]
 tags: ["ROS2", "Formula Student", "Trajectory Optimization"]
-langs: ["Python", "ROS2"]
+stack: ["Python", "ROS2"]
 featured: true
-cta_link: ["https://github.com/jacksalici/mmrGlobalPlanner"]
-cta_text: ["Take a look at the repository"]
+cta:
+  - { url: "https://github.com/jacksalici/mmrGlobalPlanner", label: "Take a look at the repository" }
 cover: "/uploads/global.png"
+activities: ["v2x"]
+
 ---
 
       
@@ -27,4 +29,3 @@ During the ay 23-24 I was member of the university Formula Student team, in part
   1. the optimal speed profile ensures the car is traveling as fast as possible at each point of the track
   2. it is crucial for achieving competitive lap times
   
-> ⚠️ **Page under construction**  

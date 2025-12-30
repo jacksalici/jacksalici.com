@@ -1,14 +1,12 @@
 ---
 title: "Emoji list API and npm"
 pubDate: 2022-08-02
-slug: "emoji-list-api"
-description: "A simple API and a npm for querying emoji."
+description: "A simple API and npm package for querying emoji."
 categories: ["Web Development"]
-tags: ["Model"]
-langs: ["Python", "npm"]
+stack: ["Python", "Node.js"]
 cover: /uploads/emojiscreenshot.png
-cta_text: ["Take a look at the repository"]
-cta_link: ["https://github.com/jacksalici/emoji-helper"]
+cta:
+  - { url: "https://github.com/jacksalici/emoji-helper", label: "Take a look at the repository" }
 hidden: true
 ---
 

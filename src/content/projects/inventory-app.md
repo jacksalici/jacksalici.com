@@ -1,23 +1,23 @@
 ---
 title: "The Inventory App"
 pubDate: 2023-08-01
-slug: "inventory-app"
+updatedDate: 2024-10-15
 description: "A web app to manage your favorite RPG hero inventory."
 categories: ["Web Development"]
-tags: ["Model"]
-langs: ["Vue"]
-cta_link: ["https://inventory.jacksalici.com", "https://raw.githubusercontent.com/jacksalici/inventory-app/"]
-cta_text: ["Check the website.", "Check the code."]
+stack: ["Vue", "Deta"]
+cta:
+  - { url: "https://inventory.jacksalici.com", label: "Check the website" }
+  - { url: "https://raw.githubusercontent.com/jacksalici/inventory-app/", label: "Check the code" }
 cover: "https://raw.githubusercontent.com/jacksalici/inventory-app/main/public/screenshot3.png"
-type: work
-
 ---
 
 The Inventory App is a fast, open-source and 100% free way to track the equipment of your role-playing games characters.
 
 ![screenshot](https://raw.githubusercontent.com/jacksalici/inventory-app/main/public/screenshot2.png)
 
-The web app is built using Vue as frontend, and [Deta Collections](https://deta.space/docs/en/use/your-data/collections) for persistent data storage. The *NoSQL* database has 2 tables (automatically created on the first usage):
+The web app is built using Vue as frontend, ~and [Deta Collections](https://deta.space/docs/en/use/your-data/collections) for persistent data storage. The *NoSQL* database has 2 tables (automatically created on the first usage):~
+
+> 🚨 **Update Oct 2024**: Deta has announced the end of its services. Therefore, until I will migrate to another service, the app is not usable anymore.
 
 - **Heroes**  
     It contains the info about the characters and has the following attributes: `nickname` (pk), `name`, `details`, `equipment`, `slots`, `avatar`. 
@@ -25,14 +25,7 @@ The web app is built using Vue as frontend, and [Deta Collections](https://deta.
 - **Inventory**  
     It contains the info about the characters' equipment: `id` (pk), `object`, `details`, `quantity`, `value`, `used`.
 
-Since my goal was to create something simple and free both for users and myself, I decided to **not** handle a database for user data, for the sake of costs, privacy, and security. Therefore, if you (or your party) want to use the website, you will need to get a Deta API key and put it on your client side.
-
-#### Security concerns
-
-1. Anyone you share a collection API key with can see/change/delete the data in that collection.
-2. The API key is saved unencrypted in the local storage of your device. This is never a good idea but seeing the informal and playful target of this app, I've done it anyway.
 
 #### Usage
 
 For the usage of the app itself, please rely on the FAQs that are [directly on the website](https://inventory.jacksalici.com/about/).
-

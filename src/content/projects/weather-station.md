@@ -1,16 +1,14 @@
 ---
 title: "Ecowitt Weather Station Client"
 pubDate: 2023-08-01
-slug: "weather-station"
+slug: weather-station
 description: "A custom client for displaying my weather station data."
 categories: ["Web Development"]
-tags: ["Ecowitt", "Vue", "Ecowitt client"]
-langs: ["Vue"]
-cta_link: ["https://weather.jacksalici.com"]
-cta_text: ["Check the dashboard"]
+tags: ["Ecowitt", "Vue"]
+stack: ["Vue", "Cloudflare Workers"]
+cta:
+  - { url: "https://weather.jacksalici.com", label: "Check the dashboard" }
 cover: "https://raw.githubusercontent.com/jacksalici/weather_station/main/screenshot.png"
-type: work
-
 ---
 
 A custom front-end and middleware for displaying data from my Ecowitt weather station.

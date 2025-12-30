@@ -8,7 +8,7 @@ const papers = (await getCollection("papers"))
   .sort(
     (a, b) =>
       Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
-  ).filter((a) => a.data.draft !== false && a.data.hidden != true);
+  ).filter((a) => a.data.draft !== true && a.data.hidden !== true);
 
 const props = { image: "/website.png" };
 ---
@@ -27,7 +27,6 @@ const props = { image: "/website.png" };
             location={single.data.location}
             venue={single.data.acronym || single.data.venue}
             authors={single.data.authors}
-            pubDate={single.data.pubDate}
             slug={"/papers/" + single.slug}
           />
         ))

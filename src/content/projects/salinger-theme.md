@@ -1,16 +1,15 @@
 ---
-title: "Salinger Theme."
+title: "Salinger Theme"
 pubDate: 2022-04-01
-lastmod: 2023-08-01
-slug: "salinger-theme"
+updatedDate: 2023-08-01
+slug: salinger-theme
 description: "A minimalistic theme for Hugo framework."
 categories: ["Web Development"]
-tags: ["Hugo", "Tailwind", "DaisyUI", "hugo theme"]
-langs: ["Hugo"]
-cta_link: ["https://github.com/jacksalici/salinger-theme"]
-cta_text: ["Go to the theme repository"]
+tags: ["Hugo", "Tailwind", "DaisyUI"]
+stack: ["Hugo", "Tailwind", "DaisyUI"]
+cta:
+  - { url: "https://github.com/jacksalici/salinger-theme", label: "Go to the theme repository" }
 cover: "https://raw.githubusercontent.com/jacksalici/salinger-theme/main/images/tn.jpg"
-type: work
 trending: true
 ---
 

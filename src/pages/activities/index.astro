@@ -9,7 +9,7 @@ const activities = (await getCollection("activities"))
     (a, b) =>
       Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
   )
-  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+  .filter((a) => a.data.draft !== true && a.data.hidden !== true);
 
 const props = {image: '/website.png'}
 ---

@@ -1,9 +1,9 @@
 ---
 title: "Join us! Gaze Estimation Dataset Collection"
 description: "Seeking volunteers to participate in recording a dataset for gaze estimation benchmarking."
+summary: "I am recording a dataset aimed to leverage the human-robot interaction research about gaze estimation. 👀"
 cover: "/uploads/ariaglasses.png"
 layout: "../layouts/Page.astro"
-summary: "I am recording a dataset aimed to leverage the human-robot interaction research about gaze estimation. 👀"
 translateLink: True
 ---
 

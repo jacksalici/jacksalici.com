@@ -1,16 +1,16 @@
 ---
-title: "EmotiVision: Emotion detection and gaze analysis of retrieved faces."
+title: "EmotiVision: Emotion detection and gaze analysis of retrieved faces"
 pubDate: 2023-07-01
 slug: emotivision
 description: Computer Vision pipeline for gaze analysis and emotion detection.
 categories: ["Computer Vision"]
 tags: ["computer vision", "emotion detection", "gaze estimation", "face retrieval"]
-langs: ["Pytorch", "OpenCV"]
+stack: ["PyTorch", "OpenCV"]
 featured: true
-cta_link: ["https://github.com/SLG-Vision/EmotiVision", "https://github.com/SLG-Vision/EmotiVision/blob/main/emotivision_final_report.pdf"]
-cta_text: ["Take a look at the code", "Read the final report"]
+cta:
+  - { url: "https://github.com/SLG-Vision/EmotiVision", label: "Take a look at the code" }
+  - { url: "https://github.com/SLG-Vision/EmotiVision/blob/main/emotivision_final_report.pdf", label: "Read the final report" }
 cover: "/uploads/cvcs_cover.jpg"
-
 ---
 
 _During the university course of computer vision and cognitive systems, Michele, Vincenzo and I were asked to develop a project featuring a pipeline with both classical image processing and deep learning techniques._

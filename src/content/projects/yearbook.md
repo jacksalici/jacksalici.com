@@ -1,10 +1,8 @@
 ---
-title: My high school's 2019 yearbook.
+title: My high school's 2019 yearbook
 pubDate: 2019-06-30
-description: My last year highschool yearbook.
-slug: yearbook
+description: My last year high school yearbook.
 categories: ["Graphic Design"]
-tags: ["Yearbook"]
 hidden: true
 ---
 

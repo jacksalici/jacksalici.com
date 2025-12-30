@@ -1,13 +1,11 @@
 ---
 title: '“Blockchain technologies applied to the digitalization of governance processes in business contexts”'
 pubDate: 2022-07-02
-slug: "bsc-degree-thesis"
-description: "My B.Sc. dissertion is about blockchain integration in management software."
+description: "My B.Sc. dissertation is about blockchain integration in management software."
 categories: ["Blockchain"]
-langs: ["Solidity"]
+stack: ["Solidity"]
 featured: true
 cover: /uploads/blockchainStructure.png
-
 ---
 
 ## Abstract 

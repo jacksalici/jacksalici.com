@@ -1,9 +1,8 @@
 ---
-title: "A 3d model against the mask pain."
+title: "A 3d model against the mask pain"
 pubDate: 2020-07-02
-description: "This 3d printing should reduce the ear pain caused by mask."
-slug: "ear-saver"
-categories: ["3d design"]
+description: "This 3D printing should reduce the ear pain caused by masks."
+categories: ["3D Design"]
 hidden: true
 ---
 
