@@ -1,6 +1,7 @@
 ---
 import FormattedDate from '../components/FormattedDate.astro';
 import GlassChip from '../components/GlassChip.astro';
+import Gallery from '../components/Gallery.astro';
 import Base from './Base.astro';
 
 const { ...props } = Astro.props;
@@ -8,6 +9,7 @@ const { ...props } = Astro.props;
 	<Base title={props?.title}, description={props?.description}, tags={props?.tags}, image={props?.cover}>
 		
 		<main>
+			
 			<div class="grid  w-full content-stretch justify-stretch justify-items-stretch align-middle gap-3 mb-16">		
 
 					<div class="w-full">
@@ -69,6 +71,11 @@ const { ...props } = Astro.props;
 				
 			</div>
 			
+			{props.gallery && props.gallery.length > 0 && (
+				<div class="mb-10">
+					<Gallery items={props.gallery} label="Gallery" />
+				</div>
+			)}
 
 			
 

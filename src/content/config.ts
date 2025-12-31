@@ -9,6 +9,16 @@ const baseSchema = z.object({
 	pubDate: z.coerce.date(),
 	updatedDate: z.coerce.date().optional(),
 	cover: z.string().optional(),
+	gallery: z
+		.array(
+			z.object({
+				src: z.string(),
+				alt: z.string(),
+				href: z.string().optional(),
+				caption: z.string().optional(),
+			}),
+		)
+		.optional(),
 	tags: z.string().array().optional(), // For SEO
 	categories: z.string().array().optional(), // For display grouping
 	draft: z.boolean().optional().default(false),

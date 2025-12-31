@@ -1,0 +1,180 @@
+---
+type GalleryItem = {
+  src: string;
+  alt: string;
+  href?: string;
+  caption?: string;
+};
+
+type Props = {
+  items?: GalleryItem[];
+  columns?: 2 | 3 | 4;
+  label?: string;
+  className?: string;
+};
+
+const {
+  items = [],
+  columns = 3,
+  label,
+  className = "",
+} = Astro.props as Props;
+
+const dialogId = `gallery_${Math.random().toString(36).slice(2, 11)}`;
+
+const columnClasses: Record<Props["columns"], string> = {
+  2: "grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-4",
+  3: "grid-cols-2 md:grid-cols-3 gap-2 md:gap-4",
+  4: "grid-cols-2 md:grid-cols-4 gap-2 md:gap-4",
+};
+---
+<section
+  class={`not-prose ${className}`}
+  aria-label={label ?? "Image gallery"}
+  data-gallery={dialogId}
+>
+  {label && (
+    <p class="mb-3 text-xs uppercase tracking-[0.2em] text-neutral-content">
+      {label}
+    </p>
+  )}
+
+  <div class={`grid ${columnClasses[columns]}`}>
+    {items.map((item, index) => (
+      <figure class="group relative overflow-hidden rounded-xl border border-base-300/70 bg-base-200/40 shadow-sm">
+        <button
+          type="button"
+          class="gallery-trigger block w-full text-left cursor-pointer"
+          data-gallery-id={dialogId}
+          data-index={index}
+        >
+          <div class="relative aspect-4/3 bg-base-300/20">
+            <img
+              src={item.src}
+              alt={item.alt}
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover transition duration-200 ease-out group-hover:scale-[1.02] group-hover:brightness-110"
+            />
+          </div>
+        </button>
+
+        {item.caption && (
+          <figcaption class="px-4 py-3 text-sm text-neutral-content">
+            {item.caption}
+          </figcaption>
+        )}
+      </figure>
+    ))}
+  </div>
+
+  <dialog
+    id={dialogId}
+    class="backdrop:bg-black/90 bg-transparent p-0 m-0 max-w-none max-h-none w-full h-full"
+    data-items={JSON.stringify(items)}
+  >
+    <div class="pointer-events-none relative w-full h-full flex items-center justify-center">
+      <button
+        type="button"
+        class="gallery-close pointer-events-auto absolute top-4 right-4 z-50 rounded-full bg-base-100/90 text-base-content w-10 h-10 flex items-center justify-center text-xl cursor-pointer shadow-lg transition"
+        aria-label="Close gallery"
+      >
+        ✕
+      </button>
+
+      <img
+        class="gallery-image pointer-events-auto max-w-[90vw] max-h-[90vh] object-contain"
+        alt=""
+      />
+    </div>
+  </dialog>
+</section>
+
+<script>
+  type GalleryItem = {
+  src: string;
+  alt: string;
+  href?: string;
+  caption?: string;
+};
+
+  function initGallery() {
+    document.querySelectorAll('[data-gallery]').forEach((section) => {
+      const galleryId = section.getAttribute('data-gallery');
+      if (!galleryId) return;
+
+      const dialog = document.getElementById(galleryId) as HTMLDialogElement;
+      if (!dialog) return;
+
+      let items: GalleryItem[] = [];
+      try {
+        items = JSON.parse(dialog.dataset.items || '[]');
+      } catch (e) {
+        console.error('Failed to parse gallery items', e);
+        return;
+      }
+
+      if (!items.length) return;
+
+      const img = dialog.querySelector('.gallery-image') as HTMLImageElement;
+      const closeBtn = dialog.querySelector('.gallery-close');
+
+      function openImage(idx: number) {
+        const item = items[idx];
+        
+        if (img) {
+          img.src = item.src;
+          img.alt = item.alt || '';
+        }
+        
+        dialog.showModal();
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeImage() {
+        dialog.close();
+        document.body.style.overflow = '';
+      }
+
+      // Open gallery on thumbnail click
+      section.querySelectorAll('.gallery-trigger').forEach((trigger) => {
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          const idx = parseInt(trigger.getAttribute('data-index') || '0');
+          openImage(idx);
+        });
+      });
+
+      // Close button
+      closeBtn?.addEventListener('click', closeImage);
+
+      // Click backdrop to close
+      dialog.addEventListener('click', (e) => {
+        if (e.target === dialog) closeImage();
+      });
+
+      // Escape key to close
+      dialog.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeImage();
+        }
+      });
+
+      // Restore scroll when dialog closes
+      dialog.addEventListener('close', () => {
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGallery);
+  } else {
+    initGallery();
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initGallery);
+</script>
