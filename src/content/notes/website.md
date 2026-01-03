@@ -5,7 +5,7 @@ updatedDate: 2025-12-30
 slug: website
 description: "I rebuild this website too often."
 summary: "A brief overview of the major versions of my personal website and the reasons behind my choices."
-categories: ["Notes"]
+categories: ["Thoughts"]
 tags: ["website", "portfolio"]
 featured: true
 ---
