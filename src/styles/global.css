@@ -76,6 +76,10 @@ img {
 	background: var(--color-base-content);
   }
 
+.my-pre {
+  @apply font-mono bg-base-200/70 py-[1px] px-3 rounded-2xl
+}
+
 mark{
   @apply bg-accent-1 p-1 rounded
 }
