@@ -1,14 +1,22 @@
 ---
-interface Props {
+interface MenuItem {
   href: string
+  label: string
+  ariaLabel?: string
+}
+
+interface Props {
+  href?: string
   label: string
   ariaLabel?: string
   full?: boolean
   highlight?: boolean
   size?: "xs" | "sm" | "md" | "lg"
+  dropdown?: boolean
+  menuItems?: MenuItem[]
 }
 
-const { href, label, ariaLabel, full, highlight, size = "sm" } = Astro.props
+const { href, label, ariaLabel, full, highlight, size = "sm", dropdown = false, menuItems = [] } = Astro.props
 
 const sizeClasses = {
   xs: "px-3 py-1 text-xs",
@@ -22,24 +30,50 @@ const baseClasses = "relative inline-flex items-center gap-2 rounded-full font-m
 const colorClasses = highlight
   ? "text-accent-3/90 hover:text-accent-2/90 bg-gradient-to-br from-accent-3/8 via-accent-3/4 to-transparent border border-accent-3/10 shadow-[0_0_0_1px_rgba(var(--accent-2),0.03)] hover:from-accent-2/[0.14] hover:via-accent-2/15 hover:border-accent-2/50 hover:shadow-[0_0_24px_rgba(var(--accent-2),0.12)] focus:ring-accent-3/20"
   : "text-white/90 bg-gradient-to-br from-white/8 via-white/4 to-transparent border border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] hover:from-white/[0.14] hover:via-accent-2/15 hover:border-accent-2/50 hover:shadow-[0_0_24px_rgba(255,255,255,0.12)] focus:ring-white/20"
+
+const Element = dropdown ? 'button' : 'a'
 ---
 
-<a
+{dropdown ? (
+  <div class="relative inline-block group">
+    <Element
+      type={dropdown ? "button" : undefined}
+      aria-label={ariaLabel ?? label}
+      class:list={[baseClasses, sizeClasses[size], colorClasses, {"w-full justify-center": full, "cursor-pointer": dropdown}]}
+    >
+      {Astro.slots.icon && (
+        <span class="relative z-10 flex items-center">
+          <slot name="icon" />
+        </span>
+      )}
+      <span class="relative z-10 transition-all">{label}</span>
+    </Element>
+    
+    <div class="absolute right-0 mt-2 w-min-fit rounded-xl backdrop-blur-md opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 ease-out  flex flex-col gap-1 p-2 -translate-y-2.5 group-hover:translate-y-0 group-focus-within:translate-y-0">
+      {menuItems.map((item) => (
+        <a
+          href={item.href}
+          aria-label={item.ariaLabel ?? item.label}
+          class:list={[baseClasses, sizeClasses[size], colorClasses, "w-full justify-center"]}
+        >
+          <span class="relative z-10 transition-all whitespace-nowrap">{item.label}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+) : (
+  <Element
     href={href}
-    target={href.startsWith("http") ? "_blank" : "_self"}
+    target={href?.startsWith("http") ? "_blank" : "_self"}
     rel="noopener"
     aria-label={ariaLabel ?? label}
     class:list={[baseClasses, sizeClasses[size], colorClasses, {"w-full justify-center": full}]}
->
-
-    <!-- icon slot -->
+  >
     {Astro.slots.icon && (
-        <span class="relative z-10 flex items-center">
-            <slot name="icon" />
-        </span>
+      <span class="relative z-10 flex items-center">
+        <slot name="icon" />
+      </span>
     )}
-
-  <span class="relative z-10  transition-all">{label}</span>
-
-  
-</a>
+    <span class="relative z-10 transition-all">{label}</span>
+  </Element>
+)}

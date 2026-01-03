@@ -36,9 +36,19 @@ const { href, class: className, ...props } = Astro.props;
       </svg>
     </a>
 
-    <div>
-<!--  <GlassChip label="Notes ↗" ariaLabel="Link to notes page" href="/notes" /> -->
-    <GlassChip label="Playground ↗" ariaLabel="Playground" href="/playground" />
+    <div class="flex gap-3 items-center">
+      <GlassChip label="Playground ↗" ariaLabel="Playground" href="/playground" />
+
+      <GlassChip 
+        label="↓" 
+        ariaLabel="Navigation menu"
+        dropdown={true}
+        menuItems={[
+          { href: "/notes", label: "Notes ↗", ariaLabel: "Link to notes page" },
+          { href: "/market", label: "Market ↗", ariaLabel: "Link to market page" },
+          { href: "/contacts", label: "Contacts ↗", ariaLabel: "Link to contacts page" }
+        ]}
+      />
     </div>
 
 
