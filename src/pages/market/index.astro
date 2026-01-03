@@ -14,8 +14,9 @@ const products = (await getCollection('market')).sort(
 
 <Base>
   <main>
-    <h1 class="mb-4 text-4xl">Garage Sales 🏷️</h1>
-    <p class="mb-6 text-lg">Di tanto in tanto cerco nuovi possessori per qualche oggetto hardware che ho usato e amato. Se sei interessatə, <a href="/contacts" class="underline">contattami</a>.</p>    
+    <h1 class="mb-4 text-4xl">Garage Sales</h1>
+    <p class="mb-3">🇮🇹 Di tanto in tanto cerco nuovi possessori per qualche oggetto hardware che ho usato e amato. Se sei interessatə, <a href="/contacts" class="underline">contattami</a>.</p>    
+    <p class="mb-6">🇺🇸 From time to time I look for new owners for some hardware I have used and loved. If you are interested, <a href="/contacts" class="underline">contact me</a>.</p>    
 
   
 
@@ -25,7 +26,7 @@ const products = (await getCollection('market')).sort(
           <PostCard
             title={item.data.title}
             description={item.data.description}
-            summary={item.data.status === "sold" ? "[VENDUTA]" : ""}
+            summary={item.data.status === "sold" ? "[SOLD]" : ""}
             pubDate={item.data.pubDate}
             slug={"/market/" + item.slug}
             unavailable={item.data.status === "sold"}
