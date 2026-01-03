@@ -1,7 +1,7 @@
 ---
 type GalleryItem = {
   src: string;
-  alt: string;
+  alt?: string;
   href?: string;
   caption?: string;
 };
@@ -54,7 +54,7 @@ const columnClasses: Record<Props["columns"], string> = {
               alt={item.alt}
               loading="lazy"
               decoding="async"
-              class="h-full w-full object-cover transition duration-200 ease-out group-hover:scale-[1.02] group-hover:brightness-110"
+              class="h-full w-full object-cover transition duration-200 ease-out group-hover:brightness-150"
             />
           </div>
         </button>
@@ -81,11 +81,15 @@ const columnClasses: Record<Props["columns"], string> = {
       >
         ✕
       </button>
-
-      <img
+      <div>
+ <img
         class="gallery-image pointer-events-auto max-w-[90vw] max-h-[90vh] object-contain"
         alt=""
       />
+
+      <p class="gallery-caption pointer-events-auto mt-4 text-center text-sm text-base-content/90 px-8"></p>
+      </div>
+     
     </div>
   </dialog>
 </section>
@@ -117,6 +121,7 @@ const columnClasses: Record<Props["columns"], string> = {
       if (!items.length) return;
 
       const img = dialog.querySelector('.gallery-image') as HTMLImageElement;
+      const caption = dialog.querySelector('.gallery-caption') as HTMLParagraphElement;
       const closeBtn = dialog.querySelector('.gallery-close');
 
       function openImage(idx: number) {
@@ -125,6 +130,11 @@ const columnClasses: Record<Props["columns"], string> = {
         if (img) {
           img.src = item.src;
           img.alt = item.alt || '';
+        }
+
+        if (caption) {
+          caption.textContent = item.caption || '';
+          caption.style.display = item.caption ? 'block' : 'none';
         }
         
         dialog.showModal();

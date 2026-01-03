@@ -13,7 +13,7 @@ const baseSchema = z.object({
 		.array(
 			z.object({
 				src: z.string(),
-				alt: z.string(),
+				alt: z.string().optional(),
 				href: z.string().optional(),
 				caption: z.string().optional(),
 			}),
@@ -73,6 +73,7 @@ const market = defineCollection({
 		cover: true,
 		draft: true,
 		hidden: true,
+		gallery: true,
 	}).extend({
 		status: z.enum(['available', 'sold']).optional().default('available'),
 	}),
