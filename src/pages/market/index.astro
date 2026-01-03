@@ -6,7 +6,9 @@ import { getCollection } from 'astro:content';
 
 const products = (await getCollection('market')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-).filter(item => item.data.draft !== true && item.data.hidden !== true);
+).filter(item => item.data.draft !== true && item.data.hidden !== true).sort(
+  (a, b) => a.data.status !== "sold" ? -1 : 1
+);
 
 ---
 
@@ -23,8 +25,10 @@ const products = (await getCollection('market')).sort(
           <PostCard
             title={item.data.title}
             description={item.data.description}
+            summary={item.data.status === "sold" ? "[VENDUTA]" : ""}
             pubDate={item.data.pubDate}
             slug={"/market/" + item.slug}
+            unavailable={item.data.status === "sold"}
           />
             
         ))} 

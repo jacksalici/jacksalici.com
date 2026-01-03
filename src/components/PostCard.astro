@@ -14,6 +14,7 @@ type Props = {
   location?: string;
   authors?: string;
   venue?: string;
+  unavailable?: boolean;
 };
 
 const { ...props } = Astro.props;
@@ -29,10 +30,12 @@ const MyA = props.slug ? 'a': 'div'
   <div class="w-full">
     <p 
     class:list={["", {"group-hover:text-accent-1": props.slug && !props.featured && !props.trending, 
-    "group-hover:text-accent-2": props.slug && props.trending, "group-hover:text-accent-3": props.slug && props.featured && !props.trending }]}
+    "group-hover:text-accent-2": props.slug && props.trending, "group-hover:text-accent-3": props.slug && props.featured && !props.trending,
+    "opacity-70": props.unavailable
+     }]} 
     >
     <span class:list={["", {"text-accent-3": props.featured && !props.trending,  "text-accent-2": props.trending}]}>—</span>
-    {props.title} {props.summary}
+    <span class:list={[{"line-through": props.unavailable == true}]}>{props.title}</span> {props.summary}
     {props.authors && <span class="text-xs">~ {props.authors}</span>}
     {props.venue && <span class="text-xs font-bold">~ {props.venue}</span>}
     {props.pubDate && 

@@ -64,12 +64,6 @@ const { ...props } = Astro.props;
 					
 			</div>
 			
-			{props.gallery && props.gallery.length > 0 && (
-				<div class="mb-10">
-					<Gallery items={props.gallery} label="Gallery" />
-				</div>
-			)}
-
 			
 
 		
@@ -88,6 +82,14 @@ const { ...props } = Astro.props;
 			))}
 			
 			</div>			}	
+
+
+			{props.gallery && props.gallery.length > 0 && (
+				<div class="mb-10">
+					<Gallery items={props.gallery} label="Gallery" />
+				</div>
+			)}
+
 			
 		</main>
 	</Base>

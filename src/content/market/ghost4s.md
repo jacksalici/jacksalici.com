@@ -2,7 +2,8 @@
 title: "Flying Bear Ghost 4S"
 pubDate: 2026-01-03
 slug: "fb-ghost4s"
-description: "Stampante 3D FDM perfettamente funzionante in vendita."
+description: "[VENDUTA] Stampante 3D FDM perfettamente funzionante in vendita."
+status: "sold"
 gallery:
   - src: /uploads/ghost4s/p2.jpg
     caption: "Vista frontale della Flying Bear Ghost 4S"
@@ -21,6 +22,9 @@ gallery:
   - src: /uploads/ghost4s/m3.jpg
     caption: "Prova di stampa 3"
 ---
+
+<span class="text-accent-3 font-bold">La stampante è stata acquistata.</span>
+
 ## Overview
 
 La Flying Bear Ghost 4S è una stampante FDM del 2019, che offre un volume di stampa di 255mm x 210mm x 210mm in un ingombro compatto di 392mm x 342mm x 420mm. La struttura completamente in metallo garantisce un'esperienza di stampa affidabile e un corpo robusto che non mi ha deluso.
@@ -55,8 +59,5 @@ La stampante funziona perfettamente e non necessita di alcun upgrade immediato. 
 
 ## Costo
 
-150, passaggio a mano zona Modena.
+~150, passaggio a mano zona Modena.~ [Venduta]
 
-
-## Contatti
-Per ulteriori informazioni, non esitate a contattarmi tramite la pagina [Contatti](/contacts).
