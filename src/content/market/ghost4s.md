@@ -1,8 +1,25 @@
 ---
 title: "Flying Bear Ghost 4S"
-pubDate: 2025-12-26
+pubDate: 2026-01-03
 slug: "fb-ghost4s"
 description: "Stampante 3D FDM perfettamente funzionante in vendita."
+gallery:
+  - src: /uploads/ghost4s/p2.jpg
+    caption: "Vista frontale della Flying Bear Ghost 4S"
+  - src: /uploads/ghost4s/p1.jpg
+    caption: "Dettaglio del piano di stampa"
+  - src: /uploads/ghost4s/p5.jpg
+    caption: "Sensore e meccanismo di alimentazione"
+  - src: /uploads/ghost4s/p3.jpg
+    caption: "Schermo touchscreen intuitivo"
+  - src: /uploads/ghost4s/p4.jpg
+    caption: "Struttura in metallo"
+  - src: /uploads/ghost4s/m1.jpg
+    caption: "Prova di stampa 1"
+  - src: /uploads/ghost4s/m2.jpg
+    caption: "Prova di stampa 2"
+  - src: /uploads/ghost4s/m3.jpg
+    caption: "Prova di stampa 3"
 ---
 ## Overview
 
@@ -10,8 +27,8 @@ La Flying Bear Ghost 4S è una stampante FDM del 2019, che offre un volume di st
 
 Ho utilizzato questa stampante per vari progetti, inclusa la stampa di parti funzionali, prototipi e modelli artistici. Ha costantemente fornito stampe di alta qualità con buona adesione dei layer e dettagli.
 
-Ore di stampa totali: ~500 ore.
-Vendo per passaggio ad una stampante con altre funzionalità.
+Dopo esattamente 5.5 anni di onorato servizio, vendo per passaggio ad una stampante con altre funzionalità.
+Ore di stampa totali: ~500 ore. Ancora perfettamente funzionante.
 
 | | |
 |---|---|
