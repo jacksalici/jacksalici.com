@@ -4,9 +4,24 @@ interface Props {
   label: string
   ariaLabel?: string
   full?: boolean
+  highlight?: boolean
+  size?: "xs" | "sm" | "md" | "lg"
 }
 
-const { href, label, ariaLabel, full } = Astro.props
+const { href, label, ariaLabel, full, highlight, size = "sm" } = Astro.props
+
+const sizeClasses = {
+  xs: "px-3 py-1 text-xs",
+  sm: "px-4 py-2 text-sm",
+  md: "px-5 py-2.5 text-base",
+  lg: "px-6 py-3 text-lg"
+}
+
+const baseClasses = "relative inline-flex items-center gap-2 rounded-full font-medium backdrop-blur-md transition-all duration-300 ease-out focus:outline-none focus:ring-2 group"
+
+const colorClasses = highlight
+  ? "text-accent-3/90 hover:text-accent-2/90 bg-gradient-to-br from-accent-3/8 via-accent-3/4 to-transparent border border-accent-3/10 shadow-[0_0_0_1px_rgba(var(--accent-2),0.03)] hover:from-accent-2/[0.14] hover:via-accent-2/15 hover:border-accent-2/50 hover:shadow-[0_0_24px_rgba(var(--accent-2),0.12)] focus:ring-accent-3/20"
+  : "text-white/90 bg-gradient-to-br from-white/8 via-white/4 to-transparent border border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] hover:from-white/[0.14] hover:via-accent-2/15 hover:border-accent-2/50 hover:shadow-[0_0_24px_rgba(255,255,255,0.12)] focus:ring-white/20"
 ---
 
 <a
@@ -14,7 +29,7 @@ const { href, label, ariaLabel, full } = Astro.props
     target={href.startsWith("http") ? "_blank" : "_self"}
     rel="noopener"
     aria-label={ariaLabel ?? label}
-    class:list={["relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white/90 bg-gradient-to-br from-white/8 via-white/4 to-transparent border border-white/10 backdrop-blur-md shadow-[0_0_0_1px_rgba(255,255,255,0.03)] transition-all duration-300 ease-out hover:from-white/[0.14] hover:via-accent-2/15 hover:border-accent-2/50 hover:shadow-[0_0_24px_rgba(255,255,255,0.12)] focus:outline-none focus:ring-2 focus:ring-white/20 group", {"w-full justify-center": full}]}
+    class:list={[baseClasses, sizeClasses[size], colorClasses, {"w-full justify-center": full}]}
 >
 
     <!-- icon slot -->

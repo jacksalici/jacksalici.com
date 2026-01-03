@@ -41,7 +41,14 @@ const props = { image: "/sky.png" };
     
       <div class="grid md:grid-cols-2 gap-8">
         <div>   
-        <h1 class="text-3xl leading-9 text-balance">
+          <GlassChip
+            href="/market/fb-ghost4s"
+            label="Check out my 3D printer for sale ↗"
+            highlight={true}
+            size="xs"
+          >
+          </GlassChip>
+        <h1 class="text-3xl mt-6 leading-9 text-balance">
           A digital craftsman</br> who designs systems</br> that matter.
         </h1>
         <div class="mt-6 mb-8 flex flex-wrap gap-3">
@@ -55,6 +62,7 @@ const props = { image: "/sky.png" };
             label="Checkout my projects on GitHub ↗"
           >
           </GlassChip>
+          
         </div>
         </div>  
 
