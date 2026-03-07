@@ -3,21 +3,25 @@
 
 
 @theme{
-    --color-accent-1: #F9C74F;
-    --color-accent-2: #19bdd0;
-    --color-accent-3: #ea5c1f;
+    --color-accent-1: #E0B000;
+    --color-accent-2: #2E86AB;
+    --color-accent-3: #F24333;
     --color-accent-4: #3D2B8C;
-    --color-base-100: #101010;
-    --color-base-200: #2A2A2A;
-    --color-base-300: #3D3D3D;
-    --color-base-content: #f5f5f5;
-    --color-neutral: #737373;
-	--color-neutral-content: #e0e0e0;
+    --color-base-100: #F8F8F8;
+    --color-base-200: #EBEBEB;
+    --color-base-300: #D6D6D6;
+    --color-base-content: #423E3B;
+    --color-neutral: #B8B8B8;
+	--color-neutral-content: #615B56;
 	--font-mono:  'Space Mono', monospace;
 	--font-sans: 'InterVariable', sans-serif;
 	--font-display: 'Space Grotesk Variable', sans-serif;
   }
 
+
+  .font-bold {
+	font-weight: 800;
+  }
 
 
 @media (prefers-reduced-motion: reduce) {
@@ -30,6 +34,10 @@
 :root {
   font-family: Inter, sans-serif;
   font-feature-settings: 'liga' 1, 'calt' 1, 'ss02' 1; /* fix for Chrome */
+  font-weight: 500;
+
+
+
 }
 @supports (font-variation-settings: normal) {
   :root { font-family: InterVariable, sans-serif; }
@@ -39,7 +47,6 @@ code,
 kbd {
 	font-family: 'Space Mono', monospace;
 }
-
 
 
 h1,

@@ -5,6 +5,23 @@ import GlassChip from "../components/GlassChip.astro";
 import Base from "../layouts/Base.astro";
 import "../styles/global.css";
 
+/*/ Load and parse news CSV
+const newsRaw = await import("../data/news.csv?raw");
+const newsLines = newsRaw.default.trim().split("\n").slice(1); // Skip header
+const news = newsLines.map((line: string) => {
+  const [title, date, link] = line.split(",");
+  return { title, date: new Date(date), link };
+});
+
+// Filter news from last 2 weeks and get the most recent one
+const twoWeeksAgo = new Date();
+twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+const recentNews = news
+  .filter((n: { date: Date }) => n.date > twoWeeksAgo)
+  .sort((a: { date: Date }, b: { date: Date }) => b.date.valueOf() - a.date.valueOf())
+  .slice(0, 1);
+*/
+
 const notes = (await getCollection("notes"))
   .sort((a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf())
   .filter((a) => a.data.draft !== false && a.data.hidden != true);
@@ -37,37 +54,30 @@ const props = { image: "/sky.png" };
 ---
 
 <Base image={props.image} hideFooter={true} >
-    <div class=" max-w-4xl mx-auto md:mt-32 p-6">
+    <div class="max-w-4xl mx-auto md:mt-24 p-6">
     
       <div class="grid md:grid-cols-2 gap-8">
         <div>   
-          <GlassChip
-            href="/papers/gradfix"
-            label="Our paper has been accepted at ICLR 2026! ↗"
-            highlight={true}
-            size="xs"
-          >
-          </GlassChip> 
-        <h1 class="text-3xl mt-6 leading-9 text-balance">
-          A digital craftsman</br> who designs systems</br> that matter.
-        </h1>
-        <div class="mt-6 mb-8 flex flex-wrap gap-3">
-          <GlassChip
-            href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ"
-            label="Read my papers on Google Scholar ↗"
-          >
-          </GlassChip>
-          <GlassChip
-            href="https://github.com/jacksalici"
-            label="Checkout my projects on GitHub ↗"
-          >
-          </GlassChip>
-          
-        </div>
+          <h1 class="text-4xl text-balance">
+            A digital craftsman</br> who designs systems</br> that matter.
+          </h1>
+          <div class="mt-6 mb-8 flex flex-wrap gap-3">
+            <GlassChip
+              href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ"
+              label="Read my papers on Google Scholar ↗"
+            >
+            </GlassChip>
+            <GlassChip
+              href="https://github.com/jacksalici"
+              label="Checkout my projects on GitHub ↗"
+            >
+            </GlassChip>
+            
+          </div>
         </div>  
 
 
-      <p class="group *:transition-colors *:duration-1000">
+      <p>
         <span
           class="">I'm</span> <span class="font-bold">Giacomo Salici</span>
         <sup class="font-extralight text-xs">/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/</sup>, <span
@@ -80,7 +90,7 @@ const props = { image: "/sky.png" };
         > research group of University of Modena <span class="">and</span> Reggio Emilia as <span class=""> a PhD candidate</span
         > in ICT.
         <br /><br />
-        My <span >research topics</span> include artificial intelligence of things (AIoT), efficient deep learning
+        My <span >research topics</span> include artificial intelligence of things (AIoT), modular deep learning
       and time series analysis.
     <br /><br />
           If you want to get in touch, feel free to <a href="/contacts">reach out&nbsp;↗</a> or to <a href="https://linkedin.com/in/jacksalici">connect with me&nbsp;↗</a>.
