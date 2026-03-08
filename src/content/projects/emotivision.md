@@ -4,7 +4,7 @@ pubDate: 2023-07-01
 slug: emotivision
 description: Computer Vision pipeline for gaze analysis and emotion detection.
 news: EmotiVision is our CV pipeline combining gaze analysis and emotion detection, scoring 97% F1.
-categories: ["AI/ML"]
+categories: ["ai-ml"]
 stack: ["PyTorch", "OpenCV"]
 featured: true
 cta:

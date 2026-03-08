@@ -6,7 +6,7 @@ authors: "Marco Savarese, Antonio De Blasi, Carmine Zaccagnino, Giacomo Salici, 
 venue: "IEEE Consumer Communications & Networking Conference 2026"
 acronym: "CCNC 2026"
 location: "Las Vegas, USA"
-categories: ["IoT/V2X"]
+categories: ["iot-and-v2x"]
 news: Our paper “RI-PIENO”, a revised and improved framework for refueling itinerary optimization, has been accepted at CCNC 2026!
 cta:
   - { url: "https://www.researchgate.net/profile/Silvia-Cascianelli/publication/396507184_RI-PIENO_-Revised_and_Improved_Petrol-Filling_Itinerary_Estimation_aNd_Optimization/links/68ef593d02d6215259bbcc07/RI-PIENO-Revised-and-Improved-Petrol-Filling-Itinerary-Estimation-aNd-Optimization.pdf", label: "Link to the paper" }
