@@ -12,7 +12,9 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
 
   redirects: {
-    
+    "/papers/": "/?t=papers#feed",
+    "/notes/": "/?t=notes#feed",
+    "/projects/": "/?t=projects#feed",
     "/b/": "/notes",
     "/projects/website": "/blog/website",
     "/p/[...slug]": "/projects/[...slug]",

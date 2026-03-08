@@ -8,26 +8,26 @@ import { FileText, Hammer, PenLine, Github, GraduationCap, Linkedin, BrainCircui
 import "../styles/global.css";
 
 
-const categoryIcons: Record<string, any> = {
-  "AI/ML": BrainCircuit,
-  "Robotics": Bot,
-  "IoT/V2X": WifiCog,
-  "Web": PanelsTopLeft,
-  "Games": Gamepad2,
-  "Making": Wrench,
-  "Design": Palette,
+const categoryIcons: Record<string, { icon: any; label: string }> = {
+  "ai-ml": { icon: BrainCircuit, label: "AI & ML" },
+  "robotics": { icon: Bot, label: "Robotics" },
+  "iot-and-v2x": { icon: WifiCog, label: "IoT & V2X" },
+  "web": { icon: PanelsTopLeft, label: "Web" },
+  "games": { icon: Gamepad2, label: "Games" },
+  "making": { icon: Wrench, label: "Making" },
+  "design": { icon: Palette, label: "Design" },
 };
 
 const recentAll = [
   ...(await getCollection("notes"))
     .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/notes/" + a.slug, type: "note" as const })),
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/notes/" + a.slug, type: "notes" as const })),
   ...(await getCollection("projects"))
     .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/projects/" + a.slug, type: "project" as const })),
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/projects/" + a.slug, type: "projects" as const })),
   ...(await getCollection("papers"))
     .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/papers/" + a.slug, type: "paper" as const })),
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/papers/" + a.slug, type: "papers" as const })),
 ].sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
 const allCategories = [...new Set(recentAll.flatMap((i) => i.categories))].sort();
@@ -71,7 +71,7 @@ const props = { image: "/sky.png" };
 
     <div class="min-h-[80vh] mt-20" id="feed">
         <h1 class="text-3xl">Thoughts, papers, & projects.</h1>
-        <div class="flex mt-5 mb-16 flex-wrap gap-2 items-center w-full justify-stretch">
+        <div class="flex mt-5 flex-wrap gap-2 items-center w-full justify-stretch">
           <input
             id="search-input"
             type="search"
@@ -80,13 +80,13 @@ const props = { image: "/sky.png" };
           />
           <select id="category-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
             <option value="all">All categories</option>
-            {allCategories.map((c) => <option value={c}>{c}</option>)}
+            {allCategories.map((c) => <option value={c}>{categoryIcons[c]?.label || c}</option>)}
           </select>
           <select id="filter-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
             <option value="all">All types</option>
-            <option value="note">Notes</option>
-            <option value="project">Projects</option>
-            <option value="paper">Papers</option>
+            <option value="notes">Notes</option>
+            <option value="projects">Projects</option>
+            <option value="papers">Papers</option>
           </select>
           <select id="sort-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
             <option value="newest">Newest first</option>
@@ -94,12 +94,12 @@ const props = { image: "/sky.png" };
           </select>
       </div>
 
-      <div class="flex flex-col gap-8">
+      <div class="flex flex-col">
         {
           recentAll.map((item) => (
             <a
               href={item.slug}
-              class="feed-item group flex gap-2 items-start"
+              class="feed-item group flex my-8 gap-2 items-start"
               data-type={item.type}
               data-date={item.date.valueOf()}
               data-featured={item.featured ? "1" : "0"}
@@ -107,9 +107,9 @@ const props = { image: "/sky.png" };
               data-text={item.text.toLowerCase()}
             >
                 <span class={`group-hover:text-accent-1 transition-colors mt-1 ${item.featured ? "text-accent-3" : ""}`}>
-                {item.type === "paper"   && <FileText size={16} />}
-                {item.type === "project" && (() => { const Icon = categoryIcons[item.categories[0]] ?? Hammer; return <Icon size={16} />; })()}
-                {item.type === "note"    && <PenLine  size={16} />}
+                {item.type === "papers"   && <FileText size={16} />}
+                {item.type === "projects" && (() => { const Icon = categoryIcons[item.categories[0]]?.icon ?? Hammer; return <Icon size={16} />; })()}
+                {item.type === "notes"    && <PenLine  size={16} />}
                 </span>
               <p class="group-hover:text-accent-1 transition-colors text-balance">
                 <span>{item.text}</span>
@@ -134,6 +134,28 @@ const props = { image: "/sky.png" };
       const categorySelect = document.getElementById("category-select") as HTMLSelectElement;
       const searchInput = document.getElementById("search-input") as HTMLInputElement;
 
+      // --- URL param helpers ---
+      function getParams() {
+        const p = new URLSearchParams(window.location.search);
+        return {
+          type: p.get("t") ?? "all",
+          category: p.get("c") ?? "all",
+          sort: p.get("s") ?? "newest",
+          q: p.get("q") ?? "",
+        };
+      }
+
+      function pushParams() {
+        const p = new URLSearchParams();
+        if (filterSelect.value !== "all")    p.set("t",     filterSelect.value);
+        if (categorySelect.value !== "all")  p.set("c",     categorySelect.value);
+        if (sortSelect.value !== "newest")   p.set("s",     sortSelect.value);
+        if (searchInput.value.trim())        p.set("q",        searchInput.value.trim());
+        const qs = p.toString();
+        history.replaceState(null, "", qs ? "?" + qs : window.location.pathname);
+      }
+
+      // --- Apply from current control values ---
       function applyAll() {
         const type = filterSelect.value;
         const category = categorySelect.value;
@@ -147,6 +169,7 @@ const props = { image: "/sky.png" };
           const searchMatch = !query || text.includes(query);
           item.style.display = typeMatch && categoryMatch && searchMatch ? "" : "none";
         });
+        pushParams();
       }
 
       function applySort(order: "newest" | "featured") {
@@ -161,6 +184,17 @@ const props = { image: "/sky.png" };
         });
         items.forEach((item) => feedContainer.appendChild(item));
       }
+
+      // --- Init from URL ---
+      (function init() {
+        const { type, category, sort, q } = getParams();
+        filterSelect.value   = type;
+        categorySelect.value = category;
+        sortSelect.value     = sort;
+        searchInput.value    = q;
+        applySort(sort as "newest" | "featured");
+        applyAll();
+      })();
 
       filterSelect.addEventListener("change", applyAll);
       categorySelect.addEventListener("change", applyAll);
