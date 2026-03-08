@@ -11,13 +11,13 @@ import "../styles/global.css";
 const recentAll = [
   ...(await getCollection("notes"))
     .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/notes/" + a.slug, type: "note" as const })),
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/notes/" + a.slug, type: "note" as const })),
   ...(await getCollection("projects"))
     .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/projects/" + a.slug, type: "project" as const })),
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/projects/" + a.slug, type: "project" as const })),
   ...(await getCollection("papers"))
     .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/papers/" + a.slug, type: "paper" as const })),
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/papers/" + a.slug, type: "paper" as const })),
 ].sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
 const props = { image: "/sky.png" };
@@ -64,17 +64,37 @@ const props = { image: "/sky.png" };
       </div>
     
     <div class="mt-40">
-      <h1 class="mb-10 text-3xl">Thoughts, articles, and projects</h1>
+      <div class="mb-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <h1 class="text-3xl">Thoughts, articles, and projects</h1>
+        <div class="flex gap-2 items-center md:ml-auto">
+          <select id="filter-select" class="text-xs px-2 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
+            <option value="all">All types</option>
+            <option value="note">Notes</option>
+            <option value="project">Projects</option>
+            <option value="paper">Papers</option>
+          </select>
+          <select id="sort-select" class="text-xs px-2 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
+            <option value="newest">Newest first</option>
+            <option value="featured">Featured first</option>
+          </select>
+        </div>
+      </div>
 
-      <div class="flex flex-col gap-6">
+      <div id="feed" class="flex flex-col gap-6">
         {
           recentAll.map((item) => (
-            <a href={item.slug} class="group flex gap-2 items-baseline">
-              <span class="group-hover:text-accent-1 transition-colors">
+            <a
+              href={item.slug}
+              class="feed-item group flex gap-2 items-baseline"
+              data-type={item.type}
+              data-date={item.date.valueOf()}
+              data-featured={item.featured ? "1" : "0"}
+            >
+                <span class={`group-hover:text-accent-1 transition-colors ${item.featured ? "text-accent-3" : ""}`}>
                 {item.type === "paper"   && <FileText size={16} />}
                 {item.type === "project" && <Hammer   size={16} />}
                 {item.type === "note"    && <PenLine  size={16} />}
-              </span>
+                </span>
               <p class="group-hover:text-accent-1 transition-colors">
                 <span>{item.text}</span>
                 {item.date && (
@@ -87,6 +107,45 @@ const props = { image: "/sky.png" };
           ))
         }
       </div>
-    </section>
+    </div>
+
+    <script>
+      const feed = document.getElementById("feed")!;
+      const filterSelect = document.getElementById("filter-select") as HTMLSelectElement;
+      const sortSelect = document.getElementById("sort-select") as HTMLSelectElement;
+
+      let activeFilter = "all";
+
+      function applyFilter() {
+        const items = feed.querySelectorAll<HTMLElement>(".feed-item");
+        items.forEach((item) => {
+          const match = activeFilter === "all" || item.dataset.type === activeFilter;
+          item.style.display = match ? "" : "none";
+        });
+      }
+
+      function applySort(order: "newest" | "featured") {
+        const items = Array.from(feed.querySelectorAll<HTMLElement>(".feed-item"));
+        items.sort((a, b) => {
+          if (order === "featured") {
+            const fa = Number(a.dataset.featured);
+            const fb = Number(b.dataset.featured);
+            if (fb !== fa) return fb - fa;
+          }
+          return Number(b.dataset.date) - Number(a.dataset.date);
+        });
+        items.forEach((item) => feed.appendChild(item));
+      }
+
+      filterSelect.addEventListener("change", () => {
+        activeFilter = filterSelect.value;
+        applyFilter();
+      });
+
+      sortSelect.addEventListener("change", () => {
+        applySort(sortSelect.value as "newest" | "featured");
+        applyFilter();
+      });
+    </script>
 
 </Base>
