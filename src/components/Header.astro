@@ -6,11 +6,11 @@ type Props = HTMLAttributes<"a">;
 const { href, class: className, ...props } = Astro.props;
 ---
 
-<header class="sticky top-0 z-50 py-5 px-2 lg:px-4 ">
-    <a href="/" aria-label="Logo of Jack" class="drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
+<header class="md:sticky top-0 z-50 py-5 px-2 lg:px-4 ">
+    <a href="/" aria-label="Logo of Jack">
       <svg
         id="logo"
-        class="max-h-10 w-12 transition-fill fill-base-content group drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+        class="max-h-10 w-12 transition-fill fill-base-content group"
         viewBox="0 0 942 1000"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
