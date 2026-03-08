@@ -53,11 +53,6 @@
 }
 
 
-  .font-bold {
-	font-weight: 800;
-  }
-
-
 @media (prefers-reduced-motion: reduce) {
 	html {
 	  scroll-behavior: auto;
@@ -68,7 +63,6 @@
 :root {
   font-family: Inter, sans-serif;
   font-feature-settings: 'liga' 1, 'calt' 1, 'ss02' 1; /* fix for Chrome */
-  font-weight: 500;
 
 
 
@@ -91,6 +85,7 @@ h5,
 h6,
 .font-display {
 	font-family: 'Space Grotesk Variable', sans-serif;
+	font-weight: 800;
 }
 
 img.emoji {
@@ -102,7 +97,7 @@ img.emoji {
 }
 
 main {
-	@apply container p-4 md:p-5 md:px-12 md:max-w-2xl mx-auto
+	@apply container p-4 md:p-5 md:px-12 md:max-w-3xl mx-auto
 }
 
 .opacityOnHover {

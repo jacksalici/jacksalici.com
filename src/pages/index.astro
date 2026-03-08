@@ -23,74 +23,67 @@ const recentAll = [
 const props = { image: "/sky.png" };
 ---
 
-<Base image={props.image} >
-    <div class="max-w-4xl mx-auto md:mt-18 p-6">
-    
-      <div class="grid md:grid-cols-2 gap-8">
-        <div>
-          <h1 class="text-4xl text-balance">
-            A digital craftsman</br> who designs systems</br> that matter.
-          </h1>
-          <div class="mt-6 mb-8 flex flex-wrap gap-3">
-            <a href="https://github.com/jacksalici" class="hover:text-accent-1 transition-colors">
-              <Github size={20} />
-            </a>
-            <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="hover:text-accent-1 transition-colors">
-              <GraduationCap size={20} />
-            </a>
-            <a href="https://linkedin.com/in/giacomosalici" class="hover:text-accent-1 transition-colors">
-              <Linkedin size={20} />
-            </a>
-            
-          </div>
-        </div>  
+<Base image={props.image}>
+  <main>
+    <h1 class="text-4xl text-balance">
+      A digital craftsman who designs systems that matter.
+    </h1>
 
+   
 
-        <p>
-          <span
-            class="">I'm</span> <span class="font-bold">Giacomo Salici</span>
-          <sup class="font-extralight text-xs">/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/</sup>, <span
-            class="">an AI
-              & computer engineer</span>, developer, and occasionally designer based in Italy. I work with the <a
-              href="https://aimagelab.unimore.it/"
-              >AImageLab</a
-              > research group of University of Modena <span class="">and</span> Reggio Emilia as <span class="font-bold"> a PhD candidate in ICT</span>.
-              <br /><br />
-              My <span >research topics</span> include artificial intelligence of things (AIoT), modular deep learning and anomaly detection. I like open source software and hardware.
-              <br /><br />
-              If you want to get in touch, feel free to <a href="/contacts">reach out&nbsp;↗</a>.
-        </p> 
+    <div class="mt-10 mb-10 flex flex-col gap-4">
+      <p>I am
+        <span class="font-bold">Giacomo Salici</span>
+        <sup class="font-extralight text-xs">/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/</sup>, an AI
+        &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a
+          href="https://aimagelab.unimore.it/">AImageLab</a> research group of University of Modena and Reggio Emilia as a <span class="font-bold">PhD candidate in ICT</span>.
+      </p>
+      <p>
+        My research topics include <span class="text-accent-2 font-bold">artificial intelligence of things (AIoT), modular deep learning and anomaly detection.</span> I like open-source software &amp; hardware.
+      </p>
+      <p>
+        If you want to get in touch, feel free to <a href="/contacts">reach out&nbsp;↗</a>.
+      </p>
+       <div class="mt-6 flex gap-3">
+      <a href="https://github.com/jacksalici" class="hover:text-accent-1 transition-colors">
+        <Github size={20} />
+      </a>
+      <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="hover:text-accent-1 transition-colors">
+        <GraduationCap size={20} />
+      </a>
+      <a href="https://linkedin.com/in/giacomosalici" class="hover:text-accent-1 transition-colors">
+        <Linkedin size={20} />
+      </a>
+    </div>
+    </div>
 
+    <div class="mb-10 mt-20 flex flex-wrap items-center gap-x-6 gap-y-3">
+      <h1 class="text-3xl">Thoughts, articles, & projects</h1>
+      <div class="flex gap-2 items-center md:ml-auto">
+        <select id="filter-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
+          <option value="all">All types</option>
+          <option value="note">Notes</option>
+          <option value="project">Projects</option>
+          <option value="paper">Papers</option>
+        </select>
+        <select id="sort-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
+          <option value="newest">Newest first</option>
+          <option value="featured">Featured first</option>
+        </select>
       </div>
-    
-    <div class="mt-40">
-      <div class="mb-10 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <h1 class="text-3xl">Thoughts, articles, and projects</h1>
-        <div class="flex gap-2 items-center md:ml-auto">
-          <select id="filter-select" class="text-xs px-2 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
-            <option value="all">All types</option>
-            <option value="note">Notes</option>
-            <option value="project">Projects</option>
-            <option value="paper">Papers</option>
-          </select>
-          <select id="sort-select" class="text-xs px-2 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
-            <option value="newest">Newest first</option>
-            <option value="featured">Featured first</option>
-          </select>
-        </div>
-      </div>
+    </div>
 
-      <div id="feed" class="flex flex-col gap-6">
+      <div id="feed" class="flex flex-col gap-8">
         {
           recentAll.map((item) => (
             <a
               href={item.slug}
-              class="feed-item group flex gap-2 items-baseline"
+              class="feed-item group flex gap-2 items-start"
               data-type={item.type}
               data-date={item.date.valueOf()}
               data-featured={item.featured ? "1" : "0"}
             >
-                <span class={`group-hover:text-accent-1 transition-colors ${item.featured ? "text-accent-3" : ""}`}>
+                <span class={`group-hover:text-accent-1 transition-colors mt-1 ${item.featured ? "text-accent-3" : ""}`}>
                 {item.type === "paper"   && <FileText size={16} />}
                 {item.type === "project" && <Hammer   size={16} />}
                 {item.type === "note"    && <PenLine  size={16} />}
@@ -147,5 +140,6 @@ const props = { image: "/sky.png" };
         applyFilter();
       });
     </script>
+  </main>
 
 </Base>
