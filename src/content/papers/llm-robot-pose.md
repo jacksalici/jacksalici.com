@@ -5,7 +5,7 @@ slug: llm-robot-pose
 authors: "Riccardo Catalini*, Federico Biagi*, Giacomo Salici*, Guido Borghi, Roberto Vezzani, and Luigi Biagiotti"
 venue: "17th International Conference on Social Robotics + AI (ICSR+AI 2025)"
 location: "Naples, Italy"
-news: '"LLMs and Humanoid Robot Diversity: The Pose Generation Challenge" has been accepted at ICSR 2025!'
+news: '“LLMs and Humanoid Robot Diversity: The Pose Generation Challenge” has been accepted at ICSR 2025!'
 activities: ["robotics"]
 acronym: "ICSR 2025"
 cta:

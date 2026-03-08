@@ -4,7 +4,7 @@ pubDate: 2026-01-30
 slug: gradfix
 authors: "Filippo Rinaldi, Aniello Panariello, Giacomo Salici, Fengyuan Liu, Marco Ciccone, Angelo Porrello, Simone Calderara"
 venue: "14th International Conference on Learning Representations"
-news: Our work "Gradient-Sign Masking for Task Vector Transport Across Pre-Trained Models" has been accepted at ICLR 2026!
+news: Our work “Gradient-Sign Masking for Task Vector Transport Across Pre-Trained Models” has been accepted at ICLR 2026!
 acronym: "ICLR 2026"
 location: "Rio de Janeiro, Brazil"
 cta:

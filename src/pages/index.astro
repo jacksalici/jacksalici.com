@@ -39,10 +39,9 @@ const props = { image: "/sky.png" };
           href="https://aimagelab.unimore.it/">AImageLab</a> research group of University of Modena and Reggio Emilia as a <span class="font-bold">PhD candidate in ICT</span>.
       </p>
       <p>
-        My research topics include <span class="text-accent-2 font-bold">artificial intelligence of things (AIoT), modular deep learning, and anomaly detection.</span>
+        My research interests include <span class="text-accent-2 font-bold">artificial intelligence of things (AIoT), modular deep learning, and anomaly detection.</span>
       
-        I like open-source software &amp; hardware, good designs (both UI and physical), mountain, and desk plants.
-     
+        Besides my research work, I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
         If you want to get in touch, feel free to <a href="/contacts">reach out&nbsp;↗</a>.
       </p>
        <div class="mt-6 flex gap-3">
@@ -58,23 +57,24 @@ const props = { image: "/sky.png" };
     </div>
     </div>
 
-    <div class="mb-10 mt-20 flex flex-wrap items-center gap-x-6 gap-y-3">
-      <h1 class="text-3xl">Thoughts, papers, & projects.</h1>
-      <div class="flex gap-2 items-center md:ml-auto">
-        <select id="filter-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
-          <option value="all">All types</option>
-          <option value="note">Notes</option>
-          <option value="project">Projects</option>
-          <option value="paper">Papers</option>
-        </select>
-        <select id="sort-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
-          <option value="newest">Newest first</option>
-          <option value="featured">Featured first</option>
-        </select>
+    <div class="min-h-[80vh] mt-20" id="feed">
+      <div class="mb-10 flex flex-wrap items-center gap-y-3 ">
+        <h1 class="text-3xl">Thoughts, papers, & projects.</h1>
+        <div class="flex gap-2 items-center md:ml-auto">
+          <select id="filter-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
+            <option value="all">All types</option>
+            <option value="note">Notes</option>
+            <option value="project">Projects</option>
+            <option value="paper">Papers</option>
+          </select>
+          <select id="sort-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
+            <option value="newest">Newest first</option>
+            <option value="featured">Featured first</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-      <div id="feed" class="flex flex-col gap-8">
+      <div class="flex flex-col gap-8">
         {
           recentAll.map((item) => (
             <a
@@ -89,10 +89,10 @@ const props = { image: "/sky.png" };
                 {item.type === "project" && <Hammer   size={16} />}
                 {item.type === "note"    && <PenLine  size={16} />}
                 </span>
-              <p class="group-hover:text-accent-1 transition-colors">
+              <p class="group-hover:text-accent-1 transition-colors text-balance">
                 <span>{item.text}</span>
                 {item.date && (
-                  <span class="text-xs ml-1.5 opacity-50">
+                  <span class="text-xs ml-1.5 opacity-50 inline-block">
                     <FormattedDate date={item.date} />
                   </span>
                 )}
@@ -103,6 +103,8 @@ const props = { image: "/sky.png" };
       </div>
     </div>
 
+
+    </div>
     <script>
       const feed = document.getElementById("feed")!;
       const filterSelect = document.getElementById("filter-select") as HTMLSelectElement;
