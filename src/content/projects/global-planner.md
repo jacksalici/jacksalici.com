@@ -3,6 +3,7 @@ title: MMR Driverless' Global Planner
 pubDate: 2024-09-01
 slug: global-planner
 description: Trajectory global planner for a Formula Student autonomous car.
+news: I built the trajectory global planner for MMR Driverless' Formula Student autonomous car.
 categories: ["Robotics"]
 tags: ["ROS2", "Formula Student", "Trajectory Optimization"]
 stack: ["Python", "ROS2"]

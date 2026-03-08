@@ -4,6 +4,7 @@ pubDate: 2022-04-01
 updatedDate: 2023-08-01
 slug: salinger-theme
 description: "A minimalistic theme for Hugo framework."
+news: Salinger is a minimalistic, blazing-fast Hugo theme built with Tailwind CSS and DaisyUI.
 categories: ["Web Development"]
 tags: ["Hugo", "Tailwind", "DaisyUI"]
 stack: ["Hugo", "Tailwind", "DaisyUI"]

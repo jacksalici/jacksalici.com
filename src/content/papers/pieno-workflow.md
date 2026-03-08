@@ -6,6 +6,7 @@ authors: "Marco Savarese, Carmine Zaccagnino, Antonio De Blasi, Giacomo Salici, 
 venue: "IEEE Consumer Communications & Networking Conference 2026"
 acronym: "CCNC 2026"
 location: "Las Vegas, USA"
+news: Our work on the complete RI-PIENO refueling workflow has been accepted at CCNC 2026!
 cta:
   - { url: "https://iris.unimore.it/bitstream/11380/1390192/1/2025407464.pdf", label: "Link to the paper" }
   - { url: "https://pieno.dev/", label: "Project Website" }

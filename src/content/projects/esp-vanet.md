@@ -3,6 +3,7 @@ title: "ESP-VANET: ESP32-based inter-vehicular communication"
 pubDate: 2024-03-25
 slug: espvanet
 description: A low-cost inter-vehicular communication network.
+news: ESP-VANET brings ETSI ITS-G5 V2X messaging to ESP32 microcontrollers at minimal cost.
 categories: ["Internet of Things"]
 tags: ["ESP32", "ETSI", "CAM", "Automotive"]
 stack: ["Arduino", "ESP32"]

@@ -6,6 +6,7 @@ authors: "Riccardo Catalini*, Giacomo Salici*, Federico Biagi, Guido Borghi, Lui
 venue: "13th International Workshop on Assistive Computer Vision and Robotics (ACVR) - in Conjunction With ICCV 2025"
 acronym: "ICCVW 2025"
 location: "Honolulu, Hawaii, USA"
+news: Our paper "LLMs as NAO Robot 3D Motion Planners" has been accepted at ICCVW 2025. See you in Hawaii!
 activities: ["robotics"]
 cta:
   - { url: "https://hdl.handle.net/11380/1384296", label: "Full Text" }

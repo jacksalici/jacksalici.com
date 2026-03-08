@@ -2,6 +2,7 @@
 title: '“Blockchain technologies applied to the digitalization of governance processes in business contexts”'
 pubDate: 2022-07-02
 description: "My B.Sc. dissertation is about blockchain integration in management software."
+news: My B.Sc. thesis on blockchain integration in governance software is now publicly available.
 categories: ["Blockchain"]
 stack: ["Solidity"]
 featured: true

@@ -2,6 +2,7 @@
 title: "Mirandola 2 website"
 pubDate: 2024-11-01
 description: The fullstack website for my scout group.
+news: I built the new fullstack website for my scout group using Nuxt and Cloudflare D1.
 categories: ["Web Development"]
 tags: ["Nuxt", "Node.js", "fullstack"]
 stack: ["Nuxt", "Node.js"]
