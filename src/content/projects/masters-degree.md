@@ -5,7 +5,7 @@ slug: sfm-gaze-framework
 description: "Gaze-Driven Human-Robot Interaction is the core of my thesis."
 news: My M.Sc. thesis on gaze-driven human-robot interaction is now available online.
 summary: "The following text is a glimpse of my master degree thesis in Computer Engineering. During its development, I applied the gaze direction on human-robot interaction, using a humanoid robot and two pair of eye-tracking glasses to build a pipeline for estimate it in common - not laboratory-based - environments."
-categories: ["Computer Vision", "Robotics"]
+categories: ["AI/ML", "Robotics"]
 stack: ["Python"]
 featured: true
 cta:

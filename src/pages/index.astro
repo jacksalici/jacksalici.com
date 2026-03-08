@@ -4,9 +4,19 @@ import PostCard from "../components/PostCard.astro";
 import GlassChip from "../components/GlassChip.astro";
 import Base from "../layouts/Base.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-import { FileText, Hammer, PenLine, Github, GraduationCap, Linkedin } from "@lucide/astro";
+import { FileText, Hammer, PenLine, Github, GraduationCap, Linkedin, BrainCircuit, Bot, WifiCog, Gamepad2, Wrench, Palette, PanelsTopLeft } from "@lucide/astro";
 import "../styles/global.css";
 
+
+const categoryIcons: Record<string, any> = {
+  "AI/ML": BrainCircuit,
+  "Robotics": Bot,
+  "IoT/V2X": WifiCog,
+  "Web": PanelsTopLeft,
+  "Games": Gamepad2,
+  "Making": Wrench,
+  "Design": Palette,
+};
 
 const recentAll = [
   ...(await getCollection("notes"))
@@ -98,7 +108,7 @@ const props = { image: "/sky.png" };
             >
                 <span class={`group-hover:text-accent-1 transition-colors mt-1 ${item.featured ? "text-accent-3" : ""}`}>
                 {item.type === "paper"   && <FileText size={16} />}
-                {item.type === "project" && <Hammer   size={16} />}
+                {item.type === "project" && (() => { const Icon = categoryIcons[item.categories[0]] ?? Hammer; return <Icon size={16} />; })()}
                 {item.type === "note"    && <PenLine  size={16} />}
                 </span>
               <p class="group-hover:text-accent-1 transition-colors text-balance">

@@ -7,6 +7,7 @@ venue: "14th International Conference on Learning Representations"
 news: Our work “Gradient-Sign Masking for Task Vector Transport Across Pre-Trained Models” has been accepted at ICLR 2026!
 acronym: "ICLR 2026"
 location: "Rio de Janeiro, Brazil"
+categories: ["AI/ML"]
 cta:
   - { url: "https://arxiv.org/pdf/2510.09658", label: "Link to the paper" }
 featured: true

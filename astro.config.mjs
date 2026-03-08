@@ -12,6 +12,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
 
   redirects: {
+    
     "/b/": "/notes",
     "/projects/website": "/blog/website",
     "/p/[...slug]": "/projects/[...slug]",

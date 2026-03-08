@@ -3,7 +3,7 @@ title: "Modeling scouts"
 pubDate: 2016-07-02
 description: "A model of a scout camp."
 news: I built a 1:20 scale model of a scout patrol area as my craftsman badge project.
-categories: ["Crafting"]
+categories: ["Making"]
 stack: ["Wood"]
 hidden: true
 gallery:

@@ -4,8 +4,7 @@ pubDate: 2024-03-25
 slug: espvanet
 description: A low-cost inter-vehicular communication network.
 news: ESP-VANET brings ETSI ITS-G5 V2X messaging to ESP32 microcontrollers at minimal cost.
-categories: ["Internet of Things"]
-tags: ["ESP32", "ETSI", "CAM", "Automotive"]
+categories: ["IoT/V2X"]
 stack: ["Arduino", "ESP32"]
 cta:
   - { url: "https://github.com/jacksalici/esp-vanet", label: "Code and Documentation" }

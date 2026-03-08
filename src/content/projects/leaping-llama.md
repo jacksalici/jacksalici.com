@@ -4,8 +4,7 @@ pubDate: 2021-07-21
 slug: leaping-llama
 description: An Android 2d game starring a llama that jumps and shots.
 news: Leaping Llama is my first Android 2D game, built with LibGDX and open source on GitHub.
-categories: ["Game Development"]
-tags: ["Android", "LibGDX"]
+categories: ["Games"]
 stack: ["Java", "LibGDX"]
 cover: "/uploads/gameLogo.png"
 ---

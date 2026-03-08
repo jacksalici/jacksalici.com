@@ -4,7 +4,7 @@ pubDate: 2023-08-01
 updatedDate: 2024-10-15
 description: "A web app to manage your favorite RPG hero inventory."
 news: The Inventory App is a free, open-source web tool for tracking RPG character equipment.
-categories: ["Web Development"]
+categories: ["Web"]
 stack: ["Vue", "Deta"]
 cta:
   - { url: "https://inventory.jacksalici.com", label: "Check the website" }
