@@ -11,27 +11,21 @@ interface Props {
   ariaLabel?: string
   full?: boolean
   highlight?: boolean
-  size?: "xs" | "sm" | "md" | "lg"
   dropdown?: boolean
   menuItems?: MenuItem[]
 }
 
-const { href, label, ariaLabel, full, highlight, size = "sm", dropdown = false, menuItems = [] } = Astro.props
+const { href, label, ariaLabel, full, highlight, dropdown = false, menuItems = [] } = Astro.props
 
-const sizeClasses = {
-  xs: "px-3 py-1 text-xs",
-  sm: "px-4 py-2 text-sm",
-  md: "px-5 py-2.5 text-base",
-  lg: "px-6 py-3 text-lg"
-}
 
-const base = "inline-flex items-center gap-2 rounded-full font-medium transition-all duration-300 focus:outline-none focus:ring-2 bg-gradient-to-br from-transparent to-transparent border hover:from-accent-2/15 hover:border-accent-2/50 focus:ring-base-content/20 hover:text-accent-2 hover:shadow-lg shadow-sm"
+
+const base = "inline-flex items-center gap-2 rounded-xl font-medium transition-all duration-100 focus:outline-none focus:ring-2 bg-gradient-to-br from-transparent to-transparent border hover:from-accent-2/15 hover:border-accent-2/50 focus:ring-base-content/20 hover:text-accent-2 hover:shadow-sm"
 
 const color = highlight
   ? "text-accent-3/90 from-accent-3 border-accent-3/15"
-  : "text-neutral-content border-neutral-content/40"
+  : "text-neutral-content border-neutral-content"
 
-const classes = [base, sizeClasses[size], color, full && "w-full justify-center"]
+const classes = [base, color, full && "w-full justify-center"]
 ---
 
 {dropdown ? (
@@ -42,7 +36,7 @@ const classes = [base, sizeClasses[size], color, full && "w-full justify-center"
     </button>
     <div class="absolute right-0 mt-2 flex flex-col gap-1 rounded-3xl p-1 invisible -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0">
       {menuItems.map((item) => (
-        <a href={item.href} aria-label={item.ariaLabel ?? item.label} class:list={[base, sizeClasses[size], color, "w-full justify-center whitespace-nowrap"]}>
+        <a href={item.href} aria-label={item.ariaLabel ?? item.label} class:list={[base, color, "w-full justify-center whitespace-nowrap"]}>
           {item.label}
         </a>
       ))}
