@@ -16,6 +16,8 @@ const categoryIcons: Record<string, { icon: any; label: string }> = {
   "games": { icon: Gamepad2, label: "Games" },
   "making": { icon: Wrench, label: "Making" },
   "design": { icon: Palette, label: "Design" },
+  "updates": { icon: PenLine, label: "Updates" },
+  "thoughts": { icon: PenLine, label: "Thoughts" },
 };
 
 const recentAll = [
@@ -71,7 +73,7 @@ const props = { image: "/sky.png" };
 
     <div class="min-h-[80vh] mt-20" id="feed">
         <h1 class="text-3xl">Thoughts, papers, & projects.</h1>
-        <div class="flex mt-5 flex-wrap gap-2 items-center w-full justify-stretch">
+        <div class="flex mt-3 mb-4 flex-wrap gap-2 items-center w-full justify-stretch">
           <input
             id="search-input"
             type="search"
@@ -93,13 +95,14 @@ const props = { image: "/sky.png" };
             <option value="featured">Featured first</option>
           </select>
       </div>
+      <p id="feed-empty" class="mt-10 text-center opacity-50 hidden">No items match the selected criteria 🤷‍♂️</p>
 
-      <div class="flex flex-col">
+      <div class="flex flex-col" id="feed-list">
         {
           recentAll.map((item) => (
             <a
               href={item.slug}
-              class="feed-item group flex my-8 gap-2 items-start"
+              class="feed-item group flex my-4 gap-2 items-start"
               data-type={item.type}
               data-date={item.date.valueOf()}
               data-featured={item.featured ? "1" : "0"}
@@ -128,7 +131,8 @@ const props = { image: "/sky.png" };
 
     </div>
     <script>
-      const feedContainer = document.getElementById("feed")!;
+      const feedList = document.getElementById("feed-list")!;
+      const feedEmpty = document.getElementById("feed-empty") as HTMLElement;
       const filterSelect = document.getElementById("filter-select") as HTMLSelectElement;
       const sortSelect = document.getElementById("sort-select") as HTMLSelectElement;
       const categorySelect = document.getElementById("category-select") as HTMLSelectElement;
@@ -138,19 +142,19 @@ const props = { image: "/sky.png" };
       function getParams() {
         const p = new URLSearchParams(window.location.search);
         return {
-          type: p.get("t") ?? "all",
-          category: p.get("c") ?? "all",
-          sort: p.get("s") ?? "newest",
+          type: p.get("type") ?? "all",
+          category: p.get("category") ?? "all",
+          sort: p.get("sort") ?? "newest",
           q: p.get("q") ?? "",
         };
       }
 
       function pushParams() {
         const p = new URLSearchParams();
-        if (filterSelect.value !== "all")    p.set("t",     filterSelect.value);
-        if (categorySelect.value !== "all")  p.set("c",     categorySelect.value);
-        if (sortSelect.value !== "newest")   p.set("s",     sortSelect.value);
-        if (searchInput.value.trim())        p.set("q",        searchInput.value.trim());
+        if (filterSelect.value !== "all") p.set("type", filterSelect.value);
+        if (categorySelect.value !== "all") p.set("category", categorySelect.value);
+        if (sortSelect.value !== "newest") p.set("sort", sortSelect.value);
+        if (searchInput.value.trim()) p.set("q", searchInput.value.trim());
         const qs = p.toString();
         history.replaceState(null, "", qs ? "?" + qs : window.location.pathname);
       }
@@ -160,20 +164,24 @@ const props = { image: "/sky.png" };
         const type = filterSelect.value;
         const category = categorySelect.value;
         const query = searchInput.value.toLowerCase().trim();
-        const items = feedContainer.querySelectorAll<HTMLElement>(".feed-item");
+        const items = feedList.querySelectorAll<HTMLElement>(".feed-item");
+        let visibleCount = 0;
         items.forEach((item) => {
           const typeMatch = type === "all" || item.dataset.type === type;
           const cats = item.dataset.categories ? item.dataset.categories.split(",") : [];
           const categoryMatch = category === "all" || cats.includes(category);
           const text = item.dataset.text ?? "";
           const searchMatch = !query || text.includes(query);
-          item.style.display = typeMatch && categoryMatch && searchMatch ? "" : "none";
+          const visible = typeMatch && categoryMatch && searchMatch;
+          item.style.display = visible ? "" : "none";
+          if (visible) visibleCount++;
         });
+        feedEmpty.classList.toggle("hidden", visibleCount > 0);
         pushParams();
       }
 
       function applySort(order: "newest" | "featured") {
-        const items = Array.from(feedContainer.querySelectorAll<HTMLElement>(".feed-item"));
+        const items = Array.from(feedList.querySelectorAll<HTMLElement>(".feed-item"));
         items.sort((a, b) => {
           if (order === "featured") {
             const fa = Number(a.dataset.featured);
@@ -182,18 +190,22 @@ const props = { image: "/sky.png" };
           }
           return Number(b.dataset.date) - Number(a.dataset.date);
         });
-        items.forEach((item) => feedContainer.appendChild(item));
+        items.forEach((item) => feedList.appendChild(item));
       }
 
       // --- Init from URL ---
       (function init() {
         const { type, category, sort, q } = getParams();
-        filterSelect.value   = type;
+        filterSelect.value = type;
         categorySelect.value = category;
-        sortSelect.value     = sort;
-        searchInput.value    = q;
+        sortSelect.value = sort;
+        searchInput.value = q;
         applySort(sort as "newest" | "featured");
         applyAll();
+        const hasQuery = window.location.search.length > 0;
+        if (hasQuery) {
+          document.getElementById("feed")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       })();
 
       filterSelect.addEventListener("change", applyAll);
