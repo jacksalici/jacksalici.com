@@ -5,6 +5,7 @@ const baseSchema = z.object({
 	title: z.string().optional(),
 	slug: z.string().optional(), // Custom URL slug (defaults to filename if not set)
 	description: z.string().optional(), // Short description for cards and SEO
+	news: z.string().optional(), // Highlighted news or updates
 	summary: z.string().optional(), // Extended description shown on the detail page
 	pubDate: z.coerce.date(),
 	updatedDate: z.coerce.date().optional(),

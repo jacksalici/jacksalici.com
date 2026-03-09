@@ -1,0 +1,217 @@
+---
+import { FileText, BrainCircuit, Bot, WifiCog, Gamepad2, Wrench, Palette, PanelsTopLeft, PenLine, Hammer } from "@lucide/astro";
+import FormattedDate from "./FormattedDate.astro";
+import { categories } from "../consts";
+
+type FeedItem = {
+  date: Date;
+  featured: boolean;
+  categories: string[];
+  text: string;
+  slug: string;
+  type: "notes" | "projects" | "papers";
+};
+
+interface Props {
+  items: FeedItem[];
+}
+
+const categoryIcons: Record<string, any> = {
+  "ai-ml":      BrainCircuit,
+  "robotics":   Bot,
+  "iot-and-v2x": WifiCog,
+  "web":        PanelsTopLeft,
+  "games":      Gamepad2,
+  "making":     Wrench,
+  "design":     Palette,
+  "updates":    PenLine,
+  "thoughts":   PenLine,
+};
+
+const { items } = Astro.props;
+const allCategories = [...new Set(items.flatMap((i) => i.categories))].sort();
+
+---
+
+<div class="min-h-[80vh] mt-20" id="feed">
+  <h1 class="text-3xl" id="feed-title">Notes, papers, &amp; projects.</h1>
+  <div class="flex mt-3 mb-4 flex-wrap gap-2 items-center w-full justify-stretch">
+    <input
+      id="search-input"
+      type="search"
+      placeholder="Search…"
+      class="text-xs px-2 py-1 rounded-lg border border-base-300 text-base-content bg-base-100 placeholder:text-neutral hover:border-base-content transition-colors focus:outline-none w-36"
+    />
+    <select id="category-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
+      <option value="all">All categories</option>
+      {allCategories.map((c) => <option value={c}>{categories[c] ?? c}</option>)}
+    </select>
+    <select id="filter-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
+      <option value="all">All types</option>
+      <option value="notes">Notes</option>
+      <option value="projects">Projects</option>
+      <option value="papers">Papers</option>
+    </select>
+    <select id="sort-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
+      <option value="newest">Newest first</option>
+      <option value="featured">Featured first</option>
+    </select>
+    <button id="reset-filters" class="text-xs px-2 py-1 text-base-300 underline hover:text-base-content cursor-pointer hidden transition-colors ">Clear</button>
+  </div>
+  <p id="feed-empty" class="mt-10 text-center opacity-50 hidden">No items match the selected criteria 🙅</p>
+
+  <div class="flex flex-col" id="feed-list">
+    {
+      items.map((item) => (
+        <a
+          href={item.slug}
+          class="feed-item group flex my-4 gap-2 items-start"
+          data-type={item.type}
+          data-date={item.date.valueOf()}
+          data-featured={item.featured ? "1" : "0"}
+          data-categories={item.categories.join(",")}
+          data-text={item.text.toLowerCase()}
+        >
+          <span class={`group-hover:text-accent-1 transition-colors mt-1 ${item.featured ? "text-accent-3" : ""}`}>
+            {item.type === "papers"   && <FileText size={16} />}
+            {item.type === "projects" && (() => { const Icon = categoryIcons[item.categories[0]] ?? Hammer; return <Icon size={16} />; })()}
+            {item.type === "notes"    && <PenLine  size={16} />}
+          </span>
+          <p class="group-hover:text-accent-1 transition-colors text-balance">
+            <span>{item.text}</span>
+            {item.date && (
+              <span class="text-xs ml-1.5 opacity-50 inline-block">
+                <FormattedDate date={item.date} />
+              </span>
+            )}
+          </p>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const feedList = document.getElementById("feed-list")!;
+  const feedEmpty = document.getElementById("feed-empty") as HTMLElement;
+  const filterSelect = document.getElementById("filter-select") as HTMLSelectElement;
+  const sortSelect = document.getElementById("sort-select") as HTMLSelectElement;
+  const categorySelect = document.getElementById("category-select") as HTMLSelectElement;
+  const searchInput = document.getElementById("search-input") as HTMLInputElement;
+
+  // --- URL param helpers ---
+  function getParams() {
+    const p = new URLSearchParams(window.location.search);
+    return {
+      type: p.get("type") ?? "all",
+      category: p.get("category") ?? "all",
+      sort: p.get("sort") ?? "newest",
+      q: p.get("q") ?? "",
+    };
+  }
+
+  function pushParams() {
+    const p = new URLSearchParams();
+    if (filterSelect.value !== "all") p.set("type", filterSelect.value);
+    if (categorySelect.value !== "all") p.set("category", categorySelect.value);
+    if (sortSelect.value !== "newest") p.set("sort", sortSelect.value);
+    if (searchInput.value.trim()) p.set("q", searchInput.value.trim());
+    const qs = p.toString();
+    history.replaceState(null, "", qs ? "?" + qs : window.location.pathname);
+  }
+
+  // --- Apply from current control values ---
+  function applyAll() {
+    const type = filterSelect.value;
+    const category = categorySelect.value;
+    const query = searchInput.value.toLowerCase().trim();
+    const items = feedList.querySelectorAll<HTMLElement>(".feed-item");
+    let visibleCount = 0;
+    items.forEach((item) => {
+      const typeMatch = type === "all" || item.dataset.type === type;
+      const cats = item.dataset.categories ? item.dataset.categories.split(",") : [];
+      const categoryMatch = category === "all" || cats.includes(category);
+      const text = item.dataset.text ?? "";
+      const searchMatch = !query || text.includes(query);
+      const visible = typeMatch && categoryMatch && searchMatch;
+      item.style.display = visible ? "" : "none";
+      if (visible) visibleCount++;
+    });
+    feedEmpty.classList.toggle("hidden", visibleCount > 0);
+
+    // --- Highlight active controls ---
+    const activeClass = ["text-accent-3", "border-accent-3"];
+    const inactiveClass = ["text-neutral", "border-base-300"];
+    function setActive(el: HTMLElement, active: boolean) {
+      el.classList.toggle("text-accent-3", active);
+      el.classList.toggle("border-accent-3", active);
+      el.classList.toggle("text-neutral", !active);
+      el.classList.toggle("border-base-300", !active);
+    }
+    setActive(categorySelect, category !== "all");
+    setActive(filterSelect, type !== "all");
+    setActive(sortSelect, sortSelect.value !== "newest");
+    const searchActive = searchInput.value.trim() !== "";
+    searchInput.classList.toggle("text-accent-3", searchActive);
+    searchInput.classList.toggle("border-accent-3", searchActive);
+    searchInput.classList.toggle("border-base-300", !searchActive);
+    const anyActive = category !== "all" || type !== "all" || sortSelect.value !== "newest" || searchActive;
+    document.getElementById("reset-filters")?.classList.toggle("hidden", !anyActive);
+
+    // --- Update feed title ---
+    const typeLabels: Record<string, string> = { notes: "Notes", projects: "Projects", papers: "Papers" };
+    const categoryLabel = category !== "all" ? (categorySelect.selectedOptions[0]?.text ?? category) : "";
+    const base = type !== "all" ? (typeLabels[type] ?? type) : "Notes, papers, &amp; projects";
+    const about = categoryLabel || query;
+    const titleEl = document.getElementById("feed-title")!;
+    titleEl.innerHTML = about ? `${base} about ${about}.` : `${base}.`;
+
+    pushParams();
+  }
+
+  function applySort(order: "newest" | "featured") {
+    const items = Array.from(feedList.querySelectorAll<HTMLElement>(".feed-item"));
+    items.sort((a, b) => {
+      if (order === "featured") {
+        const fa = Number(a.dataset.featured);
+        const fb = Number(b.dataset.featured);
+        if (fb !== fa) return fb - fa;
+      }
+      return Number(b.dataset.date) - Number(a.dataset.date);
+    });
+    items.forEach((item) => feedList.appendChild(item));
+  }
+
+  // --- Init from URL ---
+  (function init() {
+    const { type, category, sort, q } = getParams();
+    filterSelect.value = type;
+    categorySelect.value = category;
+    sortSelect.value = sort;
+    searchInput.value = q;
+    applySort(sort as "newest" | "featured");
+    applyAll();
+    const hasQuery = window.location.search.length > 0;
+    if (hasQuery) {
+      document.getElementById("feed")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  })();
+
+  filterSelect.addEventListener("change", applyAll);
+  categorySelect.addEventListener("change", applyAll);
+  searchInput.addEventListener("input", applyAll);
+
+  document.getElementById("reset-filters")?.addEventListener("click", () => {
+    filterSelect.value = "all";
+    categorySelect.value = "all";
+    sortSelect.value = "newest";
+    searchInput.value = "";
+    applySort("newest");
+    applyAll();
+  });
+
+  sortSelect.addEventListener("change", () => {
+    applySort(sortSelect.value as "newest" | "featured");
+    applyAll();
+  });
+</script>

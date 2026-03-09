@@ -3,6 +3,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import GlassChip from '../components/GlassChip.astro';
 import Gallery from '../components/Gallery.astro';
 import Base from './Base.astro';
+import { categories } from '../consts';
 
 const { ...props } = Astro.props;
 ---
@@ -23,7 +24,7 @@ const { ...props } = Astro.props;
 			<p class="text-xs mb-2">
 				{props.pubDate && <span>Published on <FormattedDate date={props.pubDate} /></span>}
 				{props.updatedDate && <span>~ Updated on <FormattedDate date={props.updatedDate} /></span>}
-				{props.categories && <span>~ {props.categories.join(', ')}</span>}
+				{props.categories && <span>~ {props.categories.map((c: string) => categories[c] ?? c).join(', ')}</span>}
 				{props.location && <span>~ {props.location}</span>}
 				{props.stack && <span>~ Built with {props.stack.join(', ')}</span>}
 			</p>
@@ -43,13 +44,13 @@ const { ...props } = Astro.props;
 		</div>
 
 		{/* Content */}
-		<div class="prose prose-invert font-body my-10 prose-img:mx-auto prose-strong:text-base-content prose-p:text-base-content prose-headings:text-neutral-content prose-ul:text-neutral-content max-w-xl prose-p:text-justify prose-p:hyphens-auto mx-auto">
+		<div class="prose prose-js font-body my-10 prose-img:mx-auto prose-p:text-justify prose-p:hyphens-auto w-full">
 			<slot />
 		</div>
 
 		{/* Call-to-action buttons */}
 		{props.cta && (
-			<div class="flex gap-3 justify-evenly *:p-3 lg:*:p-5 mb-3">
+			<div class="flex gap-3 justify-evenly *:p-3 mb-3">
 				{props.cta.map((item: { url: string; label: string }) => (
 					<GlassChip label={item.label} ariaLabel={'Link to ' + item.label} full href={item.url}>
 						<svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-5 mr-2 inline-block" viewBox="0 0 512 512" slot="icon">

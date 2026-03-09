@@ -2,7 +2,8 @@
 title: My high school's 2019 yearbook
 pubDate: 2019-06-30
 description: My last year high school yearbook.
-categories: ["Graphic Design"]
+news: I designed my high school's 76-page yearbook during my final year.
+categories: ["design"]
 hidden: true
 ---
 

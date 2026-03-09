@@ -2,7 +2,8 @@
 title: "Emoji list API and npm"
 pubDate: 2022-08-02
 description: "A simple API and npm package for querying emoji."
-categories: ["Web Development"]
+news: I built a RESTful API and npm package for fetching and randomizing emoji lists.
+categories: ["web"]
 stack: ["Python", "Node.js"]
 cover: /uploads/emojiscreenshot.png
 cta:

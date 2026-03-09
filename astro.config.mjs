@@ -12,9 +12,10 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
 
   redirects: {
-    "/b/": "/notes",
-    "/projects/website": "/blog/website",
-    "/p/[...slug]": "/projects/[...slug]",
+    "/papers": "/?type=papers",
+    "/notes": "/?type=notes",
+    "/projects": "/?type=projects",
+    "/projects/website": "/notes/website",
     "/thesis": "/projects/sfm-gaze-framework"
   },
 

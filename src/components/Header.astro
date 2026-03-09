@@ -6,9 +6,8 @@ type Props = HTMLAttributes<"a">;
 const { href, class: className, ...props } = Astro.props;
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-md bg-base-100/40 bg-blur-lg">
-  <nav class="py-4 px-2 lg:px-4 flex items-center justify-between text-base-content">
-    <a href="/" aria-label="Logo of Jack">
+<header class="md:sticky top-0 z-50 py-5 px-2 lg:px-4 mr-auto">
+    <a href="/" aria-label="Logo of Jack" class="max-w-fit mr-auto">
       <svg
         id="logo"
         class="max-h-10 w-12 transition-fill fill-base-content group"
@@ -36,21 +35,6 @@ const { href, class: className, ...props } = Astro.props;
       </svg>
     </a>
 
-    <div class="flex gap-3 items-center">
-      <GlassChip label="Playground ↗" ariaLabel="Playground" href="/playground" />
-
-      <GlassChip 
-        label="↓" 
-        ariaLabel="Navigation menu"
-        dropdown={true}
-        menuItems={[
-          { href: "/notes", label: "Notes ↗", ariaLabel: "Link to notes page" },
-          { href: "/contacts", label: "Contacts ↗", ariaLabel: "Link to contacts page" }
-        ]}
-      />
-    </div>
-
 
     
-  </nav>
 </header>

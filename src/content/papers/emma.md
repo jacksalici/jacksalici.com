@@ -6,6 +6,8 @@ authors: "Niyati Rawal, Rahul Singh Maharjan, Giacomo Salici, Riccardo Catalini,
 venue: "17th International Conference on Social Robotics + AI (ICSR+AI 2025)"
 acronym: "ICSR 2025"
 location: "Naples, Italy"
+categories: ["robotics"]
+news: Our paper titled “Multimodal Dialogue for Empathetic Human-Robot Interaction” has been accepted for publication at ICSR 2025!
 cta:
   - { url: "https://iris.unimore.it/handle/11380/1384168", label: "Link to the paper" }
 activities: ["robotics"]

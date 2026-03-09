@@ -1,143 +1,62 @@
 ---
 import { getCollection } from "astro:content";
-import PostCard from "../components/PostCard.astro";
-import GlassChip from "../components/GlassChip.astro";
+import Feed from "../components/Feed.astro";
 import Base from "../layouts/Base.astro";
+import { Github, GraduationCap, Linkedin } from "@lucide/astro";
 import "../styles/global.css";
 
-const notes = (await getCollection("notes"))
-  .sort((a, b) => b.data?.pubDate.valueOf() - a.data?.pubDate.valueOf())
-  .filter((a) => a.data.draft !== false && a.data.hidden != true);
 
-const papers = (await getCollection("papers"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .sort(
-    (a, b) =>
-      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
-  )
-  .filter((a) => a.data.draft !== false && a.data.hidden != true);
 
-const projects = (await getCollection("projects"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .sort(
-    (a, b) =>
-      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
-  )
-  .filter((a) => a.data.draft !== false && a.data.hidden != true);
-
-const activities = (await getCollection("activities"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .sort(
-    (a, b) =>
-      Number(b.data.featured.valueOf()) - Number(a.data.featured.valueOf())
-  )
-  .filter((a) => a.data.draft !== false && a.data.hidden != true);
+const recentAll = [
+  ...(await getCollection("notes"))
+    .filter((a) => a.data.draft !== true && a.data.hidden !== true)
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/notes/" + a.slug, type: "notes" as const })),
+  ...(await getCollection("projects"))
+    .filter((a) => a.data.draft !== true && a.data.hidden !== true)
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/projects/" + a.slug, type: "projects" as const })),
+  ...(await getCollection("papers"))
+    .filter((a) => a.data.draft !== true && a.data.hidden !== true)
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/papers/" + a.slug, type: "papers" as const })),
+].sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
 const props = { image: "/sky.png" };
 ---
 
-<Base image={props.image} hideFooter={true} >
-    <div class=" max-w-4xl mx-auto md:mt-32 p-6">
-    
-      <div class="grid md:grid-cols-2 gap-8">
-        <div>   
-          <GlassChip
-            href="/papers/gradfix"
-            label="Our paper has been accepted at ICLR 2026! ↗"
-            highlight={true}
-            size="xs"
-          >
-          </GlassChip> 
-        <h1 class="text-3xl mt-6 leading-9 text-balance">
-          A digital craftsman</br> who designs systems</br> that matter.
-        </h1>
-        <div class="mt-6 mb-8 flex flex-wrap gap-3">
-          <GlassChip
-            href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ"
-            label="Read my papers on Google Scholar ↗"
-          >
-          </GlassChip>
-          <GlassChip
-            href="https://github.com/jacksalici"
-            label="Checkout my projects on GitHub ↗"
-          >
-          </GlassChip>
-          
-        </div>
-        </div>  
+<Base image={props.image}>
+  <main>
+    <h1 class="text-4xl text-balance">
+      A <span class="text-accent-3">digital craftsman</span> who designs systems that matter.
+    </h1>
 
+   
 
-      <p class="group *:transition-colors *:duration-1000">
-        <span
-          class="">I'm</span> <span class="font-bold">Giacomo Salici</span>
-        <sup class="font-extralight text-xs">/'d͡ʒa‧ko‧mo sa‧li‧t͡ʃi/</sup>, <span
-          class="">an AI
-        & computer engineer</span
-        >, developer, and occasionally designer based in
-        Italy. I work with the <a
-          href="https://aimagelab.unimore.it/"
-          >AImageLab</a
-        > research group of University of Modena <span class="">and</span> Reggio Emilia as <span class=""> a PhD candidate</span
-        > in ICT.
-        <br /><br />
-        My <span >research topics</span> include artificial intelligence of things (AIoT), efficient deep learning
-      and time series analysis.
-    <br /><br />
-          If you want to get in touch, feel free to <a href="/contacts">reach out&nbsp;↗</a> or to <a href="https://linkedin.com/in/jacksalici">connect with me&nbsp;↗</a>.
-</p> 
-
+    <div class="mt-10 mb-10 flex flex-col gap-4">
+      <p>I am
+        <span class="font-bold">Giacomo Salici</span>
+        <sup class="font-light text-[10px]">/'d͡ʒa‧ko‧mo-sa‧li‧t͡ʃi/</sup>, an <span class="font-bold">AI
+        &amp; computer engineer, developer, and occasionally designer</span> based in Italy. I work with the <a class="font-bold"
+          href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of University of Modena and Reggio Emilia (<a href="https://www.unimore.it/">UniMORE&nbsp;↗</a>) as a <span class="text-accent-3 font-bold">PhD candidate  in ICT</span>.
+      </p>
+      <p>
+        My research interests include <span class="text-accent-2 font-bold">artificial intelligence of things (AIoT), modular deep learning, and anomaly detection.</span>
+      
+        Besides my research work, I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
+        If you want to get in touch, feel free to <a href="/contacts">reach out&nbsp;↗</a>.
+      </p>
+       <div class="mt-6 flex gap-3">
+      <a href="https://github.com/jacksalici" class="hover:text-accent-1 transition-colors">
+        <Github size={20} />
+      </a>
+      <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="hover:text-accent-1 transition-colors">
+        <GraduationCap size={20} />
+      </a>
+      <a href="https://linkedin.com/in/giacomosalici" class="hover:text-accent-1 transition-colors">
+        <Linkedin size={20} />
+      </a>
     </div>
-    
+    </div>
 
-    <!--<section >
-      <h2 class="text-2xl mb-4">Recent Papers</h2>
-      <div class="flex flex-col gap-4">
-        {
-          papers.map((single) => (
-            <PostCard
-              title={single.data.title}
-              location={single.data.location}
-              venue={single.data.acronym || single.data.venue}
-              authors={single.data.authors}
-              slug={"/papers/" + single.slug}
-            />
-          ))
-        }
-      </div>
-    </section>
+    <Feed items={recentAll}/>
+  </main>
 
-    <section>
-      <h2 class="text-2xl mb-4">Featured Projects</h2>
-      <div class="flex flex-col gap-4">
-        {
-          projects.map((single) => (
-            <PostCard
-              title={single.data.description}
-              pubDate={single.data.pubDate}
-              slug={"/projects/" + single.slug}
-              categories={single.data.categories}
-              summary={single.data.summary}
-              featured={single.data.featured}
-              trending={single.data.trending}
-            />
-          ))
-        }
-      </div>
-    </section>
-
-    <section>
-      <h2 class="text-2xl mb-4">Recent Notes</h2>
-      <div class="flex flex-col gap-4">
-        {
-          notes.map((single) => (
-            <PostCard
-              title={single.data.description}
-              pubDate={single.data.pubDate}
-              summary={single.data.summary}
-              slug={"/notes/" + single.slug}
-            />
-          ))
-        }
-      </div>
-    </section> -->
 </Base>

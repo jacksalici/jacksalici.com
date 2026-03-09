@@ -2,7 +2,8 @@
 title: "Lack of drawers"
 pubDate: 2021-03-17
 description: "A 3D printed mod for my Ikea Table."
-categories: ["3D Design"]
+news: I designed custom 3D-printed drawers for my IKEA Norråker desk, now available on Thingiverse.
+categories: ["making"]
 stack: ["3D Printing"]
 trending: true
 cover: /uploads/drawer1.jpg
