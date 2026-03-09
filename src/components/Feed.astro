@@ -1,6 +1,7 @@
 ---
-import {FileText, BrainCircuit, Bot, WifiCog, Gamepad2, Wrench, Palette, PanelsTopLeft, PenLine, Hammer } from "@lucide/astro";
+import { FileText, BrainCircuit, Bot, WifiCog, Gamepad2, Wrench, Palette, PanelsTopLeft, PenLine, Hammer } from "@lucide/astro";
 import FormattedDate from "./FormattedDate.astro";
+import { categories } from "../consts";
 
 type FeedItem = {
   date: Date;
@@ -11,28 +12,21 @@ type FeedItem = {
   type: "notes" | "projects" | "papers";
 };
 
-type CategoryMeta = {
-  icon: any;
-  label: string;
-};
-
 interface Props {
   items: FeedItem[];
 }
 
-const categoryIcons: Record<string, CategoryMeta> = {
-  "ai-ml": { icon: BrainCircuit, label: "AI & ML" },
-  "robotics": { icon: Bot, label: "Robotics" },
-  "iot-and-v2x": { icon: WifiCog, label: "IoT & V2X" },
-  "web": { icon: PanelsTopLeft, label: "Web" },
-  "games": { icon: Gamepad2, label: "Games" },
-  "making": { icon: Wrench, label: "Making" },
-  "design": { icon: Palette, label: "Design" },
-  "updates": { icon: PenLine, label: "Updates" },
-  "thoughts": { icon: PenLine, label: "Thoughts" },
+const categoryIcons: Record<string, any> = {
+  "ai-ml":      BrainCircuit,
+  "robotics":   Bot,
+  "iot-and-v2x": WifiCog,
+  "web":        PanelsTopLeft,
+  "games":      Gamepad2,
+  "making":     Wrench,
+  "design":     Palette,
+  "updates":    PenLine,
+  "thoughts":   PenLine,
 };
-
-
 
 const { items } = Astro.props;
 const allCategories = [...new Set(items.flatMap((i) => i.categories))].sort();
@@ -50,7 +44,7 @@ const allCategories = [...new Set(items.flatMap((i) => i.categories))].sort();
     />
     <select id="category-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
       <option value="all">All categories</option>
-      {allCategories.map((c) => <option value={c}>{categoryIcons[c]?.label || c}</option>)}
+      {allCategories.map((c) => <option value={c}>{categories[c] ?? c}</option>)}
     </select>
     <select id="filter-select" class="text-xs px-1 py-1 rounded-lg border border-base-300 text-neutral bg-base-100 hover:border-base-content hover:text-base-content transition-colors cursor-pointer focus:outline-none">
       <option value="all">All types</option>
@@ -80,7 +74,7 @@ const allCategories = [...new Set(items.flatMap((i) => i.categories))].sort();
         >
           <span class={`group-hover:text-accent-1 transition-colors mt-1 ${item.featured ? "text-accent-3" : ""}`}>
             {item.type === "papers"   && <FileText size={16} />}
-            {item.type === "projects" && (() => { const Icon = categoryIcons[item.categories[0]]?.icon ?? Hammer; return <Icon size={16} />; })()}
+            {item.type === "projects" && (() => { const Icon = categoryIcons[item.categories[0]] ?? Hammer; return <Icon size={16} />; })()}
             {item.type === "notes"    && <PenLine  size={16} />}
           </span>
           <p class="group-hover:text-accent-1 transition-colors text-balance">

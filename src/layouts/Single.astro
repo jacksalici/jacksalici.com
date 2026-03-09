@@ -3,6 +3,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import GlassChip from '../components/GlassChip.astro';
 import Gallery from '../components/Gallery.astro';
 import Base from './Base.astro';
+import { categories } from '../consts';
 
 const { ...props } = Astro.props;
 ---
@@ -23,7 +24,7 @@ const { ...props } = Astro.props;
 			<p class="text-xs mb-2">
 				{props.pubDate && <span>Published on <FormattedDate date={props.pubDate} /></span>}
 				{props.updatedDate && <span>~ Updated on <FormattedDate date={props.updatedDate} /></span>}
-				{props.categories && <span>~ {props.categories.join(', ')}</span>}
+				{props.categories && <span>~ {props.categories.map((c: string) => categories[c] ?? c).join(', ')}</span>}
 				{props.location && <span>~ {props.location}</span>}
 				{props.stack && <span>~ Built with {props.stack.join(', ')}</span>}
 			</p>
