@@ -72,7 +72,7 @@ const props = { image: "/sky.png" };
     </div>
 
     <div class="min-h-[80vh] mt-20" id="feed">
-        <h1 class="text-3xl">Thoughts, papers, & projects.</h1>
+        <h1 class="text-3xl" id="feed-title">Notes, papers, &amp; projects.</h1>
         <div class="flex mt-3 mb-4 flex-wrap gap-2 items-center w-full justify-stretch">
           <input
             id="search-input"
@@ -177,6 +177,15 @@ const props = { image: "/sky.png" };
           if (visible) visibleCount++;
         });
         feedEmpty.classList.toggle("hidden", visibleCount > 0);
+
+        // --- Update feed title ---
+        const typeLabels: Record<string, string> = { notes: "Notes", projects: "Projects", papers: "Papers" };
+        const categoryLabel = category !== "all" ? (categorySelect.selectedOptions[0]?.text ?? category) : "";
+        const base = type !== "all" ? (typeLabels[type] ?? type) : "Notes, papers, &amp; projects";
+        const about = categoryLabel || query;
+        const titleEl = document.getElementById("feed-title")!;
+        titleEl.innerHTML = about ? `${base} <span class="font-regular">about ${about}</span>.` : `${base}.`;
+
         pushParams();
       }
 
