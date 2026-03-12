@@ -77,7 +77,7 @@ const allCategories = [...new Set(items.flatMap((i) => i.categories))].sort();
             {item.type === "projects" && (() => { const Icon = categoryIcons[item.categories[0]] ?? Hammer; return <Icon size={16} />; })()}
             {item.type === "notes"    && <PenLine  size={16} />}
           </span>
-          <p class="group-hover:text-accent-1 transition-colors text-balance">
+          <p class="group-hover:text-accent-1 transition-colors">
             <span>{item.text}</span>
             {item.date && (
               <span class="text-xs ml-1.5 opacity-50 inline-block">
