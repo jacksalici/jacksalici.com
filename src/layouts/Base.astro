@@ -18,10 +18,10 @@ const pathname = new URL(Astro.request.url).pathname;
 <html lang="en" transition:animate="none">
 
   <head>
-    <BaseHead title={props.title},
+    <BaseHead title={props.title}
     description={props.description}
-    image = {props.image}
-    keywords = {props.keywords} />
+    image={props.image ?? props.cover}
+    keywords={props.keywords ?? props.tags} />
 
       <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
