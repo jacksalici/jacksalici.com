@@ -22,7 +22,7 @@ const MyA = props.slug ? 'a': 'div'
 ---
 
 <MyA
-  class:list={["group max-w-full", {" cursor-pointer transition-all": props.slug}]}
+  class:list={["group max-w-full rounded-lg border border-transparent px-3 py-2 transition-all hover:border-base-300 hover:bg-base-100 hover:shadow-sm", {" cursor-pointer": props.slug}]}
   href={props.slug}
 >
 
@@ -48,7 +48,7 @@ const MyA = props.slug ? 'a': 'div'
   </p>
     
     {props.cta && 
-      <a href={props.cta[1]} class="bg-accent-2 hover:bg-opacity-70 text-base-100 hover:border-neutral-content border hover:underline border-accent-2 rounded-md text-sm p-2 ">
+      <a href={props.cta[1]} class="inline-flex items-center justify-center rounded-lg bg-accent-2 hover:bg-accent-2/80 text-base-100 border border-accent-2 hover:border-accent-2/80 text-sm px-3 py-1.5 mt-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-base-content">
         
         {props.cta[0]}</a>
     }
