@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Single from '../../layouts/Single.astro';
 import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
@@ -9,18 +9,18 @@ import FormattedDate from '../../components/FormattedDate.astro';
 export async function getStaticPaths() {
 	const activities = await getCollection('activities');
 	return activities.map((activity) => ({
-		params: { slug: activity.slug },
+		params: { slug: activity.id },
 		props: activity,
 	}));
 }
 
 
 const activity = Astro.props;
-const { Content } = await activity.render();
+const { Content } = await render(activity);
 
 const papers = (await getCollection('papers')).filter(paper =>
 	Array.isArray(paper.data.activities) &&
-	paper.data.activities.includes(activity.slug)
+	paper.data.activities.includes(activity.id)
 );
 
 
@@ -45,7 +45,7 @@ const papers = (await getCollection('papers')).filter(paper =>
             venue={single.data.acronym ||   single.data.venue}
             authors={single.data.authors}
             pubDate={single.data.pubDate}
-            slug={"/papers/" + single.slug}
+						slug={"/papers/" + single.id}
           />
         ))
       }

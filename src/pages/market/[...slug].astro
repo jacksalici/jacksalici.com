@@ -1,19 +1,19 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Single from '../../layouts/Single.astro';
 
 
 export async function getStaticPaths() {
 	const market = await getCollection('market');
 	return market.map((product) => ({
-		params: { slug: product.slug },
+		params: { slug: product.id },
 		props: product,
 	}));
 }
 type Props = CollectionEntry<'market'>;
 
 const product = Astro.props;
-const { Content } = await product.render();
+const { Content } = await render(product);
 ---
 
 <Single {...product.data}>

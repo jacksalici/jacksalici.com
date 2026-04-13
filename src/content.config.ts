@@ -1,9 +1,10 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
+import { glob } from 'astro/loaders';
 
 // Shared schema for common fields
 const baseSchema = z.object({
 	title: z.string().optional(),
-	slug: z.string().optional(), // Custom URL slug (defaults to filename if not set)
 	description: z.string().optional(), // Short description for cards and SEO
 	news: z.string().optional(), // Highlighted news or updates
 	summary: z.string().optional(), // Extended description shown on the detail page
@@ -27,14 +28,14 @@ const baseSchema = z.object({
 });
 
 const notes = defineCollection({
-	type: 'content',
+	loader: glob({ base: './src/content/notes', pattern: '**/*.{md,mdx}' }),
 	schema: baseSchema.extend({
 		featured: z.boolean().optional().default(false),
 	}),
 });
 
 const projects = defineCollection({
-	type: 'content',
+	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
 	schema: baseSchema.extend({
 		featured: z.boolean().optional().default(false),
 		trending: z.boolean().optional().default(false),
@@ -44,14 +45,14 @@ const projects = defineCollection({
 });
 
 const activities = defineCollection({
-	type: 'content',
+	loader: glob({ base: './src/content/activities', pattern: '**/*.{md,mdx}' }),
 	schema: baseSchema.extend({
 		featured: z.boolean().optional().default(false),
 	}),
 });
 
 const papers = defineCollection({
-	type: 'content',
+	loader: glob({ base: './src/content/papers', pattern: '**/*.{md,mdx}' }),
 	schema: baseSchema.extend({
 		authors: z.string().optional(),
 		venue: z.string().optional(), // Conference/journal name
@@ -65,7 +66,7 @@ const papers = defineCollection({
 });
 
 const market = defineCollection({
-	type: 'content',
+	loader: glob({ base: './src/content/market', pattern: '**/*.{md,mdx}' }),
 	schema: baseSchema.pick({
 		title: true,
 		description: true,

@@ -28,7 +28,7 @@ const products = (await getCollection('market')).sort(
             description={item.data.description}
             summary={item.data.status === "sold" ? "[SOLD]" : ""}
             pubDate={item.data.pubDate}
-            slug={"/market/" + item.slug}
+            slug={"/market/" + item.id}
             unavailable={item.data.status === "sold"}
           />
             

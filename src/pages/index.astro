@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import Feed from "../components/Feed.astro";
 import Base from "../layouts/Base.astro";
-import { Github, GraduationCap, Linkedin } from "@lucide/astro";
 import "../styles/global.css";
 
 
@@ -10,13 +9,13 @@ import "../styles/global.css";
 const recentAll = [
   ...(await getCollection("notes"))
     .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/notes/" + a.slug, type: "notes" as const })),
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/notes/" + a.id, type: "notes" as const })),
   ...(await getCollection("projects"))
     .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/projects/" + a.slug, type: "projects" as const })),
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/projects/" + a.id, type: "projects" as const })),
   ...(await getCollection("papers"))
     .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/papers/" + a.slug, type: "papers" as const })),
+    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/papers/" + a.id, type: "papers" as const })),
 ].sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
 const props = { image: "/sky.png" };
@@ -28,12 +27,9 @@ const props = { image: "/sky.png" };
       A <span class="text-accent-3">digital craftsman</span> who designs systems that matter.
     </h1>
 
-   
-
     <div class="mt-10 mb-10 flex flex-col gap-4">
       <p>I am
-        <span class="font-bold">Giacomo Salici</span>
-        <sup class="font-light text-[10px]">/'d͡ʒa‧ko‧mo-sa‧li‧t͡ʃi/</sup>, an <span class="font-bold">AI
+        <span class="font-bold">Giacomo Salici</span>, an <span class="font-bold">AI
         &amp; computer engineer, developer, and occasionally designer</span> based in Italy. I work with the <a class="font-bold"
           href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of University of Modena and Reggio Emilia (<a href="https://www.unimore.it/">UniMORE&nbsp;↗</a>) as a <span class="text-accent-3 font-bold">PhD candidate  in ICT</span>.
       </p>
@@ -41,19 +37,18 @@ const props = { image: "/sky.png" };
         My research interests include <span class="text-accent-2 font-bold">artificial intelligence of things (AIoT), modular deep learning, and anomaly detection.</span>
       
         Besides my research work, I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
-        If you want to get in touch, feel free to <a href="/contacts">reach out&nbsp;↗</a>.
-      </p>
-       <div class="mt-6 flex gap-3">
-      <a href="https://github.com/jacksalici" class="hover:text-accent-1 transition-colors">
-        <Github size={25} />
-      </a>
+        If you want to get in touch, feel free to <a href="/contacts">contact me&nbsp;↗</a> or check out my profile on on 
+        <a href="https://github.com/jacksalici" class="hover:text-accent-1 transition-colors">
+        Github&nbsp;↗
+      </a>,
       <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="hover:text-accent-1 transition-colors">
-        <GraduationCap size={25} />
-      </a>
+        Google Scholar&nbsp;↗
+      </a> or
       <a href="https://linkedin.com/in/jacksalici" class="hover:text-accent-1 transition-colors">
-        <Linkedin size={25} />
+        Linkedin&nbsp;↗
       </a>
-    </div>
+      </p>
+       
     </div>
 
     <Feed items={recentAll}/>
