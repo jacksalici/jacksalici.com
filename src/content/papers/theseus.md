@@ -4,7 +4,7 @@ pubDate: 2026-04-30
 slug: theseus
 authors: "Filippo Rinaldi, Aniello Panariello, Giacomo Salici, Angelo Porrello, Simone Calderara"
 venue: "43rd International Conference on Machine Learning"
-news: Our new paper “Transporting Task Vectors across Different Architectures without Training” has been accepted at ICML 2026!
+news: Our new paper “Transporting Task Vectors across Different Architectures without Training” will be presented at ICML 2026!
 acronym: "ICML 2026"
 location: "Seoul, South Korea"
 categories: ["ai-ml"]
