@@ -8,7 +8,7 @@ acronym: "Ital-IA 2026"
 location: "Rome, Italy"
 coordinates: [12.4964, 41.9028]
 categories: ["ai-ml"]
-news: My latest paper on industrial anomaly detection, made in collaboration with SEW-Eurodrive, has been accepted at Ital-IA 2026! See you in Rome!
+news: My latest work on industrial anomaly detection, made in collaboration with SEW-Eurodrive, will be presented at Ital-IA 2026! See you in Rome!
 cta:
   - { url: "https://iris.unimore.it/handle/11380/1409528", label: "Link to the paper" }
 ---
