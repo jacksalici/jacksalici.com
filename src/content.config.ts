@@ -58,6 +58,7 @@ const papers = defineCollection({
 		venue: z.string().optional(), // Conference/journal name
 		acronym: z.string().optional(), // e.g., "ICSR 2025"
 		location: z.string().optional(), // Conference location
+		coordinates: z.array(z.number()).optional(),
 		featured: z.boolean().optional().default(false),
 		trending: z.boolean().optional().default(false),
 		cta: z.array(z.object({ url: z.string(), label: z.string() })).optional(), // Call-to-action buttons

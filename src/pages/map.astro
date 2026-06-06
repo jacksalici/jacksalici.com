@@ -1,0 +1,33 @@
+---
+import 'maplibre-gl/dist/maplibre-gl.css';
+
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const papers = await getCollection('papers');
+
+const papersWithCoordinates = papers
+  .filter((paper) => paper.data.coordinates)
+  .map((paper) => ({
+    id: paper.id,
+    title: paper.data.title,
+    location: paper.data.location,
+    coordinates: paper.data.coordinates,
+    venue: paper.data.venue || paper.data.acronym,
+    pubDate: paper.data.pubDate,
+    categories: paper.data.categories,
+  }));
+---
+
+<Base hideHeader hideFooter>
+  <div id="map" class="w-full h-dvh"></div>
+  <script type="application/json" id="papers-data" set:html={JSON.stringify(papersWithCoordinates)} />
+</Base>
+
+<script src="../scripts/conference-map.ts"></script>
+
+<style is:global>
+  body {
+    overflow: hidden;
+  }
+</style>

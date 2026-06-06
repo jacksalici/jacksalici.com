@@ -7,6 +7,7 @@ venue: "43rd International Conference on Machine Learning"
 news: Our new paper “Transporting Task Vectors across Different Architectures without Training” will be presented at ICML 2026!
 acronym: "ICML 2026"
 location: "Seoul, South Korea"
+coordinates: [126.9780, 37.5665]
 categories: ["ai-ml"]
 cta:
   - { url: "https://arxiv.org/pdf/2602.12952", label: "Link to the paper" }

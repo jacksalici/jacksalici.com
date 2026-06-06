@@ -6,6 +6,7 @@ authors: "Marco Savarese, Antonio De Blasi, Carmine Zaccagnino, Giacomo Salici, 
 venue: "IEEE Consumer Communications & Networking Conference 2026"
 acronym: "CCNC 2026"
 location: "Las Vegas, USA"
+coordinates: [-115.1398, 36.1699]
 categories: ["iot-and-v2x"]
 news: Our paper “RI-PIENO”, a revised and improved framework for refueling itinerary optimization, has been accepted at CCNC 2026!
 cta:
