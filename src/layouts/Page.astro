@@ -8,9 +8,17 @@ const titleClass = frontmatter.title.length > 50 ? 'text-4xl' : 'text-5xl';
 
 <Base
   title={frontmatter.title}
-  description={frontmatter.description}
+  description={frontmatter.summary ?? frontmatter.description}
+  summary={frontmatter.summary}
   tags={frontmatter.tags}
+  categories={frontmatter.categories}
   image={frontmatter.cover}
+  cover={frontmatter.cover}
+  pubDate={frontmatter.pubDate}
+  updatedDate={frontmatter.updatedDate}
+  authors={frontmatter.authors}
+  pageType={frontmatter.pubDate ? "article" : "website"}
+  noindex={frontmatter.noindex}
 >
   <main>
     

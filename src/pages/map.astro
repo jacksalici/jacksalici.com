@@ -19,7 +19,13 @@ const papersWithCoordinates = papers
   }));
 ---
 
-<Base hideHeader hideFooter>
+<Base
+  title="Conference map"
+  description="A map of paper venues and conference locations related to Giacomo Salici's publications."
+  image="/website.jpg"
+  hideHeader
+  hideFooter
+>
   <div id="map" class="w-full h-dvh"></div>
   <script type="application/json" id="papers-data" set:html={JSON.stringify(papersWithCoordinates)} />
 </Base>

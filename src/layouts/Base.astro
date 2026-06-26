@@ -19,9 +19,14 @@ const pathname = new URL(Astro.request.url).pathname;
 
   <head>
     <BaseHead title={props.title}
-    description={props.description}
+    description={props.description ?? props.summary}
     image={props.image ?? props.cover}
-    keywords={props.keywords ?? props.tags} />
+    keywords={props.keywords ?? props.tags ?? props.categories}
+    type={props.pageType ?? (props.pubDate ? "article" : "website")}
+    publishedTime={props.pubDate}
+    modifiedTime={props.updatedDate}
+    authors={props.authors}
+    noindex={props.noindex ?? pathname === "/404"} />
 
       <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">

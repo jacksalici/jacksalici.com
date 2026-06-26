@@ -8,7 +8,19 @@ import { categories } from '../consts';
 const { ...props } = Astro.props;
 ---
 
-<Base title={props?.title} description={props?.description} tags={props?.tags} image={props?.cover}>
+<Base
+	title={props?.title}
+	description={props?.news ?? props?.summary ?? props?.description}
+	summary={props?.summary}
+	tags={props?.tags}
+	categories={props?.categories}
+	image={props?.cover}
+	cover={props?.cover}
+	pubDate={props?.pubDate}
+	updatedDate={props?.updatedDate}
+	authors={props?.authors}
+	pageType="article"
+>
 	<main>
 		{/* Header section */}
 		<div class="w-full mb-16">

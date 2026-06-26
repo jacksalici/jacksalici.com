@@ -14,7 +14,11 @@ const activities = (await getCollection("activities"))
 const props = {image: '/website.png'}
 ---
 
-<Base image = {props.image} >
+<Base
+  title="Ongoing activities"
+  description="Current research activities and topics Giacomo Salici is working on, from robotics to time-series analysis and V2X."
+  image={props.image}
+>
   <main>
    
      

@@ -1,13 +1,14 @@
 ---
+import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE, SITE_URL } from "../consts";
 
-import "../styles/global.css";
+type MetaType = "website" | "article";
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? SITE_URL);
 
 const {
   title,
-  description = "I am a Computer and AI Engineer based in Modena, Italy. As a PhD student, I develop and design AI projects.",
-  image, //= "/website.jpg", decomment for default image
+  description,
+  image,
   keywords = [
     "computer engineer",
     "jack salici",
@@ -16,54 +17,70 @@ const {
     "digital craftsman",
     "phd student",
   ],
-} = Astro.props;
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  authors,
+  noindex = false,
+} = Astro.props as {
+  title?: string;
+  description?: string;
+  image?: string;
+  keywords?: string[];
+  type?: MetaType;
+  publishedTime?: Date | string;
+  modifiedTime?: Date | string;
+  authors?: string | string[];
+  noindex?: boolean;
+};
+
+const metaTitle = title ? `${title} | ${SITE_TITLE}` : `${SITE_TITLE} | ${SITE_TAGLINE}`;
+const metaDescription = description ?? SITE_DESCRIPTION;
+const metaImage = new URL(image ?? DEFAULT_OG_IMAGE, Astro.site ?? SITE_URL);
+const twitterCard = image ?? DEFAULT_OG_IMAGE ? "summary_large_image" : "summary";
+const authorList = Array.isArray(authors)
+  ? authors
+  : typeof authors === "string"
+    ? authors.split(",").map((author) => author.trim()).filter(Boolean)
+    : [];
+const normalizeDate = (value?: Date | string) => {
+  if (!value) return undefined;
+  const date = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(date.valueOf()) ? undefined : date.toISOString();
+};
+const publishedISO = normalizeDate(publishedTime);
+const modifiedISO = normalizeDate(modifiedTime);
 ---
 
-<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
-
-<!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
 <meta name="theme-color" content="#0a141f" />
-<!-- Primary Meta Tags -->
-<title>{title ? title + " ~ By Giacomo Salici" : "Giacomo Salici ~ Digital craftsman, creative AI engineer."}</title>
-<meta
-  name="title"
-  content={title
-    ? title + " ~ By Giacomo Salici"
-    : "Giacomo Salici ~ Digital craftsman, creative AI engineer."}
-/>
-<meta name="description" content={description} />
+<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"} />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta
-  property="og:title"
-  content={title
-    ? title + " ~ By Giacomo Salici"
-    : "Giacomo Salici ~ Digital craftsman, creative AI engineer."}
-/>
-<meta property="og:description" content={description} />
-{image && <meta property="og:image" content={new URL(image, Astro.url)} />}
+<title>{metaTitle}</title>
+<meta name="title" content={metaTitle} />
+<meta name="description" content={metaDescription} />
 <meta name="keywords" content={keywords.join(", ")} />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta
-  property="twitter:title"
-  content={title
-    ? title + " ~ By Giacomo Salici"
-    : "Giacomo Salici ~ Digital craftsman, creative AI engineer."}
-/>
-<meta property="twitter:description" content={description} />
-{
-  image && 
-  <meta property="twitter:image" content={new URL(image, Astro.url)} />
-}
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={metaTitle} />
+<meta property="og:description" content={metaDescription} />
+<meta property="og:image" content={metaImage} />
+<meta property="og:image:alt" content={metaTitle} />
 
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={metaTitle} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={metaImage} />
+<meta name="twitter:image:alt" content={metaTitle} />
+
+{publishedISO && <meta property="article:published_time" content={publishedISO} />}
+{modifiedISO && <meta property="article:modified_time" content={modifiedISO} />}
+{authorList.map((author) => <meta property="article:author" content={author} />)}
