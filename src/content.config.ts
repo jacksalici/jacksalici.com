@@ -41,6 +41,7 @@ const projects = defineCollection({
 		trending: z.boolean().optional().default(false),
 		stack: z.string().array().optional(), // Tech stack: languages, frameworks, tools
 		cta: z.array(z.object({ url: z.string(), label: z.string() })).optional(), // Call-to-action buttons
+		activities: z.string().array().optional(), // Link to related activities
 	}),
 });
 
