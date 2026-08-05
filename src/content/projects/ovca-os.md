@@ -5,6 +5,7 @@ slug: ovca-overall-survival
 description: Multimodal data integration for OVCA survival prediction.
 news: We built a multimodal deep learning model for ovarian cancer overall survival prediction.
 categories: ["ai-ml"]
+activities: ["ai-ml"]
 stack: ["PyTorch"]
 cta:
   - { url: "https://github.com/cosimop2000/Multimodal-data-integration-for-OVCA-survival-prediction", label: "Check the code" }

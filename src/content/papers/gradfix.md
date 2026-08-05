@@ -9,6 +9,7 @@ acronym: "ICLR 2026"
 location: "Rio de Janeiro, Brazil"
 coordinates: [-43.1729, -22.9068]
 categories: ["ai-ml"]
+activities: ["ai-ml"]
 cta:
   - { url: "https://arxiv.org/pdf/2510.09658", label: "Link to the paper" }
 featured: true

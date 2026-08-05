@@ -18,39 +18,55 @@ type Props = {
 };
 
 const { ...props } = Astro.props;
-const MyA = props.slug ? 'a': 'div' 
+const MyTag = props.slug ? 'a' : 'div';
+
+const accent = props.featured && !props.trending
+  ? "accent-3"
+  : props.trending
+    ? "accent-2"
+    : null;
 ---
 
-<MyA
-  class:list={["group max-w-full", {" cursor-pointer transition-all": props.slug}]}
+<MyTag
+  class:list={[
+    "group block card p-4 md:p-5",
+    { "card-hover cursor-pointer": props.slug },
+    { "opacity-60": props.unavailable },
+  ]}
   href={props.slug}
 >
-
-  
-  <div class="w-full">
-    <p 
-    class:list={["", {"group-hover:text-accent-1": props.slug && !props.featured && !props.trending, 
-    "group-hover:text-accent-2": props.slug && props.trending, "group-hover:text-accent-3": props.slug && props.featured && !props.trending,
-    "opacity-70": props.unavailable
-     }]} 
-    >
-    <span class:list={["", {"text-accent-3": props.featured && !props.trending,  "text-accent-2": props.trending}]}>—</span>
-    <span class:list={[{"line-through": props.unavailable == true}]}>{props.title}</span> {props.summary}
-    {props.authors && <span class="text-xs">~ {props.authors}</span>}
-    {props.venue && <span class="text-xs font-bold">~ {props.venue}</span>}
-    {props.pubDate && 
-      
-        <span class="text-xs ">
-        <FormattedDate date={props.pubDate} />
+  <div class="flex items-start justify-between gap-4">
+    <div class="min-w-0">
+      {(props.featured || props.trending) && (
+        <span class:list={["eyebrow", accent === "accent-3" ? "text-accent-3" : "text-accent-2"]}>
+          {props.featured ? "Featured" : "Trending"}
         </span>
-  }
-    
-  </p>
-    
-    {props.cta && 
-      <a href={props.cta[1]} class="bg-accent-2 hover:bg-opacity-70 text-base-100 hover:border-neutral-content border hover:underline border-accent-2 rounded-md text-sm p-2 ">
-        
-        {props.cta[0]}</a>
-    }
+      )}
+      <p class="mt-0.5 font-display font-bold text-base-content group-hover:text-accent-1 transition-colors">
+        <span class:list={[{ "line-through": props.unavailable === true }]}>{props.title}</span>
+      </p>
+
+      {props.summary && <p class="text-sm text-neutral-content mt-1">{props.summary}</p>}
+
+      <p class="text-xs text-neutral-content mt-2 flex flex-wrap gap-x-2 gap-y-0.5">
+        {props.authors && <span>{props.authors}</span>}
+        {props.venue && <span class="font-bold text-base-content/80">{props.venue}</span>}
+        {props.location && <span>{props.location}</span>}
+        {props.pubDate && (
+          <span>
+            <FormattedDate date={props.pubDate} />
+          </span>
+        )}
+      </p>
+    </div>
+
+    {props.cta && (
+      <a
+        href={props.cta[1]}
+        class="shrink-0 text-xs px-3 py-1.5 rounded-lg border border-base-300 text-neutral-content hover:text-base-content hover:border-base-content transition-colors"
+      >
+        {props.cta[0]}
+      </a>
+    )}
   </div>
-</MyA>
+</MyTag>

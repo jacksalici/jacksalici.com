@@ -12,18 +12,19 @@ const props = {image: '/website.png'}
   image={props.image}
 >
   <main>
-   <h1 class="text-3xl">Let's talk!</h1>
-    <p class="my-4 ">I'd love to hear from you! Whether it's about a project, an idea, or just to say hi, feel free to reach out.</p>
+    <p class="eyebrow mb-3">Contacts</p>
+    <h1 class="text-3xl md:text-4xl font-display font-bold">Let's talk!</h1>
+    <p class="my-4 text-neutral-content max-w-2xl">I'd love to hear from you! Whether it's about a project, an idea, or just to say hi, feel free to reach out.</p>
 
-    <p class="mb-2"><strong>Academic contacts:</strong> <span class="my-pre inline-block">name.surname@unimore.it</span></p>
-    <p class="mb-2"><strong>Other projects:</strong> <span class="my-pre inline-block">name@thisdomain.com</span></p>
-    <p class="mb-2"><strong>Personal stuff:</strong> <span class="my-pre inline-block">name.surname@the-gmail-mail</span></p>
+    <div class="card divide-y divide-base-300/70 overflow-hidden mt-6">
+      <p class="px-4 py-3 md:px-5 flex flex-wrap items-center justify-between gap-2"><strong>Academic contacts</strong> <span class="my-pre inline-block">name.surname@unimore.it</span></p>
+      <p class="px-4 py-3 md:px-5 flex flex-wrap items-center justify-between gap-2"><strong>Other projects</strong> <span class="my-pre inline-block">name@thisdomain.com</span></p>
+      <p class="px-4 py-3 md:px-5 flex flex-wrap items-center justify-between gap-2"><strong>Personal stuff</strong> <span class="my-pre inline-block">name.surname@the-gmail-mail</span></p>
+      <p class="px-4 py-3 md:px-5 flex flex-wrap items-center justify-between gap-2"><strong>Certified Mail (PEC)</strong> <span class="my-pre inline-block">name.surname@ingpec.eu</span></p>
+      <p class="px-4 py-3 md:px-5 flex flex-wrap items-center justify-between gap-2"><strong>Social & Chats</strong> everywhere as <span class="my-pre inline-block">@jacksalici</span></p>
+    </div>
 
-    <p class="mb-2"><strong>Certified Mail (PEC):</strong> <span class="my-pre inline-block">name.surname@ingpec.eu</span></p>
-
-    <p class="mb-2"><strong>Social & Chats:</strong> everywhere as <span class="my-pre inline-block">@jacksalici</span></p>
-    
-    <p class="mt-6">Looking forward to connecting with you!</p>
+    <p class="mt-6 text-neutral-content">Looking forward to connecting with you!</p>
   </main>
  
 </Base>

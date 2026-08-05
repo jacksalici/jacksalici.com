@@ -10,7 +10,7 @@
 	--color-base-200: #EBEBEB;
 	--color-base-300: #D6D6D6;
 	--color-base-content: #423E3B;
-	--color-neutral: #B8B8B8;
+	--color-neutral: #D8D8D8;
 	--color-neutral-content: #615B56;
 	--font-mono: 'Space Mono', monospace;
 	--font-sans: 'InterVariable', sans-serif;
@@ -102,6 +102,41 @@ main {
 
 .opacityOnHover {
 	@apply opacity-50 hover:opacity-100 transition-opacity
+}
+
+/* --- Minimal card system --- */
+
+.eyebrow {
+	@apply text-xs uppercase tracking-[0.2em] text-neutral-content font-mono
+}
+
+.card {
+	@apply bg-base-100 border border-base-300/60 rounded-2xl
+}
+
+.card-hover {
+	@apply transition-colors duration-150 hover:border-base-content/30
+}
+
+.hr-line {
+	@apply border-t border-base-300/70
+}
+
+.section-label {
+	@apply text-xs uppercase tracking-[0.2em] text-neutral-content font-mono flex items-center gap-3 mb-4
+}
+
+.section-label::after {
+	content: "";
+	@apply flex-1 h-px bg-base-300
+}
+
+.btn-outline {
+	@apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm transition-colors border border-base-300 hover:border-base-content
+}
+
+.btn-solid {
+	@apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm transition-opacity bg-base-content text-base-100 hover:opacity-80
 }
 
 img {

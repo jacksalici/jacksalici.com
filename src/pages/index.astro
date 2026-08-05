@@ -1,22 +1,30 @@
 ---
 import { getCollection } from "astro:content";
-import Feed from "../components/Feed.astro";
+import { BrainCircuit, Bot, WifiCog, Wrench, PanelsTopLeft, LineChart, FileText, Boxes, ArrowRight } from "@lucide/astro";
+import FormattedDate from "../components/FormattedDate.astro";
 import Base from "../layouts/Base.astro";
 import "../styles/global.css";
 
+const activities = (await getCollection("activities"))
+  .filter((a) => a.data.draft !== true && a.data.hidden !== true && a.data.shown !== false)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
+const papers = (await getCollection("papers")).filter(
+  (a) => a.data.draft !== true && a.data.hidden !== true
+);
 
-const recentAll = [
-  ...(await getCollection("notes"))
-    .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/notes/" + a.id, type: "notes" as const })),
-  ...(await getCollection("projects"))
-    .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/projects/" + a.id, type: "projects" as const })),
-  ...(await getCollection("papers"))
-    .filter((a) => a.data.draft !== true && a.data.hidden !== true)
-    .map((a) => ({ date: a.data.pubDate, featured: a.data.featured ?? false, categories: a.data.categories ?? [], text: a.data.news ?? a.data.description ?? a.data.title ?? "", slug: "/papers/" + a.id, type: "papers" as const })),
-].sort((a, b) => b.date.valueOf() - a.date.valueOf());
+const activityIcons: Record<string, any> = {
+  "ai-ml": BrainCircuit,
+  "robotics": Bot,
+  "v2x": WifiCog,
+  "tsa": LineChart,
+  "web": PanelsTopLeft,
+  "making": Wrench,
+};
+
+const latestPapers = papers
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
 const props = { image: "/sky.png" };
 ---
@@ -28,35 +36,74 @@ const props = { image: "/sky.png" };
   keywords={["giacomo salici", "ai engineer", "computer engineer", "robotics", "research", "portfolio"]}
 >
   <main>
-    <h1 class="text-4xl text-balance">
-      A <span class="text-accent-3">digital craftsman</span> who designs systems that matter.
-    </h1>
+    <section class="pt-6 pb-10 md:pt-10 md:pb-14">
+      <p class="eyebrow mb-4">Giacomo Salici — Modena, Italy</p>
+      <h1 class="text-3xl md:text-4xl text-balance font-display font-bold leading-tight">
+        A digital craftsman who designs <span class="text-accent-3">systems that matter</span>.
+      </h1>
 
-    <div class="mt-10 mb-10 flex flex-col gap-4">
-      <p>I am
-        <span class="font-bold">Giacomo Salici</span>, an <span class="font-bold">AI
-        &amp; computer engineer, developer, and occasionally designer</span> based in Italy. I work with the <a class="font-bold"
-          href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of University of Modena and Reggio Emilia (<a href="https://www.unimore.it/">UniMORE&nbsp;↗</a>) as a <span class="text-accent-3 font-bold">PhD candidate  in ICT</span>.
-      </p>
-      <p>
-        My research interests include <span class="text-accent-2 font-bold">artificial intelligence of things (AIoT), modular deep learning, and anomaly detection.</span>
-      
-        Besides my research work, I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
-        If you want to get in touch, feel free to <a href="/contacts">contact me&nbsp;↗</a> or check out my profiles on 
-        <a href="https://github.com/jacksalici" class="hover:text-accent-1 transition-colors">
-        Github&nbsp;↗
-      </a>,
-      <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="hover:text-accent-1 transition-colors">
-        Google Scholar&nbsp;↗
-      </a>, and
-      <a href="https://linkedin.com/in/jacksalici" class="hover:text-accent-1 transition-colors">
-        Linkedin&nbsp;↗
-      </a>.
-      </p>
-       
-    </div>
+      <div class="mt-6 flex flex-col gap-4 text-base-content/90 max-w-2xl">
+        <p>
+          I am <span class="font-bold">Giacomo Salici</span>, an <span class="font-bold">AI &amp; computer engineer, developer, and occasionally designer</span> based in Italy. I work with the <a class="font-bold" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of University of Modena and Reggio Emilia (<a href="https://www.unimore.it/">UniMORE&nbsp;↗</a>) as a <span class="text-accent-3 font-bold">PhD candidate in ICT</span>.
+        </p>
+        <p>
+          My research interests include <span class="text-accent-2 font-bold">artificial intelligence of things (AIoT), modular deep learning, and anomaly detection.</span> Besides research, I enjoy open-source software and hardware, good design, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
+        </p>
+      </div>
 
-    <Feed items={recentAll}/>
+      <div class="mt-6 flex flex-wrap gap-2 text-sm">
+        <a href="/contacts" class="btn-solid">Get in touch&nbsp;↗</a>
+        <a href="https://github.com/jacksalici" class="btn-outline">GitHub&nbsp;↗</a>
+        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="btn-outline">Google Scholar&nbsp;↗</a>
+        <a href="https://linkedin.com/in/jacksalici" class="btn-outline">LinkedIn&nbsp;↗</a>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {activities.map((activity) => {
+          const Icon = activityIcons[activity.id] ?? Boxes;
+          return (
+            <a href={"/activities/" + activity.id} class="card card-hover p-5 group">
+              <div class="flex items-center gap-2 mb-2">
+                <Icon size={18} class="shrink-0 text-neutral-content group-hover:text-accent-1 transition-colors" />
+                <h2 class="font-display font-bold text-base-content group-hover:text-accent-1 transition-colors">
+                  {activity.data.title}
+                </h2>
+              </div>
+
+              {activity.data.description && (
+                <p class="text-sm text-neutral-content mb-3">{activity.data.description}</p>
+              )}
+
+             
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <p class="section-label">Latest papers</p>
+
+      <ul class="divide-y divide-base-300/60 border-t border-b border-base-300/60 mb-4">
+        {latestPapers.map((paper) => (
+          <li>
+            <a href={"/papers/" + paper.id} class="group flex items-center gap-2 py-3 hover:text-accent-1 transition-colors">
+              <FileText size={14} class="shrink-0 text-neutral-content group-hover:text-accent-1 transition-colors" />
+              <span class="min-w-0 flex-1 truncate">{paper.data.title}</span>
+              <span class="shrink-0 text-xs text-neutral-content">
+                {paper.data.acronym && <span class="font-bold mr-2">{paper.data.acronym}</span>}
+                <FormattedDate date={paper.data.pubDate} />
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a href="/papers" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
+        View all papers <ArrowRight size={14} />
+      </a>
+    </section>
   </main>
-
 </Base>

@@ -21,20 +21,20 @@ const titleClass = frontmatter.title.length > 50 ? 'text-4xl' : 'text-5xl';
   noindex={frontmatter.noindex}
 >
   <main>
-    
 
-    <div class="mt-5 mb-16 text-center">
-      <h1 class={`${titleClass} text-balance`}>{frontmatter.title}</h1>
+
+    <div class="mt-5 mb-10 text-center">
+      <h1 class={`${titleClass} text-balance font-display font-bold`}>{frontmatter.title}</h1>
     </div>
 
- 
+    <div class="hr-line mb-10"></div>
 
     <div
     class="prose mb-10 prose-img:mx-auto prose-js"
   >
   {
     frontmatter.summary &&
-    <div class="text-xl p-5 mb-8 md:-mx-8">
+    <div class="card text-xl p-5 mb-8">
       {frontmatter.summary}
     </div>
   }

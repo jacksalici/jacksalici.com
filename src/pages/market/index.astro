@@ -18,13 +18,14 @@ const products = (await getCollection('market')).sort(
   image="/website.jpg"
 >
   <main>
-    <h1 class="mb-4 text-4xl">Garage Sales</h1>
-    <p class="mb-3">🇮🇹 Di tanto in tanto cerco nuovi possessori per qualche oggetto hardware che ho usato e amato. Se sei interessatə, <a href="/contacts" class="underline">contattami</a>.</p>    
-    <p class="mb-6">🇺🇸 From time to time I look for new owners for some hardware I have used and loved. If you are interested, <a href="/contacts" class="underline">contact me</a>.</p>    
+    <p class="eyebrow mb-3">Marketplace</p>
+    <h1 class="mb-4 text-3xl md:text-4xl font-display font-bold">Garage Sales</h1>
+    <div class="card p-4 mb-8 text-sm text-neutral-content space-y-2">
+      <p>🇮🇹 Di tanto in tanto cerco nuovi possessori per qualche oggetto hardware che ho usato e amato. Se sei interessatə, <a href="/contacts" class="underline">contattami</a>.</p>
+      <p>🇺🇸 From time to time I look for new owners for some hardware I have used and loved. If you are interested, <a href="/contacts" class="underline">contact me</a>.</p>
+    </div>
 
-  
-
-    <div class="space-y-6">
+    <div class="space-y-4">
         {products.map((item) => (
             
           <PostCard

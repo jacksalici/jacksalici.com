@@ -5,6 +5,7 @@ slug: weather-station
 description: "A custom client for displaying my weather station data."
 news: I built a custom Vue dashboard backed by a Cloudflare Worker for my weather station.
 categories: ["web"]
+activities: ["web"]
 stack: ["Vue", "Cloudflare Workers"]
 cta:
   - { url: "https://weather.jacksalici.com", label: "Check the dashboard" }

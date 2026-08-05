@@ -49,6 +49,7 @@ const activities = defineCollection({
 	loader: glob({ base: './src/content/activities', pattern: '**/*.{md,mdx}' }),
 	schema: baseSchema.extend({
 		featured: z.boolean().optional().default(false),
+		shown: z.boolean().optional().default(true), // Whether to show it on the homepage
 	}),
 });
 

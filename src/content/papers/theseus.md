@@ -9,6 +9,7 @@ acronym: "ICML 2026"
 location: "Seoul, South Korea"
 coordinates: [126.9780, 37.5665]
 categories: ["ai-ml"]
+activities: ["ai-ml"]
 cta:
   - { url: "https://arxiv.org/pdf/2602.12952", label: "Link to the paper" }
 featured: true

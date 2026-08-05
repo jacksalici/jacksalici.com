@@ -4,6 +4,7 @@ pubDate: 2022-07-02
 description: "My B.Sc. dissertation is about blockchain integration in management software."
 news: My B.Sc. thesis on blockchain integration in governance software is now publicly available.
 categories: ["web"]
+activities: ["web"]
 stack: ["Solidity"]
 featured: true
 cover: /uploads/blockchainStructure.png

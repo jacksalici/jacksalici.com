@@ -20,13 +20,13 @@ const props = {image: '/website.png'}
   image={props.image}
 >
   <main>
-   
-     
-    <h1 class="mb-1 text-4xl">Ongoing activities</h1>
-      <p class="mb-6 text-md text-neutral-content">
-        Projects I am currently working on. They may or may not become public or become a future publication.
-      </p>
-    <section  class="grid gap-6 mb-12">
+
+    <p class="eyebrow mb-3">Research</p>
+    <h1 class="mb-3 text-3xl md:text-4xl font-display font-bold">Ongoing activities</h1>
+    <p class="mb-10 text-base text-neutral-content max-w-2xl">
+      Projects I am currently working on. They may or may not become public or become a future publication.
+    </p>
+    <section class="grid gap-4 mb-12">
       {
         activities.map((single) => (
           <PostCard
@@ -37,10 +37,7 @@ const props = {image: '/website.png'}
           />
         ))
       }
-      
     </section>
-    
-  
   </main>
  
 </Base>
