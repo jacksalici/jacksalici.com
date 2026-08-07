@@ -4,7 +4,7 @@ pubDate: 2026-03-13
 description: Our new fullstack website for the AImageLab project.
 news: The AImageLab new website is live!
 categories: ["web"]
-activities: ["web"]
+activities: ["coding-web-apps"]
 stack: ["Django", "Tailwind CSS"]
 cta:
   - { url: "https://aimagelab.unimore.it/", label: "Website" }

@@ -17,50 +17,68 @@ export async function getStaticPaths() {
 const activity = Astro.props;
 const { Content } = await render(activity);
 
-const projects = (await getCollection('projects')).filter(project =>
-	project.data.draft !== true && project.data.hidden !== true &&
-	Array.isArray(project.data.activities) &&
-	project.data.activities.includes(activity.id)
-);
+const projects = (await getCollection('projects'))
+	.filter(project =>
+		project.data.draft !== true && project.data.hidden !== true &&
+		Array.isArray(project.data.activities) &&
+		project.data.activities.includes(activity.id)
+	)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const papers = (await getCollection('papers')).filter(paper =>
-	paper.data.draft !== true && paper.data.hidden !== true &&
-	Array.isArray(paper.data.activities) &&
-	paper.data.activities.includes(activity.id)
-);
-
-const related = [
-	...projects.map((p) => ({ title: p.data.title ?? '', pubDate: p.data.pubDate, slug: '/projects/' + p.id, type: 'project' as const, tag: p.data.categories?.[0] ? (categories[p.data.categories[0]] ?? p.data.categories[0]) : undefined })),
-	...papers.map((p) => ({ title: p.data.title ?? '', pubDate: p.data.pubDate, slug: '/papers/' + p.id, type: 'paper' as const, tag: p.data.acronym })),
-].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+const papers = (await getCollection('papers'))
+	.filter(paper =>
+		paper.data.draft !== true && paper.data.hidden !== true &&
+		Array.isArray(paper.data.activities) &&
+		paper.data.activities.includes(activity.id)
+	)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 ---
 
 <Base {...activity.data}>
 	<main>
 	<p class="eyebrow mb-3">Research Activity</p>
-	<h1 class="text-3xl md:text-4xl font-display font-bold mb-8">{activity.data.title}</h1>
+	<h1 class="text-3xl md:text-4xl font-display font-bold mb-20">{activity.data.title}</h1>
 
 	<div class="prose prose-js font-body mb-10 prose-p:text-justify prose-p:hyphens-auto w-full">
 		<Content />
 	</div>
 
-	{ related.length > 0 && <>
-	<div class="hr-line mb-8"></div>
-	<p class="section-label">Related Work</p>
-	<ul class="divide-y divide-base-300/60 border-t border-b border-base-300/60 mb-4 not-prose">
+	{ papers.length > 0 && <>
+	<p class="section-label mb-20">Related Papers</p>
+	<ul class="flex flex-col gap-1 mb-4 not-prose">
       {
-        related.map((item) => (
+        papers.map((paper) => (
           <li>
-            <a href={item.slug} class="group flex items-start gap-3 py-4 hover:text-accent-1 transition-colors">
-              {item.type === 'paper'
-                ? <FileText size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
-                : <Boxes size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />}
+            <a href={"/papers/" + paper.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
+              <FileText size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
               <span class="min-w-0 flex-1">
-                <span class="block truncate">{item.title}</span>
+                <span class="block">{paper.data.title}</span>
                 <span class="block text-xs text-neutral-content mt-1">
-                  {item.tag && <span class="font-bold mr-2">{item.tag}</span>}
-                  <FormattedDate date={item.pubDate} />
+                  {paper.data.acronym && <span class="font-bold mr-2">{paper.data.acronym}</span>}
+                  <FormattedDate date={paper.data.pubDate} />
+                </span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+	</>}
+
+	{ projects.length > 0 && <>
+	<p class="section-label">Related Projects</p>
+	<ul class="flex flex-col gap-1 mb-4 not-prose">
+      {
+        projects.map((project) => (
+          <li>
+            <a href={"/projects/" + project.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
+              <Boxes size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
+              <span class="min-w-0 flex-1">
+                <span class="block">{project.data.title}</span>
+                <span class="block text-xs text-neutral-content mt-1">
+                  {project.data.categories?.[0] && <span class="font-bold mr-2">{categories[project.data.categories[0]] ?? project.data.categories[0]}</span>}
+                  <FormattedDate date={project.data.pubDate} />
                 </span>
               </span>
             </a>

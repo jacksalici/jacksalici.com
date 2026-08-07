@@ -10,7 +10,7 @@ featured: true
 cta:
   - { url: "https://github.com/jacksalici/mmrGlobalPlanner", label: "Take a look at the repository" }
 cover: "/uploads/global.png"
-activities: ["v2x"]
+activities: ["applied-embodied-ai"]
 
 ---
 

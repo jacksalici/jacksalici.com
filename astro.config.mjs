@@ -13,7 +13,6 @@ export default defineConfig({
 
   redirects: {
     "/notes": "/",
-    "/projects": "/",
     "/projects/website": "/notes/website",
     "/thesis": "/projects/sfm-gaze-framework"
   },

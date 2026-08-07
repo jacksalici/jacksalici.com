@@ -16,15 +16,15 @@ const papers = (await getCollection("papers"))
 >
   <main>
     <p class="eyebrow mb-3">Publications</p>
-    <h1 class="mb-8 text-3xl md:text-4xl font-display font-bold">Papers</h1>
+    <h1 class="mb-20 text-3xl md:text-4xl font-display font-bold">Papers</h1>
 
-    <ul class="divide-y divide-base-300/60 border-t border-b border-base-300/60">
+    <ul class="flex flex-col gap-1">
       {papers.map((paper) => (
         <li>
-          <a href={"/papers/" + paper.id} class="group flex items-start gap-3 py-4 hover:text-accent-1 transition-colors">
+          <a href={"/papers/" + paper.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
             <FileText size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
             <span class="min-w-0 flex-1">
-              <span class="block truncate">{paper.data.title}</span>
+              <span class="block">{paper.data.title}</span>
               <span class="block text-xs text-neutral-content mt-1">
                 {paper.data.acronym && <span class="font-bold mr-2">{paper.data.acronym}</span>}
                 <FormattedDate date={paper.data.pubDate} />

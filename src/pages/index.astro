@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { BrainCircuit, Bot, WifiCog, Wrench, PanelsTopLeft, LineChart, FileText, Boxes, ArrowRight } from "@lucide/astro";
+import { FileText, Boxes, PenLine, ArrowRight } from "@lucide/astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Base from "../layouts/Base.astro";
 import "../styles/global.css";
@@ -13,16 +13,32 @@ const papers = (await getCollection("papers")).filter(
   (a) => a.data.draft !== true && a.data.hidden !== true
 );
 
-const activityIcons: Record<string, any> = {
-  "ai-ml": BrainCircuit,
-  "robotics": Bot,
-  "v2x": WifiCog,
-  "tsa": LineChart,
-  "web": PanelsTopLeft,
-  "making": Wrench,
+const projects = (await getCollection("projects")).filter(
+  (a) => a.data.draft !== true && a.data.hidden !== true
+);
+
+const notes = (await getCollection("notes")).filter(
+  (a) => a.data.draft !== true && a.data.hidden !== true
+);
+
+// Duotone gradient pairs drawn from the site's own accent palette, used as
+// generated cover art for each activity card (no external images needed).
+const activityGradients: Record<string, string> = {
+  "modular-deep-learning": "from-accent-4 to-accent-2",
+  "applied-embodied-ai": "from-accent-3 to-accent-1",
+  "anomaly-detection-tsa": "from-accent-1 to-accent-3",
+  "coding-web-apps": "from-accent-2 to-accent-1",
 };
 
 const latestPapers = papers
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const latestProjects = projects
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const latestNotes = notes
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
@@ -37,17 +53,16 @@ const props = { image: "/sky.png" };
 >
   <main>
     <section class="pt-6 pb-10 md:pt-10 md:pb-14">
-      <p class="eyebrow mb-4">Giacomo Salici — Modena, Italy</p>
       <h1 class="text-3xl md:text-4xl text-balance font-display font-bold leading-tight">
-        A digital craftsman who designs <span class="text-accent-3">systems that matter</span>.
+        A digital craftsman who designs <span class="italic">systems that matter</span>.
       </h1>
 
-      <div class="mt-6 flex flex-col gap-4 text-base-content/90 max-w-2xl">
+      <div class="mt-6 flex flex-col gap-4 max-w-2xl">
         <p>
-          I am <span class="font-bold">Giacomo Salici</span>, an <span class="font-bold">AI &amp; computer engineer, developer, and occasionally designer</span> based in Italy. I work with the <a class="font-bold" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of University of Modena and Reggio Emilia (<a href="https://www.unimore.it/">UniMORE&nbsp;↗</a>) as a <span class="text-accent-3 font-bold">PhD candidate in ICT</span>.
+          I am <span class="font-bold">Giacomo Salici</span>, an <span class="">AI &amp; computer engineer, developer, and occasionally designer</span> based in Italy. I work with the <a class="font-bold" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of University of Modena and Reggio Emilia (<a href="https://www.unimore.it/">UniMORE&nbsp;↗</a>) as a <span class="font-bold">PhD candidate in ICT</span>.
         </p>
         <p>
-          My research interests include <span class="text-accent-2 font-bold">artificial intelligence of things (AIoT), modular deep learning, and anomaly detection.</span> Besides research, I enjoy open-source software and hardware, good design, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
+          My research interests include artificial intelligence of things (AIoT), modular deep learning, and anomaly detection. Besides research, I enjoy open-source software and hardware, good design, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
         </p>
       </div>
 
@@ -59,39 +74,69 @@ const props = { image: "/sky.png" };
       </div>
     </section>
 
-    <section class="mb-16">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {activities.map((activity) => {
-          const Icon = activityIcons[activity.id] ?? Boxes;
+    <section class="mb-20">
+      <p class="section-label">Current Activities</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 md:auto-rows-[10rem] gap-4">
+        {activities.map((activity, i) => {
+          const gradient = activityGradients[activity.id] ?? "from-neutral to-neutral-content";
+          const big = i === 0;
+          const span = big
+            ? "md:col-span-2 md:row-span-2"
+            : i === 1
+              ? "md:col-span-2 md:row-span-1"
+              : "md:col-span-1 md:row-span-1";
           return (
-            <a href={"/activities/" + activity.id} class="card card-hover p-5 group">
-              <div class="flex items-center gap-2 mb-2">
-                <Icon size={18} class="shrink-0 text-neutral-content group-hover:text-accent-1 transition-colors" />
-                <h2 class="font-display font-bold text-base-content group-hover:text-accent-1 transition-colors">
+            <a
+              href={"/activities/" + activity.id}
+              class:list={[
+                "group relative block overflow-hidden rounded-2xl border border-base-300/60 card-hover h-56",
+                "md:h-auto",
+                span,
+              ]}
+            >
+              <div class={`absolute inset-0 bg-gradient-to-br ${gradient}`}></div>
+              <div
+                class="absolute inset-0 opacity-25 mix-blend-overlay transition-transform duration-700 ease-out group-hover:scale-110"
+                style="background-image:url(/noise.svg); background-size: 200px 200px;"
+              ></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-opacity duration-500 group-hover:from-black/80"></div>
+
+              <div class:list={["relative h-full flex flex-col justify-end", big ? "p-6" : "p-4"]}>
+                <h2 class:list={["font-display font-bold text-base-100", big ? "text-2xl" : "text-base"]}>
                   {activity.data.title}
                 </h2>
+
+                {activity.data.description && (
+                  <p class:list={["text-base-100/80 mt-1", big ? "text-sm" : "text-xs line-clamp-2"]}>
+                    {activity.data.description}
+                  </p>
+                )}
               </div>
-
-              {activity.data.description && (
-                <p class="text-sm text-neutral-content mb-3">{activity.data.description}</p>
-              )}
-
-             
             </a>
           );
         })}
       </div>
+
+      <div class="flex flex-wrap gap-x-6 gap-y-2 mt-4">
+        <a href="/activities" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
+          All activities <ArrowRight size={14} />
+        </a>
+        <a href="/projects" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
+          All projects <ArrowRight size={14} />
+        </a>
+      </div>
     </section>
 
-    <section class="mb-16">
+    <section class="mb-20">
       <p class="section-label">Latest papers</p>
 
-      <ul class="divide-y divide-base-300/60 border-t border-b border-base-300/60 mb-4">
+      <ul class="flex flex-col gap-1 mb-4">
         {latestPapers.map((paper) => (
           <li>
-            <a href={"/papers/" + paper.id} class="group flex items-center gap-2 py-3 hover:text-accent-1 transition-colors">
-              <FileText size={14} class="shrink-0 text-neutral-content group-hover:text-accent-1 transition-colors" />
-              <span class="min-w-0 flex-1 truncate">{paper.data.title}</span>
+            <a href={"/papers/" + paper.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
+              <FileText size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
+              <span class="min-w-0 flex-1">{paper.data.news}</span>
               <span class="shrink-0 text-xs text-neutral-content">
                 {paper.data.acronym && <span class="font-bold mr-2">{paper.data.acronym}</span>}
                 <FormattedDate date={paper.data.pubDate} />
@@ -102,8 +147,50 @@ const props = { image: "/sky.png" };
       </ul>
 
       <a href="/papers" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
-        View all papers <ArrowRight size={14} />
+        All papers <ArrowRight size={14} />
       </a>
     </section>
+
+    <section class="mb-20">
+      <p class="section-label">Latest projects</p>
+
+      <ul class="flex flex-col gap-1 mb-4">
+        {latestProjects.map((project) => (
+          <li>
+            <a href={"/projects/" + project.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
+              <Boxes size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
+              <span class="min-w-0 flex-1">{project.data.news}</span>
+              <span class="shrink-0 text-xs text-neutral-content">
+                <FormattedDate date={project.data.pubDate} />
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a href="/projects" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
+        All projects <ArrowRight size={14} />
+      </a>
+    </section>
+
+    {latestNotes.length > 0 && (
+      <section class="mb-16">
+        <p class="section-label">Latest thoughts</p>
+
+        <ul class="flex flex-col gap-1">
+          {latestNotes.map((note) => (
+            <li>
+              <a href={"/notes/" + note.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
+                <PenLine size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
+                <span class="min-w-0 flex-1">{note.data.title}</span>
+                <span class="shrink-0 text-xs text-neutral-content">
+                  <FormattedDate date={note.data.pubDate} />
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
   </main>
 </Base>

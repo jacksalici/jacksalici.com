@@ -8,7 +8,7 @@ location: "Naples, Italy"
 coordinates: [14.2681, 40.8518]
 categories: ["robotics"]
 news: '“LLMs and Humanoid Robot Diversity: The Pose Generation Challenge” has been accepted at ICSR 2025!'
-activities: ["robotics"]
+activities: ["applied-embodied-ai"]
 acronym: "ICSR 2025"
 cta:
   - { url: "https://hdl.handle.net/11380/1382389", label: "Full Text" }

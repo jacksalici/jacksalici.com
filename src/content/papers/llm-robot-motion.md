@@ -9,7 +9,7 @@ location: "Honolulu, Hawaii, USA"
 coordinates: [-157.8581, 21.3099]
 categories: ["robotics"]
 news: Our paper “LLMs as NAO Robot 3D Motion Planners” has been accepted at ICCVW 2025. See you in Hawaii!
-activities: ["robotics"]
+activities: ["applied-embodied-ai"]
 cta:
   - { url: "https://hdl.handle.net/11380/1384296", label: "Full Text" }
   - { url: "https://github.com/iot-unimore/llm-nao-motion", label: "Project Repository" }

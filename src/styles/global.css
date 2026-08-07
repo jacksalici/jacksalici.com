@@ -118,9 +118,6 @@ main {
 	@apply transition-colors duration-150 hover:border-base-content/30
 }
 
-.hr-line {
-	@apply border-t border-base-300/70
-}
 
 .section-label {
 	@apply text-xs uppercase tracking-[0.2em] text-neutral-content font-mono flex items-center gap-3 mb-4

@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import { Boxes } from "@lucide/astro";
+import Base from "../../layouts/Base.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import { categories } from "../../consts";
+
+const projects = (await getCollection("projects"))
+  .filter((a) => a.data.draft !== true && a.data.hidden !== true)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Base
+  title="Projects"
+  description="Projects built by Giacomo Salici, from research prototypes to web products and hardware."
+  image="/website.jpg"
+>
+  <main>
+    <p class="eyebrow mb-3">Portfolio</p>
+    <h1 class="mb-20 text-3xl md:text-4xl font-display font-bold">Projects</h1>
+
+    <ul class="flex flex-col gap-1">
+      {projects.map((project) => (
+        <li>
+          <a href={"/projects/" + project.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
+            <Boxes size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
+            <span class="min-w-0 flex-1">
+              <span class="block">{project.data.title}</span>
+              <span class="block text-xs text-neutral-content mt-1">
+                {project.data.categories?.[0] && <span class="font-bold mr-2">{categories[project.data.categories[0]] ?? project.data.categories[0]}</span>}
+                <FormattedDate date={project.data.pubDate} />
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>

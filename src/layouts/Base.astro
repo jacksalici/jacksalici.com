@@ -34,7 +34,7 @@ const pathname = new URL(Astro.request.url).pathname;
   </head>
 
   <body
-    class="m-0 text-base-content font-body bg-base-100 flex flex-col gap-4 lg:gap-10 min-h-screen"
+    class="m-0 text-base-content/85 font-body bg-base-100 flex flex-col gap-4 lg:gap-10 min-h-screen"
   >
     {props.hideHeader !== true && <Header />}
     <slot/>
