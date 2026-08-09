@@ -50,6 +50,7 @@ const activities = defineCollection({
 	schema: baseSchema.extend({
 		featured: z.boolean().optional().default(false),
 		shown: z.boolean().optional().default(true), // Whether to show it on the homepage
+		order: z.number().optional().default(99), // Display order on the homepage, ascending
 	}),
 });
 

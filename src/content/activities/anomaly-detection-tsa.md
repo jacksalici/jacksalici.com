@@ -1,5 +1,6 @@
 ---
-title: Anomaly Detection & Time Series Analysis
+title: Time Series Analysis & Anomaly Detection
+order: 3
 pubDate: 2026-06-01
 description: Deep learning for predictive maintenance and anomaly detection in industrial time series.
 ---

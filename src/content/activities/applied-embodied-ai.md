@@ -1,5 +1,6 @@
 ---
-title: Applied & Embodied AI
+title: Applied & Embodied AI Systems
+order: 1
 pubDate: 2025-10-20
 description: AI systems that act in the physical world, from social robots to connected and autonomous vehicles.
 featured: true

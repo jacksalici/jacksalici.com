@@ -5,9 +5,10 @@ import FormattedDate from "../components/FormattedDate.astro";
 import Base from "../layouts/Base.astro";
 import "../styles/global.css";
 
+// Ordered by the `order` field in each activity's frontmatter, ascending.
 const activities = (await getCollection("activities"))
   .filter((a) => a.data.draft !== true && a.data.hidden !== true && a.data.shown !== false)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort((a, b) => a.data.order - b.data.order);
 
 const papers = (await getCollection("papers")).filter(
   (a) => a.data.draft !== true && a.data.hidden !== true
@@ -21,14 +22,23 @@ const notes = (await getCollection("notes")).filter(
   (a) => a.data.draft !== true && a.data.hidden !== true
 );
 
-// Duotone gradient pairs drawn from the site's own accent palette, used as
-// generated cover art for each activity card (no external images needed).
+// Accent gradient painted on the front of each activity card. 
 const activityGradients: Record<string, string> = {
-  "modular-deep-learning": "from-accent-4 to-accent-2",
-  "applied-embodied-ai": "from-accent-3 to-accent-1",
-  "anomaly-detection-tsa": "from-accent-1 to-accent-3",
-  "coding-web-apps": "from-accent-2 to-accent-1",
+  "applied-embodied-ai": "from-accent-2 to-primary",
+  "modular-deep-learning": "from-accent-4 to-primary",
+  "anomaly-detection-tsa": "from-accent-1 to-primary",
+  "coding-web-apps": "from-accent-3 to-primary",
 };
+const defaultGradient = "from-neutral to-neutral-content";
+
+const pileByActivity: Record<string, (string | null)[]> = {};
+for (const activity of activities) {
+  const covers = [...projects, ...papers]
+    .filter((item) => item.data.activities?.includes(activity.id) && item.data.cover)
+    .map((item) => item.data.cover as string)
+    .slice(0, 3);
+  pileByActivity[activity.id] = covers.length >= 2 ? covers : [...covers, null, null].slice(0, 3);
+}
 
 const latestPapers = papers
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -77,48 +87,79 @@ const props = { image: "/sky.png" };
     <section class="mb-20">
       <p class="section-label">Current Activities</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 md:auto-rows-[10rem] gap-4">
-        {activities.map((activity, i) => {
-          const gradient = activityGradients[activity.id] ?? "from-neutral to-neutral-content";
-          const big = i === 0;
-          const span = big
-            ? "md:col-span-2 md:row-span-2"
-            : i === 1
-              ? "md:col-span-2 md:row-span-1"
-              : "md:col-span-1 md:row-span-1";
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-3 lg:-mx-32">
+        {activities.map((activity) => {
+          const gradient = activityGradients[activity.id] ?? defaultGradient;
           return (
-            <a
-              href={"/activities/" + activity.id}
-              class:list={[
-                "group relative block overflow-hidden rounded-2xl border border-base-300/60 card-hover h-56",
-                "md:h-auto",
-                span,
-              ]}
-            >
-              <div class={`absolute inset-0 bg-gradient-to-br ${gradient}`}></div>
-              <div
-                class="absolute inset-0 opacity-25 mix-blend-overlay transition-transform duration-700 ease-out group-hover:scale-110"
-                style="background-image:url(/noise.svg); background-size: 200px 200px;"
-              ></div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-opacity duration-500 group-hover:from-black/80"></div>
+            <a href={"/activities/" + activity.id} class="activity-card group relative block aspect-square">
+              <div class="pile absolute inset-0 pointer-events-none">
+                {pileByActivity[activity.id].map((src) => (
+                  <div class="pile-sheet absolute inset-0 rounded-xl overflow-hidden bg-base-100 border border-base-200">
+                    {src && <img src={src} alt="" loading="lazy" class="w-full h-full object-cover" />}
+                  </div>
+                ))}
+              </div>
 
-              <div class:list={["relative h-full flex flex-col justify-end", big ? "p-6" : "p-4"]}>
-                <h2 class:list={["font-display font-bold text-base-100", big ? "text-2xl" : "text-base"]}>
-                  {activity.data.title}
-                </h2>
-
-                {activity.data.description && (
-                  <p class:list={["text-base-100/80 mt-1", big ? "text-sm" : "text-xs line-clamp-2"]}>
-                    {activity.data.description}
-                  </p>
-                )}
+              <div class={`face absolute inset-0 rounded-xl overflow-hidden backdrop-blur-sm bg-gradient-to-br ${gradient}`}>
+                {/* Keeps the title legible on the lighter warm gradients. */}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                <div class="relative h-full flex items-end p-4">
+                  <h2 class="font-display text-lg text-base-100 text-balance">
+                    {activity.data.title}
+                  </h2>
+                </div>
               </div>
             </a>
           );
         })}
       </div>
 
-      <div class="flex flex-wrap gap-x-6 gap-y-2 mt-4">
+      <style>
+        .activity-card:hover,
+        .activity-card:focus-visible {
+          z-index: 20;
+        }
+        .activity-card .face {
+          z-index: 10;
+        }
+        .activity-card .pile-sheet {
+          transform-origin: top left;
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .activity-card .pile-sheet:nth-child(1) {
+          transform: rotate(-1deg);
+        }
+        .activity-card .pile-sheet:nth-child(2) {
+          transform: rotate(-2deg);
+        }
+        .activity-card .pile-sheet:nth-child(3) {
+          transform: rotate(-3deg);
+        }
+        .activity-card:hover .pile-sheet,
+        .activity-card:focus-visible .pile-sheet {
+          box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.25);
+        }
+        .activity-card:hover .pile-sheet:nth-child(1),
+        .activity-card:focus-visible .pile-sheet:nth-child(1) {
+          transform: rotate(-3deg);
+        }
+        .activity-card:hover .pile-sheet:nth-child(2),
+        .activity-card:focus-visible .pile-sheet:nth-child(2) {
+          transform: rotate(-6deg);
+        }
+        .activity-card:hover .pile-sheet:nth-child(3),
+        .activity-card:focus-visible .pile-sheet:nth-child(3) {
+          transform: rotate(-9deg);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .activity-card .pile-sheet {
+            transition: none;
+          }
+        }
+      </style>
+
+      <div class="flex flex-wrap gap-x-6 gap-y-2 mt-12">
         <a href="/activities" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
           All activities <ArrowRight size={14} />
         </a>

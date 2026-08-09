@@ -1,5 +1,6 @@
 ---
-title: Modular Deep Learning
+title: Research on Modular Deep Learning
+order: 2
 pubDate: 2026-04-30
 description: Reusing, merging, and transporting knowledge across pre-trained models, plus the vision and multimodal pipelines built on top.
 featured: true
