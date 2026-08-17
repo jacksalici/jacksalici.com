@@ -83,14 +83,14 @@ const props = { image: "/sky.png" };
       <div class="mt-7 flex flex-col-reverse sm:flex-row sm:items-start gap-6 sm:gap-8">
         <div class="flex-1 min-w-0">
           <p class="text-lg leading-relaxed">
-            I am <span class="font-bold">Giacomo Salici</span>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a class="font-bold" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of University of Modena and Reggio Emilia (<a href="https://www.unimore.it/">UniMORE&nbsp;↗</a>) as a <span class="font-bold">PhD candidate in ICT</span>.{" "}
-            <a class="read-toggle cursor-pointer underline text-nowrap">Read more ↘</a>
+            I am <span class="font-bold">Giacomo Salici</span>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a class="font-bold" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of UniMORE as a <span class="font-bold">PhD candidate in ICT</span>.{" "}
+            <button type="button" class="read-toggle toggle-btn align-middle" aria-expanded="false">Read more ↘</button>
           </p>
 
           <div id="bio-more" data-open="false" class="read-panel">
             <div>
               <p class="text-neutral-content leading-relaxed pt-4">
-                My research interests include artificial intelligence of things (AIoT), modular deep learning, and anomaly detection. Besides my research work, I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
+                At the <a href="https://www.unimore.it/">University of Modena and Reggio Emilia&nbsp;↗</a>, my research interests include <span class="text-accent-2 font-bold"><Bot class:list={"inline pb-1"}/>&nbsp;artificial intelligence of things (AIoT)</span>, <span class="text-accent-2 font-bold"><Network class:list={"inline pb-1"}/>&nbsp;modular deep learning</span>, and <span class="text-accent-2 font-bold"><Activity class:list={"inline pb-1"}/>&nbsp;anomaly detection </span>. Besides my research work, I also enjoy (in casual order): <span class="text-accent-2 font-bold"><Code class:list={"inline pb-1"}/>&nbsp;open-source software and hardware</span>, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
               </p>
             </div>
           </div>
@@ -118,7 +118,7 @@ const props = { image: "/sky.png" };
           const Icon = activityIcons[activity.id];
           return (
             <a
-              href={"/activities/" + activity.id}
+              href={"#" + activity.id}
               data-activity-id={activity.id}
               aria-pressed="false"
               class:list={[
