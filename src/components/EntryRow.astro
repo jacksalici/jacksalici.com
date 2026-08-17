@@ -12,12 +12,16 @@ interface Props {
 	description?: string;
 	/** Lowercased haystack for client-side filtering. */
 	search?: string;
+	/** Kept out of view until "Show all" reveals it. */
+	hidden?: boolean;
+	/** Activity ids this entry belongs to, used for client-side filtering by activity. */
+	activities?: string[];
 }
 
-const { href, title, meta, date, description, search } = Astro.props;
+const { href, title, meta, date, description, search, hidden, activities } = Astro.props;
 ---
 
-<li class="entry" data-search={search?.toLowerCase()}>
+<li class="entry" data-search={search?.toLowerCase()} data-activities={activities?.join(" ")} hidden={hidden}>
 	<a href={href} class="list-row">
 		<span class="min-w-0 flex-1">
 			{(meta || date) && <span class="text-xs font-mono text-neutral-content/70">

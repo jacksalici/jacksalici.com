@@ -54,13 +54,16 @@ for (const activity of activities) {
   };
 }
 
-const latestPapers = papers
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+// Sorted newest first; only the first INITIAL_VISIBLE rows show until "Load more" is clicked.
+const INITIAL_VISIBLE = 3;
 
-const latestProjects = projects
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+const latestPapers = papers.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const latestProjects = projects.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 
 const latestNotes = notes
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -76,7 +79,7 @@ const props = { image: "/sky.png" };
   keywords={["giacomo salici", "ai engineer", "computer engineer", "robotics", "research", "portfolio"]}
 >
   <main>
-    <section>
+    <section class="relative">
       <h1 class="text-4xl md:text-5xl text-balance font-display font-bold leading-[1.08] tracking-tight">
         A digital craftsman who designs <span class="italic">systems that matter</span>.
       </h1>
@@ -114,6 +117,8 @@ const props = { image: "/sky.png" };
           return (
             <a
               href={"/activities/" + activity.id}
+              data-activity-id={activity.id}
+              aria-pressed="false"
               class:list={[
                 "activity-card group relative block",
                 "w-[70%] h-56 shrink-0",
@@ -145,12 +150,56 @@ const props = { image: "/sky.png" };
         })}
       </div>
 
+      <div id="activity-details" class="read-panel" data-open="false">
+        <div>
+          <div class="pt-6">
+            {activities.map((activity) => (
+              <div class="activity-detail" data-activity-id={activity.id} data-title={activity.data.title} hidden>
+                {activity.data.description && (
+                  <p class="text-neutral-content text-xl font-display font-normal">{activity.data.description}</p>
+                    
+                )}
+                {activity.body && (
+                  <p class="text-neutral-content mt-4">{activity.body}</p>
+                    
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <style>
         
 
         /* Mobile: a snap rail showing one and a half cards. */
         .activity-rail {
           scrollbar-width: none;
+        }
+
+        /* Frozen at the top of the viewport while an activity is selected.
+           The enclosing section now spans the hero, papers, projects, and
+           writing content, so the rail stays stuck across all of it and
+           only releases once you scroll past the end of that section. */
+        .activity-rail.is-pinned {
+          position: sticky;
+          top: 010;
+          z-index: 30;
+          padding-bottom: 10;
+          background: var(--color-base-100);
+          
+        }
+
+        /* Selected card keeps the hover face permanently. */
+        .activity-card.is-active .face {
+          background: var(--color-accent-3);
+        }
+        .activity-card.is-active .face > div {
+          color: #fff;
+        }
+        
+        .toggle-btn.is-expanded svg {
+          transform: rotate(90deg);
         }
         .activity-rail::-webkit-scrollbar {
           display: none;
@@ -210,37 +259,34 @@ const props = { image: "/sky.png" };
         }
       </style>
 
-      <div class="flex flex-wrap gap-x-6 gap-y-2 mt-8">
-        <a href="/activities" class="more-link">
-          All activities <ArrowRight size={14} />
-        </a>
-      </div>
-    </section>
-
-    <section class="my-20">
+    <section class="my-20" id="papers-section">
       <p class="section-label"><span class="section-num">02</span>My latest research papers</p>
 
-      <EntryList class="mb-5">
-        {latestPapers.map((paper) => (
+      <EntryList id="papers-list" class="mb-5">
+        {latestPapers.map((paper, i) => (
           <EntryRow
             href={"/papers/" + paper.id}
             title={paper.data.news ?? paper.data.title ?? paper.id}
             meta={paper.data.acronym}
             date={paper.data.pubDate}
+            hidden={i >= INITIAL_VISIBLE}
+            activities={paper.data.activities}
           />
         ))}
       </EntryList>
 
-      <a href="/papers" class="more-link">
-        All papers <ArrowRight size={14} />
-      </a>
+      {latestPapers.length > INITIAL_VISIBLE && (
+        <button type="button" class="more-link toggle-btn" data-expanded="false">
+          <span class="toggle-label">Show all</span> <ArrowRight size={14} />
+        </button>
+      )}
     </section>
 
-    <section class="mb-20">
+    <section class="mb-20" id="projects-section">
       <p class="section-label"><span class="section-num">03</span>My latest projects</p>
 
-      <EntryList class="mb-5">
-        {latestProjects.map((project) => (
+      <EntryList id="projects-list" class="mb-5">
+        {latestProjects.map((project, i) => (
           <EntryRow
             href={"/projects/" + project.id}
             title={project.data.news ?? project.data.title ?? project.id}
@@ -250,17 +296,21 @@ const props = { image: "/sky.png" };
                 : undefined
             }
             date={project.data.pubDate}
+            hidden={i >= INITIAL_VISIBLE}
+            activities={project.data.activities}
           />
         ))}
       </EntryList>
 
-      <a href="/projects" class="more-link">
-        All projects <ArrowRight size={14} />
-      </a>
+      {latestProjects.length > INITIAL_VISIBLE && (
+        <button type="button" class="more-link toggle-btn" data-expanded="false">
+          <span class="toggle-label">Show all</span> <ArrowRight size={14} />
+        </button>
+      )}
     </section>
 
     {latestNotes.length > 0 && (
-      <section class="mb-20">
+      <section class="mb-20" id="writing-section">
         <p class="section-label"><span class="section-num">04</span>Writing</p>
 
         <EntryList>
@@ -274,6 +324,7 @@ const props = { image: "/sky.png" };
         </EntryList>
       </section>
     )}
+    </section>
 
     <section class="border-t border-base-300/70 pt-12 pb-6">
       <h2 class="font-display text-3xl md:text-4xl tracking-tight leading-[1.1] text-balance max-w-2xl">
@@ -305,5 +356,105 @@ const props = { image: "/sky.png" };
   toggle.textContent = nextOpen ? "Read less ↖" : "Read more ↘";
 
   photo?.classList.toggle("is-reading", nextOpen);
+  });
+
+  const INITIAL_VISIBLE = 3;
+
+  // "Show all" / "Show latest" toggle for a list of entries.
+  function collapseList(list: Element) {
+    Array.from(list.querySelectorAll(".entry")).forEach((entry, i) => {
+      (entry as HTMLElement).hidden = i >= INITIAL_VISIBLE;
+    });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>(".toggle-btn").forEach((btn) => {
+    const list = btn.previousElementSibling;
+    if (!list) return;
+    const label = btn.querySelector(".toggle-label");
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.dataset.expanded === "true";
+      const nextExpanded = !expanded;
+
+      Array.from(list.querySelectorAll(".entry")).forEach((entry, i) => {
+        (entry as HTMLElement).hidden = nextExpanded ? false : i >= INITIAL_VISIBLE;
+      });
+
+      btn.dataset.expanded = String(nextExpanded);
+      btn.classList.toggle("is-expanded", nextExpanded);
+      if (label) label.textContent = nextExpanded ? "Show latest" : "Show all";
+    });
+  });
+
+  // Clicking an activity pins it over all page content, filters papers/projects
+  // to its work, hides writing, and opens its details panel — click again to clear.
+  const activityRail = document.querySelector<HTMLElement>(".activity-rail");
+  const activityCards = document.querySelectorAll<HTMLAnchorElement>(".activity-card");
+  const detailsPanel = document.getElementById("activity-details");
+  const detailPanels = document.querySelectorAll<HTMLElement>(".activity-detail");
+  const writingSection = document.getElementById("writing-section");
+
+  const filterTargets = [
+    { section: document.getElementById("papers-section"), list: document.getElementById("papers-list"), btn: document.querySelector<HTMLButtonElement>("#papers-section .toggle-btn") },
+    { section: document.getElementById("projects-section"), list: document.getElementById("projects-list"), btn: document.querySelector<HTMLButtonElement>("#projects-section .toggle-btn") },
+  ];
+
+  let activeActivityId: string | null = null;
+
+  function pinRail(pin: boolean) {
+    activityRail?.classList.toggle("is-pinned", pin);
+  }
+
+  function selectActivity(id: string | null) {
+    activeActivityId = id;
+
+    activityCards.forEach((card) => {
+      const isActive = card.dataset.activityId === id;
+      card.classList.toggle("is-active", isActive);
+      card.setAttribute("aria-pressed", String(isActive));
+    });
+
+    pinRail(Boolean(id));
+
+    detailPanels.forEach((panel) => {
+      panel.hidden = panel.dataset.activityId !== id;
+    });
+    if (detailsPanel) detailsPanel.dataset.open = String(Boolean(id));
+
+    if (writingSection) writingSection.hidden = Boolean(id);
+
+    filterTargets.forEach(({ section, list, btn }) => {
+      if (!list) return;
+      const entries = Array.from(list.querySelectorAll<HTMLElement>(".entry"));
+
+      if (id) {
+        let anyVisible = false;
+        entries.forEach((entry) => {
+          const matches = (entry.dataset.activities ?? "").split(" ").includes(id);
+          entry.hidden = !matches;
+          if (matches) anyVisible = true;
+        });
+        if (btn) btn.hidden = true;
+        if (section) section.hidden = !anyVisible;
+      } else {
+        collapseList(list);
+        if (btn) {
+          btn.hidden = false;
+          btn.dataset.expanded = "false";
+          btn.classList.remove("is-expanded");
+          const label = btn.querySelector(".toggle-label");
+          if (label) label.textContent = "Show all";
+        }
+        if (section) section.hidden = false;
+      }
+    });
+  }
+
+  activityCards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
+      const id = card.dataset.activityId ?? null;
+      selectActivity(activeActivityId === id ? null : id);
+    });
   });
 </script>
