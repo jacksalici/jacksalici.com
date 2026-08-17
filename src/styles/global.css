@@ -60,6 +60,10 @@
 	}
 }
 
+html{
+	scrollbar-gutter: stable;
+}
+
 
 :root {
   font-family: Inter, sans-serif;
