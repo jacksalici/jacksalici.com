@@ -378,7 +378,19 @@ const props = { image: "/sky.png" };
     card.addEventListener("click", (e) => {
       e.preventDefault();
       const id = card.dataset.activityId ?? null;
-      selectActivity(activeActivityId === id ? null : id);
+      const nextId = activeActivityId === id ? null : id;
+      selectActivity(nextId);
+      history.replaceState(null, "", nextId ? "#" + nextId : location.pathname + location.search);
     });
   });
+
+  // Landing on (or navigating to) a #activity-id hash selects that activity.
+  function openActivityFromHash() {
+    const id = location.hash.slice(1);
+    const matches = Array.from(activityCards).some((card) => card.dataset.activityId === id);
+    if (matches) selectActivity(id);
+  }
+
+  openActivityFromHash();
+  window.addEventListener("hashchange", openActivityFromHash);
 </script>
