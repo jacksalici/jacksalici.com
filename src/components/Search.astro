@@ -1,0 +1,159 @@
+---
+// Site-wide search dialog, backed by Pagefind. Rendered once per page by the
+// Base layout and opened by any `[data-search-open]` trigger.
+// The index is generated from the built HTML by the `postbuild` script, so
+// search only answers on a built site (`npm run build && npm run preview`).
+import { X } from "@lucide/astro";
+---
+
+<dialog id="search-dialog" class="search-dialog" aria-label="Search the site">
+  <div class="flex items-center gap-2">
+    <!-- Not type="search": Chromium lets it swallow Escape instead of closing the dialog. -->
+    <input
+      type="text"
+      data-search-input
+      class="search-input"
+      placeholder="Search everything I have made…"
+      autocomplete="off"
+      aria-label="Search the site"
+    />
+    <button type="button" class="icon-btn" data-search-close aria-label="Close search">
+      <X size={18} stroke-width={1.75} />
+    </button>
+  </div>
+
+  <p data-search-status class="text-xs font-mono text-neutral-content mt-3" hidden></p>
+  <ul data-search-results class="entry-list flex flex-col mt-1"></ul>
+</dialog>
+
+<script>
+  const MAX_RESULTS = 8;
+
+  // Human label for a result, derived from the first segment of its URL.
+  const TYPES: Record<string, string> = {
+    papers: "Paper",
+    projects: "Project",
+    notes: "Note",
+    market: "Garage sale",
+    activities: "Activity",
+  };
+
+  function typeOf(url: string) {
+    const segment = url.replace(/^\//, "").split("/")[0];
+    return TYPES[segment] ?? "Page";
+  }
+
+  let pagefind: any = null;
+  let unavailable = false;
+
+  // Pagefind is emitted into `dist` after the Astro build, so it must stay out
+  // of Vite's dependency graph: a plain dynamic import here gets wrapped in
+  // Vite's preload helper and breaks at runtime.
+  const loadPagefindModule = new Function(
+    "return import('/pagefind/pagefind.js')"
+  ) as () => Promise<any>;
+
+  async function getPagefind() {
+    if (pagefind || unavailable) return pagefind;
+    try {
+      pagefind = await loadPagefindModule();
+      await pagefind.init();
+    } catch {
+      unavailable = true;
+    }
+    return pagefind;
+  }
+
+  function renderResult(data: any) {
+    const item = document.createElement("li");
+    item.className = "entry";
+
+    const link = document.createElement("a");
+    link.href = data.url;
+    link.className = "list-row";
+
+    const body = document.createElement("span");
+    body.className = "min-w-0 flex-1";
+
+    const kind = document.createElement("span");
+    kind.className = "text-xs font-mono text-accent-3";
+    kind.textContent = typeOf(data.url);
+
+    const title = document.createElement("span");
+    title.className = "block";
+    title.textContent = data.meta?.title ?? data.url;
+
+    const excerpt = document.createElement("span");
+    excerpt.className = "search-excerpt block text-sm text-neutral-content mt-0.5";
+    excerpt.innerHTML = data.excerpt; // Pagefind escapes the text and adds <mark>.
+
+    body.append(kind, title, excerpt);
+    link.append(body);
+    item.append(link);
+    return item;
+  }
+
+  function setupSearch() {
+    const dialog = document.querySelector<HTMLDialogElement>("#search-dialog");
+    if (!dialog) return;
+
+    const input = dialog.querySelector<HTMLInputElement>("[data-search-input]");
+    const list = dialog.querySelector<HTMLElement>("[data-search-results]");
+    const status = dialog.querySelector<HTMLElement>("[data-search-status]");
+    if (!input || !list || !status) return;
+
+    function say(message: string) {
+      status!.textContent = message;
+      status!.hidden = message === "";
+    }
+
+    document.querySelectorAll("[data-search-open]").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        dialog.showModal();
+        input.focus();
+        getPagefind(); // Warm the index up while the first word is typed.
+      });
+    });
+
+    dialog.querySelector("[data-search-close]")?.addEventListener("click", () => dialog.close());
+
+    // Clicking the backdrop lands on the dialog element itself.
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+
+    input.addEventListener("input", async () => {
+      const query = input.value.trim();
+      if (query.length < 2) {
+        list.replaceChildren();
+        say("");
+        return;
+      }
+
+      const engine = await getPagefind();
+      if (!engine) {
+        say("Search index unavailable — it is built with the site.");
+        return;
+      }
+
+      // Returns null when a newer keystroke has superseded this search.
+      const search = await engine.debouncedSearch(query, {}, 200);
+      if (!search) return;
+
+      const results = await Promise.all(
+        search.results.slice(0, MAX_RESULTS).map((r: any) => r.data())
+      );
+
+      list.replaceChildren(...results.map(renderResult));
+      say(
+        search.results.length === 0
+          ? `No results for “${query}”`
+          : `${search.results.length} result${search.results.length > 1 ? "s" : ""}`
+      );
+    });
+  }
+
+  // `astro:page-load` also fires on the first load, and the ClientRouter swaps
+  // in fresh elements on every navigation, so this binds exactly once each.
+  document.addEventListener("astro:page-load", setupSearch);
+</script>

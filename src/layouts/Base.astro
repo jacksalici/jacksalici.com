@@ -9,9 +9,14 @@ import { Pizza, Heart, Earth } from '@lucide/astro';
 
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
+import Search from "../components/Search.astro";
 const { ...props } = Astro.props;
 const today = new Date();
 const pathname = new URL(Astro.request.url).pathname;
+
+// Pagefind indexes only what is inside `data-pagefind-body`, so the header and
+// the footer stay out of every result. Pages hidden from crawlers stay out too.
+const indexable = props.noindex !== true && pathname !== "/404";
 
 
 ---
@@ -39,7 +44,10 @@ const pathname = new URL(Astro.request.url).pathname;
     class="m-0 text-base-content/85 font-body bg-base-100 flex flex-col gap-4 lg:gap-10 min-h-screen" transition:animate="fade"
   >
     {props.hideHeader !== true && <Header />}
-    <slot/>
+    <Search />
+    <div class="contents" data-pagefind-body={indexable ? true : undefined}>
+      <slot/>
+    </div>
     {props.hideFooter !== true && 
     <footer class="mt-auto p-4 text-neutral group select-none">
       <p class="md:text-center mb-1 text-xs *:inline flex items-center justify-center gap-1">

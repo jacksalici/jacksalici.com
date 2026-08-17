@@ -139,6 +139,41 @@ main {
 	@apply w-full bg-white border border-base-300 rounded-lg px-4 py-2.5 text-sm transition-colors placeholder:text-neutral-content/70 focus:outline-none focus:border-base-content
 }
 
+/* Pagefind wraps the matched terms of an excerpt in <mark>, which needs a
+   lighter treatment than the one used inside prose. */
+.search-excerpt mark {
+	@apply bg-accent-1/35 text-base-content px-0.5 py-0 rounded-sm
+}
+
+/* Looks like a search field, acts as the button that opens the dialog. */
+.search-trigger {
+	@apply w-full flex items-center gap-2 cursor-pointer bg-white border border-base-300 rounded-lg px-4 py-2.5 text-sm text-neutral-content/80 transition-colors hover:border-base-content hover:text-base-content
+}
+
+.search-dialog {
+	@apply w-[calc(100%-2rem)] max-w-2xl mt-[10vh] mx-auto p-4 md:p-5 bg-base-100 border border-base-300 rounded-2xl shadow-[0_24px_60px_-30px_rgba(0,0,0,0.5)];
+	@apply max-h-[75vh] overflow-y-auto
+}
+
+.search-dialog::backdrop {
+	@apply bg-base-content/25 backdrop-blur-[2px]
+}
+
+/* --- Header --- */
+
+.nav-link {
+	@apply text-neutral-content hover:text-base-content transition-colors
+}
+
+.icon-btn {
+	@apply p-2 rounded-lg cursor-pointer text-neutral-content hover:text-base-content hover:bg-base-200 transition-colors
+}
+
+/* The header is not sticky, so anchors only need a little breathing room. */
+section[id] {
+	scroll-margin-top: 2rem;
+}
+
 .list-row {
 	@apply -mx-3 px-3 py-3 rounded-lg flex items-start gap-3 transition-colors hover:bg-base-200/60
 }

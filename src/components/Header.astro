@@ -1,12 +1,17 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import { Menu, Search as SearchIcon } from "@lucide/astro";
 
-type Props = HTMLAttributes<"a">;
-const { href, class: className, ...props } = Astro.props;
+// Publications and projects are sections of the homepage, not pages of their own.
+const links = [
+  { href: "/#about", label: "About" },
+  { href: "/#papers", label: "Publications" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/playground", label: "Playground" },
+];
 ---
 
-<header class="py-4 px-2 lg:px-4 mr-auto">
-  <div class="container md:max-w-3xl mx-auto flex items-center">
+<header class="w-full" data-header>
+  <div class="container mx-auto p-4 md:p-5 md:px-12 md:max-w-4xl flex items-center gap-4">
     <a href="/" aria-label="Logo of Jack" class="max-w-fit shrink-0">
       <svg
         id="logo"
@@ -34,5 +39,49 @@ const { href, class: className, ...props } = Astro.props;
         </g>
       </svg>
     </a>
+
+    <nav class="ml-auto hidden md:flex items-center gap-6 text-sm">
+      {links.map((link) => <a href={link.href} class="nav-link">{link.label}</a>)}
+    </nav>
+
+    <div class="ml-auto md:ml-0 flex items-center gap-1">
+      <button type="button" class="icon-btn" data-search-open aria-label="Search">
+        <SearchIcon size={18} stroke-width={1.75} />
+      </button>
+      <button type="button" class="icon-btn md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu">
+        <Menu size={20} stroke-width={1.75} />
+      </button>
+    </div>
+  </div>
+
+  {/* The links the desktop nav shows inline, folded away behind the hamburger. */}
+  <div id="header-menu" data-header-menu hidden class="md:hidden border-t border-base-300/60">
+    <nav class="container mx-auto p-4 md:max-w-4xl flex flex-col">
+      {links.map((link) => <a href={link.href} class="nav-link py-2">{link.label}</a>)}
+    </nav>
   </div>
 </header>
+
+<script>
+  function setupHeader() {
+    const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+    const menu = document.querySelector<HTMLElement>("[data-header-menu]");
+    if (!toggle || !menu) return;
+
+    function setOpen(open: boolean) {
+      menu!.hidden = !open;
+      toggle!.setAttribute("aria-expanded", String(open));
+    }
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    // Following a link would otherwise leave the menu open across a transition.
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+    // The search dialog covers the menu, so fold it away when it opens.
+    document.querySelector("[data-search-open]")?.addEventListener("click", () => setOpen(false));
+  }
+
+  document.addEventListener("astro:page-load", setupHeader);
+</script>

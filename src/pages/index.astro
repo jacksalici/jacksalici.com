@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import { Bot, Network, Activity, Code } from "@lucide/astro";
+import { Bot, Network, Activity, Code, Search as SearchIcon } from "@lucide/astro";
 import EntryList from "../components/EntryList.astro";
 import EntryRow from "../components/EntryRow.astro";
 import Base from "../layouts/Base.astro";
@@ -75,7 +75,7 @@ const props = { image: "/sky.png" };
   keywords={["giacomo salici", "ai engineer", "computer engineer", "robotics", "research", "portfolio"]}
 >
   <main>
-    <section class="relative">
+    <section class="relative" id="about">
       <h1 class="text-4xl md:text-5xl text-balance font-display font-bold leading-[1.08] tracking-tight">
         A digital craftsman who designs <span class="italic text-accent-3">systems that matter</span>.
       </h1>
@@ -101,6 +101,11 @@ const props = { image: "/sky.png" };
           <span class="text-xs">Me @ ICCV25, Honolulu </span>
         </div>
       </div>
+
+      <button type="button" class="search-trigger mt-10" data-search-open data-pagefind-ignore>
+        <SearchIcon size={16} stroke-width={1.75} />
+        <span>Search everything I have made…</span>
+      </button>
 
       <p class="section-label mt-12"><span class="section-num">01</span>What I am doing right now</p>
 
@@ -169,7 +174,7 @@ const props = { image: "/sky.png" };
         </div>
       </div>
 
-    <section class="mt-20" id="papers-section">
+    <section class="mt-20" id="papers" data-pagefind-ignore>
       <p class="section-label"><span class="section-num">02</span>My latest research papers</p>
 
       <EntryList id="papers-list" class="mb-5">
@@ -192,7 +197,7 @@ const props = { image: "/sky.png" };
       )}
     </section>
 
-    <section class="mt-20" id="projects-section">
+    <section class="mt-20" id="projects" data-pagefind-ignore>
       <p class="section-label"><span class="section-num">03</span>My latest projects</p>
 
       <EntryList id="projects-list" class="mb-5">
@@ -220,7 +225,7 @@ const props = { image: "/sky.png" };
     </section>
 
     {latestNotes.length > 0 && (
-      <section class="mt-20" id="writing-section">
+      <section class="mt-20" id="writing" data-pagefind-ignore>
         <p class="section-label"><span class="section-num">04</span>Writing</p>
 
         <EntryList>
@@ -256,16 +261,28 @@ const props = { image: "/sky.png" };
   const photo = document.querySelector<HTMLElement>(".snapshot")
   const panel = document.getElementById("bio-more");
 
-  toggle?.addEventListener("click", () => {
-  const open = panel?.dataset.open === "true";
-  const nextOpen = !open;
-  if (panel) panel.dataset.open = String(nextOpen); 
-   
-  toggle.setAttribute("aria-expanded", String(nextOpen));
-   
-  toggle.textContent = nextOpen ? "Read less ↖" : "Read more ↘";
+  function setBio(open: boolean) {
+    if (panel) panel.dataset.open = String(open);
+    if (photo) photo.dataset.reading = String(open);
+    if (!toggle) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.textContent = open ? "Read less ↖" : "Read more ↘";
+  }
 
-  if (photo) photo.dataset.reading = String(nextOpen);
+  toggle?.addEventListener("click", () => {
+    setBio(panel?.dataset.open !== "true");
+  });
+
+  // The header's "About" link points at /#about and expects the long bio open.
+  function openBioFromHash() {
+    if (location.hash === "#about") setBio(true);
+  }
+
+  openBioFromHash();
+  window.addEventListener("hashchange", openBioFromHash);
+  // Clicking it while already at /#about fires no hashchange, so catch the click too.
+  document.querySelectorAll('a[href$="#about"]').forEach((link) => {
+    link.addEventListener("click", () => setBio(true));
   });
 
   const INITIAL_VISIBLE = 3;
@@ -301,11 +318,11 @@ const props = { image: "/sky.png" };
   const activityCards = document.querySelectorAll<HTMLAnchorElement>(".activity-card");
   const detailsPanel = document.getElementById("activity-details");
   const detailPanels = document.querySelectorAll<HTMLElement>(".activity-detail");
-  const writingSection = document.getElementById("writing-section");
+  const writingSection = document.getElementById("writing");
 
   const filterTargets = [
-    { section: document.getElementById("papers-section"), list: document.getElementById("papers-list"), btn: document.querySelector<HTMLButtonElement>("#papers-section .toggle-btn") },
-    { section: document.getElementById("projects-section"), list: document.getElementById("projects-list"), btn: document.querySelector<HTMLButtonElement>("#projects-section .toggle-btn") },
+    { section: document.getElementById("papers"), list: document.getElementById("papers-list"), btn: document.querySelector<HTMLButtonElement>("#papers .toggle-btn") },
+    { section: document.getElementById("projects"), list: document.getElementById("projects-list"), btn: document.querySelector<HTMLButtonElement>("#projects .toggle-btn") },
   ];
 
   let activeActivityId: string | null = null;
