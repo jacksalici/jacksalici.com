@@ -257,6 +257,10 @@ const props = { image: "/sky.png" };
 </Base>
 
 <script>
+// Re-run on every ClientRouter navigation (including back/forward), not just the
+// first load, since that's the only way freshly swapped-in elements get their
+// listeners re-attached.
+document.addEventListener("astro:page-load", () => {
   const toggle = document.querySelector(".read-toggle");
   const photo = document.querySelector<HTMLElement>(".snapshot")
   const panel = document.getElementById("bio-more");
@@ -393,4 +397,5 @@ const props = { image: "/sky.png" };
 
   openActivityFromHash();
   window.addEventListener("hashchange", openActivityFromHash);
+});
 </script>
