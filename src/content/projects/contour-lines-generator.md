@@ -8,6 +8,10 @@ cover: "/uploads/contours.png"
 categories: ["coding"]
 activities: ["coding-web-apps"]
 stack: ["JavaScript", "SVG"]
+playground:
+  link: "https://contours.jacksalici.com"
+  tagline: "Drag a few points, watch a coastline appear. Then take the picture home."
+  emoji: "🗺️"
 cta:
   - { url: "https://contours.jacksalici.com", label: "Open the generator" }
   - { url: "https://github.com/jacksalici/ContourLinesGenerator/", label: "Source code" }

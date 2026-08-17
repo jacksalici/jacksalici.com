@@ -1,8 +1,41 @@
 ---
-
+import { getCollection } from "astro:content";
+import { ArrowUpRight, Dices, RefreshCw, X } from "@lucide/astro";
 import Base from "../layouts/Base.astro";
 
+// Every project that opted into the playground, newest first. The flag can be
+// `true` (card points at the project page) or an object carrying its own link.
+const toys = (await getCollection("projects"))
+  .filter((p) => p.data.draft !== true && p.data.hidden !== true && p.data.playground)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .map((p) => {
+    const play = p.data.playground;
+    const custom = typeof play === "object" ? play : null;
+    return {
+      title: p.data.title,
+      tagline: custom?.tagline ?? p.data.description,
+      emoji: custom?.emoji ?? "🎲",
+      cover: p.data.cover,
+      href: custom?.link ?? `/projects/${p.id}/`,
+      // Only worth showing when the card itself points somewhere else.
+      project: custom ? `/projects/${p.id}/` : undefined,
+      modal: false,
+    };
+  });
 
+// The fact generator is not a project, so it is pinned in by hand.
+const cards = [
+  ...toys,
+  {
+    title: "Random Fact Generator",
+    tagline: "One unverified truth per reload. Refresh until you find one worth repeating.",
+    emoji: "🃏",
+    cover: "/sky.jpg",
+    href: undefined,
+    project: undefined,
+    modal: true, // The only toy that plays right here, in a dialog.
+  },
+];
 ---
 
 <Base
@@ -11,45 +44,159 @@ import Base from "../layouts/Base.astro";
 >
   <main>
     <p class="eyebrow mb-3">Playground</p>
-    <h1 class="text-3xl md:text-4xl font-display font-bold mb-4">Work in progress</h1>
+    <h1 class="text-3xl md:text-4xl font-display font-bold mb-4 text-balance">
+      A drawer of <span class="italic text-accent-3">things that play back</span>.
+    </h1>
+    <p class="max-w-2xl text-neutral-content mb-8">
+      Small toys built for the pleasure of building them: no sign-up, no purpose, no
+      roadmap. Open one, poke at it, close the tab.
+    </p>
 
-    This page is current under development. In the meantime, here is a random fact for you:
-    <span id="fact" class="block my-4 text-xl p-5 font-display">
-    </span>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {cards.map((card, i) => {
+        const Tag = card.modal ? "button" : "a";
+        return (
+        <div class="group relative card card-hover p-5 flex flex-col gap-3 transition-colors hover:bg-accent-2/5">
+          {card.cover && (
+            <div class="-m-1 mb-0 rounded-xl overflow-hidden bg-base-200 aspect-[3/2]">
+              <img
+                src={card.cover}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover rounded-none transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+              />
+            </div>
+          )}
+          <div class="flex items-start justify-between gap-3">
+            <span class="text-3xl leading-none transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-rotate-12 group-hover:scale-110">
+              {card.emoji}
+            </span>
+            <span class="font-mono text-xs text-neutral-content/70 tabular-nums">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+          </div>
+          <div>
+            <p class="font-display font-bold text-base-content group-hover:text-accent-2 transition-colors">
+              {card.title}
+            </p>
+            {card.tagline && (
+              <p class="text-sm text-neutral-content mt-1">{card.tagline}</p>
+            )}
+          </div>
 
-    
+          <div class="mt-auto pt-2 flex items-end justify-between gap-3">
+            {/* Covers the whole card, so anywhere outside the project link plays the toy. */}
+            <Tag
+              href={card.href}
+              target={card.href?.startsWith("http") ? "_blank" : undefined}
+              rel={card.href?.startsWith("http") ? "noopener" : undefined}
+              data-fact-open={card.modal ? "" : undefined}
+              class="text-xs font-mono text-neutral-content inline-flex items-center gap-1 cursor-pointer transition-colors group-hover:text-accent-2 before:absolute before:inset-0 before:rounded-2xl before:content-['']"
+            >
+              Play
+              <ArrowUpRight class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Tag>
+
+            {card.project && (
+              <a
+                href={card.project}
+                class="relative z-10 text-xs text-neutral-content/80 underline decoration-dotted underline-offset-4 hover:text-base-content transition-colors"
+              >
+                How it works
+              </a>
+            )}
+          </div>
+        </div>
+        );
+      })}
+
+      <div class="rounded-2xl border border-dashed border-base-300 p-5 flex flex-col gap-3 text-neutral-content">
+        <div class="flex items-start justify-between gap-3">
+          <Dices class="w-7 h-7 text-base-300" />
+          <span class="font-mono text-xs text-neutral-content/70">??</span>
+        </div>
+        <div>
+          <p class="font-display font-bold text-neutral-content/80">Next curiosity</p>
+          <p class="text-sm mt-1">
+            Other small diversions are quietly taking shape in the workshop. They will
+            land here as soon as they stop crashing.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The fact generator has no page of its own: it plays inside this dialog. -->
+    <dialog id="fact-dialog" class="search-dialog" aria-label="Random fact">
+      <div class="flex items-start justify-between gap-4 mb-4">
+        <p class="eyebrow">Random fact</p>
+        <button data-fact-close class="icon-btn -m-2" aria-label="Close">
+          <X class="w-4 h-4" />
+        </button>
+      </div>
+
+      <p id="fact-text" class="font-display text-xl md:text-2xl text-balance min-h-[4rem]">
+        Shuffling the deck...
+      </p>
+
+      <div class="flex items-center justify-between gap-4 mt-6">
+        <p class="text-xs text-neutral-content max-w-xs">
+          Served by a public API, so treat it as a rumour worth fact-checking.
+        </p>
+        <button data-fact-more class="btn-outline shrink-0 cursor-pointer">
+          <RefreshCw class="w-4 h-4" />
+          Another one
+        </button>
+      </div>
+    </dialog>
   </main>
- 
 </Base>
 
-
 <script>
-const f = document.getElementById("fact")
+  // DON'T USE EXPOSED API KEY! This is for testing purposes only.
+  // Do not use the following key for your project.
+  const API_KEY = "8Idmhms+nG6e6Agy9f1jQA==gfaW91jpy9ty2nGz";
 
+  function setupFacts() {
+    const dialog = document.getElementById("fact-dialog") as HTMLDialogElement | null;
+    const text = document.getElementById("fact-text");
+    if (!dialog || !text) return;
 
-let fact = "" 
-
-// DON'T USE EXPOSED API KEY! This is for testing purposes only.
-// Do not use the following key for your project.
-// Also becouse a limit on the API calls rate will keep your app down, so spend some money to get a key on your own and shut the freak up. 
-
-try{
-  const res = await fetch(
-    "https://api.api-ninjas.com/v1/facts",
-    {
-      method: "GET",
-      headers: {
-        "X-Api-Key": "8Idmhms+nG6e6Agy9f1jQA==gfaW91jpy9ty2nGz",
-      },
+    async function draw() {
+      text!.textContent = "Shuffling the deck...";
+      try {
+        const res = await fetch("https://api.api-ninjas.com/v1/facts", {
+          headers: { "X-Api-Key": API_KEY },
+        });
+        const data = await res.json();
+        text!.textContent = data[0].fact + ".";
+      } catch (e) {
+        text!.textContent = "Ops, an error occurred.";
+      }
     }
-  )
-const data = await res.json()
-fact = data[0].fact + "."
-  }
-  catch(e){
-    fact = "Ops, an error occurred."
+
+    document.querySelectorAll("[data-fact-open]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        dialog.showModal();
+        draw();
+      })
+    );
+
+    dialog.querySelector("[data-fact-close]")?.addEventListener("click", () => dialog.close());
+    dialog.querySelector("[data-fact-more]")?.addEventListener("click", draw);
+
+    // Clicking the backdrop, i.e. outside the dialog's own box, closes it.
+    dialog.addEventListener("click", (event) => {
+      const box = dialog.getBoundingClientRect();
+      const outside =
+        event.clientX < box.left ||
+        event.clientX > box.right ||
+        event.clientY < box.top ||
+        event.clientY > box.bottom;
+      if (outside) dialog.close();
+    });
   }
 
-f.innerText = fact
-
+  // Also fires on the first load, and again after every ClientRouter swap.
+  document.addEventListener("astro:page-load", setupFacts);
 </script>
