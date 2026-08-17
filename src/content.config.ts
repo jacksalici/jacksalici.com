@@ -51,6 +51,7 @@ const activities = defineCollection({
 		featured: z.boolean().optional().default(false),
 		shown: z.boolean().optional().default(true), // Whether to show it on the homepage
 		order: z.number().optional().default(99), // Display order on the homepage, ascending
+		kicker: z.string().optional().default('Research activity'), // Overline naming the kind of work it holds
 	}),
 });
 

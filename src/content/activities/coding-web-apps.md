@@ -1,5 +1,6 @@
 ---
 title: Coding & Web Applications
+kicker: Engineering projects
 order: 4
 pubDate: 2026-03-13
 description: Websites, tools, APIs, and CLIs designed and built end to end.

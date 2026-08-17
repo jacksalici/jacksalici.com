@@ -1,8 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import { FileText, Boxes, PenLine, ArrowRight } from "@lucide/astro";
-import FormattedDate from "../components/FormattedDate.astro";
+import { ArrowRight, Bot, Network, Activity, Code } from "@lucide/astro";
+import EntryList from "../components/EntryList.astro";
+import EntryRow from "../components/EntryRow.astro";
 import Base from "../layouts/Base.astro";
+import { categories } from "../consts";
 import "../styles/global.css";
 
 // Ordered by the `order` field in each activity's frontmatter, ascending.
@@ -24,20 +26,32 @@ const notes = (await getCollection("notes")).filter(
 
 // Accent gradient painted on the front of each activity card. 
 const activityGradients: Record<string, string> = {
-  "applied-embodied-ai": "from-accent-2 to-primary",
-  "modular-deep-learning": "from-accent-4 to-primary",
-  "anomaly-detection-tsa": "from-accent-1 to-primary",
-  "coding-web-apps": "from-accent-3 to-primary",
+  "applied-embodied-ai": "bg-accent-2",
+  "modular-deep-learning": "bg-accent-2",
+  "anomaly-detection-tsa": "bg-accent-1",
+  "coding-web-apps": "bg-accent-3",
 };
 const defaultGradient = "from-neutral to-neutral-content";
 
-const pileByActivity: Record<string, (string | null)[]> = {};
+// Icon painted on each activity card, representing its area of work.
+const activityIcons: Record<string, typeof Bot> = {
+  "applied-embodied-ai": Bot,
+  "modular-deep-learning": Network,
+  "anomaly-detection-tsa": Activity,
+  "coding-web-apps": Code,
+};
+
+// Desktop layout: two wider cards on top, two narrower ones below.
+// Index-based, so it follows `order`.
+const activitySpans = ["md:col-span-3", "md:col-span-3", "md:col-span-2", "md:col-span-2"];
+
+// How much work sits behind each activity, shown on its card.
+const tallyByActivity: Record<string, { projects: number; papers: number }> = {};
 for (const activity of activities) {
-  const covers = [...projects, ...papers]
-    .filter((item) => item.data.activities?.includes(activity.id) && item.data.cover)
-    .map((item) => item.data.cover as string)
-    .slice(0, 3);
-  pileByActivity[activity.id] = covers.length >= 2 ? covers : [...covers, null, null].slice(0, 3);
+  tallyByActivity[activity.id] = {
+    projects: projects.filter((p) => p.data.activities?.includes(activity.id)).length,
+    papers: papers.filter((p) => p.data.activities?.includes(activity.id)).length,
+  };
 }
 
 const latestPapers = papers
@@ -62,51 +76,68 @@ const props = { image: "/sky.png" };
   keywords={["giacomo salici", "ai engineer", "computer engineer", "robotics", "research", "portfolio"]}
 >
   <main>
-    <section class="pt-6 pb-10 md:pt-10 md:pb-14">
-      <h1 class="text-3xl md:text-4xl text-balance font-display font-bold leading-tight">
+    <section>
+      <h1 class="text-4xl md:text-5xl text-balance font-display font-bold leading-[1.08] tracking-tight">
         A digital craftsman who designs <span class="italic">systems that matter</span>.
       </h1>
 
-      <div class="mt-6 flex flex-col gap-4 max-w-2xl">
-        <p>
-          I am <span class="font-bold">Giacomo Salici</span>, an <span class="">AI &amp; computer engineer, developer, and occasionally designer</span> based in Italy. I work with the <a class="font-bold" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of University of Modena and Reggio Emilia (<a href="https://www.unimore.it/">UniMORE&nbsp;↗</a>) as a <span class="font-bold">PhD candidate in ICT</span>.
-        </p>
-        <p>
-          My research interests include artificial intelligence of things (AIoT), modular deep learning, and anomaly detection. Besides research, I enjoy open-source software and hardware, good design, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
-        </p>
+      <div class="mt-7 flex flex-col-reverse sm:flex-row sm:items-start gap-6 sm:gap-8">
+        <div class="flex-1 min-w-0">
+          <p class="text-lg leading-relaxed">
+            I am <span class="font-bold">Giacomo Salici</span>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a class="font-bold" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of University of Modena and Reggio Emilia (<a href="https://www.unimore.it/">UniMORE&nbsp;↗</a>) as a <span class="font-bold">PhD candidate in ICT</span>.{" "}
+            <a class="read-toggle cursor-pointer underline text-nowrap">Read more ↘</a>
+          </p>
+
+          <div id="bio-more" class="read-panel" data-open="false">
+            <div>
+              <p class="text-neutral-content leading-relaxed pt-4">
+                My research interests include artificial intelligence of things (AIoT), modular deep learning, and anomaly detection. Besides my research work, I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="snapshot shrink-0 self-start mx-auto sm:mx-0">
+          <img src="/newphoto.jpg" alt="Giacomo Salici" width="720" height="722" class="w-36 aspect-square object-cover rounded-none" />
+          <span class="text-xs">Me @ ICCV25, Honolulu </span>
+        </div>
       </div>
 
-      <div class="mt-6 flex flex-wrap gap-2 text-sm">
-        <a href="/contacts" class="btn-solid">Get in touch&nbsp;↗</a>
-        <a href="https://github.com/jacksalici" class="btn-outline">GitHub&nbsp;↗</a>
-        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="btn-outline">Google Scholar&nbsp;↗</a>
-        <a href="https://linkedin.com/in/jacksalici" class="btn-outline">LinkedIn&nbsp;↗</a>
-      </div>
-    </section>
 
-    <section class="mb-20">
-      <p class="section-label">Current Activities</p>
+      <p class="section-label mt-12"><span class="section-num">01</span>What I am doing right now</p>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-3 lg:-mx-32">
-        {activities.map((activity) => {
+      <div class="activity-rail -mx-6 scroll-pl-6 md:mx-0 md:px-0 flex md:grid md:grid-cols-10 lg:-mx-20 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory">
+        {activities.map((activity, i) => {
           const gradient = activityGradients[activity.id] ?? defaultGradient;
+          const tally = tallyByActivity[activity.id];
+          const Icon = activityIcons[activity.id];
           return (
-            <a href={"/activities/" + activity.id} class="activity-card group relative block aspect-square">
-              <div class="pile absolute inset-0 pointer-events-none">
-                {pileByActivity[activity.id].map((src) => (
-                  <div class="pile-sheet absolute inset-0 rounded-xl overflow-hidden bg-base-100 border border-base-200">
-                    {src && <img src={src} alt="" loading="lazy" class="w-full h-full object-cover" />}
-                  </div>
-                ))}
-              </div>
-
-              <div class={`face absolute inset-0 rounded-xl overflow-hidden backdrop-blur-sm bg-gradient-to-br ${gradient}`}>
-                {/* Keeps the title legible on the lighter warm gradients. */}
-                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                <div class="relative h-full flex items-end p-4">
-                  <h2 class="font-display text-lg text-base-100 text-balance">
+            <a
+              href={"/activities/" + activity.id}
+              class:list={[
+                "activity-card group relative block",
+                "w-[70%] h-56 shrink-0",
+                "md:w-auto md:shrink md:h-56",
+                activitySpans[i],
+              ]}
+            >
+              <div class={`face absolute inset-0 rounded-xl overflow-hidden bg-base-200 hover:bg-accent-3  duration-300 transition-all`}>
+                <div class="relative h-full flex flex-col justify-end p-5 md:p-6 text-neutral-content hover:text-white  duration-300 transition-all">
+                  {Icon && <Icon class="absolute top-5 left-5 md:top-6 md:left-6 opacity-70" size={22} stroke-width={1.75} />}
+                  <p class="text-xs uppercase font-mono mb-2 opacity-70">
+                    {activity.data.kicker}
+                  </p>
+                  <h2 class="font-sans text-lg">
                     {activity.data.title}
                   </h2>
+                  <p class="mt-2 text-xs font-mono opacity-70">
+                    {[
+                      tally.projects && `${tally.projects} project${tally.projects > 1 ? "s" : ""}`,
+                      tally.papers && `${tally.papers} paper${tally.papers > 1 ? "s" : ""}`,
+                    ]
+                      .filter(Boolean)
+                      .join("  ·  ")}
+                  </p>
                 </div>
               </div>
             </a>
@@ -115,123 +146,164 @@ const props = { image: "/sky.png" };
       </div>
 
       <style>
-        .activity-card:hover,
-        .activity-card:focus-visible {
-          z-index: 20;
+        
+
+        /* Mobile: a snap rail showing one and a half cards. */
+        .activity-rail {
+          scrollbar-width: none;
         }
-        .activity-card .face {
-          z-index: 10;
+        .activity-rail::-webkit-scrollbar {
+          display: none;
         }
-        .activity-card .pile-sheet {
-          transform-origin: top left;
-          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        .activity-rail::after {
+          content: "";
+          flex: 0 0 0.5rem;
         }
-        .activity-card .pile-sheet:nth-child(1) {
-          transform: rotate(-1deg);
+        @media (min-width: 768px) {
+          .activity-rail::after {
+            content: none;
+          }
         }
-        .activity-card .pile-sheet:nth-child(2) {
-          transform: rotate(-2deg);
+
+        /* A diagonal snapshot that straightens slightly on hover. */
+        .snapshot {
+          background: #fff;
+          padding: 0.6rem 0.6rem 1.6rem;
+          border: 1px solid var(--color-base-200);
+          border-radius: 10px;
+          transform: rotate(-4deg);
+          box-shadow: 0 10px 26px -16px rgba(0, 0, 0, 0.45);
+          transition:
+            transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            box-shadow 0.5s ease;
         }
-        .activity-card .pile-sheet:nth-child(3) {
-          transform: rotate(-3deg);
+        .snapshot:hover, .snapshot.is-reading { transform: rotate(-1.5deg) translateY(-4px); box-shadow: 0 18px 34px -18px rgba(0, 0, 0, 0.5); }
+
+        /* Slide open by animating the row track from 0fr to 1fr, which is the
+           only way to transition to an auto height. */
+        .read-panel {
+          display: grid;
+          grid-template-rows: 0fr;
+          transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .activity-card:hover .pile-sheet,
-        .activity-card:focus-visible .pile-sheet {
-          box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.25);
+        .read-panel > div {
+          overflow: hidden;
+          opacity: 0;
+          transition: opacity 0.3s ease;
         }
-        .activity-card:hover .pile-sheet:nth-child(1),
-        .activity-card:focus-visible .pile-sheet:nth-child(1) {
-          transform: rotate(-3deg);
+        .read-panel[data-open="true"] {
+          grid-template-rows: 1fr;
         }
-        .activity-card:hover .pile-sheet:nth-child(2),
-        .activity-card:focus-visible .pile-sheet:nth-child(2) {
-          transform: rotate(-6deg);
+        .read-panel[data-open="true"] > div {
+          opacity: 1;
+          transition-delay: 0.12s;
         }
-        .activity-card:hover .pile-sheet:nth-child(3),
-        .activity-card:focus-visible .pile-sheet:nth-child(3) {
-          transform: rotate(-9deg);
-        }
+
         @media (prefers-reduced-motion: reduce) {
-          .activity-card .pile-sheet {
-            transition: none;
+          .activity-card,
+          .activity-card .face,
+          .snapshot,
+          .read-panel,
+          .read-panel > div {
+            transition-duration: 0.01ms;
           }
         }
       </style>
 
-      <div class="flex flex-wrap gap-x-6 gap-y-2 mt-12">
-        <a href="/activities" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
+      <div class="flex flex-wrap gap-x-6 gap-y-2 mt-8">
+        <a href="/activities" class="more-link">
           All activities <ArrowRight size={14} />
-        </a>
-        <a href="/projects" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
-          All projects <ArrowRight size={14} />
         </a>
       </div>
     </section>
 
-    <section class="mb-20">
-      <p class="section-label">Latest papers</p>
+    <section class="my-20">
+      <p class="section-label"><span class="section-num">02</span>My latest research papers</p>
 
-      <ul class="flex flex-col gap-1 mb-4">
+      <EntryList class="mb-5">
         {latestPapers.map((paper) => (
-          <li>
-            <a href={"/papers/" + paper.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
-              <FileText size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
-              <span class="min-w-0 flex-1">{paper.data.news}</span>
-              <span class="shrink-0 text-xs text-neutral-content">
-                {paper.data.acronym && <span class="font-bold mr-2">{paper.data.acronym}</span>}
-                <FormattedDate date={paper.data.pubDate} />
-              </span>
-            </a>
-          </li>
+          <EntryRow
+            href={"/papers/" + paper.id}
+            title={paper.data.news ?? paper.data.title ?? paper.id}
+            meta={paper.data.acronym}
+            date={paper.data.pubDate}
+          />
         ))}
-      </ul>
+      </EntryList>
 
-      <a href="/papers" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
+      <a href="/papers" class="more-link">
         All papers <ArrowRight size={14} />
       </a>
     </section>
 
     <section class="mb-20">
-      <p class="section-label">Latest projects</p>
+      <p class="section-label"><span class="section-num">03</span>My latest projects</p>
 
-      <ul class="flex flex-col gap-1 mb-4">
+      <EntryList class="mb-5">
         {latestProjects.map((project) => (
-          <li>
-            <a href={"/projects/" + project.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
-              <Boxes size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
-              <span class="min-w-0 flex-1">{project.data.news}</span>
-              <span class="shrink-0 text-xs text-neutral-content">
-                <FormattedDate date={project.data.pubDate} />
-              </span>
-            </a>
-          </li>
+          <EntryRow
+            href={"/projects/" + project.id}
+            title={project.data.news ?? project.data.title ?? project.id}
+            meta={
+              project.data.categories?.[0]
+                ? (categories[project.data.categories[0]] ?? project.data.categories[0])
+                : undefined
+            }
+            date={project.data.pubDate}
+          />
         ))}
-      </ul>
+      </EntryList>
 
-      <a href="/projects" class="text-sm inline-flex items-center gap-1.5 text-neutral-content hover:text-accent-1 transition-colors">
+      <a href="/projects" class="more-link">
         All projects <ArrowRight size={14} />
       </a>
     </section>
 
     {latestNotes.length > 0 && (
-      <section class="mb-16">
-        <p class="section-label">Latest thoughts</p>
+      <section class="mb-20">
+        <p class="section-label"><span class="section-num">04</span>Writing</p>
 
-        <ul class="flex flex-col gap-1">
+        <EntryList>
           {latestNotes.map((note) => (
-            <li>
-              <a href={"/notes/" + note.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
-                <PenLine size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
-                <span class="min-w-0 flex-1">{note.data.title}</span>
-                <span class="shrink-0 text-xs text-neutral-content">
-                  <FormattedDate date={note.data.pubDate} />
-                </span>
-              </a>
-            </li>
+            <EntryRow
+              href={"/notes/" + note.id}
+              title={note.data.title ?? note.id}
+              date={note.data.pubDate}
+            />
           ))}
-        </ul>
+        </EntryList>
       </section>
     )}
+
+    <section class="border-t border-base-300/70 pt-12 pb-6">
+      <h2 class="font-display text-3xl md:text-4xl tracking-tight leading-[1.1] text-balance max-w-2xl">
+        Let's make something <span class="italic">that matters</span>.
+      </h2>
+      <div class="mt-7 flex flex-wrap gap-2 text-sm">
+        <a href="/contacts" class="btn-solid">Get in touch&nbsp;↗</a>
+        <a href="https://github.com/jacksalici" class="btn-outline">GitHub&nbsp;↗</a>
+        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="btn-outline">Google Scholar&nbsp;↗</a>
+        <a href="https://linkedin.com/in/jacksalici" class="btn-outline">LinkedIn&nbsp;↗</a>
+
+      </div>
+    </section>
   </main>
 </Base>
+
+<script>
+  const toggle = document.querySelector(".read-toggle");
+  const photo = document.querySelector(".snapshot")
+  const panel = document.getElementById("bio-more");
+
+  toggle?.addEventListener("click", () => {
+  const open = panel?.dataset.open === "true";
+  const nextOpen = !open;
+  if (panel) panel.dataset.open = String(nextOpen); 
+   
+  toggle.setAttribute("aria-expanded", String(nextOpen));
+   
+  toggle.textContent = nextOpen ? "Read less ↖" : "Read more ↘";
+
+  photo?.classList.toggle("is-reading", nextOpen);
+  });
+</script>

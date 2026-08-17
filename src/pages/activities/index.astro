@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import { Layers } from "@lucide/astro";
-import FormattedDate from "../../components/FormattedDate.astro";
 import Base from "../../layouts/Base.astro";
+import EntryList from "../../components/EntryList.astro";
+import EntryRow from "../../components/EntryRow.astro";
 
 const activities = (await getCollection("activities"))
   .filter((a) => a.data.draft !== true && a.data.hidden !== true)
@@ -24,25 +24,17 @@ const props = { image: '/website.png' }
       Projects I am currently working on. They may or may not become public or become a future publication.
     </p>
 
-    <ul class="flex flex-col gap-1">
+    <EntryList>
       {
         activities.map((activity) => (
-          <li>
-            <a href={"/activities/" + activity.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
-              <Layers size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
-              <span class="min-w-0 flex-1">
-                <span class="block font-display font-bold">{activity.data.title}</span>
-                {activity.data.description && (
-                  <span class="block text-sm text-neutral-content mt-0.5">{activity.data.description}</span>
-                )}
-              </span>
-              <span class="shrink-0 text-xs text-neutral-content">
-                <FormattedDate date={activity.data.pubDate} />
-              </span>
-            </a>
-          </li>
+          <EntryRow
+            href={"/activities/" + activity.id}
+            title={activity.data.title ?? activity.id}
+            description={activity.data.description}
+            date={activity.data.pubDate}
+          />
         ))
       }
-    </ul>
+    </EntryList>
   </main>
 </Base>

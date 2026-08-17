@@ -1,0 +1,12 @@
+---
+interface Props {
+	id?: string;
+	class?: string;
+}
+
+const { id, class: className } = Astro.props;
+---
+
+<ul id={id} class:list={["entry-list flex flex-col", className]}>
+	<slot />
+</ul>

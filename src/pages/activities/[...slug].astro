@@ -1,8 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import { FileText, Boxes } from '@lucide/astro';
+import EntryList from '../../components/EntryList.astro';
+import EntryRow from '../../components/EntryRow.astro';
 import { categories } from '../../consts';
 
 export async function getStaticPaths() {
@@ -13,80 +13,71 @@ export async function getStaticPaths() {
 	}));
 }
 
+type Props = CollectionEntry<'activities'>;
 
 const activity = Astro.props;
 const { Content } = await render(activity);
 
-const projects = (await getCollection('projects'))
-	.filter(project =>
-		project.data.draft !== true && project.data.hidden !== true &&
-		Array.isArray(project.data.activities) &&
-		project.data.activities.includes(activity.id)
-	)
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const byNewest = (a: { data: { pubDate: Date } }, b: { data: { pubDate: Date } }) =>
+	b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
 
-const papers = (await getCollection('papers'))
-	.filter(paper =>
-		paper.data.draft !== true && paper.data.hidden !== true &&
-		Array.isArray(paper.data.activities) &&
-		paper.data.activities.includes(activity.id)
-	)
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const linkedTo = (item: { data: { draft?: boolean; hidden?: boolean; activities?: string[] } }) =>
+	item.data.draft !== true &&
+	item.data.hidden !== true &&
+	Array.isArray(item.data.activities) &&
+	item.data.activities.includes(activity.id);
 
+const projects = (await getCollection('projects')).filter(linkedTo).sort(byNewest);
+const papers = (await getCollection('papers')).filter(linkedTo).sort(byNewest);
 ---
 
 <Base {...activity.data}>
 	<main>
-	<p class="eyebrow mb-3">Research Activity</p>
-	<h1 class="text-3xl md:text-4xl font-display font-bold mb-20">{activity.data.title}</h1>
+		<p class="eyebrow mb-3">{activity.data.kicker}</p>
+		<h1 class="text-3xl md:text-4xl font-display font-bold mb-4">{activity.data.title}</h1>
 
-	<div class="prose prose-js font-body mb-10 prose-p:text-justify prose-p:hyphens-auto w-full">
-		<Content />
-	</div>
+		{activity.data.description && (
+			<p class="text-lg md:text-xl text-base-content/90 mb-8 max-w-2xl">{activity.data.description}</p>
+		)}
 
-	{ papers.length > 0 && <>
-	<p class="section-label mb-20">Related Papers</p>
-	<ul class="flex flex-col gap-1 mb-4 not-prose">
-      {
-        papers.map((paper) => (
-          <li>
-            <a href={"/papers/" + paper.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
-              <FileText size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
-              <span class="min-w-0 flex-1">
-                <span class="block">{paper.data.title}</span>
-                <span class="block text-xs text-neutral-content mt-1">
-                  {paper.data.acronym && <span class="font-bold mr-2">{paper.data.acronym}</span>}
-                  <FormattedDate date={paper.data.pubDate} />
-                </span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-	</>}
+		<div class="prose prose-js font-body mb-16 prose-p:text-justify prose-p:hyphens-auto w-full">
+			<Content />
+		</div>
 
-	{ projects.length > 0 && <>
-	<p class="section-label">Related Projects</p>
-	<ul class="flex flex-col gap-1 mb-4 not-prose">
-      {
-        projects.map((project) => (
-          <li>
-            <a href={"/projects/" + project.id} class="group flex items-start gap-3 py-2 hover:text-accent-1 transition-colors">
-              <Boxes size={14} class="shrink-0 mt-1 text-neutral-content group-hover:text-accent-1 transition-colors" />
-              <span class="min-w-0 flex-1">
-                <span class="block">{project.data.title}</span>
-                <span class="block text-xs text-neutral-content mt-1">
-                  {project.data.categories?.[0] && <span class="font-bold mr-2">{categories[project.data.categories[0]] ?? project.data.categories[0]}</span>}
-                  <FormattedDate date={project.data.pubDate} />
-                </span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-	</>}
-</main>
+		{papers.length > 0 && (
+			<section class="mb-16 not-prose">
+				<p class="section-label">Related papers</p>
+				<EntryList>
+					{papers.map((paper) => (
+						<EntryRow
+							href={'/papers/' + paper.id}
+							title={paper.data.title ?? paper.id}
+							meta={paper.data.acronym}
+							date={paper.data.pubDate}
+						/>
+					))}
+				</EntryList>
+			</section>
+		)}
 
+		{projects.length > 0 && (
+			<section class="mb-16 not-prose">
+				<p class="section-label">Related projects</p>
+				<EntryList>
+					{projects.map((project) => (
+						<EntryRow
+							href={'/projects/' + project.id}
+							title={project.data.title ?? project.id}
+							meta={
+								project.data.categories?.[0]
+									? (categories[project.data.categories[0]] ?? project.data.categories[0])
+									: undefined
+							}
+							date={project.data.pubDate}
+						/>
+					))}
+				</EntryList>
+			</section>
+		)}
+	</main>
 </Base>

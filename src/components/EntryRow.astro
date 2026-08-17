@@ -1,0 +1,34 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+	href: string;
+	/** Main line of the row. */
+	title: string;
+	/** Single piece of metadata: category for projects, venue for papers. */
+	meta?: string;
+	date?: Date;
+	/** Optional second line, used by listings that need a summary. */
+	description?: string;
+	/** Lowercased haystack for client-side filtering. */
+	search?: string;
+}
+
+const { href, title, meta, date, description, search } = Astro.props;
+---
+
+<li class="entry" data-search={search?.toLowerCase()}>
+	<a href={href} class="list-row">
+		<span class="min-w-0 flex-1">
+			{(meta || date) && <span class="text-xs font-mono text-neutral-content/70">
+
+			{meta && <span>{meta}</span>}
+			{meta && date && <span aria-hidden="true">&nbsp;/&nbsp;</span>}
+			{date && <FormattedDate date={date} />}
+			</span>
+			}
+			<span class="block ">{title}</span>
+			{description && <span class="block text-sm text-neutral-content mt-0.5">{description}</span>}
+		</span>
+	</a>
+</li>

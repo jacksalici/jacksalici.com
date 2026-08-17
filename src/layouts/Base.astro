@@ -2,6 +2,7 @@
 import '@fontsource-variable/space-grotesk';
 import '@fontsource/space-mono';
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 
 import { Pizza, Heart, Earth } from '@lucide/astro';
 
@@ -30,11 +31,12 @@ const pathname = new URL(Astro.request.url).pathname;
 
       <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <ClientRouter />
 
   </head>
 
   <body
-    class="m-0 text-base-content/85 font-body bg-base-100 flex flex-col gap-4 lg:gap-10 min-h-screen"
+    class="m-0 text-base-content/85 font-body bg-base-100 flex flex-col gap-4 lg:gap-10 min-h-screen" transition:animate="fade"
   >
     {props.hideHeader !== true && <Header />}
     <slot/>
