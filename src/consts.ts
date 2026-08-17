@@ -12,6 +12,7 @@ export const categories: Record<string, string> = {
   "robotics":   "Robotics",
   "iot-and-v2x": "IoT & V2X",
   "web":        "Web",
+  "coding":     "Coding",
   "games":      "Games",
   "making":     "Making",
   "design":     "Design",
