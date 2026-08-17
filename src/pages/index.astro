@@ -1,6 +1,6 @@
 ---
-import { getCollection } from "astro:content";
-import { ArrowRight, Bot, Network, Activity, Code } from "@lucide/astro";
+import { getCollection, render } from "astro:content";
+import { Bot, Network, Activity, Code } from "@lucide/astro";
 import EntryList from "../components/EntryList.astro";
 import EntryRow from "../components/EntryRow.astro";
 import Base from "../layouts/Base.astro";
@@ -11,6 +11,11 @@ import "../styles/global.css";
 const activities = (await getCollection("activities"))
   .filter((a) => a.data.draft !== true && a.data.hidden !== true && a.data.shown !== false)
   .sort((a, b) => a.data.order - b.data.order);
+
+// Compiled body markdown for each activity, shown in its details panel.
+const activityContent = Object.fromEntries(
+  await Promise.all(activities.map(async (activity) => [activity.id, await render(activity)] as const))
+);
 
 const papers = (await getCollection("papers")).filter(
   (a) => a.data.draft !== true && a.data.hidden !== true
@@ -23,15 +28,6 @@ const projects = (await getCollection("projects")).filter(
 const notes = (await getCollection("notes")).filter(
   (a) => a.data.draft !== true && a.data.hidden !== true
 );
-
-// Accent gradient painted on the front of each activity card. 
-const activityGradients: Record<string, string> = {
-  "applied-embodied-ai": "bg-accent-2",
-  "modular-deep-learning": "bg-accent-2",
-  "anomaly-detection-tsa": "bg-accent-1",
-  "coding-web-apps": "bg-accent-3",
-};
-const defaultGradient = "from-neutral to-neutral-content";
 
 // Icon painted on each activity card, representing its area of work.
 const activityIcons: Record<string, typeof Bot> = {
@@ -81,7 +77,7 @@ const props = { image: "/sky.png" };
   <main>
     <section class="relative">
       <h1 class="text-4xl md:text-5xl text-balance font-display font-bold leading-[1.08] tracking-tight">
-        A digital craftsman who designs <span class="italic">systems that matter</span>.
+        A digital craftsman who designs <span class="italic text-accent-3">systems that matter</span>.
       </h1>
 
       <div class="mt-7 flex flex-col-reverse sm:flex-row sm:items-start gap-6 sm:gap-8">
@@ -91,7 +87,7 @@ const props = { image: "/sky.png" };
             <a class="read-toggle cursor-pointer underline text-nowrap">Read more ↘</a>
           </p>
 
-          <div id="bio-more" class="read-panel" data-open="false">
+          <div id="bio-more" data-open="false" class="read-panel">
             <div>
               <p class="text-neutral-content leading-relaxed pt-4">
                 My research interests include artificial intelligence of things (AIoT), modular deep learning, and anomaly detection. Besides my research work, I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
@@ -100,18 +96,19 @@ const props = { image: "/sky.png" };
           </div>
         </div>
 
-        <div class="snapshot shrink-0 self-start mx-auto sm:mx-0">
+        <div data-reading="false" class="snapshot shrink-0 self-start mx-auto sm:mx-0">
           <img src="/newphoto.jpg" alt="Giacomo Salici" width="720" height="722" class="w-36 aspect-square object-cover rounded-none" />
           <span class="text-xs">Me @ ICCV25, Honolulu </span>
         </div>
       </div>
 
-
       <p class="section-label mt-12"><span class="section-num">01</span>What I am doing right now</p>
 
-      <div class="activity-rail -mx-6 scroll-pl-6 md:mx-0 md:px-0 flex md:grid md:grid-cols-10 lg:-mx-20 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory">
+      <div
+        data-pinned="false"
+        class="activity-rail md:mx-0 md:px-0 flex md:grid md:grid-cols-10 lg:-mx-20 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory"
+      >
         {activities.map((activity, i) => {
-          const gradient = activityGradients[activity.id] ?? defaultGradient;
           const tally = tallyByActivity[activity.id];
           const Icon = activityIcons[activity.id];
           return (
@@ -121,13 +118,13 @@ const props = { image: "/sky.png" };
               aria-pressed="false"
               class:list={[
                 "activity-card group relative block",
-                "w-[70%] h-56 shrink-0",
+                "w-[70%] h-44 shrink-0",
                 "md:w-auto md:shrink md:h-56",
                 activitySpans[i],
               ]}
             >
-              <div class={`face absolute inset-0 rounded-xl overflow-hidden bg-base-200 hover:bg-accent-3  duration-300 transition-all`}>
-                <div class="relative h-full flex flex-col justify-end p-5 md:p-6 text-neutral-content hover:text-white  duration-300 transition-all">
+              <div class="face">
+                <div class="face-content">
                   {Icon && <Icon class="absolute top-5 left-5 md:top-6 md:left-6 opacity-70" size={22} stroke-width={1.75} />}
                   <p class="text-xs uppercase font-mono mb-2 opacity-70">
                     {activity.data.kicker}
@@ -150,116 +147,29 @@ const props = { image: "/sky.png" };
         })}
       </div>
 
-      <div id="activity-details" class="read-panel" data-open="false">
+      <div id="activity-details" data-open="false" class="read-panel">
         <div>
           <div class="pt-6">
-            {activities.map((activity) => (
-              <div class="activity-detail" data-activity-id={activity.id} data-title={activity.data.title} hidden>
-                {activity.data.description && (
-                  <p class="text-neutral-content text-xl font-display font-normal">{activity.data.description}</p>
-                    
-                )}
-                {activity.body && (
-                  <p class="text-neutral-content mt-4">{activity.body}</p>
-                    
-                )}
-              </div>
-            ))}
+            {activities.map((activity) => {
+              const { Content } = activityContent[activity.id];
+              return (
+                <div class="activity-detail" data-activity-id={activity.id} hidden>
+                  {activity.data.description && (
+                    <p class="text-neutral-content text-xl font-display font-normal text-balance">{activity.data.description}</p>
+                  )}
+                  <div class="prose prose-js font-body text-neutral-content mt-4 max-w-none">
+                    <Content />
+                    <span class="mt-8 opacity-50 text-xs">Scroll to see the related projects.</span>
+                  </div>
+                  
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      <style>
-        
-
-        /* Mobile: a snap rail showing one and a half cards. */
-        .activity-rail {
-          scrollbar-width: none;
-        }
-
-        /* Frozen at the top of the viewport while an activity is selected.
-           The enclosing section now spans the hero, papers, projects, and
-           writing content, so the rail stays stuck across all of it and
-           only releases once you scroll past the end of that section. */
-        .activity-rail.is-pinned {
-          position: sticky;
-          top: 010;
-          z-index: 30;
-          padding-bottom: 10;
-          background: var(--color-base-100);
-          
-        }
-
-        /* Selected card keeps the hover face permanently. */
-        .activity-card.is-active .face {
-          background: var(--color-accent-3);
-        }
-        .activity-card.is-active .face > div {
-          color: #fff;
-        }
-        
-        .toggle-btn.is-expanded svg {
-          transform: rotate(90deg);
-        }
-        .activity-rail::-webkit-scrollbar {
-          display: none;
-        }
-        .activity-rail::after {
-          content: "";
-          flex: 0 0 0.5rem;
-        }
-        @media (min-width: 768px) {
-          .activity-rail::after {
-            content: none;
-          }
-        }
-
-        /* A diagonal snapshot that straightens slightly on hover. */
-        .snapshot {
-          background: #fff;
-          padding: 0.6rem 0.6rem 1.6rem;
-          border: 1px solid var(--color-base-200);
-          border-radius: 10px;
-          transform: rotate(-4deg);
-          box-shadow: 0 10px 26px -16px rgba(0, 0, 0, 0.45);
-          transition:
-            transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-            box-shadow 0.5s ease;
-        }
-        .snapshot:hover, .snapshot.is-reading { transform: rotate(-1.5deg) translateY(-4px); box-shadow: 0 18px 34px -18px rgba(0, 0, 0, 0.5); }
-
-        /* Slide open by animating the row track from 0fr to 1fr, which is the
-           only way to transition to an auto height. */
-        .read-panel {
-          display: grid;
-          grid-template-rows: 0fr;
-          transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .read-panel > div {
-          overflow: hidden;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-        .read-panel[data-open="true"] {
-          grid-template-rows: 1fr;
-        }
-        .read-panel[data-open="true"] > div {
-          opacity: 1;
-          transition-delay: 0.12s;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .activity-card,
-          .activity-card .face,
-          .snapshot,
-          .read-panel,
-          .read-panel > div {
-            transition-duration: 0.01ms;
-          }
-        }
-      </style>
-
-    <section class="my-20" id="papers-section">
+    <section class="mt-20" id="papers-section">
       <p class="section-label"><span class="section-num">02</span>My latest research papers</p>
 
       <EntryList id="papers-list" class="mb-5">
@@ -276,13 +186,13 @@ const props = { image: "/sky.png" };
       </EntryList>
 
       {latestPapers.length > INITIAL_VISIBLE && (
-        <button type="button" class="more-link toggle-btn" data-expanded="false">
-          <span class="toggle-label">Show all</span> <ArrowRight size={14} />
+        <button type="button" data-expanded="false" class="toggle-btn">
+          <span class="toggle-label">Show all ↘</span>
         </button>
       )}
     </section>
 
-    <section class="mb-20" id="projects-section">
+    <section class="mt-20" id="projects-section">
       <p class="section-label"><span class="section-num">03</span>My latest projects</p>
 
       <EntryList id="projects-list" class="mb-5">
@@ -303,14 +213,14 @@ const props = { image: "/sky.png" };
       </EntryList>
 
       {latestProjects.length > INITIAL_VISIBLE && (
-        <button type="button" class="more-link toggle-btn" data-expanded="false">
-          <span class="toggle-label">Show all</span> <ArrowRight size={14} />
+        <button type="button" data-expanded="false" class="toggle-btn">
+          <span class="toggle-label">Show all ↘</span>
         </button>
       )}
     </section>
 
     {latestNotes.length > 0 && (
-      <section class="mb-20" id="writing-section">
+      <section class="mt-20" id="writing-section">
         <p class="section-label"><span class="section-num">04</span>Writing</p>
 
         <EntryList>
@@ -326,7 +236,7 @@ const props = { image: "/sky.png" };
     )}
     </section>
 
-    <section class="border-t border-base-300/70 pt-12 pb-6">
+    <section class="border-t mt-20 border-accent-3 pt-12 pb-6">
       <h2 class="font-display text-3xl md:text-4xl tracking-tight leading-[1.1] text-balance max-w-2xl">
         Let's make something <span class="italic">that matters</span>.
       </h2>
@@ -343,7 +253,7 @@ const props = { image: "/sky.png" };
 
 <script>
   const toggle = document.querySelector(".read-toggle");
-  const photo = document.querySelector(".snapshot")
+  const photo = document.querySelector<HTMLElement>(".snapshot")
   const panel = document.getElementById("bio-more");
 
   toggle?.addEventListener("click", () => {
@@ -355,7 +265,7 @@ const props = { image: "/sky.png" };
    
   toggle.textContent = nextOpen ? "Read less ↖" : "Read more ↘";
 
-  photo?.classList.toggle("is-reading", nextOpen);
+  if (photo) photo.dataset.reading = String(nextOpen);
   });
 
   const INITIAL_VISIBLE = 3;
@@ -381,8 +291,7 @@ const props = { image: "/sky.png" };
       });
 
       btn.dataset.expanded = String(nextExpanded);
-      btn.classList.toggle("is-expanded", nextExpanded);
-      if (label) label.textContent = nextExpanded ? "Show latest" : "Show all";
+      if (label) label.textContent = nextExpanded ? "Show latest ↖" : "Show all ↘";
     });
   });
 
@@ -402,7 +311,7 @@ const props = { image: "/sky.png" };
   let activeActivityId: string | null = null;
 
   function pinRail(pin: boolean) {
-    activityRail?.classList.toggle("is-pinned", pin);
+    if (activityRail) activityRail.dataset.pinned = String(pin);
   }
 
   function selectActivity(id: string | null) {
@@ -410,7 +319,6 @@ const props = { image: "/sky.png" };
 
     activityCards.forEach((card) => {
       const isActive = card.dataset.activityId === id;
-      card.classList.toggle("is-active", isActive);
       card.setAttribute("aria-pressed", String(isActive));
     });
 
@@ -441,9 +349,8 @@ const props = { image: "/sky.png" };
         if (btn) {
           btn.hidden = false;
           btn.dataset.expanded = "false";
-          btn.classList.remove("is-expanded");
           const label = btn.querySelector(".toggle-label");
-          if (label) label.textContent = "Show all";
+          if (label) label.textContent = "Show all ↘";
         }
         if (section) section.hidden = false;
       }
