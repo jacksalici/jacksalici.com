@@ -5,7 +5,7 @@
 	--color-accent-1: #E0B000;
 	--color-accent-2: #2E86AB;
 	--color-accent-3: #F24333;
-	--color-accent-4: #3D2B8C;
+	--color-accent-4: #6f31eb;
 	--color-primary: #2B2825; /* shared dark end for the accent gradients */
 	--color-base-100: #F8F8F8;
 	--color-base-200: #EBEBEB;
@@ -112,7 +112,7 @@ main {
 /* --- Minimal card system --- */
 
 .eyebrow {
-	@apply text-xs uppercase tracking-[0.2em] text-neutral-content font-mono
+	@apply text-xs uppercase text-neutral-content font-mono
 }
 
 .card {
@@ -247,8 +247,6 @@ section[id] {
 .face-content {
 	@apply relative h-full flex flex-col justify-end p-5 md:p-6 text-neutral-content hover:text-white duration-300 transition-all in-aria-pressed:text-white
 }
-
-
 
 .btn-outline {
 	@apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm transition-colors border border-base-300 hover:border-base-content

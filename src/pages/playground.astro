@@ -5,18 +5,14 @@ import { imageUrl, isOptimizable, resolveImage } from "../utils/images";
 import { ArrowUpRight, Dices, RefreshCw, X } from "@lucide/astro";
 import Base from "../layouts/Base.astro";
 
-// Every project that opted into the playground, newest first. The flag can be
-// `true` (card points at the project page) or an object carrying its own link.
+// Every project that opted into the playground, newest first.
 const toys = (await getCollection("projects"))
-  .filter((p) => p.data.draft !== true && p.data.hidden !== true && p.data.playground)
+  .filter((p) => p.data.draft !== true && p.data.playground)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .map((p) => {
     const play = p.data.playground;
     const custom = typeof play === "object" ? play : null;
     const page = `/projects/${p.id}/`;
-    // "How it works" goes wherever the frontmatter says, otherwise to the
-    // project page. A hidden project has nothing worth pointing at, so it
-    // simply drops the link.
     const how = custom?.how ?? (p.data.hidden ? undefined : page);
     return {
       title: p.data.title,
@@ -25,14 +21,11 @@ const toys = (await getCollection("projects"))
       icon: resolveImage(custom?.icon),
       cover: resolveImage(p.data.cover),
       href: custom?.link ?? page,
-      // Pointless when it would just repeat where the card already goes.
       how: how === (custom?.link ?? page) ? undefined : how,
       howLabel: custom?.howLabel ?? "How it works",
       modal: false,
     };
   });
-
-// The fact generator is not a project, so it is pinned in by hand.
 const cards = [
   ...toys,
   {
@@ -44,7 +37,7 @@ const cards = [
     href: undefined,
     how: undefined,
     howLabel: "How it works",
-    modal: true, // The only toy that plays right here, in a dialog.
+    modal: true, 
   },
 ];
 ---
@@ -54,9 +47,9 @@ const cards = [
   description="Experiments, small toys, and half-finished ideas by Giacomo Salici."
 >
   <main>
-    <p class="eyebrow mb-3">Playground</p>
+    <p class="eyebrow mb-3 text-accent-4!">Playground</p>
     <h1 class="text-3xl md:text-4xl font-display font-bold mb-4 text-balance">
-      A drawer of <span class="italic text-accent-3">things that play back</span>.
+      A drawer of <span class="italic text-accent-4">things that play back</span>.
     </h1>
     <p class="max-w-2xl text-neutral-content mb-8">
       Small toys built for the pleasure of building them: no sign-up, no purpose, no
@@ -66,17 +59,17 @@ const cards = [
     <div class="grid gap-4 sm:grid-cols-2">
       {cards.map((card, i) => {
         const Tag = card.modal ? "button" : "a";
+        const imageClass = "w-full h-full object-cover rounded-none transform-gpu transition-[transform,filter] duration-700! ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none group-hover:blur-md";
         return (
-        <div class="group relative card card-hover p-5 flex flex-col gap-3 bg-white! inset-shadow-2xl transition! duration-500! delay-100! ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none hover:shadow-2xl">
-          {card.cover ? (
-            <div class="relative -m-1 mb-0 rounded-xl overflow-hidden aspect-3/2">
+        <div class="group relative rounded-2xl p-5 flex flex-col gap-3 bg-white hover:bg-linear-0 hover:from-accent-4 hover:to-white hover:to-40% transition duration-500 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none hover:shadow-2xl border border-neutral hover:border-accent-4">
+            <div class="relative -m-1 mb-0 rounded-xl rounded-bl-none overflow-hidden aspect-2/1 bg-accent-4">
               {!isOptimizable(card.cover) ? (
                 <img
                   src={imageUrl(card.cover!)}
                   alt=""
                   loading="lazy"
                   decoding="async"
-                  class="w-full h-full object-cover rounded-none transform-gpu scale-105 blur-[3px] transition-[transform,filter] duration-700! ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none group-hover:rotate-1 group-hover:scale-110 group-hover:blur-none"
+                  class={imageClass}
                 />
               ) : (
                 <Image
@@ -86,68 +79,44 @@ const cards = [
                   densities={[1, 2]}
                   loading="lazy"
                   decoding="async"
-                  class="w-full h-full object-cover rounded-none transform-gpu scale-105 blur-[3px] transition-[transform,filter]! duration-700! ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none group-hover:rotate-1 group-hover:scale-110 group-hover:blur-none"
+                  class={imageClass}
                 />
               )}
 
-              
-              <span class="absolute left-0 bottom-0 grid place-items-center w-16 h-16 rounded-tr-2xl bg-white will-change-transform">
+              <span class="absolute left-0 bottom-0 grid place-items-center w-1/4 aspect-square rounded-tr-2xl bg-white  will-change-transform border-2 border-white group-hover:shadow-xl group-hover:shadow-accent-4 z-30">
                 {card.icon ? (
                   <img
                     src={imageUrl(card.icon)}
                     alt=""
                     loading="lazy"
                     decoding="async"
-                    class="w-10 h-10 object-contain rounded-none"
+                    class="w-9/12 object-contain rounded-none"
                   />
                 ) : (
-                  <span class="text-4xl leading-none">{card.emoji}</span>
+                  <span class="text-6xl leading-none">{card.emoji}</span>
                 )}
               </span>
 
-              <span class="absolute right-3 top-3 font-mono text-xs tabular-nums text-white px-2 py-0.5 rounded-full bg-black/25 ring-1 ring-white/25 will-change-transform">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+        
             </div>
-          ) : (
-            <div class="flex items-start justify-between gap-3">
-              <span class="grid place-items-center aspect-square w-50 transition-transform duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none group-hover:rotate-6 group-hover:scale-110">
-                {card.icon ? (
-                  <img
-                    src={imageUrl(card.icon)}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    class="object-contain rounded-none"
-                  />
-                ) : (
-                  <span class="text-4xl leading-none">{card.emoji}</span>
-                )}
-              </span>
-              <span class="font-mono text-xs text-neutral-content/70 tabular-nums">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-            </div>
-          )}
           <div>
-            <p class="font-display font-bold text-base-content group-hover:text-accent-2 transition-colors">
+            <h3 class="text-xl  text-base-content group-hover:text-accent-4 transition-colors">
               {card.title}
-            </p>
+            </h3>
             {card.tagline && (
-              <p class="text-sm text-neutral-content mt-1">{card.tagline}</p>
+              <p class="text-neutral-content group-hover:text-accent-4 group-hover:text-a mt-1">{card.tagline}</p>
             )}
           </div>
 
           <div class="mt-auto pt-2 flex items-end justify-between gap-3">
-            {/* Covers the whole card, so anywhere outside the "how it works" link plays the toy. */}
             <Tag
               href={card.href}
               target={card.href?.startsWith("http") ? "_blank" : undefined}
               rel={card.href?.startsWith("http") ? "noopener" : undefined}
               data-fact-open={card.modal ? "" : undefined}
-              class="text-xs font-mono text-neutral-content inline-flex items-center gap-1 cursor-pointer transition-colors group-hover:text-accent-2 before:absolute before:inset-0 before:rounded-2xl before:content-['']"
+              class="text-xs font-mono text-neutral-content inline-flex items-center gap-1 cursor-pointer transition-colors group-hover:text-white before:absolute before:inset-0 before:rounded-2xl before:content-['']"
             >
-              Play
+              Explore
               <ArrowUpRight class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Tag>
 
@@ -156,7 +125,7 @@ const cards = [
                 href={card.how}
                 target={card.how.startsWith("http") ? "_blank" : undefined}
                 rel={card.how.startsWith("http") ? "noopener" : undefined}
-                class="relative z-10 text-xs text-neutral-content/80 underline decoration-dotted underline-offset-4 hover:text-base-content transition-colors"
+                class="relative z-10 text-xs text-neutral-content/80 underline decoration-dotted underline-offset-4 group-hover:text-white/50 transition-colors"
               >
                 {card.howLabel}
               </a>

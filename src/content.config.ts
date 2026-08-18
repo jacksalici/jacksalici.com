@@ -42,12 +42,7 @@ const projects = defineCollection({
 		stack: z.string().array().optional(), // Tech stack: languages, frameworks, tools
 		cta: z.array(z.object({ url: z.string(), label: z.string() })).optional(), // Call-to-action buttons
 		activities: z.string().array().optional(), // Link to related activities
-		// Shown as a toy on /playground. Off unless set: `true` links to the
-		// project page, an object points the card somewhere else.
-		playground: z
-			.union([
-				z.boolean(),
-				z.object({
+		playground: z.object({
 					link: z.string(),
 					tagline: z.string().optional(), // Playful one-liner used on the card
 					emoji: z.string().optional(), // Card glyph, falls back to a dice
@@ -56,11 +51,8 @@ const projects = defineCollection({
 					// link when it has one, otherwise to the project page.
 					how: z.string().optional(),
 					howLabel: z.string().optional(),
-				}),
-			])
-			.optional()
-			.default(false),
-	}),
+				}).optional()
+		}),
 });
 
 const activities = defineCollection({
