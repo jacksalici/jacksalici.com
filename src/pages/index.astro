@@ -112,8 +112,7 @@ const props = { image: "/uploads/sky.jpg" };
       <p class="section-label mt-12"><span class="section-num">01</span>What I am doing right now</p>
 
       <div
-        data-pinned="false"
-        class="activity-rail md:mx-0 md:px-0 flex md:grid md:grid-cols-10 lg:-mx-20 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory"
+        class="activity-rail -mx-4 px-4 md:mx-0 md:px-0 flex md:grid md:grid-cols-10 lg:-mx-20 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory"
       >
         {activities.map((activity, i) => {
           const tally = tallyByActivity[activity.id];
@@ -122,6 +121,7 @@ const props = { image: "/uploads/sky.jpg" };
             <a
               href={"#" + activity.id}
               data-activity-id={activity.id}
+              data-activity-title={activity.data.title}
               aria-pressed="false"
               class:list={[
                 "activity-card group relative block",
@@ -166,9 +166,7 @@ const props = { image: "/uploads/sky.jpg" };
                   )}
                   <div class="prose prose-js font-body text-neutral-content mt-4 max-w-none">
                     <Content />
-                    <span class="mt-8 opacity-50 text-xs">Scroll to see the related projects.</span>
                   </div>
-                  
                 </div>
               );
             })}
@@ -178,6 +176,7 @@ const props = { image: "/uploads/sky.jpg" };
 
     <section class="mt-20" id="papers" data-pagefind-ignore>
       <p class="section-label"><span class="section-num">02</span>My latest research papers</p>
+      <p class="filter-note" hidden>Filtering by <span class="filter-note-name"></span> <button type="button" class="toggle-btn filter-clear-btn">Clear ✕</button></p>
 
       <EntryList id="papers-list" class="mb-5">
         {latestPapers.map((paper, i) => (
@@ -201,6 +200,7 @@ const props = { image: "/uploads/sky.jpg" };
 
     <section class="mt-20" id="projects" data-pagefind-ignore>
       <p class="section-label"><span class="section-num">03</span>My latest projects</p>
+      <p class="filter-note" hidden>Filtering by <span class="filter-note-name"></span> <button type="button" class="toggle-btn filter-clear-btn">Clear ✕</button></p>
 
       <EntryList id="projects-list" class="mb-5">
         {latestProjects.map((project, i) => (
@@ -318,24 +318,23 @@ document.addEventListener("astro:page-load", () => {
     });
   });
 
-  // Clicking an activity pins it over all page content, filters papers/projects
-  // to its work, hides writing, and opens its details panel — click again to clear.
-  const activityRail = document.querySelector<HTMLElement>(".activity-rail");
+  // Clicking an activity opens its full write-up and filters papers/projects
+  // down to its work, with each section stating what it's filtered by —
+  // click again (or "Clear") to reset.
   const activityCards = document.querySelectorAll<HTMLAnchorElement>(".activity-card");
+  const activityTitles = new Map(
+    Array.from(activityCards, (card) => [card.dataset.activityId, card.dataset.activityTitle ?? ""])
+  );
   const detailsPanel = document.getElementById("activity-details");
   const detailPanels = document.querySelectorAll<HTMLElement>(".activity-detail");
   const writingSection = document.getElementById("writing");
 
   const filterTargets = [
-    { section: document.getElementById("papers"), list: document.getElementById("papers-list"), btn: document.querySelector<HTMLButtonElement>("#papers .toggle-btn") },
-    { section: document.getElementById("projects"), list: document.getElementById("projects-list"), btn: document.querySelector<HTMLButtonElement>("#projects .toggle-btn") },
+    { section: document.getElementById("papers"), list: document.getElementById("papers-list"), btn: document.querySelector<HTMLButtonElement>("#papers .toggle-btn"), note: document.querySelector<HTMLElement>("#papers .filter-note") },
+    { section: document.getElementById("projects"), list: document.getElementById("projects-list"), btn: document.querySelector<HTMLButtonElement>("#projects .toggle-btn"), note: document.querySelector<HTMLElement>("#projects .filter-note") },
   ];
 
   let activeActivityId: string | null = null;
-
-  function pinRail(pin: boolean) {
-    if (activityRail) activityRail.dataset.pinned = String(pin);
-  }
 
   function selectActivity(id: string | null) {
     activeActivityId = id;
@@ -345,8 +344,6 @@ document.addEventListener("astro:page-load", () => {
       card.setAttribute("aria-pressed", String(isActive));
     });
 
-    pinRail(Boolean(id));
-
     detailPanels.forEach((panel) => {
       panel.hidden = panel.dataset.activityId !== id;
     });
@@ -354,9 +351,15 @@ document.addEventListener("astro:page-load", () => {
 
     if (writingSection) writingSection.hidden = Boolean(id);
 
-    filterTargets.forEach(({ section, list, btn }) => {
+    filterTargets.forEach(({ section, list, btn, note }) => {
       if (!list) return;
       const entries = Array.from(list.querySelectorAll<HTMLElement>(".entry"));
+
+      if (note) {
+        note.hidden = !id;
+        const name = note.querySelector(".filter-note-name");
+        if (name) name.textContent = id ? activityTitles.get(id) ?? "" : "";
+      }
 
       if (id) {
         let anyVisible = false;
@@ -380,6 +383,11 @@ document.addEventListener("astro:page-load", () => {
     });
   }
 
+  function clearActivity() {
+    selectActivity(null);
+    history.replaceState(null, "", location.pathname + location.search);
+  }
+
   activityCards.forEach((card) => {
     card.addEventListener("click", (e) => {
       e.preventDefault();
@@ -388,6 +396,10 @@ document.addEventListener("astro:page-load", () => {
       selectActivity(nextId);
       history.replaceState(null, "", nextId ? "#" + nextId : location.pathname + location.search);
     });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>(".filter-clear-btn").forEach((btn) => {
+    btn.addEventListener("click", clearActivity);
   });
 
   // Landing on (or navigating to) a #activity-id hash selects that activity.
