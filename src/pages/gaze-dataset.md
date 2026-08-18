@@ -22,7 +22,7 @@ The goal of my thesis is to create a framework for doing gaze estimation *in the
 
 Understanding where a person is looking at is fundamental in an huge amount of fields. In human-robot interaction (HRI) gaze estimation represent a forced step to have robots more intelligent and more able to understand humans' intentions.
 
-![](/uploads/rerun.png)
+![](../assets/uploads/rerun.png)
 
 
 ## The hardware 🥽  
@@ -30,7 +30,7 @@ Understanding where a person is looking at is fundamental in an huge amount of f
 Both you and I will wear a pair of Project Aria Glasses like the one below. They can be worn as normal glasses. They have been developed by Meta's Reality Labs for research purposes.  
 The advantage of these devices over alternatives is that they have 5 cameras: 2 internally for eye tracking, 2 for wide side-view, and 1 for high-res view.  
 
-![](/uploads/ariaglasses.png)
+![](../assets/uploads/ariaglasses.png)
 
 
 ## What you'll do 🤖

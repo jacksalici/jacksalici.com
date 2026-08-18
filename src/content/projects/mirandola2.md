@@ -9,7 +9,7 @@ stack: ["Nuxt", "Node.js"]
 cta:
   - { url: "https://github.com/mirandola2/frontend", label: "Frontend" }
   - { url: "https://github.com/mirandola2/middleware", label: "Middleware" }
-cover: "https://raw.githubusercontent.com/mirandola2/frontend/refs/heads/main/doc/architecture.png"
+cover: "/uploads/mirandola2/architecture.png"
 ---
 
 In the last month I developed the new website of the scout group of my town, in which I serve as a scout leader.  

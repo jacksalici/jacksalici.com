@@ -10,7 +10,7 @@ activities: ["coding-web-apps"]
 stack: ["Hugo", "Tailwind", "DaisyUI"]
 cta:
   - { url: "https://github.com/jacksalici/salinger-theme", label: "Go to the theme repository" }
-cover: "https://raw.githubusercontent.com/jacksalici/salinger-theme/main/images/tn.jpg"
+cover: "/uploads/salinger-theme/tn.jpg"
 trending: true
 ---
 

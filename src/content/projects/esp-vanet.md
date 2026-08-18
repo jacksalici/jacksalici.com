@@ -10,7 +10,7 @@ stack: ["Arduino", "ESP32"]
 cta:
   - { url: "https://github.com/jacksalici/esp-vanet", label: "Code and Documentation" }
   - { url: "https://drive.google.com/file/d/1W78rSVu3EVsvEumKGcSFqNU1EVi18FQa", label: "Slides" }
-cover: "https://raw.githubusercontent.com/jacksalici/esp-vanet/refs/heads/main/misc/architecture.svg"
+cover: "/uploads/esp-vanet/architecture.svg"
 
 ---
 

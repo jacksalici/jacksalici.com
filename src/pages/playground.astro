@@ -1,5 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { imageUrl, isOptimizable, resolveImage } from "../utils/images";
 import { ArrowUpRight, Dices, RefreshCw, X } from "@lucide/astro";
 import Base from "../layouts/Base.astro";
 
@@ -15,7 +17,7 @@ const toys = (await getCollection("projects"))
       title: p.data.title,
       tagline: custom?.tagline ?? p.data.description,
       emoji: custom?.emoji ?? "🎲",
-      cover: p.data.cover,
+      cover: resolveImage(p.data.cover),
       href: custom?.link ?? `/projects/${p.id}/`,
       // Only worth showing when the card itself points somewhere else.
       project: custom ? `/projects/${p.id}/` : undefined,
@@ -30,7 +32,7 @@ const cards = [
     title: "Random Fact Generator",
     tagline: "One unverified truth per reload. Refresh until you find one worth repeating.",
     emoji: "🃏",
-    cover: "/sky.jpg",
+    cover: resolveImage("/uploads/sky.jpg"),
     href: undefined,
     project: undefined,
     modal: true, // The only toy that plays right here, in a dialog.
@@ -59,13 +61,25 @@ const cards = [
         <div class="group relative card card-hover p-5 flex flex-col gap-3 transition-colors hover:bg-accent-2/5">
           {card.cover && (
             <div class="-m-1 mb-0 rounded-xl overflow-hidden bg-base-200 aspect-[3/2]">
-              <img
-                src={card.cover}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                class="w-full h-full object-cover rounded-none transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-              />
+              {!isOptimizable(card.cover) ? (
+                <img
+                  src={imageUrl(card.cover!)}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover rounded-none transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                />
+              ) : (
+                <Image
+                  src={card.cover}
+                  alt=""
+                  width={760}
+                  densities={[1, 2]}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover rounded-none transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                />
+              )}
             </div>
           )}
           <div class="flex items-start justify-between gap-3">

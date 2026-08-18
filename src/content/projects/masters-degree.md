@@ -12,7 +12,7 @@ featured: true
 cta:
   - { url: "https://github.com/jacksalici/sfm-gaze-framework", label: "Project Repository" }
   - { url: "https://morethesis.unimore.it/theses/available/etd-09262024-135659/", label: "Full text thesis" }
-cover: "https://raw.githubusercontent.com/jacksalici/sfm-gaze-framework/refs/heads/main/imgs/fw-example.png"
+cover: "/uploads/masters-degree/fw-example.png"
 ---
 
 ## Abstract

@@ -10,12 +10,12 @@ stack: ["Vue", "Deta"]
 cta:
   - { url: "https://inventory.jacksalici.com", label: "Check the website" }
   - { url: "https://raw.githubusercontent.com/jacksalici/inventory-app/", label: "Check the code" }
-cover: "https://raw.githubusercontent.com/jacksalici/inventory-app/main/public/screenshot3.png"
+cover: "/uploads/inventory-app/screenshot3.png"
 ---
 
 The Inventory App is a fast, open-source and 100% free way to track the equipment of your role-playing games characters.
 
-![screenshot](https://raw.githubusercontent.com/jacksalici/inventory-app/main/public/screenshot2.png)
+![screenshot](../../assets/uploads/inventory-app/screenshot2.png)
 
 The web app is built using Vue as frontend, ~and [Deta Collections](https://deta.space/docs/en/use/your-data/collections) for persistent data storage. The *NoSQL* database has 2 tables (automatically created on the first usage):~
 

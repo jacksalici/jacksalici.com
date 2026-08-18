@@ -16,13 +16,13 @@ cta:
   - { url: "https://contours.jacksalici.com", label: "Open the generator" }
   - { url: "https://github.com/jacksalici/ContourLinesGenerator/", label: "Source code" }
 gallery:
-  - src: "https://raw.githubusercontent.com/jacksalici/ContourLinesGenerator/main/assets/contours1.png"
+  - src: "/uploads/contour-lines-generator/contours1.png"
     alt: "Contour example 1"
-  - src: "https://raw.githubusercontent.com/jacksalici/ContourLinesGenerator/main/assets/contours2.png"
+  - src: "/uploads/contour-lines-generator/contours2.png"
     alt: "Contour example 2"
-  - src: "https://raw.githubusercontent.com/jacksalici/ContourLinesGenerator/main/assets/contours3.png"
+  - src: "/uploads/contour-lines-generator/contours3.png"
     alt: "Contour example 3"
-  - src: "https://raw.githubusercontent.com/jacksalici/ContourLinesGenerator/main/assets/contours4.png"
+  - src: "/uploads/contour-lines-generator/contours4.png"
     alt: "Contour example 4"
 ---
 

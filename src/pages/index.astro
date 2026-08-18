@@ -1,5 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import portrait from "../assets/uploads/newphoto.jpg";
 import { Bot, Network, Activity, Code, Search as SearchIcon } from "@lucide/astro";
 import EntryList from "../components/EntryList.astro";
 import EntryRow from "../components/EntryRow.astro";
@@ -65,7 +67,7 @@ const latestNotes = notes
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const props = { image: "/sky.png" };
+const props = { image: "/uploads/sky.jpg" };
 ---
 
 <Base
@@ -97,7 +99,7 @@ const props = { image: "/sky.png" };
         </div>
 
         <div data-reading="false" class="snapshot shrink-0 self-start mx-auto sm:mx-0">
-          <img src="/newphoto.jpg" alt="Giacomo Salici" width="720" height="722" class="w-36 aspect-square object-cover rounded-none" />
+          <Image src={portrait} alt="Giacomo Salici" width={288} densities={[1, 2]} class="w-36 aspect-square object-cover rounded-none" />
           <span class="text-xs">Me @ ICCV25, Honolulu </span>
         </div>
       </div>

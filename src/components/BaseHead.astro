@@ -1,4 +1,6 @@
 ---
+import { getImage } from "astro:assets";
+import { imageUrl, isOptimizable, resolveImage } from "../utils/images";
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE, SITE_URL } from "../consts";
 
 type MetaType = "website" | "article";
@@ -36,7 +38,13 @@ const {
 
 const metaTitle = title ? `${title} | ${SITE_TITLE}` : `${SITE_TITLE} | ${SITE_TAGLINE}`;
 const metaDescription = description ?? SITE_DESCRIPTION;
-const metaImage = new URL(image ?? DEFAULT_OG_IMAGE, Astro.site ?? SITE_URL);
+// Covers moved under `src/assets`, so a raw frontmatter path is no longer a
+// public URL: resolve it and emit a share-sized derivative.
+const ogSource = resolveImage(image ?? DEFAULT_OG_IMAGE);
+const ogPath = isOptimizable(ogSource)
+  ? (await getImage({ src: ogSource, width: Math.min(1200, ogSource.width), format: "jpg" })).src
+  : imageUrl(ogSource);
+const metaImage = new URL(ogPath, Astro.site ?? SITE_URL);
 const twitterCard = image ?? DEFAULT_OG_IMAGE ? "summary_large_image" : "summary";
 const authorList = Array.isArray(authors)
   ? authors

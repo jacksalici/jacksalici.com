@@ -7,11 +7,11 @@ news: Smart Bus Stop is an IoT system to improve public transport via real-time 
 categories: ["iot-and-v2x"]
 activities: ["applied-embodied-ai"]
 stack: ["Flask", "Arduino", "ESP32"]
-cover: https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/architecture.jpg
+cover: /uploads/smart-bus-stop/architecture.jpg
 cta:
   - { url: "https://github.com/jacksalici/smart-bus-stop", label: "Take a look at the repository" }
 ---
-![Cover](https://raw.githubusercontent.com/jacksalici/smart-bus-stop/main/img/cover.svg)
+![Cover](../../assets/uploads/smart-bus-stop/cover.svg)
 
 This project was developed by a friend on mine and me as the final project for my Master's Degree in the CS IoT course. Its main focus is to improve public transportation, particularly city buses. The aim is to create a smart bus stop that enables easier access to the service and enhances it through a network of such stations.
 

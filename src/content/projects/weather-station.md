@@ -9,7 +9,7 @@ activities: ["coding-web-apps"]
 stack: ["Vue", "Cloudflare Workers"]
 cta:
   - { url: "https://weather.jacksalici.com", label: "Check the dashboard" }
-cover: "https://raw.githubusercontent.com/jacksalici/weather_station/main/screenshot.png"
+cover: "/uploads/weather-station/screenshot.png"
 ---
 
 A custom front-end and middleware for displaying data from my Ecowitt weather station.

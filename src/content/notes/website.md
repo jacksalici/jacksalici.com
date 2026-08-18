@@ -12,7 +12,7 @@ featured: true
 
 As you probably have imagined, I built this website myself. Actually, I've rebuilt it several times because I can't decide how I want it. I think that this is due to the fact that as soon as I find new inspiration or a framework I like, I cannot stop thinking about it. If you like to tidy your home before hosting guests, well, I like to tidy MY home, my digital home, that is, in a certain way — the website you are reading. So, it has to be the thing that better represents me, what I did, and what my tastes are, even if this means rebuilding it twice a year. I want to spend some words about the major versions of it and why I chose them.
 
-[![pages-scores](/uploads/scores.png)](https://pagespeed.web.dev/analysis/https-jacksalici-com/3hqj7sj4ug?form_factor=mobile)
+[![pages-scores](../../assets/uploads/scores.png)](https://pagespeed.web.dev/analysis/https-jacksalici-com/3hqj7sj4ug?form_factor=mobile)
 
 ## Hugo
 

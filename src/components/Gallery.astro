@@ -1,4 +1,7 @@
 ---
+import { Image, getImage } from "astro:assets";
+import { imageUrl, isOptimizable, resolveImage } from "../utils/images";
+
 type GalleryItem = {
   src: string;
   alt?: string;
@@ -13,16 +16,31 @@ type Props = {
   className?: string;
 };
 
-const {
-  items = [],
-  columns = 3,
-  label,
-  className = "",
-} = Astro.props as Props;
+const { items = [], columns, label, className = "" } = Astro.props as Props;
+
+// Two or four pictures divide evenly in pairs; anything else reads better in
+// threes. An explicit `columns` still wins.
+const cols = columns ?? (items.length === 2 || items.length === 4 ? 2 : 3);
 
 const dialogId = `gallery_${Math.random().toString(36).slice(2, 11)}`;
 
-const columnClasses: Record<Props["columns"], string> = {
+// Thumbnails are emitted at card size instead of shipping the full-resolution
+// upload, and the lightbox gets its own, larger derivative. Sources that stay
+// strings (remote URLs, GIFs in `public/`) are used untouched.
+const tiles = await Promise.all(
+  items.map(async (item) => {
+    const source = resolveImage(item.src);
+    if (!isOptimizable(source)) return { ...item, thumb: null, full: imageUrl(source!) };
+    const full = await getImage({
+      src: source,
+      width: Math.min(1600, source.width),
+      format: "webp",
+    });
+    return { ...item, thumb: source, full: full.src };
+  }),
+);
+
+const columnClasses: Record<NonNullable<Props["columns"]>, string> = {
   2: "grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-4",
   3: "grid-cols-2 md:grid-cols-3 gap-2 md:gap-4",
   4: "grid-cols-2 md:grid-cols-4 gap-2 md:gap-4",
@@ -39,23 +57,37 @@ const columnClasses: Record<Props["columns"], string> = {
     </p>
   )}
 
-  <div class={`grid ${columnClasses[columns]}`}>
-    {items.map((item, index) => (
-      <figure class="group relative overflow-hidden rounded-xl border border-base-300/70 bg-base-200/40 shadow-sm">
+  <div class={`grid ${columnClasses[cols]}`}>
+    {tiles.map((item, index) => (
+      <figure class="group relative overflow-hidden rounded-xl border border-base-300/70 bg-base-200/40 transition-colors duration-200 hover:border-base-content/30">
         <button
           type="button"
           class="gallery-trigger block w-full text-left cursor-pointer"
           data-gallery-id={dialogId}
           data-index={index}
         >
-          <div class="relative aspect-4/3 bg-base-300/20">
-            <img
-              src={item.src}
-              alt={item.alt}
-              loading="lazy"
-              decoding="async"
-              class="h-full w-full object-cover transition duration-200 ease-out group-hover:brightness-150"
-            />
+          <div class="relative aspect-4/3 overflow-hidden bg-base-300/20">
+            {item.thumb ? (
+              <Image
+                src={item.thumb}
+                alt={item.alt ?? ""}
+                width={800}
+                densities={[1, 2]}
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover rounded-none transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+              />
+            ) : (
+              <img
+                src={item.full}
+                alt={item.alt}
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover rounded-none transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+              />
+            )}
+            {/* A quiet wash instead of the old blow-out in brightness. */}
+            <span class="pointer-events-none absolute inset-0 bg-base-content/0 transition-colors duration-300 group-hover:bg-base-content/10" />
           </div>
         </button>
 
@@ -71,7 +103,7 @@ const columnClasses: Record<Props["columns"], string> = {
   <dialog
     id={dialogId}
     class="backdrop:bg-black/90 bg-transparent p-0 m-0 max-w-none max-h-none w-full h-full"
-    data-items={JSON.stringify(items)}
+    data-items={JSON.stringify(tiles.map(({ full, alt, caption }) => ({ src: full, alt, caption })))}
   >
     <div class="pointer-events-none relative w-full h-full flex items-center justify-center">
       <button
