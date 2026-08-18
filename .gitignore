@@ -7,3 +7,5 @@ resources
 .vscode
 dist
 .astro/types.d.ts
+.claude
+.codex
