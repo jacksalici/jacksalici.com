@@ -166,7 +166,7 @@ main {
 /* --- Header --- */
 
 .nav-link {
-	@apply text-neutral-content hover:text-base-content transition-colors
+	@apply text-neutral-content/80 hover:text-base-content transition-colors
 }
 
 .icon-btn {
@@ -231,11 +231,18 @@ section[id] {
 	@apply data-[reading=true]:rotate-[-1.5deg] data-[reading=true]:-translate-y-1 data-[reading=true]:shadow-[0_18px_34px_-18px_rgba(0,0,0,0.5)]
 }
 
-/* A horizontal card rail that freezes over page content, with a blurred
-   backdrop, while pinned (toggle with the `data-pinned` attribute). */
+/* A horizontally scrollable card rail on mobile, a grid on desktop. */
 .activity-rail {
-	@apply scrollbar-none [&::-webkit-scrollbar]:hidden after:content-[''] after:block after:w-2 after:shrink-0 md:after:hidden;
-	@apply data-[pinned=true]:sticky data-[pinned=true]:top-0  data-[pinned=true]:z-30 data-[pinned=true]:py-3 data-[pinned=true]:bg-base-100/80 data-[pinned=true]:backdrop-blur-xl
+	@apply scrollbar-none [&::-webkit-scrollbar]:hidden after:content-[''] after:block after:w-2 after:shrink-0 md:after:hidden
+}
+
+/* Sits under a section's kicker, stating what activity it's currently filtered by. */
+.filter-note {
+	@apply text-xs font-mono text-neutral-content/80 flex items-center gap-2 mt-1 mb-4
+}
+
+.filter-note-name {
+	@apply text-accent-3
 }
 
 /* The front face of an activity card, lit up permanently while selected
