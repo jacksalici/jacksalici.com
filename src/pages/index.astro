@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import portrait from "../assets/uploads/newphoto.jpg";
-import { Bot, Network, Activity, Code, Search as SearchIcon } from "@lucide/astro";
+import { Bot, Network, Activity, Code, Search as SearchIcon, FolderOpen, Folder } from "@lucide/astro";
 import EntryList from "../components/EntryList.astro";
 import EntryRow from "../components/EntryRow.astro";
 import Base from "../layouts/Base.astro";
@@ -92,7 +92,7 @@ const props = { image: "/uploads/sky.jpg" };
           <div id="bio-more" data-open="false" class="read-panel">
             <div>
               <p class="text-neutral-content leading-relaxed pt-4">
-                At the <a href="https://www.unimore.it/">University of Modena and Reggio Emilia&nbsp;↗</a>, my research interests include <span class="text-accent-2 font-bold"><Bot class:list={"inline pb-1"}/>&nbsp;artificial intelligence of things (AIoT)</span>, <span class="text-accent-2 font-bold"><Network class:list={"inline pb-1"}/>&nbsp;modular deep learning</span>, and <span class="text-accent-2 font-bold"><Activity class:list={"inline pb-1"}/>&nbsp;anomaly detection </span>. Besides my research work, I also enjoy (in casual order): <span class="text-accent-2 font-bold"><Code class:list={"inline pb-1"}/>&nbsp;open-source software and hardware</span>, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
+                At <a href="https://www.unimore.it/">University of Modena and Reggio Emilia&nbsp;↗</a>, my research interests include <span class="text-accent-2 font-bold inline-block"><Bot class:list={"inline pb-1"}/>&nbsp;artificial intelligence of things (AIoT)</span>, <span class="text-accent-2 font-bold inline-block"><Network class:list={"inline pb-1"}/>&nbsp;modular deep learning</span>, and <span class="text-accent-2 font-bold inline-block"><Activity class:list={"inline pb-1"}/>&nbsp;anomaly detection </span>. Besides my research work, I also enjoy (in casual order): <span class="text-accent-2 font-bold inline-block"><Code class:list={"inline pb-1"}/>&nbsp;open-source software and hardware</span>, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
               </p>
             </div>
           </div>
@@ -176,7 +176,7 @@ const props = { image: "/uploads/sky.jpg" };
 
     <section class="mt-20" id="papers" data-pagefind-ignore>
       <p class="section-label"><span class="section-num">02</span>My latest research papers</p>
-      <p class="filter-note" hidden>Filtering by <span class="filter-note-name"></span> <button type="button" class="toggle-btn filter-clear-btn">Clear ✕</button></p>
+      <p class="filter-note" hidden><FolderOpen class:list={"w-4"}/><span class="filter-note-name"></span><button type="button" class="toggle-btn" data-clear-filter>Clear ✕</button></p>
 
       <EntryList id="papers-list" class="mb-5">
         {latestPapers.map((paper, i) => (
@@ -192,7 +192,7 @@ const props = { image: "/uploads/sky.jpg" };
       </EntryList>
 
       {latestPapers.length > INITIAL_VISIBLE && (
-        <button type="button" data-expanded="false" class="toggle-btn">
+        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="papers-list">
           <span class="toggle-label">Show all ↘</span>
         </button>
       )}
@@ -200,7 +200,7 @@ const props = { image: "/uploads/sky.jpg" };
 
     <section class="mt-20" id="projects" data-pagefind-ignore>
       <p class="section-label"><span class="section-num">03</span>My latest projects</p>
-      <p class="filter-note" hidden>Filtering by <span class="filter-note-name"></span> <button type="button" class="toggle-btn filter-clear-btn">Clear ✕</button></p>
+      <p class="filter-note" hidden><FolderOpen class:list={"w-4"}/><span class="filter-note-name"></span> <button type="button" class="toggle-btn" data-clear-filter>Clear ✕</button></p>
 
       <EntryList id="projects-list" class="mb-5">
         {latestProjects.map((project, i) => (
@@ -220,7 +220,7 @@ const props = { image: "/uploads/sky.jpg" };
       </EntryList>
 
       {latestProjects.length > INITIAL_VISIBLE && (
-        <button type="button" data-expanded="false" class="toggle-btn">
+        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="projects-list">
           <span class="toggle-label">Show all ↘</span>
         </button>
       )}
@@ -243,9 +243,9 @@ const props = { image: "/uploads/sky.jpg" };
     )}
     </section>
 
-    <section class="border-t mt-20 border-accent-3 pt-12 pb-6">
-      <h2 class="font-display text-3xl md:text-4xl tracking-tight leading-[1.1] text-balance max-w-2xl">
-        Let's make something <span class="italic">that matters</span>.
+    <section class=" mt-20 bg-white rounded-2xl px-4 md:mx-0 md:px-0 lg:px-20 lg:-mx-20 py-12 ">
+      <h2 class="font-display text-3xl md:text-4xl tracking-tight text-balance max-w-2xl">
+        Let's make something <span class="italic text-accent-3">that matters</span>.
       </h2>
       <div class="mt-7 flex flex-wrap gap-2 text-sm">
         <a href="/contacts" class="btn-solid">Get in touch&nbsp;↗</a>
@@ -293,30 +293,20 @@ document.addEventListener("astro:page-load", () => {
 
   const INITIAL_VISIBLE = 3;
 
-  // "Show all" / "Show latest" toggle for a list of entries.
-  function collapseList(list: Element) {
-    Array.from(list.querySelectorAll(".entry")).forEach((entry, i) => {
-      (entry as HTMLElement).hidden = i >= INITIAL_VISIBLE;
-    });
+  function entriesOf(list: Element) {
+    return Array.from(list.querySelectorAll<HTMLElement>(".entry"));
   }
 
-  document.querySelectorAll<HTMLButtonElement>(".toggle-btn").forEach((btn) => {
-    const list = btn.previousElementSibling;
-    if (!list) return;
-    const label = btn.querySelector(".toggle-label");
-
-    btn.addEventListener("click", () => {
-      const expanded = btn.dataset.expanded === "true";
-      const nextExpanded = !expanded;
-
-      Array.from(list.querySelectorAll(".entry")).forEach((entry, i) => {
-        (entry as HTMLElement).hidden = nextExpanded ? false : i >= INITIAL_VISIBLE;
-      });
-
-      btn.dataset.expanded = String(nextExpanded);
-      if (label) label.textContent = nextExpanded ? "Show latest ↖" : "Show all ↘";
+  // Shows/hides a list's entries, either respecting the active activity
+  // filter (only entries tagged with `filterId` are shown, in full) or,
+  // when there's no filter, the plain "show all" / "show latest" toggle.
+  function applyListVisibility(list: Element, expanded: boolean, filterId: string | null) {
+    entriesOf(list).forEach((entry, i) => {
+      entry.hidden = filterId
+        ? !(entry.dataset.activities ?? "").split(" ").includes(filterId)
+        : !expanded && i >= INITIAL_VISIBLE;
     });
-  });
+  }
 
   // Clicking an activity opens its full write-up and filters papers/projects
   // down to its work, with each section stating what it's filtered by —
@@ -329,10 +319,21 @@ document.addEventListener("astro:page-load", () => {
   const detailPanels = document.querySelectorAll<HTMLElement>(".activity-detail");
   const writingSection = document.getElementById("writing");
 
-  const filterTargets = [
-    { section: document.getElementById("papers"), list: document.getElementById("papers-list"), btn: document.querySelector<HTMLButtonElement>("#papers .toggle-btn"), note: document.querySelector<HTMLElement>("#papers .filter-note") },
-    { section: document.getElementById("projects"), list: document.getElementById("projects-list"), btn: document.querySelector<HTMLButtonElement>("#projects .toggle-btn"), note: document.querySelector<HTMLElement>("#projects .filter-note") },
-  ];
+  // Each filterable section's list, its "Show all" toggle (found by the
+  // toggle's `data-target`, not DOM position — the "Clear" button also
+  // lives in this section and must never be confused for the toggle), and
+  // the note that states what it's filtered by.
+  function filterTargetFor(sectionId: string) {
+    const section = document.getElementById(sectionId);
+    const list = document.getElementById(`${sectionId}-list`);
+    const btn = list
+      ? document.querySelector<HTMLButtonElement>(`.list-toggle[data-target="${list.id}"]`)
+      : null;
+    const note = section?.querySelector<HTMLElement>(".filter-note") ?? null;
+    return { section, list, btn, note };
+  }
+
+  const filterTargets = [filterTargetFor("papers"), filterTargetFor("projects")];
 
   let activeActivityId: string | null = null;
 
@@ -340,8 +341,7 @@ document.addEventListener("astro:page-load", () => {
     activeActivityId = id;
 
     activityCards.forEach((card) => {
-      const isActive = card.dataset.activityId === id;
-      card.setAttribute("aria-pressed", String(isActive));
+      card.setAttribute("aria-pressed", String(card.dataset.activityId === id));
     });
 
     detailPanels.forEach((panel) => {
@@ -353,7 +353,6 @@ document.addEventListener("astro:page-load", () => {
 
     filterTargets.forEach(({ section, list, btn, note }) => {
       if (!list) return;
-      const entries = Array.from(list.querySelectorAll<HTMLElement>(".entry"));
 
       if (note) {
         note.hidden = !id;
@@ -361,23 +360,19 @@ document.addEventListener("astro:page-load", () => {
         if (name) name.textContent = id ? activityTitles.get(id) ?? "" : "";
       }
 
+      applyListVisibility(list, true, id);
+
       if (id) {
-        let anyVisible = false;
-        entries.forEach((entry) => {
-          const matches = (entry.dataset.activities ?? "").split(" ").includes(id);
-          entry.hidden = !matches;
-          if (matches) anyVisible = true;
-        });
         if (btn) btn.hidden = true;
-        if (section) section.hidden = !anyVisible;
+        if (section) section.hidden = !entriesOf(list).some((entry) => !entry.hidden);
       } else {
-        collapseList(list);
         if (btn) {
           btn.hidden = false;
           btn.dataset.expanded = "false";
           const label = btn.querySelector(".toggle-label");
           if (label) label.textContent = "Show all ↘";
         }
+        applyListVisibility(list, false, null);
         if (section) section.hidden = false;
       }
     });
@@ -398,8 +393,24 @@ document.addEventListener("astro:page-load", () => {
     });
   });
 
-  document.querySelectorAll<HTMLButtonElement>(".filter-clear-btn").forEach((btn) => {
+  document.querySelectorAll<HTMLButtonElement>("[data-clear-filter]").forEach((btn) => {
     btn.addEventListener("click", clearActivity);
+  });
+
+  // "Show all" / "Show latest" toggle for a list of entries. Hidden while
+  // an activity filter is active (see selectActivity), so it can only ever
+  // act on the unfiltered list.
+  document.querySelectorAll<HTMLButtonElement>(".list-toggle").forEach((btn) => {
+    const list = document.getElementById(btn.dataset.target ?? "");
+    if (!list) return;
+    const label = btn.querySelector(".toggle-label");
+
+    btn.addEventListener("click", () => {
+      const nextExpanded = btn.dataset.expanded !== "true";
+      applyListVisibility(list, nextExpanded, activeActivityId);
+      btn.dataset.expanded = String(nextExpanded);
+      if (label) label.textContent = nextExpanded ? "Show latest ↖" : "Show all ↘";
+    });
   });
 
   // Landing on (or navigating to) a #activity-id hash selects that activity.
