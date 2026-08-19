@@ -12,9 +12,12 @@ let links = [
 // Anchor links only resolve their section client-side (the hash never reaches the server),
 // so this just seeds the initial state; [data-header] script keeps it in sync on scroll/hash change.
 const { pathname, hash } = Astro.url;
+// The static build serves pages at a trailing-slash URL (e.g. "/playground/"), but nav hrefs
+// are written without one, so the comparison has to ignore it.
+const stripTrailingSlash = (path: string) => (path.length > 1 ? path.replace(/\/$/, "") : path);
 function isActive(href: string) {
   const [path, linkHash] = href.split("#");
-  if (path !== pathname) return false;
+  if (stripTrailingSlash(path) !== stripTrailingSlash(pathname)) return false;
   return linkHash ? hash === `#${linkHash}` : hash === "";
 }
 
@@ -128,9 +131,12 @@ if (pathname !== "/") {
     const controller = new AbortController();
     document.addEventListener("astro:before-swap", () => controller.abort(), { once: true });
 
+    // Same trailing-slash quirk as the server-side isActive() above: the "/playground" href
+    // never matches the "/playground/" the browser actually navigates to without this.
+    const stripTrailingSlash = (path: string) => (path.length > 1 ? path.replace(/\/$/, "") : path);
     function setActive(hash: string) {
       links.forEach((link) => {
-        const matches = link.pathname === location.pathname && link.hash === hash;
+        const matches = stripTrailingSlash(link.pathname) === stripTrailingSlash(location.pathname) && link.hash === hash;
         if (matches) link.setAttribute("aria-current", "page");
         else link.removeAttribute("aria-current");
       });
