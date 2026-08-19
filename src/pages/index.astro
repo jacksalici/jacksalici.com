@@ -86,7 +86,7 @@ const props = { image: "/uploads/sky.jpg" };
         <div class="flex-1 min-w-0">
           <p class="text-lg leading-relaxed">
             I am <span class="font-bold">Giacomo Salici</span>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a class="font-bold" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of UniMORE as a <span class="font-bold">PhD candidate in ICT</span>.{" "}
-            <button type="button" class="read-toggle toggle-btn align-middle" aria-expanded="false">Read more ↘</button>
+            <button type="button" class="read-toggle toggle-btn align-middle" aria-expanded="false" data-cuelume-toggle>Read more ↘</button>
           </p>
 
           <div id="bio-more" data-open="false" class="read-panel">
@@ -98,13 +98,13 @@ const props = { image: "/uploads/sky.jpg" };
           </div>
         </div>
 
-        <div data-reading="false" class="snapshot shrink-0 self-start mx-auto sm:mx-0">
+        <div data-reading="false" class="snapshot shrink-0 self-start mx-auto sm:mx-0" data-cuelume-hover="tick">
           <Image src={portrait} alt="Giacomo Salici" width={288} densities={[1, 2]} class="w-36 aspect-square object-cover rounded-none" />
           <span class="text-xs">Me @ ICCV25, Honolulu </span>
         </div>
       </div>
 
-      <button type="button" class="search-trigger mt-10" data-search-open data-pagefind-ignore>
+      <button type="button" class="search-trigger mt-10" data-search-open data-pagefind-ignore data-cuelume-press="bloom">
         <SearchIcon size={16} stroke-width={1.75} />
         <span>Search everything I have made…</span>
       </button>
@@ -123,6 +123,8 @@ const props = { image: "/uploads/sky.jpg" };
               data-activity-id={activity.id}
               data-activity-title={activity.data.title}
               aria-pressed="false"
+              data-cuelume-hover="tick"
+              data-cuelume-release="pulse"
               class:list={[
                 "activity-card group relative block",
                 "w-[70%] h-44 shrink-0",
@@ -177,7 +179,7 @@ const props = { image: "/uploads/sky.jpg" };
 
     <section class="mt-20" id="papers" data-pagefind-ignore>
       <p class="section-label"><span class="section-num">02</span>My latest research papers</p>
-      <p class="filter-note" hidden><FolderOpen class:list={"w-4"}/><span class="filter-note-name"></span><button type="button" class="toggle-btn" data-clear-filter>Clear ✕</button></p>
+      <p class="filter-note" hidden><FolderOpen class:list={"w-4"}/><span class="filter-note-name"></span><button type="button" class="toggle-btn" data-clear-filter data-cuelume-press="release">Clear ✕</button></p>
 
       <EntryList id="papers-list" class="mb-5">
         {latestPapers.map((paper, i) => (
@@ -193,7 +195,7 @@ const props = { image: "/uploads/sky.jpg" };
       </EntryList>
 
       {latestPapers.length > INITIAL_VISIBLE && (
-        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="papers-list">
+        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="papers-list" data-cuelume-toggle>
           <span class="toggle-label">Show all ↘</span>
         </button>
       )}
@@ -201,7 +203,7 @@ const props = { image: "/uploads/sky.jpg" };
 
     <section class="mt-20" id="projects" data-pagefind-ignore>
       <p class="section-label"><span class="section-num">03</span>My latest projects</p>
-      <p class="filter-note" hidden><FolderOpen class:list={"w-4"}/><span class="filter-note-name"></span> <button type="button" class="toggle-btn" data-clear-filter>Clear ✕</button></p>
+      <p class="filter-note" hidden><FolderOpen class:list={"w-4"}/><span class="filter-note-name"></span> <button type="button" class="toggle-btn" data-clear-filter data-cuelume-press="release">Clear ✕</button></p>
 
       <EntryList id="projects-list" class="mb-5">
         {latestProjects.map((project, i) => (
@@ -221,7 +223,7 @@ const props = { image: "/uploads/sky.jpg" };
       </EntryList>
 
       {latestProjects.length > INITIAL_VISIBLE && (
-        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="projects-list">
+        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="projects-list" data-cuelume-toggle>
           <span class="toggle-label">Show all ↘</span>
         </button>
       )}
@@ -248,10 +250,10 @@ const props = { image: "/uploads/sky.jpg" };
         Let's make something <span class="italic text-accent-3">that matters</span>.
       </h2>
       <div class="mt-7 flex flex-wrap gap-2 text-sm">
-        <a href="/contacts" class="btn-solid">Get in touch&nbsp;↗</a>
-        <a href="https://github.com/jacksalici" class="btn-outline">GitHub&nbsp;↗</a>
-        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="btn-outline">Google Scholar&nbsp;↗</a>
-        <a href="https://linkedin.com/in/jacksalici" class="btn-outline">LinkedIn&nbsp;↗</a>
+        <a href="/contacts" class="btn-solid" data-cuelume-hover="tick">Get in touch&nbsp;↗</a>
+        <a href="https://github.com/jacksalici" class="btn-outline" data-cuelume-hover="tick">GitHub&nbsp;↗</a>
+        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="btn-outline" data-cuelume-hover="tick">Google Scholar&nbsp;↗</a>
+        <a href="https://linkedin.com/in/jacksalici" class="btn-outline" data-cuelume-hover="tick">LinkedIn&nbsp;↗</a>
 
       </div>
     </section>
@@ -262,6 +264,8 @@ const props = { image: "/uploads/sky.jpg" };
 // Re-run on every ClientRouter navigation (including back/forward), not just the
 // first load, since that's the only way freshly swapped-in elements get their
 // listeners re-attached.
+import { play } from "../utils/sounds";
+
 document.addEventListener("astro:page-load", () => {
   const toggle = document.querySelector(".read-toggle");
   const photo = document.querySelector<HTMLElement>(".snapshot")

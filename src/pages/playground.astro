@@ -78,7 +78,7 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
 
     {deadToys.length > 0 && (
       <div class="flex justify-end mb-4">
-        <button type="button" id="graveyard-toggle" data-expanded="true" class="toggle-btn">
+        <button type="button" id="graveyard-toggle" data-expanded="true" class="toggle-btn" data-cuelume-toggle>
           <span class="toggle-label">Show only active toys</span>
         </button>
       </div>
@@ -171,6 +171,8 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
                   rel={card.href?.startsWith("http") ? "noopener" : undefined}
                   data-fact-open={card.modal ? "" : undefined}
                   class="text-xs font-mono text-neutral-content inline-flex items-center gap-1 cursor-pointer transition-colors group-hover:text-white before:absolute before:inset-0 before:rounded-2xl before:content-['']"
+                  data-cuelume-hover="sparkle"
+                  data-cuelume-press
                 >
                   Explore
                   <ArrowUpRight class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -188,7 +190,6 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
                 </a>
               )}
             </div>
-         
         </div>
         );
       })}
@@ -211,7 +212,7 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
         <p class="text-xs text-neutral-content max-w-xs">
           Served by a public API, so treat it as a rumour worth fact-checking.
         </p>
-        <button data-fact-more class="btn-outline shrink-0 cursor-pointer">
+        <button data-fact-more class="btn-outline shrink-0 cursor-pointer" data-cuelume-hover="tick"  data-cuelume-press="bloom">
           <RefreshCw class="w-4 h-4" />
           Another one
         </button>
@@ -221,6 +222,8 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
 </Base>
 
 <script>
+  import { play } from "../utils/sounds";
+
   // DON'T USE EXPOSED API KEY! This is for testing purposes only.
   // Do not use the following key for your project.
   const API_KEY = "8Idmhms+nG6e6Agy9f1jQA==gfaW91jpy9ty2nGz";
@@ -232,20 +235,24 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
 
     async function draw() {
       text!.textContent = "Shuffling the deck...";
+      play("loading");
       try {
         const res = await fetch("https://api.api-ninjas.com/v1/facts", {
           headers: { "X-Api-Key": API_KEY },
         });
         const data = await res.json();
         text!.textContent = data[0].fact + ".";
+        play("ready");
       } catch (e) {
         text!.textContent = "Ops, an error occurred.";
+        play("error");
       }
     }
 
     document.querySelectorAll("[data-fact-open]").forEach((btn) =>
       btn.addEventListener("click", () => {
         dialog.showModal();
+        play("bloom");
         draw();
       })
     );

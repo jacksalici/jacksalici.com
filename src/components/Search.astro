@@ -27,6 +27,8 @@ import { X } from "@lucide/astro";
 </dialog>
 
 <script>
+  import { play } from "../utils/sounds";
+
   const MAX_RESULTS = 8;
 
   // Human label for a result, derived from the first segment of its URL.
@@ -71,6 +73,7 @@ import { X } from "@lucide/astro";
     const link = document.createElement("a");
     link.href = data.url;
     link.className = "list-row";
+    link.dataset.cuelumePress = "success";
 
     const body = document.createElement("span");
     body.className = "min-w-0 flex-1";

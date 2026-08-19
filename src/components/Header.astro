@@ -1,5 +1,5 @@
 ---
-import { Menu, Search as SearchIcon } from "@lucide/astro";
+import { Menu, Search as SearchIcon, Volume2, VolumeX } from "@lucide/astro";
 
 // Publications and projects are sections of the homepage, not pages of their own.
 let links = [
@@ -31,7 +31,7 @@ if (pathname !== "/") {
 
 <header class="w-full" data-header>
   <div class="container mx-auto p-4 md:p-5 md:px-12 md:max-w-4xl flex items-center gap-4">
-    <a href="/" aria-label="Logo of Jack" class="max-w-fit shrink-0">
+    <a href="/" aria-label="Logo of Jack" class="max-w-fit shrink-0" data-cuelume-press="whisper" data-cuelume-hover="tick" data-cuelume-release="sparkle">
       <svg
         id="logo"
         class="max-h-8 w-10 transition-fill fill-base-content group"
@@ -66,6 +66,7 @@ if (pathname !== "/") {
           class="nav-link"
           class:list={{ "nav-link--playground": link.href === "/playground" }}
           aria-current={isActive(link.href) ? "page" : undefined}
+          data-cuelume-release="arrival" data-cuelume-hover="tick"
         >
           {link.label}
         </a>
@@ -73,10 +74,14 @@ if (pathname !== "/") {
     </nav>
 
     <div class="ml-auto md:ml-0 flex items-center gap-1">
-      <button type="button" class="icon-btn" data-search-open aria-label="Search">
+        <button type="button" class="icon-btn" data-search-open aria-label="Search" data-cuelume-press="bloom" data-cuelume-hover="tick">
         <SearchIcon size={18} stroke-width={1.75} />
       </button>
-      <button type="button" class="icon-btn md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu">
+      <button type="button" class="icon-btn" data-sound-toggle aria-label="Mute sound" aria-pressed="false" data-cuelume-hover="tick" data-cuelume-press>
+        <span data-sound-icon-on><Volume2 size={18} stroke-width={1.75} /></span>
+        <span data-sound-icon-off hidden><VolumeX size={18} stroke-width={1.75} /></span>
+      </button>
+      <button type="button" class="icon-btn md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu" data-cuelume-press="scan">
         <Menu size={20} stroke-width={1.75} />
       </button>
     </div>
@@ -91,6 +96,7 @@ if (pathname !== "/") {
           class="nav-link py-2"
           class:list={{ "nav-link--playground": link.href === "/playground" }}
           aria-current={isActive(link.href) ? "page" : undefined}
+          data-cuelume-press
         >
           {link.label}
         </a>
@@ -100,6 +106,30 @@ if (pathname !== "/") {
 </header>
 
 <script>
+  import { isSoundEnabled, setSoundEnabled } from "../utils/sounds";
+
+  function setupSoundToggle() {
+    const btn = document.querySelector<HTMLButtonElement>("[data-sound-toggle]");
+    const onIcon = btn?.querySelector<HTMLElement>("[data-sound-icon-on]");
+    const offIcon = btn?.querySelector<HTMLElement>("[data-sound-icon-off]");
+    if (!btn || !onIcon || !offIcon) return;
+
+    function render(enabled: boolean) {
+      btn!.setAttribute("aria-pressed", String(!enabled));
+      btn!.setAttribute("aria-label", enabled ? "Mute sound" : "Unmute sound");
+      onIcon!.hidden = !enabled;
+      offIcon!.hidden = enabled;
+    }
+
+    render(isSoundEnabled());
+
+    btn.addEventListener("click", () => {
+      const next = !isSoundEnabled();
+      setSoundEnabled(next);
+      render(next);
+    });
+  }
+
   function setupHeader() {
     const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
     const menu = document.querySelector<HTMLElement>("[data-header-menu]");
@@ -190,5 +220,6 @@ if (pathname !== "/") {
   document.addEventListener("astro:page-load", () => {
     setupHeader();
     setupActiveLink();
+    setupSoundToggle();
   });
 </script>
