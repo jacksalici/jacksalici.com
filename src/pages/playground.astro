@@ -59,7 +59,7 @@ const nextCuriosityCard: Card = {
   dead: undefined,
 };
 
-const cards = [nextCuriosityCard, ...livingToys, randomFactCard, ...deadToys];
+const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
 ---
 
 <Base
@@ -73,13 +73,13 @@ const cards = [nextCuriosityCard, ...livingToys, randomFactCard, ...deadToys];
     </h1>
     <p class="max-w-2xl text-neutral-content mb-8">
       Small toys built for the pleasure of building them: no sign-up, no purpose, no
-      roadmap. Open one, poke at it, close the tab.
+      roadmap. Open one, poke at it, close the tab. No continuity guarantee.
     </p>
 
     {deadToys.length > 0 && (
       <div class="flex justify-end mb-4">
         <button type="button" id="graveyard-toggle" data-expanded="true" class="toggle-btn">
-          <span class="toggle-label">Show only active experiments</span>
+          <span class="toggle-label">Show only active toys</span>
         </button>
       </div>
     )}
@@ -279,7 +279,7 @@ const cards = [nextCuriosityCard, ...livingToys, randomFactCard, ...deadToys];
       const nextExpanded = !expanded;
       graveyardItems.forEach((card) => (card.hidden = !nextExpanded));
       btn.dataset.expanded = String(nextExpanded);
-      if (label) label.textContent = nextExpanded ? "Show only active experiments" : "Show all experiments";
+      if (label) label.textContent = nextExpanded ? "Show only active toys" : "Show all toys";
     });
   }
 

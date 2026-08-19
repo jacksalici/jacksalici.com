@@ -2,13 +2,28 @@
 import { Menu, Search as SearchIcon } from "@lucide/astro";
 
 // Publications and projects are sections of the homepage, not pages of their own.
-const links = [
-  { href: "/", label: "Home" },
+let links = [
   { href: "/#about", label: "About" },
   { href: "/#papers", label: "Publications" },
   { href: "/#projects", label: "Projects" },
   { href: "/playground", label: "Playground" },
 ];
+
+// Anchor links only resolve their section client-side (the hash never reaches the server),
+// so this just seeds the initial state; [data-header] script keeps it in sync on scroll/hash change.
+const { pathname, hash } = Astro.url;
+function isActive(href: string) {
+  const [path, linkHash] = href.split("#");
+  if (path !== pathname) return false;
+  return linkHash ? hash === `#${linkHash}` : hash === "";
+}
+
+if (pathname !== "/") {
+  links = [
+    { href: "/", label: "Home" },
+    ...links,
+  ];
+}
 ---
 
 <header class="w-full" data-header>
@@ -42,7 +57,16 @@ const links = [
     </a>
 
     <nav class="ml-auto hidden md:flex items-center gap-6 text-sm">
-      {links.map((link) => <a href={link.href} class="nav-link">{link.label}</a>)}
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="nav-link"
+          class:list={{ "nav-link--playground": link.href === "/playground" }}
+          aria-current={isActive(link.href) ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
     </nav>
 
     <div class="ml-auto md:ml-0 flex items-center gap-1">
@@ -58,7 +82,16 @@ const links = [
   {/* The links the desktop nav shows inline, folded away behind the hamburger. */}
   <div id="header-menu" data-header-menu hidden class="md:hidden border-t border-base-300/60">
     <nav class="container mx-auto p-4 md:max-w-4xl flex flex-col">
-      {links.map((link) => <a href={link.href} class="nav-link py-2">{link.label}</a>)}
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="nav-link py-2"
+          class:list={{ "nav-link--playground": link.href === "/playground" }}
+          aria-current={isActive(link.href) ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
     </nav>
   </div>
 </header>
@@ -84,5 +117,72 @@ const links = [
     document.querySelector("[data-search-open]")?.addEventListener("click", () => setOpen(false));
   }
 
-  document.addEventListener("astro:page-load", setupHeader);
+  // Hash-only navigation (the homepage's #about/#papers/#projects anchors) never triggers a
+  // fresh Astro render, so the active link has to be kept in sync manually here. On the
+  // homepage itself, scrolling past a section should update the active link (and the URL
+  // hash) the same way clicking its nav link would.
+  function setupActiveLink() {
+    const links = document.querySelectorAll<HTMLAnchorElement>("[data-header] .nav-link");
+    // Listeners attach to window/document, which survive view-transition swaps, so they're
+    // torn down explicitly before the next page's setup runs.
+    const controller = new AbortController();
+    document.addEventListener("astro:before-swap", () => controller.abort(), { once: true });
+
+    function setActive(hash: string) {
+      links.forEach((link) => {
+        const matches = link.pathname === location.pathname && link.hash === hash;
+        if (matches) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
+    }
+
+    setActive(location.hash);
+
+    const sections = ["about", "papers", "projects"]
+      .map((id) => {
+        const el = document.getElementById(id);
+        return el ? { hash: `#${id}`, top: el.offsetTop } : null;
+      })
+      .filter((entry): entry is { hash: string; top: number } => entry !== null);
+
+    if (location.pathname !== "/" || sections.length === 0) {
+      window.addEventListener("hashchange", () => setActive(location.hash), { signal: controller.signal });
+      return;
+    }
+
+    // A single scroll-position check (rather than an IntersectionObserver watching each section)
+    // avoids two async signals racing to decide the active link near the top of the page.
+    let ticking = false;
+    function updateFromScroll() {
+      ticking = false;
+      // A small fixed offset (not a fraction of viewport height) keeps the trigger pinned just
+      // below the header: "about" starts right under it, so a percentage-based lookahead would
+      // always overshoot into it and Home could never be active.
+      const line = window.scrollY + 96;
+      let hash = "";
+      for (const section of sections) {
+        if (line >= section.top) hash = section.hash;
+      }
+      if (hash !== location.hash) history.replaceState(null, "", hash || location.pathname);
+      setActive(hash);
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(updateFromScroll);
+      },
+      { passive: true, signal: controller.signal },
+    );
+
+    updateFromScroll();
+    window.addEventListener("hashchange", () => setActive(location.hash), { signal: controller.signal });
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    setupHeader();
+    setupActiveLink();
+  });
 </script>

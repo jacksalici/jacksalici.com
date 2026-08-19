@@ -169,6 +169,14 @@ main {
 	@apply text-neutral-content/80 hover:text-base-content transition-colors
 }
 
+.nav-link[aria-current="page"] {
+	@apply text-base-content
+}
+
+.nav-link--playground[aria-current="page"] {
+	@apply text-accent-4
+}
+
 .icon-btn {
 	@apply p-2 rounded-lg cursor-pointer text-neutral-content hover:text-base-content hover:bg-base-200 transition-colors
 }
