@@ -11,7 +11,8 @@ stack: ["JavaScript", "SVG"]
 playground:
   link: "https://contours.jacksalici.com"
   tagline: "Drag a few points, watch a coastline appear. Then take the picture home."
-  icon: "/uploads/contour-lines-generator/favicon.png"
+  emoji: 🖼️
+  how: /projects/contour-lines-generator
 cta:
   - { url: "https://contours.jacksalici.com", label: "Open the generator" }
   - { url: "https://github.com/jacksalici/ContourLinesGenerator/", label: "Source code" }

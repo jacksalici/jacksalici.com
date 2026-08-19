@@ -2,44 +2,64 @@
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import { imageUrl, isOptimizable, resolveImage } from "../utils/images";
-import { ArrowUpRight, Dices, RefreshCw, X } from "@lucide/astro";
+import { ArrowUpRight, RefreshCw, X } from "@lucide/astro";
 import Base from "../layouts/Base.astro";
 
-// Every project that opted into the playground, newest first.
 const toys = (await getCollection("projects"))
   .filter((p) => p.data.draft !== true && p.data.playground)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .map((p) => {
     const play = p.data.playground;
-    const custom = typeof play === "object" ? play : null;
     const page = `/projects/${p.id}/`;
-    const how = custom?.how ?? (p.data.hidden ? undefined : page);
     return {
       title: p.data.title,
-      tagline: custom?.tagline ?? p.data.description,
-      emoji: custom?.emoji ?? "🎲",
-      icon: resolveImage(custom?.icon),
+      tagline: play?.tagline ?? p.data.description,
+      emoji: play?.emoji ?? "🎲",
+      icon: resolveImage(play?.icon),
       cover: resolveImage(p.data.cover),
-      href: custom?.link ?? page,
-      how: how === (custom?.link ?? page) ? undefined : how,
-      howLabel: custom?.howLabel ?? "How it works",
+      href: play?.link ?? page,
+      how: play?.how ?? (p.data.hidden ? undefined : page),
+      howLabel: play?.howLabel ?? (play?.dead ? "How it worked" : "How it works"),
       modal: false,
+      pubDate: new Date(p.data.pubDate),
+      dead: play?.dead ? new Date(play.dead) : undefined,
     };
   });
-const cards = [
-  ...toys,
-  {
-    title: "Random Fact Generator",
-    tagline: "One unverified truth per reload. Refresh until you find one worth repeating.",
-    emoji: "🃏",
-    icon: undefined,
-    cover: resolveImage("/uploads/sky.jpg"),
-    href: undefined,
-    how: undefined,
-    howLabel: "How it works",
-    modal: true, 
-  },
-];
+
+const livingToys = toys.filter((t) => !t.dead);
+const deadToys = toys.filter((t) => t.dead).sort((a, b) => b.dead!.valueOf() - a.dead!.valueOf());
+
+type Card = (typeof toys)[number];
+
+const randomFactCard: Card = {
+  title: "Random Fact Generator",
+  tagline: "One unverified truth per reload. Refresh until you find one worth repeating.",
+  emoji: "🃏",
+  icon: undefined,
+  cover: resolveImage("/uploads/sky.jpg"),
+  href: undefined,
+  how: undefined,
+  howLabel: "How it works",
+  modal: true,
+  pubDate: undefined,
+  dead: undefined,
+};
+
+const nextCuriosityCard: Card = {
+  title: "Next curiosity",
+  tagline: "Other small diversions are quietly taking shape in the workshop. They will land here as soon as they stop crashing.",
+  emoji: "🎲",
+  icon: undefined,
+  cover: undefined,
+  href: undefined,
+  how: undefined,
+  howLabel: "How it works",
+  modal: false,
+  pubDate: undefined,
+  dead: undefined,
+};
+
+const cards = [nextCuriosityCard, ...livingToys, randomFactCard, ...deadToys];
 ---
 
 <Base
@@ -56,34 +76,69 @@ const cards = [
       roadmap. Open one, poke at it, close the tab.
     </p>
 
+    {deadToys.length > 0 && (
+      <div class="flex justify-end mb-4">
+        <button type="button" id="graveyard-toggle" data-expanded="true" class="toggle-btn">
+          <span class="toggle-label">Show only active experiments</span>
+        </button>
+      </div>
+    )}
+
     <div class="grid gap-4 sm:grid-cols-2">
-      {cards.map((card, i) => {
-        const Tag = card.modal ? "button" : "a";
-        const imageClass = "w-full h-full object-cover rounded-none transform-gpu transition-[transform,filter] duration-700! ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none group-hover:blur-md";
+      {cards.map((card) => {
+        const clickable = !card.dead && (card.modal || !!card.href);
+        const Tag = card.modal ? "button" : clickable ? "a" : "div";
+        const imageClass = [
+          "w-full h-full object-cover rounded-none transform-gpu transition-[transform,filter] duration-700! ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+          clickable ? "group-hover:blur-md" : "opacity-20",
+        ].join(" ");
         return (
-        <div class="group relative rounded-2xl p-5 flex flex-col gap-3 bg-white hover:bg-linear-0 hover:from-accent-4 hover:to-white hover:to-40% transition duration-500 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none hover:shadow-2xl border border-neutral hover:border-accent-4">
-            <div class="relative -m-1 mb-0 rounded-xl rounded-bl-none overflow-hidden aspect-2/1 bg-accent-4">
-              {!isOptimizable(card.cover) ? (
-                <img
-                  src={imageUrl(card.cover!)}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  class={imageClass}
-                />
-              ) : (
-                <Image
-                  src={card.cover}
-                  alt=""
-                  width={760}
-                  densities={[1, 2]}
-                  loading="lazy"
-                  decoding="async"
-                  class={imageClass}
-                />
+        <div
+          class:list={[
+            "group relative rounded-2xl p-5 flex flex-col gap-3 border transition duration-500 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+            card.dead
+              ? "grayscale border-dashed border-base-300"
+              : clickable
+                ? "bg-white hover:bg-linear-0 hover:from-accent-4 hover:to-white hover:to-40% hover:shadow-2xl border-neutral hover:border-accent-4"
+                : "border-dashed border-base-300 text-neutral-content",
+          ]}
+          data-dead={card.dead ? "" : undefined}
+          data-graveyard-item={card.dead || card === nextCuriosityCard ? "" : undefined}
+        >
+            <div class="relative -m-1 mb-0 rounded-xl rounded-bl-none overflow-hidden aspect-3/1">
+              {card.cover && (
+                !isOptimizable(card.cover) ? (
+                  <img
+                    src={imageUrl(card.cover)}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    class={imageClass}
+                  />
+                ) : (
+                  <Image
+                    src={card.cover}
+                    alt=""
+                    width={760}
+                    densities={[1, 2]}
+                    loading="lazy"
+                    decoding="async"
+                    class={imageClass}
+                  />
+                )
               )}
 
-              <span class="absolute left-0 bottom-0 grid place-items-center w-1/4 aspect-square rounded-tr-2xl bg-white  will-change-transform border-2 border-white group-hover:shadow-xl group-hover:shadow-accent-4 z-30">
+              {card.dead && card.pubDate && (
+                <span class="absolute top-2 right-2 z-30 rounded-full bg-base-content text-base-100 px-2.5 py-1 text-xs shadow-lg">
+                  {card.pubDate.getFullYear()}-{card.dead.getFullYear()}
+                </span>
+              )}
+
+              <span class:list={[
+                "absolute left-0 bottom-0 grid place-items-center w-1/4 aspect-square rounded-tr-2xl z-30",
+                clickable && " bg-white border-2 border-white",
+                !clickable && "bg-base-100"
+              ]}>
                 {card.icon ? (
                   <img
                     src={imageUrl(card.icon)}
@@ -93,61 +148,50 @@ const cards = [
                     class="w-9/12 object-contain rounded-none"
                   />
                 ) : (
-                  <span class="text-6xl leading-none">{card.emoji}</span>
+                  <span class="text-5xl leading-none">{card.emoji}</span>
                 )}
               </span>
-
-        
             </div>
           <div>
-            <h3 class="text-xl  text-base-content group-hover:text-accent-4 transition-colors">
+            <h3 class:list={["text-xl text-base-content transition-colors", clickable && "group-hover:text-accent-4"]}>
               {card.title}
             </h3>
             {card.tagline && (
-              <p class="text-neutral-content group-hover:text-accent-4 group-hover:text-a mt-1">{card.tagline}</p>
+              <p class:list={["text-neutral-content mt-1", clickable && "group-hover:text-accent-4"]}>
+                {card.tagline}
+              </p>
             )}
           </div>
 
-          <div class="mt-auto pt-2 flex items-end justify-between gap-3">
-            <Tag
-              href={card.href}
-              target={card.href?.startsWith("http") ? "_blank" : undefined}
-              rel={card.href?.startsWith("http") ? "noopener" : undefined}
-              data-fact-open={card.modal ? "" : undefined}
-              class="text-xs font-mono text-neutral-content inline-flex items-center gap-1 cursor-pointer transition-colors group-hover:text-white before:absolute before:inset-0 before:rounded-2xl before:content-['']"
-            >
-              Explore
-              <ArrowUpRight class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Tag>
-
-            {card.how && (
-              <a
-                href={card.how}
-                target={card.how.startsWith("http") ? "_blank" : undefined}
-                rel={card.how.startsWith("http") ? "noopener" : undefined}
-                class="relative z-10 text-xs text-neutral-content/80 underline decoration-dotted underline-offset-4 group-hover:text-white/50 transition-colors"
-              >
-                {card.howLabel}
-              </a>
-            )}
-          </div>
+            <div class="mt-auto pt-2 flex items-end justify-between gap-3">
+              {clickable && (
+                <Tag
+                  href={card.href}
+                  target={card.href?.startsWith("http") ? "_blank" : undefined}
+                  rel={card.href?.startsWith("http") ? "noopener" : undefined}
+                  data-fact-open={card.modal ? "" : undefined}
+                  class="text-xs font-mono text-neutral-content inline-flex items-center gap-1 cursor-pointer transition-colors group-hover:text-white before:absolute before:inset-0 before:rounded-2xl before:content-['']"
+                >
+                  Explore
+                  <ArrowUpRight class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Tag>
+              )}
+              {card.how && (
+                <a
+                  href={card.how}
+                  class:list={[
+                    "ml-auto relative z-10 text-xs text-neutral-content/80 underline decoration-dotted underline-offset-4 transition-all hover:opacity-70",
+                    clickable && "group-hover:text-white/50"
+                  ]}
+                >
+                  {card.howLabel}
+                </a>
+              )}
+            </div>
+         
         </div>
         );
       })}
-
-      <div class="rounded-2xl border border-dashed border-base-300 p-5 flex flex-col gap-3 text-neutral-content">
-        <div class="flex items-start justify-between gap-3">
-          <Dices class="w-7 h-7 text-base-300" />
-          <span class="font-mono text-xs text-neutral-content/70">??</span>
-        </div>
-        <div>
-          <p class="font-display font-bold text-neutral-content/80">Next curiosity</p>
-          <p class="text-sm mt-1">
-            Other small diversions are quietly taking shape in the workshop. They will
-            land here as soon as they stop crashing.
-          </p>
-        </div>
-      </div>
     </div>
 
     <!-- The fact generator has no page of its own: it plays inside this dialog. -->
@@ -221,6 +265,25 @@ const cards = [
     });
   }
 
+  // Retired toys and the "Next curiosity" placeholder are shown by default;
+  // this toggles both away together.
+  function setupGraveyard() {
+    const btn = document.getElementById("graveyard-toggle") as HTMLButtonElement | null;
+    if (!btn) return;
+
+    const label = btn.querySelector(".toggle-label");
+    const graveyardItems = document.querySelectorAll<HTMLElement>("[data-graveyard-item]");
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.dataset.expanded !== "false";
+      const nextExpanded = !expanded;
+      graveyardItems.forEach((card) => (card.hidden = !nextExpanded));
+      btn.dataset.expanded = String(nextExpanded);
+      if (label) label.textContent = nextExpanded ? "Show only active experiments" : "Show all experiments";
+    });
+  }
+
   // Also fires on the first load, and again after every ClientRouter swap.
   document.addEventListener("astro:page-load", setupFacts);
+  document.addEventListener("astro:page-load", setupGraveyard);
 </script>

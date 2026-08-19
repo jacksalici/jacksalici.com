@@ -11,6 +11,11 @@ cta:
   - { url: "https://inventory.jacksalici.com", label: "Check the website" }
   - { url: "https://raw.githubusercontent.com/jacksalici/inventory-app/", label: "Check the code" }
 cover: "/uploads/inventory-app/screenshot3.png"
+playground:
+  link: "/projects/inventory-app/"
+  tagline: "A web app to manage your favorite RPG hero inventory. Killed by the discontinuity of Deta, the backend service I was using."
+  emoji: "🎒"
+  dead: 2024-10-01
 ---
 
 The Inventory App is a fast, open-source and 100% free way to track the equipment of your role-playing games characters.

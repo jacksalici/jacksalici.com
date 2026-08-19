@@ -7,6 +7,11 @@ news: Leaping Llama is my first Android 2D game, built with LibGDX and open sour
 categories: ["games"]
 stack: ["Java", "LibGDX"]
 cover: "/uploads/gameLogo.png"
+playground:
+  link: "/projects/leaping-llama/"
+  tagline: "An Android 2d game starring a llama that jumps and shots. Killed by Google Play when they closed my account for inactivity."
+  emoji: "🦙"
+  dead: 2024-01-01
 ---
 
 
