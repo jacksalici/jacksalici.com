@@ -7,6 +7,7 @@
 	--color-accent-3: #F24333;
 	--color-accent-4: #6f31eb;
 	--color-primary: #2B2825; /* shared dark end for the accent gradients */
+	--color-surface: #FFFFFF; /* elevated card surface, one step lighter than base-100 */
 	--color-base-100: #F8F8F8;
 	--color-base-200: #EBEBEB;
 	--color-base-300: #D6D6D6;
@@ -140,7 +141,7 @@ main {
 /* --- Homepage index rows --- */
 
 .search-input {
-	@apply w-full bg-white border border-base-300 rounded-lg px-4 py-2.5 text-sm transition-colors placeholder:text-neutral-content/70 focus:outline-none focus:border-base-content
+	@apply w-full bg-surface border border-base-300 rounded-lg px-4 py-2.5 text-sm transition-colors placeholder:text-neutral-content/70 focus:outline-none focus:border-base-content
 }
 
 /* Pagefind wraps the matched terms of an excerpt in <mark>, which needs a
@@ -151,7 +152,7 @@ main {
 
 /* Looks like a search field, acts as the button that opens the dialog. */
 .search-trigger {
-	@apply w-full flex items-center gap-2 cursor-pointer bg-white border border-base-300 rounded-lg px-4 py-2.5 text-sm text-neutral-content/80 transition-colors hover:border-base-content hover:text-base-content
+	@apply w-full flex items-center gap-2 cursor-pointer bg-surface border border-base-300 rounded-lg px-4 py-2.5 text-sm text-neutral-content/80 transition-colors hover:border-base-content hover:text-base-content
 }
 
 .search-dialog {
@@ -234,7 +235,7 @@ section[id] {
 /* A diagonal snapshot that straightens slightly on hover, or while its
    linked read-panel is open (toggle with the `data-reading` attribute). */
 .snapshot {
-	@apply bg-white p-[0.6rem_0.6rem_1.6rem] border border-base-200 rounded-[10px] rotate-[-4deg] shadow-[0_10px_26px_-16px_rgba(0,0,0,0.45)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:duration-[.01ms];
+	@apply bg-surface p-[0.6rem_0.6rem_1.6rem] border border-base-200 rounded-[10px] rotate-[-4deg] shadow-[0_10px_26px_-16px_rgba(0,0,0,0.45)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:duration-[.01ms];
 	@apply hover:rotate-[-1.5deg] hover:-translate-y-1 hover:shadow-[0_18px_34px_-18px_rgba(0,0,0,0.5)];
 	@apply data-[reading=true]:rotate-[-1.5deg] data-[reading=true]:-translate-y-1 data-[reading=true]:shadow-[0_18px_34px_-18px_rgba(0,0,0,0.5)]
 }

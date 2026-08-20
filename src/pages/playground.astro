@@ -99,7 +99,7 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
             card.dead
               ? "grayscale border-dashed border-base-300"
               : clickable
-                ? "bg-white hover:bg-linear-0 hover:from-accent-4 hover:to-white hover:to-40% hover:shadow-2xl border-neutral hover:border-accent-4"
+                ? "bg-surface hover:bg-linear-0 hover:from-accent-4 hover:to-surface hover:to-40% hover:shadow-2xl border-neutral hover:border-accent-4"
                 : "border-dashed border-base-300 text-neutral-content",
           ]}
           data-dead={card.dead ? "" : undefined}
@@ -136,7 +136,7 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
 
               <span class:list={[
                 "absolute left-0 bottom-0 grid place-items-center w-1/4 aspect-square rounded-tr-2xl z-30",
-                clickable && " bg-white border-2 border-white",
+                clickable && " bg-surface border-2 border-surface",
                 !clickable && "bg-base-100"
               ]}>
                 {card.icon ? (
