@@ -42,7 +42,8 @@ const projects = defineCollection({
 		stack: z.string().array().optional(), // Tech stack: languages, frameworks, tools
 		cta: z.array(z.object({ url: z.string(), label: z.string() })).optional(), // Call-to-action buttons
 		activities: z.string().array().optional(), // Link to related activities
-		playground: z.object({
+    playground: z.object({
+          title: z.string().optional(),
 					link: z.string(),
 					tagline: z.string().optional(), // Playful one-liner used on the card
 					emoji: z.string().optional(), // Card glyph, falls back to a dice

@@ -12,7 +12,7 @@ const toys = (await getCollection("projects"))
     const play = p.data.playground;
     const page = `/projects/${p.id}/`;
     return {
-      title: p.data.title,
+      title: play?.title ?? p.data.title,
       tagline: play?.tagline ?? p.data.description,
       emoji: play?.emoji ?? "🎲",
       icon: resolveImage(play?.icon),
