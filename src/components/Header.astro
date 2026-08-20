@@ -1,5 +1,5 @@
 ---
-import { Menu, Search as SearchIcon, Volume2, VolumeX } from "@lucide/astro";
+import { Menu, Search as SearchIcon, Volume2, VolumeX, Sun, Moon, SunMoon } from "@lucide/astro";
 
 // Publications and projects are sections of the homepage, not pages of their own.
 let links = [
@@ -81,6 +81,11 @@ if (pathname !== "/") {
         <span data-sound-icon-on><Volume2 size={18} stroke-width={1.75} /></span>
         <span data-sound-icon-off hidden><VolumeX size={18} stroke-width={1.75} /></span>
       </button>
+      <button type="button" class="icon-btn" data-theme-toggle aria-label="Theme: auto" data-cuelume-hover="tick" data-cuelume-press>
+        <span data-theme-icon-auto><SunMoon size={18} stroke-width={1.75} /></span>
+        <span data-theme-icon-light hidden><Sun size={18} stroke-width={1.75} /></span>
+        <span data-theme-icon-dark hidden><Moon size={18} stroke-width={1.75} /></span>
+      </button>
       <button type="button" class="icon-btn md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu" data-cuelume-press="scan">
         <Menu size={20} stroke-width={1.75} />
       </button>
@@ -107,6 +112,13 @@ if (pathname !== "/") {
 
 <script>
   import { isSoundEnabled, setSoundEnabled } from "../utils/sounds";
+  import { getStoredTheme, applyTheme, cycleTheme, type Theme } from "../utils/theme";
+
+  // View transitions swap in the new page's DOM (fetched via fetch(), so its inline <head>
+  // script never ran) before "astro:page-load" fires, which briefly shows the default theme
+  // until this reapplies the stored one. This script tag itself persists across transitions
+  // (Astro dedupes identical head scripts), so registering the listener once here is enough.
+  document.addEventListener("astro:after-swap", () => applyTheme(getStoredTheme()));
 
   function setupSoundToggle() {
     const btn = document.querySelector<HTMLButtonElement>("[data-sound-toggle]");
@@ -127,6 +139,33 @@ if (pathname !== "/") {
       const next = !isSoundEnabled();
       setSoundEnabled(next);
       render(next);
+    });
+  }
+
+  function setupThemeToggle() {
+    const btn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+    const autoIcon = btn?.querySelector<HTMLElement>("[data-theme-icon-auto]");
+    const lightIcon = btn?.querySelector<HTMLElement>("[data-theme-icon-light]");
+    const darkIcon = btn?.querySelector<HTMLElement>("[data-theme-icon-dark]");
+    if (!btn || !autoIcon || !lightIcon || !darkIcon) return;
+
+    const labels: Record<Theme, string> = {
+      auto: "Theme: auto",
+      light: "Theme: light",
+      dark: "Theme: dark",
+    };
+
+    function render(theme: Theme) {
+      btn!.setAttribute("aria-label", labels[theme]);
+      autoIcon!.hidden = theme !== "auto";
+      lightIcon!.hidden = theme !== "light";
+      darkIcon!.hidden = theme !== "dark";
+    }
+
+    render(getStoredTheme());
+
+    btn.addEventListener("click", () => {
+      render(cycleTheme());
     });
   }
 
@@ -221,5 +260,6 @@ if (pathname !== "/") {
     setupHeader();
     setupActiveLink();
     setupSoundToggle();
+    setupThemeToggle();
   });
 </script>

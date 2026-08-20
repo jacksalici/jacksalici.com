@@ -24,6 +24,14 @@ const indexable = props.noindex !== true && pathname !== "/404";
 <html lang="en" transition:animate="none">
 
   <head>
+    <script is:inline>
+      (function () {
+        var theme = localStorage.getItem("theme");
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.setAttribute("data-theme", theme);
+        }
+      })();
+    </script>
     <BaseHead title={props.title}
     description={props.description ?? props.summary}
     image={props.image ?? props.cover}

@@ -19,6 +19,48 @@
 	--font-display: 'Space Grotesk Variable', sans-serif;
 }
 
+:root {
+	color-scheme: light dark;
+}
+
+/* Dark theme: follows the OS preference by default. [data-theme] on <html>,
+   set by the navbar toggle (see utils/theme.ts), overrides that default in
+   either direction so an explicit choice always wins. */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--color-accent-1: #E0B000;
+		--color-accent-2: #2E86AB;
+		--color-accent-3: #C93527;
+		--color-accent-4: #5A27C2;
+		--color-surface: #262320;
+		--color-base-100: #1C1A17;
+		--color-base-200: #26221E;
+		--color-base-300: #3D3730;
+		--color-base-content: #F1EDE7;
+		--color-neutral: #37332D;
+		--color-neutral-content: #B6AFA5;
+	}
+}
+
+:root[data-theme="dark"] {
+	color-scheme: dark;
+	--color-accent-1: #C79A00;
+	--color-accent-2: #256B88;
+	--color-accent-3: #C93527;
+	--color-accent-4: #5A27C2;
+	--color-surface: #262320;
+	--color-base-100: #1C1A17;
+	--color-base-200: #26221E;
+	--color-base-300: #3D3730;
+	--color-base-content: #F1EDE7;
+	--color-neutral: #37332D;
+	--color-neutral-content: #B6AFA5;
+}
+
+:root[data-theme="light"] {
+	color-scheme: light;
+}
+
 @utility prose-js {
 	--tw-prose-body: var(--color-base-content);
 	--tw-prose-headings: var(--color-base-content);
@@ -283,4 +325,3 @@ mark{
 p a {
 	@apply underline hover:text-accent-1 transition-colors duration-100
 }
-
