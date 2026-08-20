@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PostCard from "../../components/PostCard.astro";
+import EntryList from "../../components/EntryList.astro";
+import EntryRow from "../../components/EntryRow.astro";
 
 import { getCollection } from 'astro:content';
 
@@ -25,21 +26,17 @@ const products = (await getCollection('market')).sort(
       <p>🇺🇸 From time to time I look for new owners for some hardware I have used and loved. If you are interested, <a href="/contacts" class="underline">contact me</a>.</p>
     </div>
 
-    <div class="space-y-4">
+    <EntryList>
         {products.map((item) => (
-            
-          <PostCard
+          <EntryRow
+            href={"/market/" + item.id}
             title={item.data.title}
             description={item.data.description}
-            summary={item.data.status === "sold" ? "[SOLD]" : ""}
-            pubDate={item.data.pubDate}
-            slug={"/market/" + item.id}
-            unavailable={item.data.status === "sold"}
+            date={item.data.pubDate}
+            meta={item.data.status === "sold" ? "SOLD" : undefined}
           />
-            
-        ))} 
-        
-    </div>
+        ))}
+    </EntryList>
     
   </main>
 </Base>

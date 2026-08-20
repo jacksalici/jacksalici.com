@@ -120,11 +120,6 @@ main {
 	@apply bg-base-100 border border-base-300/60 rounded-2xl
 }
 
-.card-hover {
-	@apply transition-colors duration-150 hover:border-base-content/30
-}
-
-
 .section-label {
 	@apply text-xs uppercase text-accent-3 font-mono flex items-center gap-3 mb-4
 }
