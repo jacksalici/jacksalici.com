@@ -22,7 +22,7 @@ const { href, title, meta, date, description, search, hidden, activities } = Ast
 ---
 
 <li class="entry" data-search={search?.toLowerCase()} data-activities={activities?.join(" ")} hidden={hidden}>
-	<a href={href} class="list-row" data-cuelume-hover="tick" data-cuelume-press>
+	<a href={href} class="list-row" data-cuelume-hover="tick" data-cuelume-press data-haptic-press="light">
 		<span class="min-w-0 flex-1">
 			{(meta || date) && <span class="text-xs font-mono text-neutral-content/70">
 

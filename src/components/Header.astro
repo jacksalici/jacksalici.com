@@ -31,7 +31,7 @@ if (pathname !== "/") {
 
 <header class="w-full" data-header>
   <div class="container mx-auto p-4 md:p-5 md:px-12 md:max-w-4xl flex items-center gap-4">
-    <a href="/" aria-label="Logo of Jack" class="max-w-fit shrink-0" data-cuelume-press="whisper" data-cuelume-hover="tick" data-cuelume-release="sparkle">
+    <a href="/" aria-label="Logo of Jack" class="max-w-fit shrink-0" data-cuelume-press="whisper" data-cuelume-hover="tick" data-cuelume-release="sparkle" data-haptic-press="error">
       <svg
         id="logo"
         class="max-h-8 w-10 transition-fill fill-base-content group"
@@ -74,19 +74,19 @@ if (pathname !== "/") {
     </nav>
 
     <div class="ml-auto md:ml-0 flex items-center gap-1">
-        <button type="button" class="icon-btn" data-search-open aria-label="Search" data-cuelume-press="bloom" data-cuelume-hover="tick">
+        <button type="button" class="icon-btn" data-search-open aria-label="Search" data-cuelume-press="bloom" data-cuelume-hover="tick" data-haptic-press="light">
         <SearchIcon size={18} stroke-width={1.75} />
       </button>
-      <button type="button" class="icon-btn" data-sound-toggle aria-label="Mute sound" aria-pressed="false" data-cuelume-hover="tick" data-cuelume-press>
+      <button type="button" class="icon-btn" data-sound-toggle aria-label="Mute sound" aria-pressed="false" data-cuelume-hover="tick" data-cuelume-press data-haptic-toggle="selection">
         <span data-sound-icon-on><Volume2 size={18} stroke-width={1.75} /></span>
         <span data-sound-icon-off hidden><VolumeX size={18} stroke-width={1.75} /></span>
       </button>
-      <button type="button" class="icon-btn" data-theme-toggle aria-label="Theme: auto" data-cuelume-hover="tick" data-cuelume-press>
+      <button type="button" class="icon-btn" data-theme-toggle aria-label="Theme: auto" data-cuelume-hover="tick" data-cuelume-press data-haptic-toggle="selection">
         <span data-theme-icon-auto><SunMoon size={18} stroke-width={1.75} /></span>
         <span data-theme-icon-light hidden><Sun size={18} stroke-width={1.75} /></span>
         <span data-theme-icon-dark hidden><Moon size={18} stroke-width={1.75} /></span>
       </button>
-      <button type="button" class="icon-btn md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu" data-cuelume-press="scan">
+      <button type="button" class="icon-btn md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu" data-cuelume-press="scan" data-haptic-press="light">
         <Menu size={20} stroke-width={1.75} />
       </button>
     </div>
@@ -102,6 +102,7 @@ if (pathname !== "/") {
           class:list={{ "nav-link--playground": link.href === "/playground" }}
           aria-current={isActive(link.href) ? "page" : undefined}
           data-cuelume-press
+          data-haptic-press="light"
         >
           {link.label}
         </a>

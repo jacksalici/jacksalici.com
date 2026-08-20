@@ -58,7 +58,7 @@ const indexable = props.noindex !== true && pathname !== "/404";
     </div>
     {props.hideFooter !== true &&
     <footer class="mt-auto p-4 text-neutral group select-none">
-      <p class="md:text-center mb-1 text-xs *:inline flex items-center justify-center gap-1" data-cuelume-release="error">
+      <p class="md:text-center mb-1 text-xs *:inline flex items-center justify-center gap-1" data-cuelume-release="error" data-haptic-press="error">
         2013 - {today.getFullYear()} &copy; Giacomo Salici. Digital craftsman, creative AI engineer. <nobr>Made with <Heart class="inline w-4 h-4 mb-1" /> and <Pizza class="inline w-4 h-4 mb-1" /> on <Earth class="inline w-4 h-4 mb-1" />.</nobr>
       </p>
     </footer>
@@ -68,7 +68,9 @@ const indexable = props.noindex !== true && pathname !== "/404";
   <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
   <script>
     import { initSounds } from "../utils/sounds";
+    import { bindHaptics } from "../utils/haptics";
     initSounds();
+    bindHaptics();
   </script>
   </body>
 </html>
