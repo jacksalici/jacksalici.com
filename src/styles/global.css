@@ -272,7 +272,7 @@ section[id] {
 /* A diagonal snapshot that straightens slightly on hover, or while its
    linked read-panel is open (toggle with the `data-reading` attribute). */
 .snapshot {
-	@apply bg-surface p-[0.6rem_0.6rem_1.6rem] border border-base-200 rounded-[10px] rotate-[-4deg] shadow-[0_10px_26px_-16px_rgba(0,0,0,0.45)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:duration-[.01ms];
+	@apply bg-surface p-[0.6rem_0.6rem_0] border border-base-200 rounded-[10px] rotate-[-4deg] shadow-[0_10px_26px_-16px_rgba(0,0,0,0.45)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:duration-[.01ms];
 	@apply hover:rotate-[-1.5deg] hover:-translate-y-1 hover:shadow-[0_18px_34px_-18px_rgba(0,0,0,0.5)];
 	@apply data-[reading=true]:rotate-[-1.5deg] data-[reading=true]:-translate-y-1 data-[reading=true]:shadow-[0_18px_34px_-18px_rgba(0,0,0,0.5)]
 }
