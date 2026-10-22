@@ -37,10 +37,6 @@ On my own recordings, the cane counts steps with 92.9% accuracy.
 
 The second question we addressed is whether the cane can say something about *how* a person walks, not only *how much*. We trained a small convolutional autoencoder exclusively on normal walking and used its reconstruction error as an anomaly score. On the same recordings, it flags abnormal gait with 98.7% AUPRC under session-level cross-validation. Without access to any class labels, the score also orders the types of gait problems (unsteadiness, tremors, falls) by how strongly they distort the signal.
 
-## Limitations and next steps
-
-The dataset is small and comes from a single participant, so these results should be read as a proof of concept rather than as a validated clinical tool. Extending the recordings to more people is the obvious next step. The direction I find most promising is temporal: checking whether the anomaly score rises *before* a fall, which would turn the cane from a monitoring device into an early-warning one.
-
 ## Open resources
 
 Hardware design, firmware, code and data are openly available at [cane.jacksalici.com](https://cane.jacksalici.com).
