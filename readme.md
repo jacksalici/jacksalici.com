@@ -32,7 +32,7 @@ All commands are run from the root of the project, from a terminal:
 | `bun run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `bun run astro -- --help` | Get help using the Astro CLI                     |
 
-Once the edits have been made, *just push the commits*: Netlify will build the website, update the `publish` folder and host it.
+Once the edits have been made, *just push the commits*: Vercel will build the website and host it.
 
 ## Changelog 🕰️
 

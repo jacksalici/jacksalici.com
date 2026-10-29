@@ -5,6 +5,7 @@ import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 
 import { Pizza, Heart, Earth } from '@lucide/astro';
+import Analytics from '@vercel/analytics/astro';
 
 
 import BaseHead from "../components/BaseHead.astro";
@@ -64,8 +65,7 @@ const indexable = props.noindex !== true && pathname !== "/404";
     </footer>
     }
 
-  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+  <Analytics />
   <script>
     import { initSounds } from "../utils/sounds";
     import { bindHaptics } from "../utils/haptics";

@@ -1,7 +1,7 @@
 ---
 title: "Is my website's style to my taste?"
 pubDate: 2023-02-02
-updatedDate: 2025-12-30
+updatedDate: 2026-10-26
 slug: website
 description: "I rebuild this website too often."
 summary: "A brief overview of the major versions of my personal website and the reasons behind my choices."
@@ -30,7 +30,7 @@ Finally, it's very fast. Faster than Hugo, actually (I got a +3% on PageSpeed In
 
 The entire source code of the website is open source and available on [this](https://github.com/jacksalici/jacksalici.com) GitHub repository.
 
-Since the website is static, it's really good both in performance and lightweightness, and moreover, it makes it possible to pay nothing for hosting (the whole thing is hosted on _Netlify_). The only expense I'm in charge of is the domain, which I have bought from _Cloudflare_ for a few dollars per year.
+Since the website is static, it's really good both in performance and lightweightness, and moreover, it makes it possible to pay nothing for hosting (the whole thing was hosted on _Netlify_ until October 2026, when I moved it to _Vercel_). The only expense I'm in charge of is the domain, which I have bought from _Cloudflare_ for a few dollars per year.
 
 I also added some easter eggs that no one will ever notice, so if you are curious, look for a 404 error for one instance of my broken humor...
 
@@ -41,7 +41,7 @@ The theme also uses some _Google Symbols_ and _Font Awesome_ icons, both importe
 
 Just looking at [these](/p/emojipoll/) [projects](/p/emoji-list-api/), you know that I also like emojis, but normally, they change according to the operating system where they are read. So, for a long time, I've applied the _Tweemoji_ (open-source Twitter Emoji) library to be sure to get the same emoji experience on all devices, but when I rebuilt the website in Astro, I decided to drop that for the sake of performance (the change is not a big deal, but PageSpeed waits for no man). At the same time, the theme also uses some _Google Symbols_ and _Font Awesome_ icons, both imported directly as SVGs, and the fonts I use are all in local. Without any external script, I achieved the perfomances you have seen at the begin of the article.  -->
 
-Since September 2024, I use [Simple Analytics](https://www.simpleanalytics.com/) to see how many of you read my gibberish posts. 
+From September 2024 to October 2026, I used [Simple Analytics](https://www.simpleanalytics.com/) to see how many of you read my gibberish posts. 
  > Simple Analytics is a privacy-friendly and simple alternative to Google Analytics. No cookies. No trackers. No consent required from your visitors. Just straightforward analytics. [...] Built and hosted in the EU 🇪🇺, we believe in an internet that is friendly to website visitors.
 
-
+Since October 2026, together with the move to Vercel, I switched to [Vercel Web Analytics](https://vercel.com/docs/analytics), which is built into the hosting and, like its predecessor, works without cookies.
