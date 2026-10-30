@@ -68,7 +68,7 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
 >
   <main>
     <p class="eyebrow mb-3 text-accent-4!">Playground</p>
-    <h1 class="text-3xl md:text-4xl font-display font-bold mb-4 text-balance">
+    <h1 class="text-4xl md:text-5xl mb-4 text-balance">
       A drawer of <span class="italic text-accent-4">things that play back</span>.
     </h1>
     <p class="max-w-2xl text-neutral-content mb-8">
@@ -170,7 +170,7 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
                   target={card.href?.startsWith("http") ? "_blank" : undefined}
                   rel={card.href?.startsWith("http") ? "noopener" : undefined}
                   data-fact-open={card.modal ? "" : undefined}
-                  class="text-xs font-mono text-neutral-content inline-flex items-center gap-1 cursor-pointer transition-colors group-hover:text-white before:absolute before:inset-0 before:rounded-2xl before:content-['']"
+                  class="text-xs text-neutral-content inline-flex items-center gap-1 cursor-pointer transition-colors group-hover:text-white before:absolute before:inset-0 before:rounded-2xl before:content-['']"
                   data-cuelume-hover="sparkle"
                   data-cuelume-press
                   data-haptic-press="light"

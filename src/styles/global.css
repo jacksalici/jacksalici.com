@@ -11,12 +11,12 @@
 	--color-base-100: #F8F8F8;
 	--color-base-200: #EBEBEB;
 	--color-base-300: #D6D6D6;
-	--color-base-content: #423E3B;
+	--color-base-content: #252220;
 	--color-neutral: #D8D8D8;
-	--color-neutral-content: #615B56;
-	--font-mono: 'Space Mono', monospace;
+	--color-neutral-content: #5C5752;
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, monospace; /* code only */
 	--font-sans: 'InterVariable', sans-serif;
-	--font-display: 'Space Grotesk Variable', sans-serif;
+	--font-display: 'InterVariable', sans-serif;
 }
 
 :root {
@@ -36,7 +36,7 @@
 		--color-base-100: #1C1A17;
 		--color-base-200: #26221E;
 		--color-base-300: #3D3730;
-		--color-base-content: #F1EDE7;
+		--color-base-content: #F7F5F2;
 		--color-neutral: #37332D;
 		--color-neutral-content: #B6AFA5;
 	}
@@ -52,7 +52,7 @@
 	--color-base-100: #1C1A17;
 	--color-base-200: #26221E;
 	--color-base-300: #3D3730;
-	--color-base-content: #F1EDE7;
+	--color-base-content: #F7F5F2;
 	--color-neutral: #37332D;
 	--color-neutral-content: #B6AFA5;
 }
@@ -121,19 +121,25 @@ html{
 pre,
 code,
 kbd {
-	font-family: 'Space Mono', monospace;
+	font-family: var(--font-mono);
 }
 
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.font-display {
-	font-family: 'Space Grotesk Variable', sans-serif;
-	font-weight: 800;
+/* In the base layer so utilities on a heading (e.g. `font-medium`) can
+   override it. */
+@layer base {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	.font-display {
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		line-height: 1.1;
+		color: var(--color-base-content);
+	}
 }
 
 img.emoji {
@@ -155,7 +161,7 @@ main {
 /* --- Minimal card system --- */
 
 .eyebrow {
-	@apply text-xs uppercase text-neutral-content font-mono
+	@apply text-xs font-medium text-neutral-content
 }
 
 .card {
@@ -163,16 +169,7 @@ main {
 }
 
 .section-label {
-	@apply text-xs uppercase text-accent-3 font-mono flex items-center gap-3 mb-4
-}
-
-.section-num {
-	@apply text-accent-3 mr-2 tabular-nums
-}
-
-.section-label::after {
-	content: "";
-	@apply flex-1 h-px bg-accent-3
+	@apply text-sm font-semibold text-base-content mb-4
 }
 
 /* --- Homepage index rows --- */
@@ -229,7 +226,7 @@ section[id] {
 }
 
 .list-meta {
-	@apply shrink-0 text-xs text-neutral-content font-mono pt-0.5 flex items-center gap-2
+	@apply shrink-0 text-xs text-neutral-content tabular-nums pt-0.5 flex items-center gap-2
 }
 
 /* Arrow slides out of the meta column as the row is hovered. */
@@ -291,11 +288,11 @@ section[id] {
 /* The front face of an activity card, lit up permanently while selected
    (an ancestor card carries `aria-pressed="true"`). */
 .face {
-	@apply absolute inset-0 rounded-xl overflow-hidden bg-base-200 hover:bg-accent-3 duration-300 transition-all in-aria-pressed:bg-accent-3
+	@apply absolute inset-0 rounded-xl overflow-hidden bg-base-200 hover:bg-base-content duration-300 transition-all in-aria-pressed:bg-base-content
 }
 
 .face-content {
-	@apply relative h-full flex flex-col justify-end p-5 md:p-6 text-neutral-content hover:text-white duration-300 transition-all in-aria-pressed:text-white
+	@apply relative h-full flex flex-col justify-end p-5 md:p-6 text-base-content hover:text-base-100 duration-300 transition-all in-aria-pressed:text-base-100
 }
 
 .btn-outline {

@@ -2,7 +2,7 @@
 import Base from "./Base.astro";
 
 const { frontmatter } = Astro.props;
-const titleClass = frontmatter.title.length > 50 ? 'text-4xl' : 'text-5xl';
+const titleClass = frontmatter.title.length > 50 ? 'text-5xl' : 'text-6xl';
 
 ---
 
@@ -24,7 +24,7 @@ const titleClass = frontmatter.title.length > 50 ? 'text-4xl' : 'text-5xl';
 
 
     <div class="mt-5 mb-10 text-center">
-      <h1 class={`${titleClass} text-balance font-display font-bold`}>{frontmatter.title}</h1>
+      <h1 class={`${titleClass} text-balance`}>{frontmatter.title}</h1>
     </div>
 
 

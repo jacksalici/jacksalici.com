@@ -22,7 +22,7 @@ import { X } from "@lucide/astro";
     </button>
   </div>
 
-  <p data-search-status class="text-xs font-mono text-neutral-content mt-3" hidden></p>
+  <p data-search-status class="text-xs text-neutral-content mt-3" hidden></p>
   <ul data-search-results class="entry-list flex flex-col mt-1"></ul>
 </dialog>
 
@@ -79,7 +79,7 @@ import { X } from "@lucide/astro";
     body.className = "min-w-0 flex-1";
 
     const kind = document.createElement("span");
-    kind.className = "text-xs font-mono text-accent-3";
+    kind.className = "text-xs font-medium text-neutral-content";
     kind.textContent = typeOf(data.url);
 
     const title = document.createElement("span");
