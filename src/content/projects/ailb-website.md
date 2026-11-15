@@ -2,7 +2,7 @@
 title: "AImageLab website"
 pubDate: 2026-03-13
 description: Our new fullstack website for the AImageLab project.
-news: The AImageLab new website is live!
+news: The new AImageLab website is live, a Django site we built that pulls our publications in from IRIS automatically.
 categories: ["web"]
 activities: ["coding-web-apps"]
 stack: ["Django", "Tailwind CSS"]

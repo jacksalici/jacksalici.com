@@ -1,5 +1,5 @@
 ---
-title: TSA & Anomaly Detection
+title: Time series analysis and anomaly detection for industry
 kicker: Industrial projects
 order: 3
 pubDate: 2026-06-01

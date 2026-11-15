@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import { imageUrl, isOptimizable, resolveImage } from "../utils/images";
-import { ArrowUpRight, RefreshCw, X } from "@lucide/astro";
+import { RefreshCw, X } from "@lucide/astro";
 import Base from "../layouts/Base.astro";
 
 const toys = (await getCollection("projects"))
@@ -31,6 +31,7 @@ const deadToys = toys.filter((t) => t.dead).sort((a, b) => b.dead!.valueOf() - a
 
 type Card = (typeof toys)[number];
 
+// The fact generator has no project page: it plays inside a dialog on this page.
 const randomFactCard: Card = {
   title: "Random Fact Generator",
   tagline: "One unverified truth per reload. Refresh until you find one worth repeating.",
@@ -45,21 +46,14 @@ const randomFactCard: Card = {
   dead: undefined,
 };
 
-const nextCuriosityCard: Card = {
-  title: "Next curiosity",
-  tagline: "Other small diversions are quietly taking shape in the workshop. They will land here as soon as they stop crashing.",
-  emoji: "🎲",
-  icon: undefined,
-  cover: undefined,
-  href: undefined,
-  how: undefined,
-  howLabel: "How it works",
-  modal: false,
-  pubDate: undefined,
-  dead: undefined,
-};
-
-const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
+const sections = [
+  { label: undefined, note: undefined, cards: [...livingToys, randomFactCard] },
+  {
+    label: "Retired",
+    note: "No longer running. Their write-ups are still here.",
+    cards: deadToys,
+  },
+].filter((section) => section.cards.length > 0);
 ---
 
 <Base
@@ -68,133 +62,85 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
 >
   <main>
     <p class="eyebrow mb-3 text-accent-4!">Playground</p>
-    <h1 class="text-4xl md:text-5xl mb-4 text-balance">
-      A drawer of <span class="italic text-accent-4">things that play back</span>.
+    <h1 class="page-title">
+      A drawer of things that play back.
     </h1>
-    <p class="max-w-2xl text-neutral-content mb-8">
+    <p class="page-lead">
       Small toys built for the pleasure of building them: no sign-up, no purpose, no
       roadmap. Open one, poke at it, close the tab. No continuity guarantee.
     </p>
 
-    {deadToys.length > 0 && (
-      <div class="flex justify-end mb-4">
-        <button type="button" id="graveyard-toggle" data-expanded="true" class="toggle-btn" data-cuelume-toggle data-haptic-toggle="selection">
-          <span class="toggle-label">Show only active toys</span>
-        </button>
-      </div>
-    )}
+    {sections.map((section) => (
+      <section class="mt-12">
+        {section.label && <p class="section-label mb-1!">{section.label}</p>}
+        {section.note && <p class="text-sm text-neutral-content mb-5">{section.note}</p>}
 
-    <div class="grid gap-4 sm:grid-cols-2">
-      {cards.map((card) => {
-        const clickable = !card.dead && (card.modal || !!card.href);
-        const Tag = card.modal ? "button" : clickable ? "a" : "div";
-        const imageClass = [
-          "w-full h-full object-cover rounded-none transform-gpu transition-[transform,filter] duration-700! ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-          clickable ? "group-hover:blur-md" : "opacity-20",
-        ].join(" ");
-        return (
-        <div
-          class:list={[
-            "group relative rounded-2xl p-5 flex flex-col gap-3 border transition duration-500 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-            card.dead
-              ? "grayscale border-dashed border-base-300"
-              : clickable
-                ? "bg-surface hover:bg-linear-0 hover:from-accent-4 hover:to-surface hover:to-40% hover:shadow-2xl border-neutral hover:border-accent-4"
-                : "border-dashed border-base-300 text-neutral-content",
-          ]}
-          data-dead={card.dead ? "" : undefined}
-          data-graveyard-item={card.dead || card === nextCuriosityCard ? "" : undefined}
-        >
-            <div class="relative -m-1 mb-0 rounded-xl rounded-bl-none overflow-hidden aspect-3/1">
-              {card.cover && (
-                !isOptimizable(card.cover) ? (
-                  <img
-                    src={imageUrl(card.cover)}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    class={imageClass}
-                  />
-                ) : (
-                  <Image
-                    src={card.cover}
-                    alt=""
-                    width={760}
-                    densities={[1, 2]}
-                    loading="lazy"
-                    decoding="async"
-                    class={imageClass}
-                  />
-                )
-              )}
+        <div class="grid gap-x-6 gap-y-10 sm:grid-cols-2">
+          {section.cards.map((card) => {
+            const playable = !card.dead && (card.modal || !!card.href);
+            const external = card.href?.startsWith("http");
+            const Action = card.modal ? "button" : "a";
+            const imageClass = [
+              "w-full h-full object-cover rounded-none",
+              playable && "transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none",
+              card.dead && "grayscale",
+            ];
+            return (
+              <article class="toy group">
+                <div class="toy-media">
+                  {card.cover ? (
+                    !isOptimizable(card.cover) ? (
+                      <img src={imageUrl(card.cover)} alt="" loading="lazy" decoding="async" class:list={imageClass} />
+                    ) : (
+                      <Image src={card.cover} alt="" width={760} densities={[1, 2]} loading="lazy" decoding="async" class:list={imageClass} />
+                    )
+                  ) : (
+                    <span class="text-6xl leading-none" aria-hidden="true">{card.emoji}</span>
+                  )}
+                </div>
 
-              {card.dead && card.pubDate && (
-                <span class="absolute top-2 right-2 z-30 rounded-full bg-base-content text-base-100 px-2.5 py-1 text-xs shadow-lg">
-                  {card.pubDate.getFullYear()}-{card.dead.getFullYear()}
-                </span>
-              )}
+                <div class="mt-4 flex items-baseline gap-2">
+                  {card.icon ? (
+                    <img src={imageUrl(card.icon)} alt="" loading="lazy" decoding="async" class="size-5 self-center object-contain rounded-none" />
+                  ) : (
+                    card.cover && <span aria-hidden="true">{card.emoji}</span>
+                  )}
+                  <h2 class="text-lg tracking-normal">{card.title}</h2>
+                  {card.dead && card.pubDate && (
+                    <span class="ml-auto shrink-0 text-xs tabular-nums text-neutral-content">
+                      {[...new Set([card.pubDate.getFullYear(), card.dead.getFullYear()])].join("–")}
+                    </span>
+                  )}
+                </div>
 
-              <span class:list={[
-                "absolute left-0 bottom-0 grid place-items-center w-1/4 aspect-square rounded-tr-2xl z-30",
-                clickable && " bg-surface border-2 border-surface",
-                !clickable && "bg-base-100"
-              ]}>
-                {card.icon ? (
-                  <img
-                    src={imageUrl(card.icon)}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    class="w-9/12 object-contain rounded-none"
-                  />
-                ) : (
-                  <span class="text-5xl leading-none">{card.emoji}</span>
-                )}
-              </span>
-            </div>
-          <div>
-            <h3 class:list={["text-xl text-base-content transition-colors", clickable && "group-hover:text-accent-4"]}>
-              {card.title}
-            </h3>
-            {card.tagline && (
-              <p class:list={["text-neutral-content mt-1", clickable && "group-hover:text-accent-4"]}>
-                {card.tagline}
-              </p>
-            )}
-          </div>
+                {card.tagline && <p class="mt-1 text-sm text-neutral-content">{card.tagline}</p>}
 
-            <div class="mt-auto pt-2 flex items-end justify-between gap-3">
-              {clickable && (
-                <Tag
-                  href={card.href}
-                  target={card.href?.startsWith("http") ? "_blank" : undefined}
-                  rel={card.href?.startsWith("http") ? "noopener" : undefined}
-                  data-fact-open={card.modal ? "" : undefined}
-                  class="text-xs text-neutral-content inline-flex items-center gap-1 cursor-pointer transition-colors group-hover:text-white before:absolute before:inset-0 before:rounded-2xl before:content-['']"
-                  data-cuelume-hover="sparkle"
-                  data-cuelume-press
-                  data-haptic-press="light"
-                >
-                  Explore
-                  <ArrowUpRight class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Tag>
-              )}
-              {card.how && (
-                <a
-                  href={card.how}
-                  class:list={[
-                    "ml-auto relative z-10 text-xs text-neutral-content/80 underline decoration-dotted underline-offset-4 transition-all hover:opacity-70",
-                    clickable && "group-hover:text-white/50"
-                  ]}
-                >
-                  {card.howLabel}
-                </a>
-              )}
-            </div>
+                <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                  {playable && (
+                    <Action
+                      type={card.modal ? "button" : undefined}
+                      href={card.href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener" : undefined}
+                      data-fact-open={card.modal ? "" : undefined}
+                      class="toy-action"
+                      data-haptic-press="light"
+                    >
+                      {card.modal ? "Draw a fact" : "Play"}&nbsp;↗
+                    </Action>
+                  )}
+                  {card.how && <a href={card.how} class="nav-link relative z-10">{card.howLabel}</a>}
+                </div>
+              </article>
+            );
+          })}
         </div>
-        );
-      })}
-    </div>
+      </section>
+    ))}
+
+    <p class="mt-16 max-w-2xl text-sm text-neutral-content">
+      Other small diversions are quietly taking shape in the workshop. They will land here as soon as they stop crashing.
+    </p>
 
     <!-- The fact generator has no page of its own: it plays inside this dialog. -->
     <dialog id="fact-dialog" class="search-dialog" aria-label="Random fact">
@@ -273,25 +219,6 @@ const cards = [...livingToys, randomFactCard, nextCuriosityCard, ...deadToys];
     });
   }
 
-  // Retired toys and the "Next curiosity" placeholder are shown by default;
-  // this toggles both away together.
-  function setupGraveyard() {
-    const btn = document.getElementById("graveyard-toggle") as HTMLButtonElement | null;
-    if (!btn) return;
-
-    const label = btn.querySelector(".toggle-label");
-    const graveyardItems = document.querySelectorAll<HTMLElement>("[data-graveyard-item]");
-
-    btn.addEventListener("click", () => {
-      const expanded = btn.dataset.expanded !== "false";
-      const nextExpanded = !expanded;
-      graveyardItems.forEach((card) => (card.hidden = !nextExpanded));
-      btn.dataset.expanded = String(nextExpanded);
-      if (label) label.textContent = nextExpanded ? "Show only active toys" : "Show all toys";
-    });
-  }
-
   // Also fires on the first load, and again after every ClientRouter swap.
   document.addEventListener("astro:page-load", setupFacts);
-  document.addEventListener("astro:page-load", setupGraveyard);
 </script>

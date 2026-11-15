@@ -46,7 +46,7 @@ export async function getNews(): Promise<NewsItem[]> {
       collection: "notes" as const,
       kind: "notes" as const,
       href: "/notes/" + note.id,
-      title: note.data.title ?? note.id,
+      title: note.data.news ?? note.data.title ?? note.id,
       date: note.data.pubDate,
     })),
   ];

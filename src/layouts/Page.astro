@@ -2,7 +2,6 @@
 import Base from "./Base.astro";
 
 const { frontmatter } = Astro.props;
-const titleClass = frontmatter.title.length > 50 ? 'text-5xl' : 'text-6xl';
 
 ---
 
@@ -23,23 +22,15 @@ const titleClass = frontmatter.title.length > 50 ? 'text-5xl' : 'text-6xl';
   <main>
 
 
-    <div class="mt-5 mb-10 text-center">
-      <h1 class={`${titleClass} text-balance`}>{frontmatter.title}</h1>
+    <div class="w-full mb-12">
+      <h1 class="page-title">{frontmatter.title}</h1>
+      {frontmatter.summary && <p class="page-lead">{frontmatter.summary}</p>}
     </div>
 
-
-    <div
-    class="prose mb-10 prose-img:mx-auto prose-js"
-  >
-  {
-    frontmatter.summary &&
-    <div class="card text-xl p-5 mb-8">
-      {frontmatter.summary}
-    </div>
-  }
+    <div class="prose prose-js font-body mb-10 prose-img:mx-auto max-w-none">
   {
     frontmatter.translateLink &&
-    <div class="text-xs text-neutral-content opacity-50 not-prose mb-8">
+    <div class="text-xs text-muted not-prose mb-8">
       <span class="inline-block !leading-none">English is not your strongest language?</span>
       <span class="inline-block !leading-none">🇮🇹 Read the machine-translated <a class="underline" href={"https://jacksalici-com.translate.goog" + frontmatter.url + "/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp"}> Italian version</a>.</span>
       </div>

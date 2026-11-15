@@ -1,5 +1,5 @@
 ---
-title: Research on Modular Deep Learning
+title: "Modular deep learning: reusing and merging pre-trained models"
 kicker: Research projects
 order: 2
 pubDate: 2026-04-30

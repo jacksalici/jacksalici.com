@@ -8,12 +8,13 @@
 	--color-accent-4: #6f31eb;
 	--color-primary: #2B2825; /* shared dark end for the accent gradients */
 	--color-surface: #FFFFFF; /* elevated card surface, one step lighter than base-100 */
-	--color-base-100: #F8F8F8;
-	--color-base-200: #EBEBEB;
-	--color-base-300: #D6D6D6;
-	--color-base-content: #252220;
+	--color-base-100: #FFFFFF;
+	--color-base-200: #F0F0F0;
+	--color-base-300: #CFCFCF;
+	--color-base-content: #111111;
 	--color-neutral: #D8D8D8;
-	--color-neutral-content: #5C5752;
+	--color-neutral-content: #474340; /* secondary text */
+	--color-muted: #8C8782; /* faintest text: footer, placeholders */
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, monospace; /* code only */
 	--font-sans: 'InterVariable', sans-serif;
 	--font-display: 'InterVariable', sans-serif;
@@ -32,13 +33,14 @@
 		--color-accent-2: #2E86AB;
 		--color-accent-3: #C93527;
 		--color-accent-4: #5A27C2;
-		--color-surface: #262320;
-		--color-base-100: #1C1A17;
-		--color-base-200: #26221E;
-		--color-base-300: #3D3730;
-		--color-base-content: #F7F5F2;
+		--color-surface: #1A1917;
+		--color-base-100: #0E0D0C;
+		--color-base-200: #1E1C1A;
+		--color-base-300: #44403A;
+		--color-base-content: #FFFFFF;
 		--color-neutral: #37332D;
-		--color-neutral-content: #B6AFA5;
+		--color-neutral-content: #CFC9C0;
+		--color-muted: #7F7972;
 	}
 }
 
@@ -48,13 +50,14 @@
 	--color-accent-2: #256B88;
 	--color-accent-3: #C93527;
 	--color-accent-4: #5A27C2;
-	--color-surface: #262320;
-	--color-base-100: #1C1A17;
-	--color-base-200: #26221E;
-	--color-base-300: #3D3730;
-	--color-base-content: #F7F5F2;
+	--color-surface: #1A1917;
+	--color-base-100: #0E0D0C;
+	--color-base-200: #1E1C1A;
+	--color-base-300: #44403A;
+	--color-base-content: #FFFFFF;
 	--color-neutral: #37332D;
-	--color-neutral-content: #B6AFA5;
+	--color-neutral-content: #CFC9C0;
+	--color-muted: #7F7972;
 }
 
 :root[data-theme="light"] {
@@ -110,7 +113,7 @@ html{
 
 :root {
   font-family: Inter, sans-serif;
-  font-feature-settings: 'liga' 1, 'calt' 1, 'ss02' 1, 'ss03' 1; /* fix for Chrome */
+  font-feature-settings: 'liga' 1, 'calt' 1, 'ss03' 1; /* fix for Chrome */
 
 
 
@@ -154,10 +157,6 @@ main {
 	@apply container p-4 md:p-5 md:px-12 md:max-w-4xl mx-auto
 }
 
-.opacityOnHover {
-	@apply opacity-50 hover:opacity-100 transition-opacity
-}
-
 /* --- Minimal card system --- */
 
 .eyebrow {
@@ -168,14 +167,24 @@ main {
 	@apply bg-base-100 border border-base-300/60 rounded-2xl
 }
 
+/* Shared page header: every page opens with an optional .eyebrow, a
+   .page-title and a .page-lead, in that order. */
+.page-title {
+	@apply text-4xl md:text-5xl text-balance max-w-3xl
+}
+
+.page-lead {
+	@apply mt-4 text-lg md:text-xl leading-relaxed text-neutral-content max-w-2xl
+}
+
 .section-label {
-	@apply text-sm font-semibold text-base-content mb-4
+	@apply text-xl md:text-2xl font-semibold tracking-tight text-base-content mb-4
 }
 
 /* --- Homepage index rows --- */
 
 .search-input {
-	@apply w-full bg-surface border border-base-300 rounded-lg px-4 py-2.5 text-sm transition-colors placeholder:text-neutral-content/70 focus:outline-none focus:border-base-content
+	@apply w-full bg-surface border border-base-300 rounded-lg px-4 py-2.5 text-sm transition-colors placeholder:text-muted focus:outline-none focus:border-base-content
 }
 
 /* Pagefind wraps the matched terms of an excerpt in <mark>, which needs a
@@ -186,7 +195,7 @@ main {
 
 /* Looks like a search field, acts as the button that opens the dialog. */
 .search-trigger {
-	@apply w-full flex items-center gap-2 cursor-pointer bg-surface border border-base-300 rounded-lg px-4 py-2.5 text-sm text-neutral-content/80 transition-colors hover:border-base-content hover:text-base-content
+	@apply w-full flex items-center gap-2 cursor-pointer bg-surface border border-base-300 rounded-lg px-4 py-2.5 text-sm text-neutral-content transition-colors hover:border-base-content hover:text-base-content
 }
 
 .search-dialog {
@@ -201,7 +210,7 @@ main {
 /* --- Header --- */
 
 .nav-link {
-	@apply text-neutral-content/80 hover:text-base-content transition-colors
+	@apply text-neutral-content hover:text-base-content transition-colors
 }
 
 .nav-link[aria-current="page"] {
@@ -231,18 +240,14 @@ section[id] {
 	@apply items-baseline
 }
 
-/* News row: month, title, pill on one line. On narrow screens the month and
-   the pill share the first line and the title wraps underneath. */
+/* News row: month, category pill and text on one line. On narrow screens
+   the month and the pill share the first line and the text wraps underneath. */
 .news-row {
-	@apply grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 items-baseline sm:grid-cols-[4.5rem_1fr_auto] sm:gap-x-4
-}
-
-.news-row > .news-pill {
-	@apply sm:order-3
+	@apply grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 items-baseline sm:grid-cols-[4.5rem_6.5rem_1fr]
 }
 
 .news-row > .news-title {
-	@apply col-span-2 min-w-0 sm:col-span-1 sm:order-2
+	@apply col-span-2 min-w-0 sm:col-span-1
 }
 
 .list-meta {
@@ -273,7 +278,7 @@ section[id] {
 
 /* Small pill toggle, e.g. the "Show all / Show latest" buttons on the homepage. */
 .toggle-btn {
-	@apply inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full cursor-pointer bg-base-content/10 text-base-content/70 transition-colors hover:bg-base-content/15 hover:text-base-content
+	@apply inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full cursor-pointer bg-base-200 text-neutral-content transition-colors hover:bg-base-300 hover:text-base-content
 }
 
 /* Slide open by animating the row track from 0fr to 1fr, which is the only
@@ -286,10 +291,9 @@ section[id] {
 	@apply overflow-hidden opacity-0 transition-opacity duration-300 motion-reduce:duration-[.01ms] in-data-[open=true]:opacity-100 in-data-[open=true]:delay-120
 }
 
-/* Round portrait, greyscale until hovered: colour on the homepage is reserved
-   for the category pills. */
+/* Round portrait on the homepage. */
 .avatar {
-	@apply size-16 rounded-full object-cover grayscale transition-[filter] duration-500 hover:grayscale-0 motion-reduce:duration-[.01ms]
+	@apply size-16 rounded-full object-cover
 }
 
 /* Category pill of a news row. One hue per kind, set through --pill; the tint
@@ -297,14 +301,29 @@ section[id] {
 .pill {
 	--pill: var(--color-neutral-content);
 	@apply inline-block text-xs leading-5 px-2 rounded-full whitespace-nowrap;
-	background: color-mix(in oklab, var(--pill) 14%, transparent);
-	color: color-mix(in oklab, var(--pill) 50%, var(--color-base-content));
+	background: color-mix(in oklab, var(--pill) 18%, transparent);
+	color: color-mix(in oklab, var(--pill) 45%, var(--color-base-content));
 }
 
 .pill[data-kind="research"]    { --pill: var(--color-accent-2); }
 .pill[data-kind="engineering"] { --pill: var(--color-accent-1); }
 .pill[data-kind="design"]      { --pill: var(--color-accent-3); }
 .pill[data-kind="development"] { --pill: var(--color-accent-4); }
+
+/* --- Playground --- */
+
+/* A toy: picture, name, one line, and a "Play" link stretched over the card. */
+.toy {
+	@apply relative flex flex-col
+}
+
+.toy-media {
+	@apply aspect-16/10 grid place-items-center overflow-hidden rounded-xl bg-base-200
+}
+
+.toy-action {
+	@apply cursor-pointer text-base-content transition-colors hover:text-accent-4 after:absolute after:inset-0 after:content-['']
+}
 
 .btn-outline {
 	@apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm transition-colors border border-base-300 hover:border-base-content

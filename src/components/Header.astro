@@ -4,6 +4,7 @@ import { Menu, Search as SearchIcon, Volume2, VolumeX, Sun, Moon, SunMoon } from
 // Papers, projects and notes share one news list on the homepage.
 let links = [
   { href: "/#about", label: "About" },
+  { href: "/research", label: "Research" },
   { href: "/#news", label: "News" },
   { href: "/playground", label: "Playground" },
 ];
@@ -92,7 +93,7 @@ if (pathname !== "/") {
   </div>
 
   {/* The links the desktop nav shows inline, folded away behind the hamburger. */}
-  <div id="header-menu" data-header-menu hidden class="md:hidden border-t border-base-300/60">
+  <div id="header-menu" data-header-menu hidden class="md:hidden border-t border-base-300">
     <nav class="container mx-auto p-4 md:max-w-4xl flex flex-col">
       {links.map((link) => (
         <a
@@ -238,7 +239,9 @@ if (pathname !== "/") {
       for (const section of sections) {
         if (line >= section.top) hash = section.hash;
       }
-      if (hash !== location.hash) history.replaceState(null, "", hash || location.pathname);
+      // Keep history.state: the ClientRouter stores its entry index there and
+      // ignores a "back" to an entry whose state was wiped.
+      if (hash !== location.hash) history.replaceState(history.state, "", hash || location.pathname);
       setActive(hash);
     }
 

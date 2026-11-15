@@ -2,7 +2,7 @@
 title: UniMORE strategic plan
 pubDate: 2026-03-10
 description: Designed with Affinity, the new strategic plan of the University of Modena and Reggio Emilia is finally out!
-news: I designed UniMORE strategic plan.
+news: I designed “Innovation for Legacy”, the new strategic plan of the University of Modena and Reggio Emilia.
 categories: ["design"]
 hidden: false
 cta:

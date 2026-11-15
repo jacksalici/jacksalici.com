@@ -4,6 +4,7 @@ pubDate: 2024-10-17
 slug: masters
 description: "My master degree has been a crazy journey."
 summary: "The past year has been the most intense of my life but looking back I am filled with happiness, as I never thought I could enjoy my final year as a student of a degree so much. The following text is part of the acknowledgments of my Master's Degree thesis."
+news: "My master's degree has been a crazy journey: a look back at the most intense year of my life."
 categories: ["updates"]
 ---
 

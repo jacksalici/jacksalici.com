@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import EntryList from "../components/EntryList.astro";
+import EntryRow from "../components/EntryRow.astro";
+import Base from "../layouts/Base.astro";
+import { getActivities } from "../utils/news";
+
+const papers = (await getCollection("papers", (p) => p.data.draft !== true && p.data.hidden !== true)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// A research activity is one with at least one paper behind it.
+const activities = (await getActivities())
+  .filter((a) => a.data.hidden !== true)
+  .map((activity) => ({
+    activity,
+    papers: papers.filter((p) => p.data.activities?.includes(activity.id)).length,
+  }))
+  .filter((entry) => entry.papers > 0);
+---
+
+<Base
+  title="Research"
+  description="Research activities and peer-reviewed papers by Giacomo Salici, PhD candidate at AImageLab, University of Modena and Reggio Emilia."
+  keywords={["giacomo salici", "research", "papers", "publications", "aimagelab"]}
+>
+  <main>
+    <div class="w-full mb-12">
+      <p class="eyebrow mb-3">Research</p>
+      <h1 class="page-title">Research activities and papers.</h1>
+      <p class="page-lead">
+        I am a PhD candidate in ICT with the <a href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of the University of Modena and Reggio Emilia. These are the lines of research I work on and the papers that came out of them.
+      </p>
+    </div>
+
+    <section id="activities">
+      <p class="section-label">Activities</p>
+      <ul class="flex flex-col">
+        {activities.map(({ activity, papers }) => (
+          <li>
+            <a href={"/activities/" + activity.id} class="list-row list-row--baseline" data-haptic-press="light">
+              <span class="min-w-0 flex-1">
+                <span class="block">{activity.data.title}</span>
+                {activity.data.description && (
+                  <span class="block text-sm text-neutral-content mt-0.5">{activity.data.description}</span>
+                )}
+              </span>
+              <span class="hidden sm:block shrink-0 text-xs tabular-nums text-neutral-content">
+                {papers} paper{papers === 1 ? "" : "s"}
+              </span>
+              <span class="shrink-0 text-neutral-content" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mt-16" id="papers">
+      <p class="section-label">Papers</p>
+      <EntryList>
+        {papers.map((paper) => (
+          <EntryRow
+            href={"/papers/" + paper.id}
+            title={paper.data.title ?? paper.id}
+            meta={paper.data.acronym ?? paper.data.venue}
+            date={paper.data.pubDate}
+            description={paper.data.authors}
+          />
+        ))}
+      </EntryList>
+    </section>
+  </main>
+</Base>

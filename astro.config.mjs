@@ -14,7 +14,7 @@ export default defineConfig({
   redirects: {
     // The collections no longer have their own index page: they live as
     // sections of the homepage.
-    "/papers": "/#papers",
+    "/papers": "/research",
     "/projects": "/#projects",
     "/notes": "/#writing",
     "/projects/website": "/notes/website",

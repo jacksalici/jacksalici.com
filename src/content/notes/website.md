@@ -4,6 +4,7 @@ pubDate: 2023-02-02
 updatedDate: 2026-10-26
 slug: website
 description: "I rebuild this website too often."
+news: A note on why I keep rebuilding this website, and how it moved from Hugo to Astro.
 summary: "A brief overview of the major versions of my personal website and the reasons behind my choices."
 categories: ["thoughts"]
 tags: ["website", "portfolio"]

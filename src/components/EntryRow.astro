@@ -26,8 +26,8 @@ const { href, title, meta, date, description, search, hidden, activities, kind }
 
 <li class="entry" data-search={search?.toLowerCase()} data-activities={activities?.join(" ")} hidden={hidden}>
 	{kind ? (
-		<a href={href} class="list-row news-row" data-cuelume-hover="tick" data-cuelume-press data-haptic-press="light">
-			<span class="text-xs tabular-nums text-neutral-content whitespace-nowrap">{date && <FormattedDate date={date} />}</span>
+		<a href={href} class="list-row news-row" data-haptic-press="light">
+			<span class="news-date text-xs tabular-nums text-neutral-content whitespace-nowrap">{date && <FormattedDate date={date} />}</span>
 			<span class="news-pill"><span class="pill" data-kind={kind}>{newsKindLabels[kind]}</span></span>
 			<span class="news-title">{title}</span>
 		</a>

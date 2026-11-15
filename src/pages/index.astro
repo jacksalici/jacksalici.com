@@ -10,9 +10,6 @@ import "../styles/global.css";
 const news = await getNews();
 const activities = (await getActivities()).filter((a) => a.data.hidden !== true && a.data.shown !== false);
 
-// Only the first INITIAL_VISIBLE rows show until "Show all" is clicked.
-const INITIAL_VISIBLE = 6;
-
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
 // How much work sits behind each activity, shown next to its title.
@@ -38,7 +35,7 @@ const props = { image: "/uploads/sky.jpg" };
     <section id="about">
       <Image src={portrait} alt="Giacomo Salici at ICCV 2025, Honolulu" width={64} height={64} densities={[1, 2, 3]} class="avatar" data-cuelume-hover="tick" />
 
-      <h1 class="mt-6 text-3xl md:text-4xl text-balance tracking-tight leading-[1.1] max-w-2xl">
+      <h1 class="mt-6 text-4xl md:text-6xl text-balance tracking-tight leading-[1.05] max-w-3xl">
         A digital craftsman who designs systems that matter.
       </h1>
 
@@ -54,6 +51,13 @@ const props = { image: "/uploads/sky.jpg" };
               At <a href="https://www.unimore.it/">University of Modena and Reggio Emilia&nbsp;↗</a>, my research interests include <span class="font-medium text-base-content">artificial intelligence of things (AIoT)</span>, <span class="font-medium text-base-content">modular deep learning</span>, and <span class="font-medium text-base-content">anomaly detection</span>. Besides my research work, I also enjoy (in casual order): <span class="font-medium text-base-content">open-source software and hardware</span>, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
             </p>
           </div>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <a href="/contacts" class="nav-link text-base-content!">Get in touch&nbsp;↗</a>
+          <a href="https://github.com/jacksalici" class="nav-link">GitHub&nbsp;↗</a>
+          <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="nav-link">Google Scholar&nbsp;↗</a>
+          <a href="https://linkedin.com/in/jacksalici" class="nav-link">LinkedIn&nbsp;↗</a>
         </div>
       </div>
     </section>
@@ -84,33 +88,11 @@ const props = { image: "/uploads/sky.jpg" };
     <section class="mt-16" id="news" data-pagefind-ignore>
       <p class="section-label">Latest news</p>
 
-      <EntryList id="news-list" class="mb-5">
-        {news.map((item, i) => (
-          <EntryRow
-            href={item.href}
-            title={item.title}
-            date={item.date}
-            kind={item.kind}
-            hidden={i >= INITIAL_VISIBLE}
-          />
+      <EntryList id="news-list">
+        {news.map((item) => (
+          <EntryRow href={item.href} title={item.title} date={item.date} kind={item.kind} />
         ))}
       </EntryList>
-
-      {news.length > INITIAL_VISIBLE && (
-        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="news-list" data-cuelume-toggle>
-          <span class="toggle-label">Show all ↘</span>
-        </button>
-      )}
-    </section>
-
-    <section class="mt-20 pt-8 border-t border-base-300">
-      <p class="section-label">Let's make something that matters</p>
-      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-        <a href="/contacts" class="nav-link text-base-content!" data-cuelume-hover="tick">Get in touch&nbsp;↗</a>
-        <a href="https://github.com/jacksalici" class="nav-link" data-cuelume-hover="tick">GitHub&nbsp;↗</a>
-        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="nav-link" data-cuelume-hover="tick">Google Scholar&nbsp;↗</a>
-        <a href="https://linkedin.com/in/jacksalici" class="nav-link" data-cuelume-hover="tick">LinkedIn&nbsp;↗</a>
-      </div>
     </section>
   </main>
 </Base>
@@ -144,24 +126,6 @@ document.addEventListener("astro:page-load", () => {
   // Clicking it while already at /#about fires no hashchange, so catch the click too.
   document.querySelectorAll('a[href$="#about"]').forEach((link) => {
     link.addEventListener("click", () => setBio(true));
-  });
-
-  const INITIAL_VISIBLE = 6;
-
-  // "Show all" / "Show latest" toggle for a list of entries.
-  document.querySelectorAll<HTMLButtonElement>(".list-toggle").forEach((btn) => {
-    const list = document.getElementById(btn.dataset.target ?? "");
-    if (!list) return;
-    const label = btn.querySelector(".toggle-label");
-
-    btn.addEventListener("click", () => {
-      const expanded = btn.dataset.expanded !== "true";
-      list.querySelectorAll<HTMLElement>(".entry").forEach((entry, i) => {
-        entry.hidden = !expanded && i >= INITIAL_VISIBLE;
-      });
-      btn.dataset.expanded = String(expanded);
-      if (label) label.textContent = expanded ? "Show latest ↖" : "Show all ↘";
-    });
   });
 
   // Activities used to open in a dialog at /#<activity-id>; send those old
