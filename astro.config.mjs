@@ -15,6 +15,7 @@ export default defineConfig({
     // The collections no longer have their own index page: they live as
     // sections of the homepage.
     "/papers": "/research",
+    "/playground": "/apps",
     "/projects": "/#projects",
     "/notes": "/#writing",
     "/projects/website": "/notes/website",
