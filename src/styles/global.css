@@ -217,7 +217,7 @@ main {
 	@apply text-base-content
 }
 
-.nav-link--playground[aria-current="page"] {
+.nav-link--apps[aria-current="page"] {
 	@apply text-accent-4
 }
 
@@ -238,16 +238,6 @@ section[id] {
    element: row variants have to live here rather than in the markup. */
 .list-row--baseline {
 	@apply items-baseline
-}
-
-/* News row: month, category pill and text on one line. On narrow screens
-   the month and the pill share the first line and the text wraps underneath. */
-.news-row {
-	@apply grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 items-baseline sm:grid-cols-[4.5rem_6.5rem_1fr]
-}
-
-.news-row > .news-title {
-	@apply col-span-2 min-w-0 sm:col-span-1
 }
 
 .list-meta {
@@ -276,41 +266,7 @@ section[id] {
 	@apply translate-x-0.5
 }
 
-/* Small pill toggle, e.g. the "Show all / Show latest" buttons on the homepage. */
-.toggle-btn {
-	@apply inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full cursor-pointer bg-base-200 text-neutral-content transition-colors hover:bg-base-300 hover:text-base-content
-}
-
-/* Slide open by animating the row track from 0fr to 1fr, which is the only
-   way to transition to an auto height. Toggle with the `data-open` attribute. */
-.read-panel {
-	@apply grid grid-rows-[0fr] transition-[grid-template-rows] duration-450 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:duration-[.01ms] data-[open=true]:grid-rows-[1fr]
-}
-
-.read-panel > div {
-	@apply overflow-hidden opacity-0 transition-opacity duration-300 motion-reduce:duration-[.01ms] in-data-[open=true]:opacity-100 in-data-[open=true]:delay-120
-}
-
-/* Round portrait on the homepage. */
-.avatar {
-	@apply size-16 rounded-full object-cover
-}
-
-/* Category pill of a news row. One hue per kind, set through --pill; the tint
-   and the text are both mixed from it so they hold up in light and dark. */
-.pill {
-	--pill: var(--color-neutral-content);
-	@apply inline-block text-xs leading-5 px-2 rounded-full whitespace-nowrap;
-	background: color-mix(in oklab, var(--pill) 18%, transparent);
-	color: color-mix(in oklab, var(--pill) 45%, var(--color-base-content));
-}
-
-.pill[data-kind="research"]    { --pill: var(--color-accent-2); }
-.pill[data-kind="engineering"] { --pill: var(--color-accent-1); }
-.pill[data-kind="design"]      { --pill: var(--color-accent-3); }
-.pill[data-kind="development"] { --pill: var(--color-accent-4); }
-
-/* --- Playground --- */
+/* --- Apps --- */
 
 /* A toy: picture, name, one line, and a "Play" link stretched over the card. */
 .toy {

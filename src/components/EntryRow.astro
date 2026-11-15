@@ -17,19 +17,20 @@ interface Props {
 	hidden?: boolean;
 	/** Activity ids this entry belongs to, used for client-side filtering by activity. */
 	activities?: string[];
-	/** Kind of news; turns the row into a "month / title / coloured pill" line. */
+	/** Kind of news; puts the month and a coloured pill inline before the title. */
 	kind?: NewsKind;
 }
 
 const { href, title, meta, date, description, search, hidden, activities, kind } = Astro.props;
 ---
 
-<li class="entry" data-search={search?.toLowerCase()} data-activities={activities?.join(" ")} hidden={hidden}>
+<li class="entry" data-kind={kind} data-search={search?.toLowerCase()} data-activities={activities?.join(" ")} hidden={hidden}>
 	{kind ? (
-		<a href={href} class="list-row news-row" data-haptic-press="light">
-			<span class="news-date text-xs tabular-nums text-neutral-content whitespace-nowrap">{date && <FormattedDate date={date} />}</span>
-			<span class="news-pill"><span class="pill" data-kind={kind}>{newsKindLabels[kind]}</span></span>
-			<span class="news-title">{title}</span>
+		// Month in a fixed column, title, and the category as quiet text on the right.
+		<a href={href} class="list-row list-row--baseline" data-haptic-press="light">
+			{date && <span class="w-18 shrink-0 text-sm tabular-nums text-muted"><FormattedDate date={date} /></span>}
+			<span class="min-w-0 flex-1">{title}</span>
+			<span class="hidden sm:block shrink-0 text-sm text-muted">{newsKindLabels[kind]}</span>
 		</a>
 	) : (
 		<a href={href} class="list-row" data-cuelume-hover="tick" data-cuelume-press data-haptic-press="light">

@@ -1,26 +1,13 @@
 ---
-import { Image } from "astro:assets";
-import portrait from "../assets/uploads/newphoto.jpg";
 import EntryList from "../components/EntryList.astro";
 import EntryRow from "../components/EntryRow.astro";
 import Base from "../layouts/Base.astro";
-import { getActivities, getNews } from "../utils/news";
+import { getNews } from "../utils/news";
 import "../styles/global.css";
 
 const news = await getNews();
-const activities = (await getActivities()).filter((a) => a.data.hidden !== true && a.data.shown !== false);
-
-const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
-
-// How much work sits behind each activity, shown next to its title.
-function tally(activityId: string) {
-  const related = news.filter((item) => item.activities?.includes(activityId));
-  const papers = related.filter((item) => item.collection === "papers").length;
-  const projects = related.filter((item) => item.collection === "projects").length;
-  return [projects && plural(projects, "project"), papers && plural(papers, "paper")]
-    .filter(Boolean)
-    .join(" · ");
-}
+// News shown before "All updates" reveals the rest.
+const LATEST = 6;
 
 const props = { image: "/uploads/sky.jpg" };
 ---
@@ -32,107 +19,51 @@ const props = { image: "/uploads/sky.jpg" };
   keywords={["giacomo salici", "ai engineer", "computer engineer", "robotics", "research", "portfolio"]}
 >
   <main>
-    <section id="about">
-      <Image src={portrait} alt="Giacomo Salici at ICCV 2025, Honolulu" width={64} height={64} densities={[1, 2, 3]} class="avatar" data-cuelume-hover="tick" />
-
-      <h1 class="mt-6 text-4xl md:text-6xl text-balance tracking-tight leading-[1.05] max-w-3xl">
+    <section id="about" class="max-w-2xl">
+      <h1 class="text-2xl md:text-3xl font-medium tracking-tight leading-snug text-balance">
         A digital craftsman who designs systems that matter.
       </h1>
 
-      <div class="mt-5 max-w-2xl">
-        <p class="sm:text-lg leading-relaxed text-neutral-content">
-          I am <span class="font-medium text-base-content">Giacomo Salici</span>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a class="font-medium text-base-content" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of UniMORE as a <span class="font-medium text-base-content">PhD candidate in ICT</span>.{" "}
-          <button type="button" class="read-toggle toggle-btn align-middle" aria-expanded="false" aria-controls="bio-more" data-cuelume-toggle>Read more ↘</button>
-        </p>
+      <p class="mt-5 leading-relaxed text-neutral-content">
+        I am <span class="text-base-content">Giacomo Salici</span>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a href="https://aimagelab.unimore.it/">AImageLab</a> research group of UniMORE as a <span class="text-base-content">PhD candidate in ICT</span>.
+      </p>
+      <p class="mt-4 leading-relaxed text-neutral-content">
+        My research interests include <span class="text-base-content">AIoT</span>, <span class="text-base-content">embodied AI</span>, <span class="text-base-content">modular DL</span>, and <span class="text-base-content">anomaly detection</span>. I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
+      </p>
 
-        <div id="bio-more" data-open="false" class="read-panel">
-          <div>
-            <p class="text-neutral-content leading-relaxed pt-4">
-              At <a href="https://www.unimore.it/">University of Modena and Reggio Emilia&nbsp;↗</a>, my research interests include <span class="font-medium text-base-content">artificial intelligence of things (AIoT)</span>, <span class="font-medium text-base-content">modular deep learning</span>, and <span class="font-medium text-base-content">anomaly detection</span>. Besides my research work, I also enjoy (in casual order): <span class="font-medium text-base-content">open-source software and hardware</span>, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-          <a href="/contacts" class="nav-link text-base-content!">Get in touch&nbsp;↗</a>
-          <a href="https://github.com/jacksalici" class="nav-link">GitHub&nbsp;↗</a>
-          <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="nav-link">Google Scholar&nbsp;↗</a>
-          <a href="https://linkedin.com/in/jacksalici" class="nav-link">LinkedIn&nbsp;↗</a>
-        </div>
+      <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+        <a href="/contacts" class="nav-link text-base-content!">Get in touch</a>
+        <a href="https://github.com/jacksalici" class="nav-link">GitHub</a>
+        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="nav-link">Google Scholar</a>
+        <a href="https://linkedin.com/in/jacksalici" class="nav-link">LinkedIn</a>
       </div>
     </section>
 
-    <section class="mt-16" id="activities">
-      <p class="section-label">What I am doing right now</p>
-
-      <ul class="flex flex-col">
-        {activities.map((activity) => (
-          <li>
-            <a
-              href={"/activities/" + activity.id}
-              data-activity-id={activity.id}
-              class="list-row list-row--baseline"
-              data-cuelume-hover="tick"
-              data-cuelume-press
-              data-haptic-press="light"
-            >
-              <span class="min-w-0 flex-1">{activity.data.title}</span>
-              <span class="hidden sm:block shrink-0 text-xs tabular-nums text-neutral-content">{tally(activity.id)}</span>
-              <span class="shrink-0 text-neutral-content" aria-hidden="true">→</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section class="mt-16" id="news" data-pagefind-ignore>
-      <p class="section-label">Latest news</p>
+    <section class="mt-20" id="news" data-pagefind-ignore>
+      <h2 class="eyebrow mb-3">News</h2>
 
       <EntryList id="news-list">
-        {news.map((item) => (
-          <EntryRow href={item.href} title={item.title} date={item.date} kind={item.kind} />
+        {news.map((item, i) => (
+          <EntryRow href={item.href} title={item.title} date={item.date} kind={item.kind} hidden={i >= LATEST} />
         ))}
       </EntryList>
+
+      {news.length > LATEST && (
+        <button type="button" class="more-link mt-4 cursor-pointer" data-news-more data-haptic-press="light">
+          All {news.length} updates ↓
+        </button>
+      )}
     </section>
   </main>
 </Base>
 
 <script>
-// Re-run on every ClientRouter navigation (including back/forward), not just the
-// first load, since that's the only way freshly swapped-in elements get their
-// listeners re-attached.
-document.addEventListener("astro:page-load", () => {
-  const toggle = document.querySelector(".read-toggle");
-  const panel = document.getElementById("bio-more");
-
-  function setBio(open: boolean) {
-    if (panel) panel.dataset.open = String(open);
-    if (!toggle) return;
-    toggle.setAttribute("aria-expanded", String(open));
-    toggle.textContent = open ? "Read less ↖" : "Read more ↘";
-  }
-
-  toggle?.addEventListener("click", () => {
-    setBio(panel?.dataset.open !== "true");
-  });
-
-  // The header's "About" link points at /#about and expects the long bio open.
-  function openBioFromHash() {
-    if (location.hash === "#about") setBio(true);
-  }
-
-  openBioFromHash();
-  window.addEventListener("hashchange", openBioFromHash);
-  // Clicking it while already at /#about fires no hashchange, so catch the click too.
-  document.querySelectorAll('a[href$="#about"]').forEach((link) => {
-    link.addEventListener("click", () => setBio(true));
-  });
-
-  // Activities used to open in a dialog at /#<activity-id>; send those old
-  // links to the activity's own page.
-  const legacy = document.querySelector<HTMLAnchorElement>(
-    `a[data-activity-id="${CSS.escape(location.hash.slice(1))}"]`
-  );
-  if (legacy) location.replace(legacy.href);
+// One delegated listener: module scripts run once and the document outlives
+// ClientRouter swaps, so this works on first load and after every navigation.
+document.addEventListener("click", (event) => {
+  const more = (event.target as Element).closest<HTMLButtonElement>("[data-news-more]");
+  if (!more) return;
+  document.querySelectorAll<HTMLElement>("#news-list .entry[hidden]").forEach((entry) => (entry.hidden = false));
+  more.remove();
 });
 </script>
