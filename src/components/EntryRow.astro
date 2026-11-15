@@ -1,5 +1,6 @@
 ---
 import FormattedDate from "./FormattedDate.astro";
+import { newsKindLabels, type NewsKind } from "../consts";
 
 interface Props {
 	href: string;
@@ -16,23 +17,33 @@ interface Props {
 	hidden?: boolean;
 	/** Activity ids this entry belongs to, used for client-side filtering by activity. */
 	activities?: string[];
+	/** Kind of news; turns the row into a "month / title / coloured pill" line. */
+	kind?: NewsKind;
 }
 
-const { href, title, meta, date, description, search, hidden, activities } = Astro.props;
+const { href, title, meta, date, description, search, hidden, activities, kind } = Astro.props;
 ---
 
 <li class="entry" data-search={search?.toLowerCase()} data-activities={activities?.join(" ")} hidden={hidden}>
-	<a href={href} class="list-row" data-cuelume-hover="tick" data-cuelume-press data-haptic-press="light">
-		<span class="min-w-0 flex-1">
-			{(meta || date) && <span class="text-xs tabular-nums text-neutral-content">
-
-			{meta && <span>{meta}</span>}
-			{meta && date && <span aria-hidden="true">&nbsp;/&nbsp;</span>}
-			{date && <FormattedDate date={date} />}
+	{kind ? (
+		<a href={href} class="list-row news-row" data-cuelume-hover="tick" data-cuelume-press data-haptic-press="light">
+			<span class="text-xs tabular-nums text-neutral-content whitespace-nowrap">{date && <FormattedDate date={date} />}</span>
+			<span class="news-pill"><span class="pill" data-kind={kind}>{newsKindLabels[kind]}</span></span>
+			<span class="news-title">{title}</span>
+		</a>
+	) : (
+		<a href={href} class="list-row" data-cuelume-hover="tick" data-cuelume-press data-haptic-press="light">
+			<span class="min-w-0 flex-1">
+				{(meta || date) && (
+					<span class="text-xs tabular-nums text-neutral-content">
+						{meta && <span>{meta}</span>}
+						{meta && date && <span aria-hidden="true">&nbsp;/&nbsp;</span>}
+						{date && <FormattedDate date={date} />}
+					</span>
+				)}
+				<span class="block">{title}</span>
+				{description && <span class="block text-sm text-neutral-content mt-0.5">{description}</span>}
 			</span>
-			}
-			<span class="block ">{title}</span>
-			{description && <span class="block text-sm text-neutral-content mt-0.5">{description}</span>}
-		</span>
-	</a>
+		</a>
+	)}
 </li>

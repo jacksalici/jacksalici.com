@@ -1,11 +1,10 @@
 ---
 import { Menu, Search as SearchIcon, Volume2, VolumeX, Sun, Moon, SunMoon } from "@lucide/astro";
 
-// Publications and projects are sections of the homepage, not pages of their own.
+// Papers, projects and notes share one news list on the homepage.
 let links = [
   { href: "/#about", label: "About" },
-  { href: "/#papers", label: "Publications" },
-  { href: "/#projects", label: "Projects" },
+  { href: "/#news", label: "News" },
   { href: "/playground", label: "Playground" },
 ];
 
@@ -190,7 +189,7 @@ if (pathname !== "/") {
     document.querySelector("[data-search-open]")?.addEventListener("click", () => setOpen(false));
   }
 
-  // Hash-only navigation (the homepage's #about/#papers/#projects anchors) never triggers a
+  // Hash-only navigation (the homepage's #about/#news anchors) never triggers a
   // fresh Astro render, so the active link has to be kept in sync manually here. On the
   // homepage itself, scrolling past a section should update the active link (and the URL
   // hash) the same way clicking its nav link would.
@@ -214,7 +213,7 @@ if (pathname !== "/") {
 
     setActive(location.hash);
 
-    const sections = ["about", "papers", "projects"]
+    const sections = ["about", "news"]
       .map((id) => {
         const el = document.getElementById(id);
         return el ? { hash: `#${id}`, top: el.offsetTop } : null;

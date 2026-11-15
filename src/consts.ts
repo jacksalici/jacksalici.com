@@ -19,3 +19,27 @@ export const categories: Record<string, string> = {
   "updates":    "Updates",
   "thoughts":   "Thoughts",
 };
+
+// Pill shown on each row of the homepage news list: papers are "research",
+// notes are "notes", and a project takes one of the middle three from its
+// first category. The pill colours live in global.css (.pill[data-kind]).
+export type NewsKind = "research" | "engineering" | "development" | "design" | "notes";
+
+export const newsKindLabels: Record<NewsKind, string> = {
+  research:    "Research",
+  engineering: "Engineering",
+  development: "Development",
+  design:      "Design",
+  notes:       "Notes",
+};
+
+export const projectKinds: Record<string, NewsKind> = {
+  "ai-ml":       "engineering",
+  "robotics":    "engineering",
+  "iot-and-v2x": "engineering",
+  "making":      "engineering",
+  "web":         "development",
+  "coding":      "development",
+  "games":       "development",
+  "design":      "design",
+};

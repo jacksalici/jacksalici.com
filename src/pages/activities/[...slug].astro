@@ -1,0 +1,58 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import EntryList from "../../components/EntryList.astro";
+import EntryRow from "../../components/EntryRow.astro";
+import Base from "../../layouts/Base.astro";
+import { getActivities, getNews } from "../../utils/news";
+
+export async function getStaticPaths() {
+  const [activities, news] = await Promise.all([getActivities(), getNews()]);
+  return activities.map((activity) => ({
+    params: { slug: activity.id },
+    props: {
+      activity,
+      related: news.filter((item) => item.activities?.includes(activity.id)),
+    },
+  }));
+}
+
+type Props = {
+  activity: CollectionEntry<"activities">;
+  related: Awaited<ReturnType<typeof getNews>>;
+};
+
+const { activity, related } = Astro.props;
+const { Content } = await render(activity);
+---
+
+<Base
+  title={activity.data.title}
+  description={activity.data.description}
+  tags={activity.data.tags}
+  pageType="website"
+>
+  <main>
+    <div class="w-full mb-10">
+      <p class="eyebrow mb-3">{activity.data.kicker}</p>
+      <h1 class="text-4xl md:text-5xl text-balance mb-4">{activity.data.title}</h1>
+      {activity.data.description && (
+        <p class="text-lg md:text-xl text-neutral-content max-w-2xl text-balance">{activity.data.description}</p>
+      )}
+    </div>
+
+    <div class="prose prose-js font-body mb-12 max-w-2xl">
+      <Content />
+    </div>
+
+    {related.length > 0 && (
+      <section data-pagefind-ignore>
+        <p class="section-label">Related work</p>
+        <EntryList>
+          {related.map((item) => (
+            <EntryRow href={item.href} title={item.title} date={item.date} kind={item.kind} />
+          ))}
+        </EntryList>
+      </section>
+    )}
+  </main>
+</Base>

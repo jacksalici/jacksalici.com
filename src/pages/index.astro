@@ -1,63 +1,29 @@
 ---
-import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import portrait from "../assets/uploads/newphoto.jpg";
-import { FolderOpen } from "@lucide/astro";
 import EntryList from "../components/EntryList.astro";
 import EntryRow from "../components/EntryRow.astro";
 import Base from "../layouts/Base.astro";
-import { categories } from "../consts";
+import { getActivities, getNews } from "../utils/news";
 import "../styles/global.css";
 
-// Ordered by the `order` field in each activity's frontmatter, ascending.
-const activities = (await getCollection("activities"))
-  .filter((a) => a.data.draft !== true && a.data.hidden !== true && a.data.shown !== false)
-  .sort((a, b) => a.data.order - b.data.order);
+const news = await getNews();
+const activities = (await getActivities()).filter((a) => a.data.hidden !== true && a.data.shown !== false);
 
-// Compiled body markdown for each activity, shown in its details panel.
-const activityContent = Object.fromEntries(
-  await Promise.all(activities.map(async (activity) => [activity.id, await render(activity)] as const))
-);
+// Only the first INITIAL_VISIBLE rows show until "Show all" is clicked.
+const INITIAL_VISIBLE = 6;
 
-const papers = (await getCollection("papers")).filter(
-  (a) => a.data.draft !== true && a.data.hidden !== true
-);
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
-const projects = (await getCollection("projects")).filter(
-  (a) => a.data.draft !== true && a.data.hidden !== true
-);
-
-const notes = (await getCollection("notes")).filter(
-  (a) => a.data.draft !== true && a.data.hidden !== true
-);
-
-// Desktop layout: two wider cards on top, two narrower ones below.
-// Index-based, so it follows `order`.
-const activitySpans = ["md:col-span-3", "md:col-span-3", "md:col-span-2", "md:col-span-2"];
-
-// How much work sits behind each activity, shown on its card.
-const tallyByActivity: Record<string, { projects: number; papers: number }> = {};
-for (const activity of activities) {
-  tallyByActivity[activity.id] = {
-    projects: projects.filter((p) => p.data.activities?.includes(activity.id)).length,
-    papers: papers.filter((p) => p.data.activities?.includes(activity.id)).length,
-  };
+// How much work sits behind each activity, shown next to its title.
+function tally(activityId: string) {
+  const related = news.filter((item) => item.activities?.includes(activityId));
+  const papers = related.filter((item) => item.collection === "papers").length;
+  const projects = related.filter((item) => item.collection === "projects").length;
+  return [projects && plural(projects, "project"), papers && plural(papers, "paper")]
+    .filter(Boolean)
+    .join(" · ");
 }
-
-// Sorted newest first; only the first INITIAL_VISIBLE rows show until "Load more" is clicked.
-const INITIAL_VISIBLE = 3;
-
-const latestPapers = papers.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
-
-const latestProjects = projects.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
-
-const latestNotes = notes
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
 
 const props = { image: "/uploads/sky.jpg" };
 ---
@@ -69,181 +35,81 @@ const props = { image: "/uploads/sky.jpg" };
   keywords={["giacomo salici", "ai engineer", "computer engineer", "robotics", "research", "portfolio"]}
 >
   <main>
-    <section class="relative" id="about">
-      <h1 class="text-4xl md:text-6xl text-balance tracking-tight leading-[1.05]">
+    <section id="about">
+      <Image src={portrait} alt="Giacomo Salici at ICCV 2025, Honolulu" width={64} height={64} densities={[1, 2, 3]} class="avatar" data-cuelume-hover="tick" />
+
+      <h1 class="mt-6 text-3xl md:text-4xl text-balance tracking-tight leading-[1.1] max-w-2xl">
         A digital craftsman who designs systems that matter.
       </h1>
 
-      <div class="mt-7 sm:flex sm:flex-row sm:items-start sm:gap-8">
-        <div data-reading="false" class="snapshot w-28 md:w-36 shrink-0 float-right ml-2 mb-2 sm:order-2 sm:float-none sm:ml-0 sm:mb-0 sm:self-start sm:mx-0" data-cuelume-hover="tick">
-          <Image src={portrait} alt="Giacomo Salici" width={288} densities={[1, 2]} class="w-full aspect-square object-cover rounded-none" />
-          <span class="block w-full py-[0.6rem] text-xs italic text-center">Me @ ICCV25, Honolulu</span>
-        </div>
+      <div class="mt-5 max-w-2xl">
+        <p class="sm:text-lg leading-relaxed text-neutral-content">
+          I am <span class="font-medium text-base-content">Giacomo Salici</span>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a class="font-medium text-base-content" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of UniMORE as a <span class="font-medium text-base-content">PhD candidate in ICT</span>.{" "}
+          <button type="button" class="read-toggle toggle-btn align-middle" aria-expanded="false" aria-controls="bio-more" data-cuelume-toggle>Read more ↘</button>
+        </p>
 
-        <div class="flex-1 min-w-0">
-          <p class="sm:text-lg leading-relaxed">
-            I am <span class="font-bold">Giacomo Salici</span>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a class="font-bold" href="https://aimagelab.unimore.it/">AImageLab&nbsp;↗</a> research group of UniMORE as a <span class="font-bold">PhD candidate in ICT</span>.{" "}
-            <button type="button" class="read-toggle toggle-btn align-middle" aria-expanded="false" data-cuelume-toggle>Read more ↘</button>
-          </p>
-
-          <div id="bio-more" data-open="false" class="read-panel">
-            <div>
-              <p class="text-neutral-content leading-relaxed pt-4">
-                At <a href="https://www.unimore.it/">University of Modena and Reggio Emilia&nbsp;↗</a>, my research interests include <span class="font-semibold text-base-content">artificial intelligence of things (AIoT)</span>, <span class="font-semibold text-base-content">modular deep learning</span>, and <span class="font-semibold text-base-content">anomaly detection</span>. Besides my research work, I also enjoy (in casual order): <span class="font-semibold text-base-content">open-source software and hardware</span>, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
-              </p>
-            </div>
+        <div id="bio-more" data-open="false" class="read-panel">
+          <div>
+            <p class="text-neutral-content leading-relaxed pt-4">
+              At <a href="https://www.unimore.it/">University of Modena and Reggio Emilia&nbsp;↗</a>, my research interests include <span class="font-medium text-base-content">artificial intelligence of things (AIoT)</span>, <span class="font-medium text-base-content">modular deep learning</span>, and <span class="font-medium text-base-content">anomaly detection</span>. Besides my research work, I also enjoy (in casual order): <span class="font-medium text-base-content">open-source software and hardware</span>, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
+            </p>
           </div>
         </div>
-
-        <div class="clear-both sm:hidden"></div>
       </div>
+    </section>
 
+    <section class="mt-16" id="activities">
+      <p class="section-label">What I am doing right now</p>
 
-      <p class="section-label mt-16">What I am doing right now</p>
-
-      <div
-        class="activity-rail -mx-4 px-4 md:mx-0 md:px-0 flex md:grid md:grid-cols-10 lg:-mx-20 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory"
-      >
-        {activities.map((activity, i) => {
-          const tally = tallyByActivity[activity.id];
-          return (
+      <ul class="flex flex-col">
+        {activities.map((activity) => (
+          <li>
             <a
-              href={"#" + activity.id}
+              href={"/activities/" + activity.id}
               data-activity-id={activity.id}
-              data-activity-title={activity.data.title}
-              aria-pressed="false"
+              class="list-row list-row--baseline"
               data-cuelume-hover="tick"
-              data-cuelume-release="pulse"
+              data-cuelume-press
               data-haptic-press="light"
-              class:list={[
-                "activity-card group relative block",
-                "w-[70%] h-44 shrink-0",
-                "md:w-auto md:shrink md:h-56",
-                activitySpans[i],
-              ]}
             >
-              <div class="face">
-                <div class="face-content">
-                  <p class="text-xs mb-2 opacity-70">
-                    {activity.data.kicker}
-                  </p>
-                  <h2 class="font-semibold text-lg leading-snug tracking-normal text-current">
-                    {activity.data.title}
-                  </h2>
-                  <p class="mt-2 text-xs tabular-nums opacity-70">
-                    {[
-                      tally.projects && `${tally.projects} project${tally.projects > 1 ? "s" : ""}`,
-                      tally.papers && `${tally.papers} paper${tally.papers > 1 ? "s" : ""}`,
-                    ]
-                      .filter(Boolean)
-                      .join("  ·  ")}
-                  </p>
-                </div>
-              </div>
+              <span class="min-w-0 flex-1">{activity.data.title}</span>
+              <span class="hidden sm:block shrink-0 text-xs tabular-nums text-neutral-content">{tally(activity.id)}</span>
+              <span class="shrink-0 text-neutral-content" aria-hidden="true">→</span>
             </a>
-          );
-        })}
-      </div>
-
-      <div id="activity-details" data-open="false" class="read-panel">
-        <div>
-          <div class="pt-6">
-            {activities.map((activity) => {
-              const { Content } = activityContent[activity.id];
-              return (
-                <div class="activity-detail" data-activity-id={activity.id} hidden>
-                  {activity.data.description && (
-                    <p class="text-neutral-content text-xl text-balance">{activity.data.description}</p>
-                  )}
-                  <div class="prose prose-js font-body text-neutral-content mt-4 max-w-none">
-                    <Content />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+          </li>
+        ))}
+      </ul>
     </section>
 
-    <section class="mt-20" id="papers" data-pagefind-ignore>
-      <p class="section-label">My latest research papers</p>
-      <p class="filter-note" hidden><FolderOpen class:list={"w-4"}/><span class="filter-note-name"></span><button type="button" class="toggle-btn" data-clear-filter data-cuelume-press="release">Clear ✕</button></p>
+    <section class="mt-16" id="news" data-pagefind-ignore>
+      <p class="section-label">Latest news</p>
 
-      <EntryList id="papers-list" class="mb-5">
-        {latestPapers.map((paper, i) => (
+      <EntryList id="news-list" class="mb-5">
+        {news.map((item, i) => (
           <EntryRow
-            href={"/papers/" + paper.id}
-            title={paper.data.news ?? paper.data.title ?? paper.id}
-            meta={paper.data.acronym}
-            date={paper.data.pubDate}
+            href={item.href}
+            title={item.title}
+            date={item.date}
+            kind={item.kind}
             hidden={i >= INITIAL_VISIBLE}
-            activities={paper.data.activities}
           />
         ))}
       </EntryList>
 
-      {latestPapers.length > INITIAL_VISIBLE && (
-        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="papers-list" data-cuelume-toggle>
+      {news.length > INITIAL_VISIBLE && (
+        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="news-list" data-cuelume-toggle>
           <span class="toggle-label">Show all ↘</span>
         </button>
       )}
     </section>
 
-    <section class="mt-20" id="projects" data-pagefind-ignore>
-      <p class="section-label">My latest projects</p>
-      <p class="filter-note" hidden><FolderOpen class:list={"w-4"}/><span class="filter-note-name"></span> <button type="button" class="toggle-btn" data-clear-filter data-cuelume-press="release">Clear ✕</button></p>
-
-      <EntryList id="projects-list" class="mb-5">
-        {latestProjects.map((project, i) => (
-          <EntryRow
-            href={"/projects/" + project.id}
-            title={project.data.news ?? project.data.title ?? project.id}
-            meta={
-              project.data.categories?.[0]
-                ? (categories[project.data.categories[0]] ?? project.data.categories[0])
-                : undefined
-            }
-            date={project.data.pubDate}
-            hidden={i >= INITIAL_VISIBLE}
-            activities={project.data.activities}
-          />
-        ))}
-      </EntryList>
-
-      {latestProjects.length > INITIAL_VISIBLE && (
-        <button type="button" data-expanded="false" class="toggle-btn list-toggle" data-target="projects-list" data-cuelume-toggle>
-          <span class="toggle-label">Show all ↘</span>
-        </button>
-      )}
-    </section>
-
-    {latestNotes.length > 0 && (
-      <section class="mt-20" id="writing" data-pagefind-ignore>
-        <p class="section-label">Writing</p>
-
-        <EntryList>
-          {latestNotes.map((note) => (
-            <EntryRow
-              href={"/notes/" + note.id}
-              title={note.data.title ?? note.id}
-              date={note.data.pubDate}
-            />
-          ))}
-        </EntryList>
-      </section>
-    )}
-
-    <section class="mt-24 pt-12 border-t border-base-300">
-      <h2 class="text-3xl md:text-4xl tracking-tight text-balance max-w-2xl">
-        Let's make something that matters.
-      </h2>
-      <div class="mt-7 flex flex-wrap gap-2 text-sm">
-        <a href="/contacts" class="btn-solid" data-cuelume-hover="tick">Get in touch&nbsp;↗</a>
-        <a href="https://github.com/jacksalici" class="btn-outline" data-cuelume-hover="tick">GitHub&nbsp;↗</a>
-        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="btn-outline" data-cuelume-hover="tick">Google Scholar&nbsp;↗</a>
-        <a href="https://linkedin.com/in/jacksalici" class="btn-outline" data-cuelume-hover="tick">LinkedIn&nbsp;↗</a>
-
+    <section class="mt-20 pt-8 border-t border-base-300">
+      <p class="section-label">Let's make something that matters</p>
+      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+        <a href="/contacts" class="nav-link text-base-content!" data-cuelume-hover="tick">Get in touch&nbsp;↗</a>
+        <a href="https://github.com/jacksalici" class="nav-link" data-cuelume-hover="tick">GitHub&nbsp;↗</a>
+        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="nav-link" data-cuelume-hover="tick">Google Scholar&nbsp;↗</a>
+        <a href="https://linkedin.com/in/jacksalici" class="nav-link" data-cuelume-hover="tick">LinkedIn&nbsp;↗</a>
       </div>
     </section>
   </main>
@@ -253,16 +119,12 @@ const props = { image: "/uploads/sky.jpg" };
 // Re-run on every ClientRouter navigation (including back/forward), not just the
 // first load, since that's the only way freshly swapped-in elements get their
 // listeners re-attached.
-import { play } from "../utils/sounds";
-
 document.addEventListener("astro:page-load", () => {
   const toggle = document.querySelector(".read-toggle");
-  const photo = document.querySelector<HTMLElement>(".snapshot")
   const panel = document.getElementById("bio-more");
 
   function setBio(open: boolean) {
     if (panel) panel.dataset.open = String(open);
-    if (photo) photo.dataset.reading = String(open);
     if (!toggle) return;
     toggle.setAttribute("aria-expanded", String(open));
     toggle.textContent = open ? "Read less ↖" : "Read more ↘";
@@ -284,136 +146,29 @@ document.addEventListener("astro:page-load", () => {
     link.addEventListener("click", () => setBio(true));
   });
 
-  const INITIAL_VISIBLE = 3;
+  const INITIAL_VISIBLE = 6;
 
-  function entriesOf(list: Element) {
-    return Array.from(list.querySelectorAll<HTMLElement>(".entry"));
-  }
-
-  // Shows/hides a list's entries, either respecting the active activity
-  // filter (only entries tagged with `filterId` are shown, in full) or,
-  // when there's no filter, the plain "show all" / "show latest" toggle.
-  function applyListVisibility(list: Element, expanded: boolean, filterId: string | null) {
-    entriesOf(list).forEach((entry, i) => {
-      entry.hidden = filterId
-        ? !(entry.dataset.activities ?? "").split(" ").includes(filterId)
-        : !expanded && i >= INITIAL_VISIBLE;
-    });
-  }
-
-  // Clicking an activity opens its full write-up and filters papers/projects
-  // down to its work, with each section stating what it's filtered by —
-  // click again (or "Clear") to reset.
-  const activityCards = document.querySelectorAll<HTMLAnchorElement>(".activity-card");
-  const activityTitles = new Map(
-    Array.from(activityCards, (card) => [card.dataset.activityId, card.dataset.activityTitle ?? ""])
-  );
-  const detailsPanel = document.getElementById("activity-details");
-  const detailPanels = document.querySelectorAll<HTMLElement>(".activity-detail");
-  const writingSection = document.getElementById("writing");
-
-  // Each filterable section's list, its "Show all" toggle (found by the
-  // toggle's `data-target`, not DOM position — the "Clear" button also
-  // lives in this section and must never be confused for the toggle), and
-  // the note that states what it's filtered by.
-  function filterTargetFor(sectionId: string) {
-    const section = document.getElementById(sectionId);
-    const list = document.getElementById(`${sectionId}-list`);
-    const btn = list
-      ? document.querySelector<HTMLButtonElement>(`.list-toggle[data-target="${list.id}"]`)
-      : null;
-    const note = section?.querySelector<HTMLElement>(".filter-note") ?? null;
-    return { section, list, btn, note };
-  }
-
-  const filterTargets = [filterTargetFor("papers"), filterTargetFor("projects")];
-
-  let activeActivityId: string | null = null;
-
-  function selectActivity(id: string | null) {
-    activeActivityId = id;
-
-    activityCards.forEach((card) => {
-      card.setAttribute("aria-pressed", String(card.dataset.activityId === id));
-    });
-
-    detailPanels.forEach((panel) => {
-      panel.hidden = panel.dataset.activityId !== id;
-    });
-    if (detailsPanel) detailsPanel.dataset.open = String(Boolean(id));
-
-    if (writingSection) writingSection.hidden = Boolean(id);
-
-    filterTargets.forEach(({ section, list, btn, note }) => {
-      if (!list) return;
-
-      if (note) {
-        note.hidden = !id;
-        const name = note.querySelector(".filter-note-name");
-        if (name) name.textContent = id ? activityTitles.get(id) ?? "" : "";
-      }
-
-      applyListVisibility(list, true, id);
-
-      if (id) {
-        if (btn) btn.hidden = true;
-        if (section) section.hidden = !entriesOf(list).some((entry) => !entry.hidden);
-      } else {
-        if (btn) {
-          btn.hidden = false;
-          btn.dataset.expanded = "false";
-          const label = btn.querySelector(".toggle-label");
-          if (label) label.textContent = "Show all ↘";
-        }
-        applyListVisibility(list, false, null);
-        if (section) section.hidden = false;
-      }
-    });
-  }
-
-  function clearActivity() {
-    selectActivity(null);
-    history.replaceState(null, "", location.pathname + location.search);
-  }
-
-  activityCards.forEach((card) => {
-    card.addEventListener("click", (e) => {
-      e.preventDefault();
-      const id = card.dataset.activityId ?? null;
-      const nextId = activeActivityId === id ? null : id;
-      selectActivity(nextId);
-      history.replaceState(null, "", nextId ? "#" + nextId : location.pathname + location.search);
-    });
-  });
-
-  document.querySelectorAll<HTMLButtonElement>("[data-clear-filter]").forEach((btn) => {
-    btn.addEventListener("click", clearActivity);
-  });
-
-  // "Show all" / "Show latest" toggle for a list of entries. Hidden while
-  // an activity filter is active (see selectActivity), so it can only ever
-  // act on the unfiltered list.
+  // "Show all" / "Show latest" toggle for a list of entries.
   document.querySelectorAll<HTMLButtonElement>(".list-toggle").forEach((btn) => {
     const list = document.getElementById(btn.dataset.target ?? "");
     if (!list) return;
     const label = btn.querySelector(".toggle-label");
 
     btn.addEventListener("click", () => {
-      const nextExpanded = btn.dataset.expanded !== "true";
-      applyListVisibility(list, nextExpanded, activeActivityId);
-      btn.dataset.expanded = String(nextExpanded);
-      if (label) label.textContent = nextExpanded ? "Show latest ↖" : "Show all ↘";
+      const expanded = btn.dataset.expanded !== "true";
+      list.querySelectorAll<HTMLElement>(".entry").forEach((entry, i) => {
+        entry.hidden = !expanded && i >= INITIAL_VISIBLE;
+      });
+      btn.dataset.expanded = String(expanded);
+      if (label) label.textContent = expanded ? "Show latest ↖" : "Show all ↘";
     });
   });
 
-  // Landing on (or navigating to) a #activity-id hash selects that activity.
-  function openActivityFromHash() {
-    const id = location.hash.slice(1);
-    const matches = Array.from(activityCards).some((card) => card.dataset.activityId === id);
-    if (matches) selectActivity(id);
-  }
-
-  openActivityFromHash();
-  window.addEventListener("hashchange", openActivityFromHash);
+  // Activities used to open in a dialog at /#<activity-id>; send those old
+  // links to the activity's own page.
+  const legacy = document.querySelector<HTMLAnchorElement>(
+    `a[data-activity-id="${CSS.escape(location.hash.slice(1))}"]`
+  );
+  if (legacy) location.replace(legacy.href);
 });
 </script>

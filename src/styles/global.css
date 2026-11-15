@@ -225,6 +225,26 @@ section[id] {
 	@apply -mx-3 px-3 py-3 rounded-lg flex items-start gap-3 transition-colors hover:bg-base-200/60
 }
 
+/* These rules are unlayered, so they beat Tailwind utilities on the same
+   element: row variants have to live here rather than in the markup. */
+.list-row--baseline {
+	@apply items-baseline
+}
+
+/* News row: month, title, pill on one line. On narrow screens the month and
+   the pill share the first line and the title wraps underneath. */
+.news-row {
+	@apply grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 items-baseline sm:grid-cols-[4.5rem_1fr_auto] sm:gap-x-4
+}
+
+.news-row > .news-pill {
+	@apply sm:order-3
+}
+
+.news-row > .news-title {
+	@apply col-span-2 min-w-0 sm:col-span-1 sm:order-2
+}
+
 .list-meta {
 	@apply shrink-0 text-xs text-neutral-content tabular-nums pt-0.5 flex items-center gap-2
 }
@@ -266,34 +286,25 @@ section[id] {
 	@apply overflow-hidden opacity-0 transition-opacity duration-300 motion-reduce:duration-[.01ms] in-data-[open=true]:opacity-100 in-data-[open=true]:delay-120
 }
 
-/* A diagonal snapshot that straightens slightly on hover, or while its
-   linked read-panel is open (toggle with the `data-reading` attribute). */
-.snapshot {
-	@apply bg-surface p-[0.6rem_0.6rem_0] border border-base-200 rounded-[10px] rotate-[-4deg] shadow-[0_10px_26px_-16px_rgba(0,0,0,0.45)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:duration-[.01ms];
-	@apply hover:rotate-[-1.5deg] hover:-translate-y-1 hover:shadow-[0_18px_34px_-18px_rgba(0,0,0,0.5)];
-	@apply data-[reading=true]:rotate-[-1.5deg] data-[reading=true]:-translate-y-1 data-[reading=true]:shadow-[0_18px_34px_-18px_rgba(0,0,0,0.5)]
+/* Round portrait, greyscale until hovered: colour on the homepage is reserved
+   for the category pills. */
+.avatar {
+	@apply size-16 rounded-full object-cover grayscale transition-[filter] duration-500 hover:grayscale-0 motion-reduce:duration-[.01ms]
 }
 
-/* A horizontally scrollable card rail on mobile, a grid on desktop. */
-.activity-rail {
-	@apply scrollbar-none [&::-webkit-scrollbar]:hidden after:content-[''] after:block after:w-2 after:shrink-0 md:after:hidden
+/* Category pill of a news row. One hue per kind, set through --pill; the tint
+   and the text are both mixed from it so they hold up in light and dark. */
+.pill {
+	--pill: var(--color-neutral-content);
+	@apply inline-block text-xs leading-5 px-2 rounded-full whitespace-nowrap;
+	background: color-mix(in oklab, var(--pill) 14%, transparent);
+	color: color-mix(in oklab, var(--pill) 50%, var(--color-base-content));
 }
 
-/* Sits under a section's kicker, stating what activity it's currently filtered by. */
-.filter-note {
-	@apply text-xs text-neutral-content/70 flex items-center gap-1 mt-1 mb-4
-}
-
-
-/* The front face of an activity card, lit up permanently while selected
-   (an ancestor card carries `aria-pressed="true"`). */
-.face {
-	@apply absolute inset-0 rounded-xl overflow-hidden bg-base-200 hover:bg-base-content duration-300 transition-all in-aria-pressed:bg-base-content
-}
-
-.face-content {
-	@apply relative h-full flex flex-col justify-end p-5 md:p-6 text-base-content hover:text-base-100 duration-300 transition-all in-aria-pressed:text-base-100
-}
+.pill[data-kind="research"]    { --pill: var(--color-accent-2); }
+.pill[data-kind="engineering"] { --pill: var(--color-accent-1); }
+.pill[data-kind="design"]      { --pill: var(--color-accent-3); }
+.pill[data-kind="development"] { --pill: var(--color-accent-4); }
 
 .btn-outline {
 	@apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm transition-colors border border-base-300 hover:border-base-content
