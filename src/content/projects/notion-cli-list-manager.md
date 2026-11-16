@@ -12,13 +12,19 @@ trending: true
 cover: /uploads/notion-cli.gif
 ---
 
-[Notion](https://notion.so) is a nice tool for "task management, project management, knowledge management" (from Wikipedia), that allows you to use databases as lists of notes and pages. I have been using it for years but sometimes I found that adding the record was time-wasting, so I have been developing a CLI (command-line interface) in Python for managing those databases. If you want to give it a try:  
-```
+Writing down an idea is only useful if it takes less time than the idea takes to fade, and opening a full workspace application to add one line to a list does not meet that bar. [Notion](https://notion.so) lets you use databases as lists of notes and pages; I have used it for years, but adding a record through its interface was slow enough that I wrote a command-line client in Python for those list databases.
+
+![Screen recording of a terminal window placed over a Notion "To Do" database, used to run the list command](../../assets/uploads/notion-cli.gif)
+
+The tool installs a single `list` command that talks to the Notion API through an internal integration token: the database has to be shared with the integration, then token and default database ID are stored once with `list set`. After that, `list` prints the items of the default database as an ASCII table, `list add` creates a page, `list rm` deletes items by index, with ranges and lists such as `3,4,6:10:2`, and `list db` registers further databases under a label and chooses which properties to show and in which order. Properties are read-only, and relations and rollups are not supported.
+
+```sh
 pip install notion-cli-list-manager
-```  
+list set --token [token] --id [database-id]
+list add "get money"
+list
+```
 
-You can read more on the [GitHub repository](https://github.com/jacksalici/notion-cli-list-manager). Note that the project is not completed yet, so commands could change a bit.  
-
-<img class="not-sized" alt="GitHub Repo stars" src="https://img.shields.io/github/stars/jacksalici/notion-cli-list-manager?style=social">
+ The [GitHub repository](https://github.com/jacksalici/notion-cli-list-manager) has the full command reference, and it collected more stars than I expected.
 
 The project have been starred more than I thought, thanks you all for the interest!

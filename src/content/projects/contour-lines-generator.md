@@ -27,9 +27,19 @@ gallery:
     alt: "Contour example 4"
 ---
 
-This is something I had wanted to make for a long time. There is a particular kind of beauty in seeing art come out of mathematics: a few numbers, an interpolation rule, and suddenly the screen shows something that looks like a coastline or a mountain ridge. I started sketching this years ago and never finished it, but agentic coding finally let me close the gap between the idea and a working tool, and the results are honestly brilliant. It is [pure JavaScript](https://github.com/jacksalici/ContourLinesGenerator/), no framework and no build step, entirely open source, and you can [try it in the browser](https://contours.jacksalici.com).
+On a topographic map, the shape of the terrain is drawn with contour lines, curves that join the points at the same elevation; the same construction applied to an invented surface turns a few numbers and an interpolation rule into something that looks like a coastline or a mountain ridge. This is something I had wanted to make for a long time: I started sketching it years ago and never finished it, until agentic coding let me close the gap between the idea and a working tool.
 
-The purpose of this project is to generate **parametric [contour lines](https://en.wikipedia.org/wiki/Contour_line)** and export them as beautiful images.
+![The generator in the browser: the control panel on the left and, on the right, a rainbow-coloured contour drawing with its draggable control points](../../assets/uploads/contour-lines-generator/screenshot.jpg)
+
+The generator draws **parametric [contour lines](https://en.wikipedia.org/wiki/Contour_line)**. The user places a handful of control points $(x, y, z)$ on the canvas; a height function $h(x, y)$ is interpolated from them on a regular grid, optionally roughened with two layers of fBm noise, and for each level $c$ the curve
+
+$$
+L_c = \{\, (x, y) : h(x, y) = c \,\}
+$$
+
+is extracted with marching squares, then stitched, simplified, smoothed and written as an SVG path. The steps are detailed below.
+
+It is [pure JavaScript](https://github.com/jacksalici/ContourLinesGenerator/), twelve small modules with no framework and no build step, entirely open source, and it runs [in the browser](https://contours.jacksalici.com). The whole state of a drawing is serialised in the query string, so the URL is the save format and a shared link restores the exact image; opening the page without parameters gives a fresh random drawing every time. The result can be exported as SVG or PNG.
 
 ## How it works
 
@@ -46,8 +56,8 @@ Contour lines are [level sets](https://en.wikipedia.org/wiki/Level_set) of a con
     - *Additive
    bumps* sums the gaussians, so overlapping points build ridges. It's the most terrain-like of the three;
     - *inverse distance* and *gaussian blend* average instead, so the field never exceeds the highest control
-   point. Optional [fBm noise](https://en.wikipedia.org/wiki/Fractional_Brownian_motion) roughens the
-   surface, and a [smoothstep](https://en.wikipedia.org/wiki/Smoothstep) border mask fades it to zero near
+   point. Two optional layers of [fBm noise](https://en.wikipedia.org/wiki/Fractional_Brownian_motion)
+   roughen the surface, and a [smoothstep](https://en.wikipedia.org/wiki/Smoothstep) border mask fades it to zero near
    the frame so contours close into islands instead of being clipped: `radial` gives an oval landmass,
    `frame` gives rings parallel to the border, `none` lets lines run off the edge. The result is rescaled
    to `[0,1]`.

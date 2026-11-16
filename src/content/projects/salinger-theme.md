@@ -14,13 +14,13 @@ cover: "/uploads/salinger-theme/tn.jpg"
 trending: true
 ---
 
+A static site generator turns Markdown files into a website, and the theme decides everything a visitor actually sees. Salinger is a minimal, mobile-first theme for the [Hugo framework](https://gohugo.io) that I wrote for an earlier version of this website and then released on its own.
 
-__Salinger__ is a _clean, minimalistic, mobile-first, blazing-fast, fancy_ and _lightweight_ theme for the [Hugo framework](https://gohugo.io).
-Born as the theme for this website, recently it has been completely rebuilt using __Tailwind__ and __DaisyUI__.
+![Home page of the Salinger theme demo site, shown in dark mode on desktop and in light mode on a phone](../../assets/uploads/salinger-theme/tn.jpg)
 
-Why this name? During the design of the light mode homepage, I was inspired by [the Italian edition cover by Einaudi](https://duckduckgo.com/?q=il+giovane+holden+by+j.d.+salinger+einaudi+1961&t=h_&ia=images&iax=images&iaf=color%3AWhite) of _The Catcher in The Rye_ by J.D. Salinger.
+The second major version, from July 2023, is a complete rewrite on Tailwind CSS and DaisyUI. It has light, dark and automatic colour modes, a hamburger menu with a custom icon, Twemoji rendering of emoji, per-page control over which metadata are shown, Google Analytics and SEO tags; the README reports a 100% score on PageSpeed. The theme is added to a Hugo project as a git submodule and configured from `hugo.toml`, and it was featured at HugoConf 2023.
 
-More info and usage instructions are on the [GitHub](https://github.com/jacksalici/salinger-theme) repository.
+The name comes from the light-mode home page, whose design was inspired by [the cover of the 1961 Einaudi edition](https://duckduckgo.com/?q=il+giovane+holden+by+j.d.+salinger+einaudi+1961&t=h_&ia=images&iax=images&iaf=color%3AWhite) of _The Catcher in the Rye_ by J.D. Salinger. Usage instructions are in the [GitHub repository](https://github.com/jacksalici/salinger-theme) and its wiki, and the [demo site](https://salinger-hugo-theme.netlify.app) shows the theme running.
 
 ## Features
 

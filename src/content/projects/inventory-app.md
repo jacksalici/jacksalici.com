@@ -9,7 +9,7 @@ activities: ["coding-web-apps"]
 stack: ["Vue", "Deta"]
 cta:
   - { url: "https://inventory.jacksalici.com", label: "Check the website" }
-  - { url: "https://raw.githubusercontent.com/jacksalici/inventory-app/", label: "Check the code" }
+  - { url: "https://github.com/jacksalici/inventory-app", label: "Check the code" }
 cover: "/uploads/inventory-app/screenshot3.png"
 playground:
   link: "/projects/inventory-app/"
@@ -18,21 +18,10 @@ playground:
   dead: 2024-10-01
 ---
 
-The Inventory App is a fast, open-source and 100% free way to track the equipment of your role-playing games characters.
+In a tabletop role-playing game every character carries equipment, coins and consumables that change at each session, and the paper sheet where they are written is never the one the rest of the party is looking at. The Inventory App is a free and open-source web app to keep the inventory of a whole party in one shared place.
 
-![screenshot](../../assets/uploads/inventory-app/screenshot2.png)
+![Party view of The Inventory App, with the heroes and their equipment](../../assets/uploads/inventory-app/screenshot2.png)
 
-The web app is built using Vue as frontend, ~and [Deta Collections](https://deta.space/docs/en/use/your-data/collections) for persistent data storage. The *NoSQL* database has 2 tables (automatically created on the first usage):~
+The frontend is written in Vue, and the data lived in Deta Collections, a hosted NoSQL store, in two tables created on first use: `Heroes` (`nickname` as key, `name`, `details`, `equipment`, `slots`, `avatar`) and `Inventory` (`id` as key, `object`, `details`, `quantity`, `value`, `used`). I wanted something simple and free for both the users and me, so I chose not to run a user database at all, for cost, privacy and security: each party created its own Deta collection and entered its API key in the app. The trade-off is explicit in the README: anyone who has the key can read, change and delete the data of that collection, and the key is saved unencrypted in the browser's local storage, which is not good practice and which I accepted given the informal purpose of the app.
 
-> 🚨 **Update Oct 2024**: Deta has announced the end of its services. Therefore, until I will migrate to another service, the app is not usable anymore.
-
-- **Heroes**  
-    It contains the info about the characters and has the following attributes: `nickname` (pk), `name`, `details`, `equipment`, `slots`, `avatar`. 
-
-- **Inventory**  
-    It contains the info about the characters' equipment: `id` (pk), `object`, `details`, `quantity`, `value`, `used`.
-
-
-#### Usage
-
-For the usage of the app itself, please rely on the FAQs that are [directly on the website](https://inventory.jacksalici.com/about/).
+In October 2024 Deta announced the end of its services, and with it the app lost its only backend. The static site at [inventory.jacksalici.com](https://inventory.jacksalici.com) still loads, with its FAQ, but it can no longer store anything; I have not migrated it to another service. The [code](https://github.com/jacksalici/inventory-app) is released under the MIT licence.

@@ -16,7 +16,7 @@ gallery:
   - src: "/uploads/model/model4.jpg"
     alt: "Scout model 4"
 ---
-During my last year as a boy scout, I've achieved the craftsman badge making a 1:20 scale model of a patrol area during the campouts.
 
+In scouting, a proficiency badge (in italian, "brevetto") is earned by completing a practical project that demonstrates a specific skill, and the craftsman badge is the one about building things by hand.
 
-
+During my last year as a boy scout I earned the craftsman badge by building a 1:20 scale model of a patrol area, the space a patrol sets up and lives in during the campouts. The pictures above show the finished model.

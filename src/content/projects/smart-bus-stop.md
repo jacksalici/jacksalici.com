@@ -11,9 +11,10 @@ cover: /uploads/smart-bus-stop/architecture.jpg
 cta:
   - { url: "https://github.com/jacksalici/smart-bus-stop", label: "Take a look at the repository" }
 ---
-![Cover](../../assets/uploads/smart-bus-stop/cover.svg)
 
 This project was developed by a friend on mine and me as the final project for my Master's Degree in the CS IoT course. Its main focus is to improve public transportation, particularly city buses. The aim is to create a smart bus stop that enables easier access to the service and enhances it through a network of such stations.
+
+![Architecture of the system: the bus server, with resource manager, digital twin and forecasting, talks over MQTT with the bus client and with the help button and people counter of each stop, and over HTTP with the web client and NFC authentication of the kiosk](../../assets/uploads/smart-bus-stop/architecture.jpg)
 
 In our vision, each smart bus stop will be equipped with a digital kiosk/totem device and a button board. A solar panel may also be provided to the station to make it self-sufficient during sunny hours.
 

@@ -12,42 +12,26 @@ cta:
 hidden: true
 ---
 
-I developed a simple RESTful API and a Node package for querying emoji, since I needed one for developing [EmojiPoll](https://jacksalici.com/projects/emojipoll). The problem is that for emojis, unlike standard alphabet characters, it is not possible to get a random glyph from a set.
+Drawing a random letter is a matter of picking an index in a short contiguous alphabet, but emoji do not work that way: they are scattered over several Unicode blocks, and many of them are sequences of code points (skin-tone modifiers, joined sequences, flags) rather than single characters. Picking one at random, or all those of a given category, requires an explicit list. I needed exactly this while developing [EmojiPoll](https://jacksalici.com/projects/emojipoll), so I built a small RESTful API and a Node package for querying emoji.
 
-## API
+![A JSON array of random emoji, as returned by the API](../../assets/uploads/emojiscreenshot.png)
 
-For the first I used Python and FastAPI, and now is hosted on [Deta](https://emojiapi.jacksalici.com/docs).
-
-```python
-
-import requests
-import json
-
-data=requests.get('https://emoji.deta.dev/random?n=10&skintones=False&nogroup=Symbols,Flags')
-print(json.loads(data.text))
- 
-# ["☔","🤵‍♀️","🤍","🗿","🎥","👴","🏃","🥄","🧃","✌️"]
-```
-
-For both the tool, there are several parameters, you can see them on the [GitHub repository](https://github.com/jacksalici/emoji-helper). One of them is the random option.
-
-The data is parsed from the Unicode website into a JSON list of dictionaries from which the emoji are retrieved ([JSON file](https://raw.githubusercontent.com/jacksalici/emoji-list-api/main/src/emoji.json)). Each dictionary presents information regarding an emoji and can be retrieved using the verbose parameter. An example is reported.
+Both tools read the same data: a script parses the `emoji-test.txt` file published by Unicode (version 15.0) into a [JSON list](https://raw.githubusercontent.com/jacksalici/emoji-helper/main/helper/emoji.json) of 4,733 records, 3,655 of which are fully-qualified emoji, each with its description, group, subgroup, code points, status and version, as in the example below. On top of it, the two tools expose the same queries: a list or a random sample of `n` emoji, filtered by included or excluded groups and subgroups, search terms, maximum emoji version and skin tones, returned either as bare glyphs or, in verbose mode, as full records. All the parameters are documented in the [GitHub repository](https://github.com/jacksalici/emoji-helper).
 
 ```json
 {
-        "emoji": "🌵",
-        "description": "cactus",
-        "group": "Animals & Nature",
-        "subgroup": "plant-other",
-        "code": "1F335",
-        "status": "fully-qualified",
-        "version": "E0.6"
-    }
+    "emoji": "🌵",
+    "description": "cactus",
+    "group": "Animals & Nature",
+    "subgroup": "plant-other",
+    "code": "1F335",
+    "status": "fully-qualified",
+    "version": "E0.6"
+}
 ```
-## npm
 
-For what concerns the npm package, here is a very simple script that shows how it works.
-   
+The API is written in Python with FastAPI and was hosted on Deta; that deployment no longer answers, but the code can still be run locally from the repository. The Node package is published on npm as `emoji-random-list` and works offline:
+
 ```bash
 npm i emoji-random-list
 ```
@@ -57,4 +41,3 @@ var emoji = require("emoji-random-list")
 console.log(emoji.random({n: 5, group: 'objects'}))
 //[ '🪒', '📕', '🔋', '🔩', '💷' ]
 ```
-

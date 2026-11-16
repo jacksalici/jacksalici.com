@@ -7,7 +7,6 @@ categories: ["making"]
 hidden: true
 ---
 
-During the Covid-19 emergency, intending to reduce the ear pain caused by wearing the mask for several hours, I designed this ear saver that can be 3d printed in a few minutes.
-If you want, you can download the 3d model .stl from my [Thingiverse page](https://www.thingiverse.com/thing:4421036).
+A face mask held by elastic loops puts a constant load on the back of the ears, and after several hours of wear this becomes painful. An ear saver is a strap that sits behind the head and holds the two loops, moving the tension away from the ears.
 
-![](/uploads/ear-saver/Render1.png)
+During the Covid-19 emergency, to reduce the ear pain caused by wearing a mask for several hours, I designed an ear saver that can be 3D printed in a few minutes. The .stl model can be downloaded from my [Thingiverse page](https://www.thingiverse.com/thing:4421036).

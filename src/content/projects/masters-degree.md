@@ -4,7 +4,7 @@ pubDate: 2024-10-17
 slug: sfm-gaze-framework
 description: "Gaze-Driven Human-Robot Interaction is the core of my thesis."
 news: My M.Sc. thesis on gaze-driven human-robot interaction is now available online.
-summary: "The following text is a glimpse of my master degree thesis in Computer Engineering. During its development, I applied the gaze direction on human-robot interaction, using a humanoid robot and two pair of eye-tracking glasses to build a pipeline for estimate it in common - not laboratory-based - environments."
+summary: "A summary of my M.Sc. thesis in Computer Engineering: a framework that uses Project Aria eye-tracking glasses and Structure from Motion to locate human gaze in 3D outside the laboratory, and a dataset of human-robot interactions recorded with it."
 categories: ["ai-ml", "robotics"]
 activities: ["applied-embodied-ai"]
 stack: ["Python"]
@@ -15,38 +15,17 @@ cta:
 cover: "/uploads/masters-degree/fw-example.png"
 ---
 
-## Abstract
+Gaze is one of the main non-verbal channels of human communication: where a person looks reveals what they attend to and whether they intend to engage. A robot that works with people needs this cue, but estimating gaze in dynamic, real-world environments, rather than in the laboratory, is a practical problem that is still not completely solved, and new models need reference data to be validated against. My M.Sc. thesis in Computer Engineering at the University of Modena and Reggio Emilia, supervised by Prof. Roberto Vezzani and defended in October 2024, develops a framework that estimates gaze "in the wild" and labels the 3D position of the point being looked at.
 
-Humanity has always developed tools and skills to simplify tasks and improve the quality of life. Since the invention of robotic arms, these machines have reduced the physical demands of labor-intensive jobs and increased safety. With the advent of artificial intelligence, robots are becoming more empathetic and interactive, making a robust human-robot interaction (HRI) essential. A key aspect of interactive robots is their ability to detect users' intention to engage and interpret their focus of attention — tasks where estimating human gaze plays a crucial role.
+![Output of the framework on one take of the dataset: the reconstructed point cloud with the camera poses of the two pairs of glasses and the gaze direction, the average reprojection error over time, and the same instant seen from the Pepper robot](../../assets/uploads/masters-degree/fw-example.png)
 
-The goal of this thesis is to develop a framework for gaze estimation and eye tracking. Firstly, it addresses the practical challenge of estimating eye movements "in the wild". Secondly, it provides a baseline for the future research in this field. The framework makes use of Meta's Project Aria glasses, a device designed to accelerate research in augmented and extended reality (AR/XR), and integrates multiple technologies, from neural networks to Structure From Motion (SFM) processing. The gaze direction can effectually be localized within a 3D environment, allowing tracking across multiple third-person perspectives.
+The framework is built around Meta's Project Aria glasses, a research device with two eye-tracking cameras. A VGG network estimates the gaze direction of the wearer from the images of the pupils. The recordings of the different devices are synchronised through timestamps shown as QR codes, frames are extracted, and a Structure from Motion (SfM) reconstruction, computed with HLOC and PyCOLMAP, provides a 3D model of the room together with the pose of every camera in it. The gaze direction is then converted into a 3D gaze point in the reconstructed space, from which it can be reprojected into any other localised view: a second pair of Aria glasses, or the camera of a robot. The pipeline is a sequence of Python scripts, with the results inspected in Rerun.
 
-A new dataset has also been recorded to demonstrate the framework's capabilities and offer a potential benchmark and validation tool for new gaze estimation models, especially in HRI context. It consists of recordings of participants performing common actions while wearing Project Aria glasses, captured from another pair of glasses and a Pepper robot the participant interacts with. This dataset could address existing challenges in the field and advance further research in HRI.
+With the framework I recorded a dataset ([more about it here](/gaze-dataset)) of 10 participants performing common actions while wearing the glasses, with and without a Pepper humanoid robot to interact with, filmed by a second pair of glasses and by the robot itself. It is meant as a potential benchmark and validation tool for new gaze estimation models, especially in human-robot interaction (HRI). The thesis also includes a case study developed in parallel, in which a robot manipulator performs pick-and-place tasks driven by the gaze of a user wearing the glasses. The code is in the [repository](https://github.com/jacksalici/sfm-gaze-framework); the files of the thesis are deposited in the [university archive](https://morethesis.unimore.it/theses/available/etd-09262024-135659/) with restricted access; for the dataset, contact me.
 
-## Preface
+## Thesis structure
 
-The gaze is one of the most important non-verbal communication mediums and it is present in every live human interaction. When people communicate, their gaze carries emotions, intentions, and answers. To be able to understand the gaze clues represents a mandatory part of complete communication but also a better understanding of the interlocutor. This is true not only for humans but also for Human Robot Interaction (HRI). In this context, the gaze is a fundamental tool for robots to completely understand human intentions.
-
-This thesis aims to investigate the role of gaze in HRI, and how it can enhance collaborative machine interactions. The work starts from a deep dive into the challenges of both gaze estimation and HRI and then moves on to an analysis of gaze estimation applied to HRI. During the work behind this thesis, two pieces of hardware were indeed used and here described since they perfectly reflect the two main aspects of this research. The first is a humanoid robot designed for social interaction, the second is the very recent and portable Meta's Project Aria glasses—hardware designed to advance research in augmented and extended reality (AR/XR), with two cameras for eye-tracking and gaze estimation.
-
-This thesis later presents the development of a framework for gaze estimation _in the wild_. As will be deeply discussed, estimating eye movements in dynamic, real-world environments is a practical challenge that is still not completely solved. Even if it is not without limitation, the framework try to be as modular as possible in this task. Moreover, it was designed to provide a baseline and validation for future models on gaze estimation. Thanks to several tools and two different Project Aria, it can create labels of the 3D position of the gazed point. The framework consists of a detailed pipeline, beginning with a VGG network that processes pupil images to detect gaze direction.
-
-Subsequently, a Structure From Motion (SFM) technique is used to reconstruct a 3D virtual representation of the space. Through several reprojections, the gaze direction is localized within this 3D environment, making it possible to track the gaze across multiple third-person perspectives.
-
-To validate the framework, a new dataset was recorded [(more about it here)](/gaze-dataset). The dataset is a collection of participants while they perform common actions with and without a humanoid robot to interact with. This dataset offers a potential benchmark and validation tool for new gaze estimation models and human-robot interaction research, further advancing the field.
-
-Finally, the thesis includes a case study of gaze-driven HRI, which was developed in parallel to the framework. A robot manipulator was programmed to be controlled with the gaze of the user, who is wearing Project Aria Glasses. The robot can successfully follow the user's will and perform pick and place tasks, demonstrating the potential of gaze-driven HRI in real-world applications. The objective of this entire work is indeed not only to refine the technical methodologies for a new type interaction but also to assess the implications of these advancements for practical applications in HRI.
-
-## Thesis Structure
-
-This thesis is structured into several parts. In this introductory Part I, the state of the art and the challenges of human-robot interaction (HRI) are profiled, with particular attention to the importance of gaze and its role in HRI. Additionally, relevant literature will be reviewed, besides to the methods and algorithms explored in the preliminary work which lead up to this thesis (Chapter 2).
-
-The Part II provides an in-depth analysis of two pieces of hardware that represent different aspects of HRI and Gaze Estimation. The first is the Pepper Robot (Chapter 3), a humanoid robot with various social capabilities, and the second is a pair of glasses designed by Meta to accelerate research in the field through the recording of egocentric views (Chapter 4). The same part includes a chapter where a brief analysis is made about the other devices used in this work and more generally used in HRI (Chapter 5).
-
-The Part III represents the core novelty of this thesis. There, the methodology and pipeline of creating a framework for gaze analysis are deeply described (Chapters 6 and 7).
-A dataset for benchmarking gaze estimation model has been recorded and elaborated using the framework. The implications of this dataset are also described there (Chapter 8).
-
-Part IV begins with a presentation of a case study about HRI (Chapter 9), which was developed during the same period and it is a perfect example of a gaze-driven application that could increase the quality of how a pick and place robot manipulator is used.
-In the same part are present the conclusion and possible future developments of this work (Chapter 10). This thesis covers a broad range of topics, and it would be impossible to deeply dive into each of them. However, it is hoped that this work will provide a solid foundation for any additional future work and give a glimpse of every touched aspect.
-
-
+- **Part I** profiles the state of the art and the challenges of human-robot interaction, with particular attention to the role of gaze, and reviews the literature together with the methods explored in the preliminary work (Chapter 2).
+- **Part II** analyses the hardware: the Pepper robot, a humanoid designed for social interaction (Chapter 3), the Project Aria glasses, which record egocentric views (Chapter 4), and the other devices used in this work and, more generally, in HRI (Chapter 5).
+- **Part III** is the core contribution: the methodology and the pipeline of the framework for gaze analysis (Chapters 6 and 7), and the dataset recorded and processed with it, with its implications (Chapter 8).
+- **Part IV** presents the case study of the gaze-driven pick-and-place manipulator (Chapter 9), followed by the conclusions and possible future developments (Chapter 10).

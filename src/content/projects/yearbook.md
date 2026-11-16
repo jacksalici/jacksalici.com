@@ -7,6 +7,6 @@ categories: ["design"]
 hidden: true
 ---
 
-During my last year of high school, I took care of the creation of the school yearbook. 76 pages designed by me. This is a first draft of the final template.
+A school yearbook is a small editorial project: texts and photographs from many hands have to fit a single template. In my last year of high school I took care of ours, the 2018/2019 edition, and designed all of its 76 pages. The picture shows a first draft of the final template.
 
-![](../../assets/uploads/yearbook.jpg)
+![Mock-up of the yearbook: the dark grey cover, with the title "2018 2019 un annuario senza filtro" in a pink-to-orange gradient, lying on an open spread of photographs](../../assets/uploads/yearbook.jpg)
