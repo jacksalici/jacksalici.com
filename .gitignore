@@ -10,3 +10,4 @@ dist
 .claude
 .codex
 CLAUDE.md
+__pycache__

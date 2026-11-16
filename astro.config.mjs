@@ -1,6 +1,8 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 
 import tailwindcss from "@tailwindcss/vite";
@@ -10,6 +12,12 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://jacksalici.com",
   integrations: [mdx(), sitemap()],
+
+  // LaTeX in Markdown: `$…$` inline, `$$…$$` on its own lines for display.
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
 
   redirects: {
     // The collections no longer have their own index page: they live as
