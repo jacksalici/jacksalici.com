@@ -1,0 +1,18 @@
+---
+// A labelled block of a page.
+interface Props {
+	title?: string;
+	/** One line under the title. */
+	note?: string;
+	id?: string;
+	[key: `data-${string}`]: unknown;
+}
+
+const { title, note, ...rest } = Astro.props;
+---
+
+<section class="section" {...rest}>
+	{title && <h2 class="eyebrow">{title}</h2>}
+	{note && <p class="text-sm text-neutral-content mb-5">{note}</p>}
+	<slot />
+</section>

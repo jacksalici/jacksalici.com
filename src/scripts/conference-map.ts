@@ -52,7 +52,7 @@ map.on('load', () => {
     source: 'papers',
     filter: ['has', 'point_count'],
     paint: {
-      'circle-color': '#F24333',
+      'circle-color': '#C93527',
       'circle-radius': ['step', ['get', 'point_count'], 20, 10, 30, 50, 40],
       'circle-opacity': 0.7,
     },
@@ -76,7 +76,7 @@ map.on('load', () => {
     source: 'papers',
     filter: ['!', ['has', 'point_count']],
     paint: {
-      'circle-color': '#F24333',
+      'circle-color': '#C93527',
       'circle-radius': 8,
     },
   });
@@ -100,7 +100,7 @@ map.on('load', () => {
           .map(
             (p, j) => `
           <div class="${j > 0 ? 'border-t border-white/10 mt-1.5 pt-1.5' : ''}">
-            <a href="/papers/${p.id}/" class="font-semibold text-sm text-accent-1 hover:underline no-underline">${p.title}</a>
+            <a href="/papers/${p.id}/" class="font-semibold text-sm text-accent hover:underline no-underline">${p.title}</a>
             ${p.venue ? `<p class="text-xs mt-0.5">${p.venue}</p>` : ''}
           </div>`,
           )

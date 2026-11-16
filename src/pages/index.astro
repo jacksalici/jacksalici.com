@@ -1,9 +1,12 @@
 ---
-import EntryList from "../components/EntryList.astro";
-import EntryRow from "../components/EntryRow.astro";
+import Button from "../components/Button.astro";
+import List from "../components/List.astro";
+import ListItem from "../components/ListItem.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Section from "../components/Section.astro";
 import Base from "../layouts/Base.astro";
+import { newsKindLabels } from "../consts";
 import { getNews } from "../utils/news";
-import "../styles/global.css";
 
 const news = await getNews();
 // News shown before "All updates" reveals the rest.
@@ -19,41 +22,35 @@ const props = { image: "/uploads/sky.jpg" };
   keywords={["giacomo salici", "ai engineer", "computer engineer", "robotics", "research", "portfolio"]}
 >
   <main>
-    <section id="about" class="max-w-2xl">
-      <h1 class="text-2xl md:text-3xl font-medium tracking-tight leading-snug text-balance">
-        A digital craftsman who designs systems that matter.
-      </h1>
-
-      <p class="mt-5 leading-relaxed text-neutral-content">
+    <PageHeader title="A digital craftsman who designs systems that matter.">
+      <p>
         I am <span class="text-base-content">Giacomo Salici</span>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a href="https://aimagelab.unimore.it/">AImageLab</a> research group of UniMORE as a <span class="text-base-content">PhD candidate in ICT</span>.
       </p>
-      <p class="mt-4 leading-relaxed text-neutral-content">
+      <p>
         My research interests include <span class="text-base-content">AIoT</span>, <span class="text-base-content">embodied AI</span>, <span class="text-base-content">modular DL</span>, and <span class="text-base-content">anomaly detection</span>. I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
       </p>
 
-      <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-        <a href="/contacts" class="nav-link text-base-content!">Get in touch</a>
-        <a href="https://github.com/jacksalici" class="nav-link">GitHub</a>
-        <a href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" class="nav-link">Google Scholar</a>
-        <a href="https://linkedin.com/in/jacksalici" class="nav-link">LinkedIn</a>
+      <div slot="after" class="flex flex-wrap gap-x-5 gap-y-2">
+        <Button variant="link" href="/contacts" class="text-base-content">Get in touch</Button>
+        <Button variant="link" href="https://github.com/jacksalici">GitHub</Button>
+        <Button variant="link" href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ">Google Scholar</Button>
+        <Button variant="link" href="https://linkedin.com/in/jacksalici">LinkedIn</Button>
       </div>
-    </section>
+    </PageHeader>
 
-    <section class="mt-20" id="news" data-pagefind-ignore>
-      <h2 class="eyebrow mb-3">News</h2>
-
-      <EntryList id="news-list">
+    <Section title="News" id="news" data-pagefind-ignore>
+      <List id="news-list">
         {news.map((item, i) => (
-          <EntryRow href={item.href} title={item.title} date={item.date} kind={item.kind} hidden={i >= LATEST} />
+          <ListItem href={item.href} title={item.title} date={item.date} chip={newsKindLabels[item.kind]} hidden={i >= LATEST} />
         ))}
-      </EntryList>
+      </List>
 
       {news.length > LATEST && (
-        <button type="button" class="more-link mt-4 cursor-pointer" data-news-more data-haptic-press="light">
+        <Button variant="link" class="mt-4" data-news-more data-haptic-press="light">
           All {news.length} updates ↓
-        </button>
+        </Button>
       )}
-    </section>
+    </Section>
   </main>
 </Base>
 
@@ -63,7 +60,7 @@ const props = { image: "/uploads/sky.jpg" };
 document.addEventListener("click", (event) => {
   const more = (event.target as Element).closest<HTMLButtonElement>("[data-news-more]");
   if (!more) return;
-  document.querySelectorAll<HTMLElement>("#news-list .entry[hidden]").forEach((entry) => (entry.hidden = false));
+  document.querySelectorAll<HTMLElement>("#news-list [data-entry][hidden]").forEach((entry) => (entry.hidden = false));
   more.remove();
 });
 </script>

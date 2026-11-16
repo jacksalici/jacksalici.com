@@ -23,7 +23,7 @@ gallery:
     caption: "Prova di stampa 3"
 ---
 
-<span class="text-accent-3 font-bold">La stampante è stata acquistata.</span>
+<span class="text-accent font-bold">La stampante è stata acquistata.</span>
 
 ## Overview
 

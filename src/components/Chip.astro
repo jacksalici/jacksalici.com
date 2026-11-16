@@ -1,0 +1,11 @@
+---
+// The one small label of the site: kinds, statuses, badges.
+interface Props {
+	tone?: "neutral" | "accent";
+	class?: string;
+}
+
+const { tone = "neutral", class: className } = Astro.props;
+---
+
+<span class:list={["chip", className]} data-tone={tone}><slot /></span>

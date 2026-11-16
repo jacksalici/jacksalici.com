@@ -20,9 +20,8 @@ export const categories: Record<string, string> = {
   "thoughts":   "Thoughts",
 };
 
-// Pill shown on each row of the homepage news list: papers are "research",
-// notes are "notes", and a project takes one of the middle three from its
-// first category. The pill colours live in global.css (.pill[data-kind]).
+// Chip shown on each row of the news list: papers are "research", notes are
+// "notes", and a project takes one of the middle three from its first category.
 export type NewsKind = "research" | "engineering" | "development" | "design" | "notes";
 
 export const newsKindLabels: Record<NewsKind, string> = {

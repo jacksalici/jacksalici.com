@@ -52,21 +52,21 @@ const columnClasses: Record<NonNullable<Props["columns"]>, string> = {
   data-gallery={dialogId}
 >
   {label && (
-    <p class="mb-3 text-xs uppercase tracking-[0.2em] text-neutral-content">
+    <p class="eyebrow mb-3">
       {label}
     </p>
   )}
 
   <div class={`grid ${columnClasses[cols]}`}>
     {tiles.map((item, index) => (
-      <figure class="group relative overflow-hidden rounded-xl border border-base-300/70 bg-base-200/40 transition-colors duration-200 hover:border-base-content/30">
+      <figure class="grid-item group">
         <button
           type="button"
           class="gallery-trigger block w-full text-left cursor-pointer"
           data-gallery-id={dialogId}
           data-index={index}
         >
-          <div class="relative aspect-4/3 overflow-hidden bg-base-300/20">
+          <div class="grid-media">
             {item.thumb ? (
               <Image
                 src={item.thumb}
@@ -75,7 +75,7 @@ const columnClasses: Record<NonNullable<Props["columns"]>, string> = {
                 densities={[1, 2]}
                 loading="lazy"
                 decoding="async"
-                class="h-full w-full object-cover rounded-none transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                class="transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
               />
             ) : (
               <img
@@ -83,16 +83,14 @@ const columnClasses: Record<NonNullable<Props["columns"]>, string> = {
                 alt={item.alt}
                 loading="lazy"
                 decoding="async"
-                class="h-full w-full object-cover rounded-none transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                class="transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
               />
             )}
-            {/* A quiet wash instead of the old blow-out in brightness. */}
-            <span class="pointer-events-none absolute inset-0 bg-base-content/0 transition-colors duration-300 group-hover:bg-base-content/10" />
           </div>
         </button>
 
         {item.caption && (
-          <figcaption class="px-4 py-3 text-sm text-neutral-content">
+          <figcaption class="grid-item-description">
             {item.caption}
           </figcaption>
         )}
@@ -137,7 +135,8 @@ const columnClasses: Record<NonNullable<Props["columns"]>, string> = {
   function initGallery() {
     document.querySelectorAll('[data-gallery]').forEach((section) => {
       const galleryId = section.getAttribute('data-gallery');
-      if (!galleryId) return;
+      if (!galleryId || (section as HTMLElement).dataset.bound) return;
+      (section as HTMLElement).dataset.bound = 'true';
 
       const dialog = document.getElementById(galleryId) as HTMLDialogElement;
       if (!dialog) return;

@@ -1,0 +1,26 @@
+---
+// The one button of the site. With an `href` it renders a link, otherwise a
+// <button>. Any other attribute (data-*, aria-*, target…) is passed through.
+import type { HTMLAttributes } from "astro/types";
+
+type Props = {
+	/** solid: main action. outline: secondary. link: text only. icon: square, icon only. */
+	variant?: "solid" | "outline" | "link" | "icon";
+	href?: string;
+	class?: string;
+} & Omit<HTMLAttributes<"a"> & HTMLAttributes<"button">, "class" | "href">;
+
+const { variant = "outline", href, class: className, ...rest } = Astro.props;
+const Tag = href ? "a" : "button";
+const external = href?.startsWith("http");
+---
+
+<Tag
+	href={href}
+	type={href ? undefined : "button"}
+	target={external ? "_blank" : undefined}
+	rel={external ? "noopener" : undefined}
+	class:list={["btn", className]}
+	data-variant={variant}
+	{...rest}
+><slot /></Tag>

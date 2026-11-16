@@ -1,5 +1,6 @@
 ---
-import { Menu, Search as SearchIcon, Volume2, VolumeX, Sun, Moon, SunMoon } from "@lucide/astro";
+import Button from "./Button.astro";
+import { Menu, Search as SearchIcon, Sun, Moon, SunMoon } from "@lucide/astro";
 
 let links = [
   { href: "/", label: "About" },
@@ -17,8 +18,8 @@ function isActive(href: string) {
 ---
 
 <header class="w-full" data-header>
-  <div class="container mx-auto p-4 md:p-5 md:px-12 md:max-w-4xl flex items-center gap-4">
-    <a href="/" aria-label="Logo of Jack" class="max-w-fit shrink-0" data-cuelume-press="whisper" data-cuelume-hover="tick" data-cuelume-release="sparkle" data-haptic-press="error">
+  <div class="shell flex items-center gap-4">
+    <a href="/" aria-label="Logo of Jack" class="max-w-fit shrink-0" data-haptic-press="error">
       <svg
         id="logo"
         class="max-h-8 w-10 transition-fill fill-base-content group"
@@ -31,15 +32,15 @@ function isActive(href: string) {
       >
         <g transform="matrix(1,0,0,1,-383.556,-420.583)">
           <path
-            class="group-hover:fill-accent-2 transition-all"
+            class="group-hover:fill-accent transition-all"
             d="M544.989,1122.5C579.959,1152.47 625.389,1170.58 675.017,1170.58C785.4,1170.58 875.017,1080.97 875.017,970.583L1125.02,970.583C1125.02,1218.94 923.379,1420.58 675.017,1420.58C563.875,1420.58 462.09,1380.2 383.556,1313.34L544.989,1122.5Z"
           ></path>
           <path
-            class="group-hover:fill-accent-3 transition-all"
+            class="group-hover:fill-accent transition-all"
             d="M1324.98,420.583L1324.98,670.583C1214.6,670.583 1124.98,760.2 1124.98,870.583L874.983,870.583C874.983,622.221 1076.62,420.583 1324.98,420.583Z"
           ></path>
           <path
-            class="group-hover:fill-accent-1 transition-all "
+            class="group-hover:fill-accent transition-all "
             d="M1008.84,420.583C921.088,482.377 852.184,569.178 812.535,670.583L540.994,670.583L540.994,420.583L1008.84,420.583Z"
           ></path>
         </g>
@@ -50,8 +51,7 @@ function isActive(href: string) {
       {links.map((link) => (
         <a
           href={link.href}
-          class="nav-link"
-          class:list={{ "nav-link--apps": link.href === "/apps" }}
+          class="link"
           aria-current={isActive(link.href) ? "page" : undefined}
           data-cuelume-release="arrival" data-cuelume-hover="tick"
         >
@@ -61,32 +61,27 @@ function isActive(href: string) {
     </nav>
 
     <div class="ml-auto md:ml-0 flex items-center gap-1">
-        <button type="button" class="icon-btn" data-search-open aria-label="Search" data-cuelume-press="bloom" data-cuelume-hover="tick" data-haptic-press="light">
+        <Button variant="icon" data-search-open aria-label="Search" data-haptic-press="light">
         <SearchIcon size={18} stroke-width={1.75} />
-      </button>
-      <button type="button" class="icon-btn" data-sound-toggle aria-label="Mute sound" aria-pressed="false" data-cuelume-hover="tick" data-cuelume-press data-haptic-toggle="selection">
-        <span data-sound-icon-on><Volume2 size={18} stroke-width={1.75} /></span>
-        <span data-sound-icon-off hidden><VolumeX size={18} stroke-width={1.75} /></span>
-      </button>
-      <button type="button" class="icon-btn" data-theme-toggle aria-label="Theme: auto" data-cuelume-hover="tick" data-cuelume-press data-haptic-toggle="selection">
+      </Button>
+      <Button variant="icon" data-theme-toggle aria-label="Theme: auto" data-haptic-toggle="selection">
         <span data-theme-icon-auto><SunMoon size={18} stroke-width={1.75} /></span>
         <span data-theme-icon-light hidden><Sun size={18} stroke-width={1.75} /></span>
         <span data-theme-icon-dark hidden><Moon size={18} stroke-width={1.75} /></span>
-      </button>
-      <button type="button" class="icon-btn md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu" data-cuelume-press="scan" data-haptic-press="light">
+      </Button>
+      <Button variant="icon" class="md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu" data-haptic-press="light">
         <Menu size={20} stroke-width={1.75} />
-      </button>
+      </Button>
     </div>
   </div>
 
   {/* The links the desktop nav shows inline, folded away behind the hamburger. */}
   <div id="header-menu" data-header-menu hidden class="md:hidden border-t border-base-300">
-    <nav class="container mx-auto p-4 md:max-w-4xl flex flex-col">
+    <nav class="shell flex flex-col">
       {links.map((link) => (
         <a
           href={link.href}
-          class="nav-link py-2"
-          class:list={{ "nav-link--apps": link.href === "/apps" }}
+          class="link py-2"
           aria-current={isActive(link.href) ? "page" : undefined}
           data-cuelume-press
           data-haptic-press="light"
@@ -102,83 +97,56 @@ function isActive(href: string) {
   import { isSoundEnabled, setSoundEnabled } from "../utils/sounds";
   import { getStoredTheme, applyTheme, cycleTheme, type Theme } from "../utils/theme";
 
-  // View transitions swap in the new page's DOM (fetched via fetch(), so its inline <head>
-  // script never ran) before "astro:page-load" fires, which briefly shows the default theme
-  // until this reapplies the stored one. This script tag itself persists across transitions
-  // (Astro dedupes identical head scripts), so registering the listener once here is enough.
-  document.addEventListener("astro:after-swap", () => applyTheme(getStoredTheme()));
+  // This module runs once and the document outlives ClientRouter swaps, so the
+  // listeners are delegated to it: they work on the first load (where
+  // "astro:page-load" may already have fired) and on every page swapped in later.
 
-  function setupSoundToggle() {
-    const btn = document.querySelector<HTMLButtonElement>("[data-sound-toggle]");
-    const onIcon = btn?.querySelector<HTMLElement>("[data-sound-icon-on]");
-    const offIcon = btn?.querySelector<HTMLElement>("[data-sound-icon-off]");
-    if (!btn || !onIcon || !offIcon) return;
+  const themeLabels: Record<Theme, string> = {
+    auto: "Theme: auto",
+    light: "Theme: light",
+    dark: "Theme: dark",
+  };
 
-    function render(enabled: boolean) {
-      btn!.setAttribute("aria-pressed", String(!enabled));
-      btn!.setAttribute("aria-label", enabled ? "Mute sound" : "Unmute sound");
-      onIcon!.hidden = !enabled;
-      offIcon!.hidden = enabled;
-    }
-
-    render(isSoundEnabled());
-
-    btn.addEventListener("click", () => {
-      const next = !isSoundEnabled();
-      setSoundEnabled(next);
-      render(next);
-    });
-  }
-
-  function setupThemeToggle() {
+  // Show the icon and label of the current theme on the toggle.
+  function renderThemeToggle(theme: Theme = getStoredTheme()) {
     const btn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
-    const autoIcon = btn?.querySelector<HTMLElement>("[data-theme-icon-auto]");
-    const lightIcon = btn?.querySelector<HTMLElement>("[data-theme-icon-light]");
-    const darkIcon = btn?.querySelector<HTMLElement>("[data-theme-icon-dark]");
-    if (!btn || !autoIcon || !lightIcon || !darkIcon) return;
-
-    const labels: Record<Theme, string> = {
-      auto: "Theme: auto",
-      light: "Theme: light",
-      dark: "Theme: dark",
-    };
-
-    function render(theme: Theme) {
-      btn!.setAttribute("aria-label", labels[theme]);
-      autoIcon!.hidden = theme !== "auto";
-      lightIcon!.hidden = theme !== "light";
-      darkIcon!.hidden = theme !== "dark";
-    }
-
-    render(getStoredTheme());
-
-    btn.addEventListener("click", () => {
-      render(cycleTheme());
+    if (!btn) return;
+    btn.setAttribute("aria-label", themeLabels[theme]);
+    btn.querySelectorAll<HTMLElement>("[data-theme-icon-auto], [data-theme-icon-light], [data-theme-icon-dark]").forEach((icon) => {
+      icon.hidden = !icon.hasAttribute(`data-theme-icon-${theme}`);
     });
   }
 
-  function setupHeader() {
+  function setMenuOpen(open: boolean) {
     const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
     const menu = document.querySelector<HTMLElement>("[data-header-menu]");
     if (!toggle || !menu) return;
-
-    function setOpen(open: boolean) {
-      menu!.hidden = !open;
-      toggle!.setAttribute("aria-expanded", String(open));
-    }
-
-    toggle.addEventListener("click", () => {
-      setOpen(toggle.getAttribute("aria-expanded") !== "true");
-    });
-
-    // Following a link would otherwise leave the menu open across a transition.
-    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
-    // The search dialog covers the menu, so fold it away when it opens.
-    document.querySelector("[data-search-open]")?.addEventListener("click", () => setOpen(false));
+    menu.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
   }
 
-  document.addEventListener("astro:page-load", () => {
-    setupHeader();
-    setupThemeToggle();
+  document.addEventListener("click", (event) => {
+    const target = event.target as Element;
+
+    if (target.closest("[data-theme-toggle]")) {
+      renderThemeToggle(cycleTheme());
+      return;
+    }
+
+    const menuToggle = target.closest("[data-menu-toggle]");
+    if (menuToggle) {
+      setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
+      return;
+    }
+
+    // Following a menu link would otherwise leave the menu open across a
+    // transition, and the search dialog covers the menu when it opens.
+    if (target.closest("[data-header-menu] a, [data-search-open]")) setMenuOpen(false);
   });
+
+  // The swapped-in page was fetched, so its inline <head> theme script never
+  // ran: reapply the stored theme before it paints.
+  document.addEventListener("astro:after-swap", () => applyTheme(getStoredTheme()));
+  document.addEventListener("astro:page-load", () => renderThemeToggle());
+  renderThemeToggle();
 </script>

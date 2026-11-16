@@ -1,7 +1,8 @@
 ---
+import List from "../../components/List.astro";
+import ListItem from "../../components/ListItem.astro";
+import PageHeader from "../../components/PageHeader.astro";
 import Base from "../../layouts/Base.astro";
-import EntryList from "../../components/EntryList.astro";
-import EntryRow from "../../components/EntryRow.astro";
 
 import { getCollection } from 'astro:content';
 
@@ -19,24 +20,21 @@ const products = (await getCollection('market')).sort(
   image="/website.jpg"
 >
   <main>
-    <p class="eyebrow mb-3">Marketplace</p>
-    <h1 class="page-title mb-6">Garage Sales</h1>
-    <div class="card p-4 mb-8 text-sm text-neutral-content space-y-2">
-      <p>🇮🇹 Di tanto in tanto cerco nuovi possessori per qualche oggetto hardware che ho usato e amato. Se sei interessatə, <a href="/contacts" class="underline">contattami</a>.</p>
-      <p>🇺🇸 From time to time I look for new owners for some hardware I have used and loved. If you are interested, <a href="/contacts" class="underline">contact me</a>.</p>
-    </div>
+    <PageHeader eyebrow="Marketplace" title="Garage Sales">
+      <p>🇮🇹 Di tanto in tanto cerco nuovi possessori per qualche oggetto hardware che ho usato e amato. Se sei interessatə, <a href="/contacts">contattami</a>.</p>
+      <p>🇺🇸 From time to time I look for new owners for some hardware I have used and loved. If you are interested, <a href="/contacts">contact me</a>.</p>
+    </PageHeader>
 
-    <EntryList>
-        {products.map((item) => (
-          <EntryRow
-            href={"/market/" + item.id}
-            title={item.data.title}
-            description={item.data.description}
-            date={item.data.pubDate}
-            meta={item.data.status === "sold" ? "SOLD" : undefined}
-          />
-        ))}
-    </EntryList>
-    
+    <List>
+      {products.map((item) => (
+        <ListItem
+          href={"/market/" + item.id}
+          title={item.data.title ?? item.id}
+          description={item.data.description}
+          date={item.data.pubDate}
+          chip={item.data.status === "sold" ? "Sold" : undefined}
+        />
+      ))}
+    </List>
   </main>
 </Base>

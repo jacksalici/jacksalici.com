@@ -1,8 +1,9 @@
 ---
+import PageHeader from "../components/PageHeader.astro";
+import Prose from "../components/Prose.astro";
 import Base from "./Base.astro";
 
 const { frontmatter } = Astro.props;
-
 ---
 
 <Base
@@ -20,25 +21,15 @@ const { frontmatter } = Astro.props;
   noindex={frontmatter.noindex}
 >
   <main>
+    <PageHeader title={frontmatter.title} lead={frontmatter.summary} />
 
-
-    <div class="w-full mb-12">
-      <h1 class="page-title">{frontmatter.title}</h1>
-      {frontmatter.summary && <p class="page-lead">{frontmatter.summary}</p>}
-    </div>
-
-    <div class="prose prose-js font-body mb-10 prose-img:mx-auto max-w-none">
-  {
-    frontmatter.translateLink &&
-    <div class="text-xs text-muted not-prose mb-8">
-      <span class="inline-block !leading-none">English is not your strongest language?</span>
-      <span class="inline-block !leading-none">🇮🇹 Read the machine-translated <a class="underline" href={"https://jacksalici-com.translate.goog" + frontmatter.url + "/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp"}> Italian version</a>.</span>
-      </div>
-  }  
-    <slot />
-  </div>
-
+    <Prose>
+      {frontmatter.translateLink && (
+        <p class="eyebrow not-prose mb-8">
+          English is not your strongest language? 🇮🇹 Read the machine-translated <a href={"https://jacksalici-com.translate.goog" + frontmatter.url + "/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp"}>Italian version</a>.
+        </p>
+      )}
+      <slot />
+    </Prose>
   </main>
-
- 
 </Base>

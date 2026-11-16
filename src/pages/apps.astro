@@ -1,59 +1,70 @@
 ---
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
-import { imageUrl, isOptimizable, resolveImage } from "../utils/images";
 import { RefreshCw, X } from "@lucide/astro";
+import Button from "../components/Button.astro";
+import Grid from "../components/Grid.astro";
+import GridItem from "../components/GridItem.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Section from "../components/Section.astro";
 import Base from "../layouts/Base.astro";
 
-const toys = (await getCollection("projects"))
+interface App {
+  title: string;
+  tagline?: string;
+  emoji: string;
+  cover?: string;
+  /** Where the app runs; the fact generator opens a dialog instead. */
+  href?: string;
+  modal?: boolean;
+  /** Write-up of the app. */
+  how?: string;
+  howLabel: string;
+  pubDate?: Date;
+  /** When set, the app is retired. */
+  dead?: Date;
+}
+
+const apps: App[] = (await getCollection("projects"))
   .filter((p) => p.data.draft !== true && p.data.playground)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .map((p) => {
     const play = p.data.playground;
     const page = `/projects/${p.id}/`;
     return {
-      title: play?.title ?? p.data.title,
+      title: play?.title ?? p.data.title ?? p.id,
       tagline: play?.tagline ?? p.data.description,
       emoji: play?.emoji ?? "🎲",
-      icon: resolveImage(play?.icon),
-      cover: resolveImage(p.data.cover),
+      cover: p.data.cover,
       href: play?.link ?? page,
       how: play?.how ?? (p.data.hidden ? undefined : page),
       howLabel: play?.howLabel ?? (play?.dead ? "How it worked" : "How it works"),
-      modal: false,
-      pubDate: new Date(p.data.pubDate),
-      dead: play?.dead ? new Date(play.dead) : undefined,
+      pubDate: p.data.pubDate,
+      dead: play?.dead,
     };
   });
 
-const livingToys = toys.filter((t) => !t.dead);
-const deadToys = toys.filter((t) => t.dead).sort((a, b) => b.dead!.valueOf() - a.dead!.valueOf());
-
-type Card = (typeof toys)[number];
-
 // The fact generator has no project page: it plays inside a dialog on this page.
-const randomFactCard: Card = {
+const randomFact: App = {
   title: "Random Fact Generator",
   tagline: "One unverified truth per reload. Refresh until you find one worth repeating.",
   emoji: "🃏",
-  icon: undefined,
-  cover: resolveImage("/uploads/sky.jpg"),
-  href: undefined,
-  how: undefined,
-  howLabel: "How it works",
+  cover: "/uploads/sky.jpg",
   modal: true,
-  pubDate: undefined,
-  dead: undefined,
+  howLabel: "How it works",
 };
 
+const retired = apps.filter((a) => a.dead).sort((a, b) => b.dead!.valueOf() - a.dead!.valueOf());
+
 const sections = [
-  { label: undefined, note: undefined, cards: [...livingToys, randomFactCard] },
-  {
-    label: "Retired",
-    note: "No longer running. Their write-ups are still here.",
-    cards: deadToys,
-  },
-].filter((section) => section.cards.length > 0);
+  { title: undefined, note: undefined, apps: [...apps.filter((a) => !a.dead), randomFact] },
+  { title: "Retired", note: "No longer running. Their write-ups are still here.", apps: retired },
+].filter((section) => section.apps.length > 0);
+
+/** "2019–2022" for a retired app, a single year when both coincide. */
+const lifespan = (app: App) =>
+  app.dead && app.pubDate
+    ? [...new Set([app.pubDate.getFullYear(), app.dead.getFullYear()])].join("–")
+    : undefined;
 ---
 
 <Base
@@ -61,108 +72,55 @@ const sections = [
   description="Small apps, toys, and experiments by Giacomo Salici."
 >
   <main>
-    <p class="eyebrow mb-3 text-accent-4!">Apps</p>
-    <h1 class="page-title">
-      A drawer of things that play back.
-    </h1>
-    <p class="page-lead">
-      Small toys built for the pleasure of building them: no sign-up, no purpose, no
-      roadmap. Open one, poke at it, close the tab. No continuity guarantee.
-    </p>
+    <PageHeader
+      eyebrow="Apps"
+      title="A drawer of things that play back."
+      lead="Small toys built for the pleasure of building them: no sign-up, no purpose, no roadmap. Open one, poke at it, close the tab. No continuity guarantee."
+    />
 
     {sections.map((section) => (
-      <section class="mt-12">
-        {section.label && <p class="section-label mb-1!">{section.label}</p>}
-        {section.note && <p class="text-sm text-neutral-content mb-5">{section.note}</p>}
-
-        <div class="grid gap-x-6 gap-y-10 sm:grid-cols-2">
-          {section.cards.map((card) => {
-            const playable = !card.dead && (card.modal || !!card.href);
-            const external = card.href?.startsWith("http");
-            const Action = card.modal ? "button" : "a";
-            const imageClass = [
-              "w-full h-full object-cover rounded-none",
-              playable && "transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none",
-              card.dead && "grayscale",
-            ];
-            return (
-              <article class="toy group">
-                <div class="toy-media">
-                  {card.cover ? (
-                    !isOptimizable(card.cover) ? (
-                      <img src={imageUrl(card.cover)} alt="" loading="lazy" decoding="async" class:list={imageClass} />
-                    ) : (
-                      <Image src={card.cover} alt="" width={760} densities={[1, 2]} loading="lazy" decoding="async" class:list={imageClass} />
-                    )
-                  ) : (
-                    <span class="text-6xl leading-none" aria-hidden="true">{card.emoji}</span>
-                  )}
-                </div>
-
-                <div class="mt-4 flex items-baseline gap-2">
-                  {card.icon ? (
-                    <img src={imageUrl(card.icon)} alt="" loading="lazy" decoding="async" class="size-5 self-center object-contain rounded-none" />
-                  ) : (
-                    card.cover && <span aria-hidden="true">{card.emoji}</span>
-                  )}
-                  <h2 class="text-lg tracking-normal">{card.title}</h2>
-                  {card.dead && card.pubDate && (
-                    <span class="ml-auto shrink-0 text-xs tabular-nums text-neutral-content">
-                      {[...new Set([card.pubDate.getFullYear(), card.dead.getFullYear()])].join("–")}
-                    </span>
-                  )}
-                </div>
-
-                {card.tagline && <p class="mt-1 text-sm text-neutral-content">{card.tagline}</p>}
-
-                <div class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-                  {playable && (
-                    <Action
-                      type={card.modal ? "button" : undefined}
-                      href={card.href}
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noopener" : undefined}
-                      data-fact-open={card.modal ? "" : undefined}
-                      class="toy-action"
-                      data-haptic-press="light"
-                    >
-                      {card.modal ? "Draw a fact" : "Play"}&nbsp;↗
-                    </Action>
-                  )}
-                  {card.how && <a href={card.how} class="nav-link relative z-10">{card.howLabel}</a>}
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
+      <Section title={section.title} note={section.note}>
+        <Grid>
+          {section.apps.map((app) => (
+            <GridItem title={app.title} description={app.tagline} image={app.cover} emoji={app.emoji} meta={lifespan(app)} muted={!!app.dead}>
+              {!app.dead && app.modal && (
+                <Button variant="link" class="stretched" data-fact-open data-haptic-press="light">Draw a fact&nbsp;↗</Button>
+              )}
+              {!app.dead && !app.modal && app.href && (
+                <Button variant="link" class="stretched" href={app.href} data-haptic-press="light">Play&nbsp;↗</Button>
+              )}
+              {app.how && <Button variant="link" href={app.how}>{app.howLabel}</Button>}
+            </GridItem>
+          ))}
+        </Grid>
+      </Section>
     ))}
 
-    <p class="mt-16 max-w-2xl text-sm text-neutral-content">
+    <p class="mt-12 text-sm text-neutral-content">
       Other small diversions are quietly taking shape in the workshop. They will land here as soon as they stop crashing.
     </p>
 
     <!-- The fact generator has no page of its own: it plays inside this dialog. -->
-    <dialog id="fact-dialog" class="search-dialog" aria-label="Random fact">
-      <div class="flex items-start justify-between gap-4 mb-4">
+    <dialog id="fact-dialog" class="dialog" aria-label="Random fact">
+      <div class="flex items-center justify-between gap-4 mb-4">
         <p class="eyebrow">Random fact</p>
-        <button data-fact-close class="icon-btn -m-2" aria-label="Close" data-haptic-press="light">
-          <X class="w-4 h-4" />
-        </button>
+        <Button variant="icon" class="-m-2" data-fact-close aria-label="Close" data-haptic-press="light">
+          <X size={18} stroke-width={1.75} />
+        </Button>
       </div>
 
-      <p id="fact-text" class="font-display text-xl md:text-2xl text-balance min-h-[4rem]">
+      <p id="fact-text" class="page-title min-h-16">
         Shuffling the deck...
       </p>
 
       <div class="flex items-center justify-between gap-4 mt-6">
-        <p class="text-xs text-neutral-content max-w-xs">
+        <p class="eyebrow max-w-xs">
           Served by a public API, so treat it as a rumour worth fact-checking.
         </p>
-        <button data-fact-more class="btn-outline shrink-0 cursor-pointer" data-cuelume-hover="tick"  data-cuelume-press="bloom" data-haptic-press="medium">
-          <RefreshCw class="w-4 h-4" />
+        <Button variant="outline" class="shrink-0" data-fact-more data-haptic-press="medium">
+          <RefreshCw size={16} stroke-width={1.75} />
           Another one
-        </button>
+        </Button>
       </div>
     </dialog>
   </main>
@@ -178,7 +136,8 @@ const sections = [
   function setupFacts() {
     const dialog = document.getElementById("fact-dialog") as HTMLDialogElement | null;
     const text = document.getElementById("fact-text");
-    if (!dialog || !text) return;
+    if (!dialog || !text || dialog.dataset.bound) return;
+    dialog.dataset.bound = "true";
 
     async function draw() {
       text!.textContent = "Shuffling the deck...";
@@ -219,6 +178,8 @@ const sections = [
     });
   }
 
-  // Also fires on the first load, and again after every ClientRouter swap.
+  // `astro:page-load` can fire before this module runs on the first load, so
+  // bind right away too; the `bound` flag keeps each dialog to one binding.
+  setupFacts();
   document.addEventListener("astro:page-load", setupFacts);
 </script>

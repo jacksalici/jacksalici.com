@@ -3,10 +3,12 @@
 // Base layout and opened by any `[data-search-open]` trigger.
 // The index is generated from the built HTML by the `postbuild` script, so
 // search only answers on a built site (`npm run build && npm run preview`).
+import Button from "./Button.astro";
+import List from "./List.astro";
 import { X } from "@lucide/astro";
 ---
 
-<dialog id="search-dialog" class="search-dialog" aria-label="Search the site">
+<dialog id="search-dialog" class="dialog" aria-label="Search the site">
   <div class="flex items-center gap-2">
     <!-- Not type="search": Chromium lets it swallow Escape instead of closing the dialog. -->
     <input
@@ -17,13 +19,13 @@ import { X } from "@lucide/astro";
       autocomplete="off"
       aria-label="Search the site"
     />
-    <button type="button" class="icon-btn" data-search-close aria-label="Close search">
+    <Button variant="icon" data-search-close aria-label="Close search">
       <X size={18} stroke-width={1.75} />
-    </button>
+    </Button>
   </div>
 
-  <p data-search-status class="text-xs text-neutral-content mt-3" hidden></p>
-  <ul data-search-results class="entry-list flex flex-col mt-1"></ul>
+  <p data-search-status class="eyebrow mt-3" hidden></p>
+  <List class="mt-1" data-search-results />
 </dialog>
 
 <script>
@@ -66,39 +68,37 @@ import { X } from "@lucide/astro";
     return pagefind;
   }
 
+  // Builds the same markup as ListItem.astro, so results look like any other list.
   function renderResult(data: any) {
-    const item = document.createElement("li");
-    item.className = "entry";
+    const el = (tag: string, className: string, text = "") => {
+      const node = document.createElement(tag);
+      node.className = className;
+      node.textContent = text;
+      return node;
+    };
 
-    const link = document.createElement("a");
+    const link = el("a", "entry") as HTMLAnchorElement;
     link.href = data.url;
-    link.className = "list-row";
-    link.dataset.cuelumePress = "success";
 
-    const body = document.createElement("span");
-    body.className = "min-w-0 flex-1";
-
-    const kind = document.createElement("span");
-    kind.className = "text-xs font-medium text-neutral-content";
-    kind.textContent = typeOf(data.url);
-
-    const title = document.createElement("span");
-    title.className = "block";
-    title.textContent = data.meta?.title ?? data.url;
-
-    const excerpt = document.createElement("span");
-    excerpt.className = "search-excerpt block text-sm text-neutral-content mt-0.5";
+    const excerpt = el("span", "entry-description");
     excerpt.innerHTML = data.excerpt; // Pagefind escapes the text and adds <mark>.
 
-    body.append(kind, title, excerpt);
-    link.append(body);
+    const body = el("span", "entry-body");
+    body.append(el("span", "entry-title", data.meta?.title ?? data.url), excerpt);
+
+    const trail = el("span", "entry-trail");
+    trail.append(el("span", "chip", typeOf(data.url)));
+
+    link.append(body, trail);
+    const item = document.createElement("li");
     item.append(link);
     return item;
   }
 
   function setupSearch() {
     const dialog = document.querySelector<HTMLDialogElement>("#search-dialog");
-    if (!dialog) return;
+    if (!dialog || dialog.dataset.bound) return;
+    dialog.dataset.bound = "true";
 
     const input = dialog.querySelector<HTMLInputElement>("[data-search-input]");
     const list = dialog.querySelector<HTMLElement>("[data-search-results]");
@@ -156,7 +156,9 @@ import { X } from "@lucide/astro";
     });
   }
 
-  // `astro:page-load` also fires on the first load, and the ClientRouter swaps
-  // in fresh elements on every navigation, so this binds exactly once each.
+  // `astro:page-load` can fire before this module runs on the first load, so
+  // bind right away too; the ClientRouter swaps in fresh elements on every
+  // navigation, and the `bound` flag keeps each dialog to a single binding.
+  setupSearch();
   document.addEventListener("astro:page-load", setupSearch);
 </script>

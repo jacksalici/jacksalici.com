@@ -1,0 +1,14 @@
+---
+// A list of ListItem rows.
+interface Props {
+	id?: string;
+	class?: string;
+	[key: `data-${string}`]: unknown;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<ul {...rest} class:list={["flex flex-col", className]}>
+	<slot />
+</ul>

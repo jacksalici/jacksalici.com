@@ -1,8 +1,12 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
-import EntryList from "../../components/EntryList.astro";
-import EntryRow from "../../components/EntryRow.astro";
+import List from "../../components/List.astro";
+import ListItem from "../../components/ListItem.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Prose from "../../components/Prose.astro";
+import Section from "../../components/Section.astro";
 import Base from "../../layouts/Base.astro";
+import { newsKindLabels } from "../../consts";
 import { getActivities, getNews } from "../../utils/news";
 
 export async function getStaticPaths() {
@@ -32,27 +36,24 @@ const { Content } = await render(activity);
   pageType="website"
 >
   <main>
-    <div class="w-full mb-12">
-      <p class="eyebrow mb-3">{activity.data.kicker}</p>
-      <h1 class="page-title">{activity.data.title}</h1>
-      {activity.data.description && (
-        <p class="page-lead">{activity.data.description}</p>
-      )}
-    </div>
+    <PageHeader
+      eyebrow={activity.data.kicker}
+      title={activity.data.title ?? activity.id}
+      lead={activity.data.description}
+    />
 
-    <div class="prose prose-js font-body mb-12 max-w-none">
+    <Prose>
       <Content />
-    </div>
+    </Prose>
 
     {related.length > 0 && (
-      <section data-pagefind-ignore>
-        <p class="section-label">Related work</p>
-        <EntryList>
+      <Section title="Related work" data-pagefind-ignore>
+        <List>
           {related.map((item) => (
-            <EntryRow href={item.href} title={item.title} date={item.date} kind={item.kind} />
+            <ListItem href={item.href} title={item.title} date={item.date} chip={newsKindLabels[item.kind]} />
           ))}
-        </EntryList>
-      </section>
+        </List>
+      </Section>
     )}
   </main>
 </Base>

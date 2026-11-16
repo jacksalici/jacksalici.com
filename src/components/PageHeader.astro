@@ -1,0 +1,22 @@
+---
+// Opening block of every page: eyebrow, title, lead, in that order.
+// Slots: `eyebrow` and the default one (lead) take rich content in place of
+// the props; `after` holds whatever closes the header (links, authors).
+interface Props {
+	title: string;
+	eyebrow?: string;
+	lead?: string;
+}
+
+const { title, eyebrow, lead } = Astro.props;
+---
+
+<header class="page-header">
+	{(eyebrow || Astro.slots.has("eyebrow")) && (
+		<p class="eyebrow">{eyebrow}<slot name="eyebrow" /></p>
+	)}
+	<h1 class="page-title">{title}</h1>
+	{lead && <p class="page-lead">{lead}</p>}
+	{Astro.slots.has("default") && <div class="page-lead"><slot /></div>}
+	{Astro.slots.has("after") && <div class="page-header-after"><slot name="after" /></div>}
+</header>

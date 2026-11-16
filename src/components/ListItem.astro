@@ -1,0 +1,44 @@
+---
+// The one row used by every list of the site: news, papers, activities,
+// garage sales, contacts. Search results are built in the browser with the
+// same classes (see Search.astro).
+import Chip from "./Chip.astro";
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+	/** Without it the row is plain text instead of a link. */
+	href?: string;
+	title: string;
+	/** Second line, under the title. */
+	description?: string;
+	/** Shown in a fixed column before the title. */
+	date?: Date;
+	/** Label shown as a chip at the end of the row. */
+	chip?: string;
+	/** Plain metadata at the end of the row; the `trail` slot takes richer content. */
+	trail?: string;
+	/** Kept out of view until something reveals it. */
+	hidden?: boolean;
+}
+
+const { href, title, description, date, chip, trail, hidden } = Astro.props;
+const Row = href ? "a" : "div";
+const hasTrail = Boolean(chip || trail) || Astro.slots.has("trail");
+---
+
+<li data-entry hidden={hidden}>
+	<Row href={href} class="entry" data-haptic-press={href ? "light" : undefined}>
+		{date && <span class="entry-date"><FormattedDate date={date} /></span>}
+		<span class="entry-body">
+			<span class="entry-title">{title}</span>
+			{description && <span class="entry-description">{description}</span>}
+		</span>
+		{hasTrail && (
+			<span class="entry-trail">
+				{chip && <Chip>{chip}</Chip>}
+				{trail}
+				<slot name="trail" />
+			</span>
+		)}
+	</Row>
+</li>
