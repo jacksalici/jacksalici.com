@@ -1,6 +1,6 @@
 ---
 import Button from "./Button.astro";
-import { Menu, Search as SearchIcon, Sun, Moon, SunMoon } from "@lucide/astro";
+import { Menu, Search as SearchIcon, Volume2, VolumeX, Sun, Moon, SunMoon } from "@lucide/astro";
 
 let links = [
   { href: "/", label: "About" },
@@ -19,7 +19,7 @@ function isActive(href: string) {
 
 <header class="w-full" data-header>
   <div class="shell flex items-center gap-4">
-    <a href="/" aria-label="Logo of Jack" class="max-w-fit shrink-0" data-haptic-press="error">
+    <a href="/" aria-label="Logo of Jack" class="max-w-fit shrink-0" data-cuelume-press="whisper" data-cuelume-hover="tick" data-cuelume-release="sparkle" data-haptic-press="error">
       <svg
         id="logo"
         class="max-h-8 w-10 transition-fill fill-base-content group"
@@ -61,15 +61,19 @@ function isActive(href: string) {
     </nav>
 
     <div class="ml-auto md:ml-0 flex items-center gap-1">
-        <Button variant="icon" data-search-open aria-label="Search" data-haptic-press="light">
+        <Button variant="icon" data-search-open aria-label="Search" data-cuelume-press="bloom" data-haptic-press="light">
         <SearchIcon size={18} stroke-width={1.75} />
+      </Button>
+      <Button variant="icon" data-sound-toggle aria-label="Mute sound" aria-pressed="false" data-haptic-toggle="selection">
+        <span data-sound-icon-on><Volume2 size={18} stroke-width={1.75} /></span>
+        <span data-sound-icon-off hidden><VolumeX size={18} stroke-width={1.75} /></span>
       </Button>
       <Button variant="icon" data-theme-toggle aria-label="Theme: auto" data-haptic-toggle="selection">
         <span data-theme-icon-auto><SunMoon size={18} stroke-width={1.75} /></span>
         <span data-theme-icon-light hidden><Sun size={18} stroke-width={1.75} /></span>
         <span data-theme-icon-dark hidden><Moon size={18} stroke-width={1.75} /></span>
       </Button>
-      <Button variant="icon" class="md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu" data-haptic-press="light">
+      <Button variant="icon" class="md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu" data-cuelume-press="scan" data-haptic-press="light">
         <Menu size={20} stroke-width={1.75} />
       </Button>
     </div>
@@ -117,6 +121,16 @@ function isActive(href: string) {
     });
   }
 
+  // Show the icon and label of the current sound state on the toggle.
+  function renderSoundToggle(enabled: boolean = isSoundEnabled()) {
+    const btn = document.querySelector<HTMLButtonElement>("[data-sound-toggle]");
+    if (!btn) return;
+    btn.setAttribute("aria-pressed", String(!enabled));
+    btn.setAttribute("aria-label", enabled ? "Mute sound" : "Unmute sound");
+    btn.querySelector<HTMLElement>("[data-sound-icon-on]")!.hidden = !enabled;
+    btn.querySelector<HTMLElement>("[data-sound-icon-off]")!.hidden = enabled;
+  }
+
   function setMenuOpen(open: boolean) {
     const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
     const menu = document.querySelector<HTMLElement>("[data-header-menu]");
@@ -130,6 +144,13 @@ function isActive(href: string) {
 
     if (target.closest("[data-theme-toggle]")) {
       renderThemeToggle(cycleTheme());
+      return;
+    }
+
+    if (target.closest("[data-sound-toggle]")) {
+      const enabled = !isSoundEnabled();
+      setSoundEnabled(enabled);
+      renderSoundToggle(enabled);
       return;
     }
 
@@ -147,6 +168,10 @@ function isActive(href: string) {
   // The swapped-in page was fetched, so its inline <head> theme script never
   // ran: reapply the stored theme before it paints.
   document.addEventListener("astro:after-swap", () => applyTheme(getStoredTheme()));
-  document.addEventListener("astro:page-load", () => renderThemeToggle());
+  document.addEventListener("astro:page-load", () => {
+    renderThemeToggle();
+    renderSoundToggle();
+  });
   renderThemeToggle();
+  renderSoundToggle();
 </script>

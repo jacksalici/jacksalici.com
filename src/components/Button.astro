@@ -1,6 +1,8 @@
 ---
 // The one button of the site. With an `href` it renders a link, otherwise a
 // <button>. Any other attribute (data-*, aria-*, target…) is passed through.
+// Every button ticks on hover and sounds on press; pass `data-cuelume-*` to
+// pick another sound.
 import type { HTMLAttributes } from "astro/types";
 
 type Props = {
@@ -22,5 +24,7 @@ const external = href?.startsWith("http");
 	rel={external ? "noopener" : undefined}
 	class:list={["btn", className]}
 	data-variant={variant}
+	data-cuelume-hover="tick"
+	data-cuelume-press
 	{...rest}
 ><slot /></Tag>

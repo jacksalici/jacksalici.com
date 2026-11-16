@@ -29,8 +29,6 @@ import { X } from "@lucide/astro";
 </dialog>
 
 <script>
-  import { play } from "../utils/sounds";
-
   const MAX_RESULTS = 8;
 
   // Human label for a result, derived from the first segment of its URL.
@@ -79,6 +77,8 @@ import { X } from "@lucide/astro";
 
     const link = el("a", "entry") as HTMLAnchorElement;
     link.href = data.url;
+    link.dataset.cuelumeHover = "tick";
+    link.dataset.cuelumePress = "success";
 
     const excerpt = el("span", "entry-description");
     excerpt.innerHTML = data.excerpt; // Pagefind escapes the text and adds <mark>.
