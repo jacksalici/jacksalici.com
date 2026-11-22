@@ -2,20 +2,20 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-	/* Light: #111111 text, #C93527 accent, #FFFFFF background.
-	   Dark: #EAEBED text, #F24333 accent, #1F1F1F background. The deeper red
+	/* Light: #0A0A0A text, #C93527 accent, #FFFFFF background.
+	   Dark: #F5F5F6 text, #F24333 accent, #1F1F1F background. The deeper red
 	   reads better on the light base and the brighter one on the dark base. */
 	--color-accent: #C93527;
 	--color-on-accent: #FFFFFF; /* text set on an accent fill */
-	--color-primary: #111111;
+	--color-primary: #0A0A0A;
 	--color-surface: #FFFFFF; /* elevated card surface */
 	--color-base-100: #FFFFFF;
 	--color-base-200: #F0F0F0;
 	--color-base-300: #CFCFCF;
-	--color-base-content: #111111;
+	--color-base-content: #0A0A0A;
 	--color-neutral: #D8D8D8;
-	--color-neutral-content: #333436; /* secondary text */
-	--color-muted: #75777B; /* faintest text: footer, placeholders */
+	--color-neutral-content: #55575B; /* secondary text: 7.2:1 on base-100 */
+	--color-muted: #727478; /* faintest text: 4.7:1 on base-100, the AA floor */
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, monospace; /* code only */
 	--font-sans: 'InterVariable', sans-serif;
 	--font-display: 'InterVariable', sans-serif;
@@ -36,10 +36,10 @@
 		--color-base-100: #1F1F1F;
 		--color-base-200: #2E2E2E;
 		--color-base-300: #4A4A4A;
-		--color-base-content: #EAEBED;
+		--color-base-content: #F5F5F6;
 		--color-neutral: #3A3A3A;
-		--color-neutral-content: #BDBEC0;
-		--color-muted: #8E8F92;
+		--color-neutral-content: #A3A4A7;
+		--color-muted: #87888C;
 	}
 }
 
@@ -51,10 +51,10 @@
 	--color-base-100: #1F1F1F;
 	--color-base-200: #2E2E2E;
 	--color-base-300: #4A4A4A;
-	--color-base-content: #EAEBED;
+	--color-base-content: #F5F5F6;
 	--color-neutral: #3A3A3A;
-	--color-neutral-content: #BDBEC0;
-	--color-muted: #8E8F92;
+	--color-neutral-content: #A3A4A7;
+	--color-muted: #87888C;
 }
 
 :root[data-theme="light"] {
@@ -189,6 +189,11 @@ img.emoji {
 		@apply text-base-content
 	}
 
+	/* Header navigation: same soft fill on hover as the icon buttons. */
+	.nav-link {
+		@apply px-3 py-1.5 rounded-lg hover:bg-base-200
+	}
+
 	/* --- Page header and sections --- */
 
 	.page-header {
@@ -223,11 +228,21 @@ img.emoji {
 	}
 
 	.page-title {
-		@apply text-2xl md:text-3xl font-medium tracking-tight leading-snug text-balance
+		@apply text-2xl md:text-3xl font-semibold tracking-tight leading-snug text-balance
+	}
+
+	/* Home only: one notch above the default (28/34px instead of 24/30px). */
+	.page-header[data-size="lg"] .page-title {
+		@apply text-[1.75rem] md:text-[2.125rem]
 	}
 
 	.page-lead {
 		@apply mt-5 leading-relaxed text-neutral-content space-y-4
+	}
+
+	/* Key terms of the lead: full ink and a heavier weight over the grey copy. */
+	.page-lead strong {
+		@apply font-medium text-base-content
 	}
 
 	.page-header-after {
@@ -289,9 +304,10 @@ img.emoji {
 		@apply border-base-300
 	}
 
-	/* Text-only: sits inline with copy, so it drops the box and the fill. */
+	/* Text-only: sits inline with copy. The padding is cancelled by a negative
+	   margin, so the text stays aligned while the hover fill gets room. */
 	.btn[data-variant="link"] {
-		@apply p-0 rounded-none hover:bg-transparent
+		@apply -mx-2 -my-1 px-2 py-1
 	}
 
 	.btn[data-variant="icon"] {
@@ -328,7 +344,7 @@ img.emoji {
 	}
 
 	.entry-date {
-		@apply shrink-0 text-sm tabular-nums text-muted sm:w-18
+		@apply shrink-0 text-sm text-muted sm:w-18
 	}
 
 	.entry-body {
@@ -336,7 +352,7 @@ img.emoji {
 	}
 
 	.entry-title {
-		@apply block
+		@apply block font-medium text-base-content
 	}
 
 	.entry-description {
@@ -366,7 +382,7 @@ img.emoji {
 	}
 
 	.grid-item-title {
-		@apply mt-4 flex items-baseline justify-between gap-2 text-base font-medium tracking-normal leading-snug
+		@apply mt-4 flex items-baseline justify-between gap-2 text-base font-semibold tracking-normal leading-snug
 	}
 
 	.grid-item-description {

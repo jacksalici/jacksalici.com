@@ -47,11 +47,11 @@ function isActive(href: string) {
       </svg>
     </a>
 
-    <nav class="ml-auto hidden md:flex items-center gap-6 text-sm">
+    <nav class="ml-auto hidden md:flex items-center gap-1 text-sm">
       {links.map((link) => (
         <a
           href={link.href}
-          class="link"
+          class="link nav-link"
           aria-current={isActive(link.href) ? "page" : undefined}
           data-cuelume-release="arrival" data-cuelume-hover="tick"
         >
@@ -85,7 +85,7 @@ function isActive(href: string) {
       {links.map((link) => (
         <a
           href={link.href}
-          class="link py-2"
+          class="link nav-link -mx-3 py-2"
           aria-current={isActive(link.href) ? "page" : undefined}
           data-cuelume-press
           data-haptic-press="light"

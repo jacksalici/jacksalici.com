@@ -11,13 +11,15 @@ interface Props {
 	/** Short name of the page, as the last step of the breadcrumbs. */
 	crumb?: string;
 	lead?: string;
+	/** lg: a slightly larger title, for the home page. */
+	size?: "lg";
 }
 
-const { title, crumb, lead } = Astro.props;
+const { title, crumb, lead, size } = Astro.props;
 const crumbs = getBreadcrumbs(Astro.url.pathname, crumb);
 ---
 
-<header class="page-header">
+<header class="page-header" data-size={size}>
 	{crumbs.length > 0 && <nav aria-label="Breadcrumb" class="breadcrumbs">
 		<ol>
 			{crumbs.map((step) => (
