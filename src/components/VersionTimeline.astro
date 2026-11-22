@@ -1,0 +1,160 @@
+---
+// Every version of this website, newest first and grouped by major, read from
+// src/data/changelog.json (the `versions` collection). A major shows its
+// homepage as a large screenshot; a minor keeps it as a thumbnail beside the
+// text. Each screenshot links to the full picture and names the commit it was
+// built from.
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Chip from "./Chip.astro";
+import FormattedDate from "./FormattedDate.astro";
+import { imageUrl, isOptimizable, resolveImage } from "../utils/images";
+
+const REPO = "https://github.com/jacksalici/jacksalici.com";
+
+type Version = CollectionEntry<"versions">["data"];
+
+const parse = (version: string) => version.split(".").map(Number);
+const newestFirst = (a: Version, b: Version) => {
+	const [x, y] = [parse(a.version), parse(b.version)];
+	return y[0] - x[0] || y[1] - x[1] || y[2] - x[2];
+};
+
+const versions = (await getCollection("versions")).map((entry) => entry.data).sort(newestFirst);
+const current = versions[0]?.version;
+
+// Consecutive versions sharing a major, newest major first.
+const groups: { major: number; versions: Version[] }[] = [];
+for (const version of versions) {
+	const major = parse(version.version)[0];
+	const last = groups.at(-1);
+	if (last?.major === major) last.versions.push(version);
+	else groups.push({ major, versions: [version] });
+}
+
+// A major lasts from its first release to the first release of the next one.
+const periods = groups.map((group, i) => ({
+	from: group.versions.at(-1)!.date,
+	to: i > 0 ? groups[i - 1].versions.at(-1)!.date : undefined,
+}));
+
+const isMajor = (version: string) => /^\d+\.0\.0$/.test(version);
+const anchor = (version: string) => `v${version.replaceAll(".", "-")}`;
+const press = { "data-cuelume-hover": "tick", "data-cuelume-press": "", "data-haptic-press": "light" };
+---
+
+<div class="not-prose mt-10">
+	{groups.map((group, i) => (
+		<section class="mt-16 first:mt-0" aria-labelledby={`major-${group.major}`}>
+			<div class="section-head mb-6">
+				<h2 id={`major-${group.major}`} class="eyebrow">Version {group.major}</h2>
+				<p class="text-sm text-neutral-content">
+					<FormattedDate date={periods[i].from} /> – {periods[i].to ? <FormattedDate date={periods[i].to!} /> : "today"}
+				</p>
+			</div>
+
+			<ol class="ml-1.5 border-l border-base-300">
+				{group.versions.map((v) => {
+					const major = isMajor(v.version);
+					const shot = v.screenshot && resolveImage(v.screenshot.src);
+					const commitLink = (
+						<a href={`${REPO}/commit/${v.commit}`} class="link underline tabular-nums" {...press}>{v.commit}</a>
+					);
+					const meta = (
+						<p class="mt-3 text-xs text-neutral-content">
+							{v.stack && <span>{v.stack.join(" · ")} · </span>}
+							Commit {commitLink}
+						</p>
+					);
+					const changes = (
+						<ul class="mt-3 list-disc space-y-1 pl-4 text-sm marker:text-neutral-content">
+							{v.changes.map((change) => <li>{change}</li>)}
+						</ul>
+					);
+
+					return (
+						<li id={anchor(v.version)} class="relative scroll-mt-8 pb-12 pl-6 last:pb-0 sm:pl-8">
+							<span
+								aria-hidden="true"
+								class:list={[
+									"absolute left-[-0.5px] -translate-x-1/2 rounded-full ring-4 ring-base-100",
+									major ? "top-1 size-3 bg-accent" : "top-1.5 size-2 border border-neutral-content bg-base-100",
+								]}
+							/>
+
+							<div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+								<a href={`#${anchor(v.version)}`} class="font-semibold tabular-nums text-base-content hover:text-accent" {...press}>
+									v{v.version}
+								</a>
+								<Chip tone={major ? "accent" : "neutral"}>{major ? "Major" : "Minor"}</Chip>
+								{v.version === current && <Chip>Current</Chip>}
+								<span class="text-neutral-content"><FormattedDate date={v.date} /></span>
+							</div>
+
+							{major ? (
+								<div>
+									<h3 class="mt-2 text-base font-semibold">{v.title}</h3>
+									<p class="mt-1 text-neutral-content">{v.summary}</p>
+									{shot && (
+										<figure class="mt-5">
+											<a href={imageUrl(shot)} class="block overflow-hidden rounded-xl border border-base-300 bg-base-200" {...press}>
+												{isOptimizable(shot) ? (
+													<Image
+														src={shot}
+														alt={v.screenshot!.alt}
+														widths={[480, 800, 1200, 1600]}
+														sizes="(min-width: 56rem) 46rem, calc(100vw - 4rem)"
+														loading="lazy"
+														decoding="async"
+														class="block h-auto w-full rounded-none"
+													/>
+												) : (
+													<img src={imageUrl(shot)} alt={v.screenshot!.alt} loading="lazy" class="block h-auto w-full rounded-none" />
+												)}
+											</a>
+											<figcaption class="mt-2 text-xs text-neutral-content">
+												Homepage of v{v.version}, built from commit {commitLink}.
+											</figcaption>
+										</figure>
+									)}
+									{changes}
+									{meta}
+								</div>
+							) : (
+								<div class:list={["mt-2", shot && "sm:grid sm:grid-cols-[minmax(0,1fr)_11rem] sm:gap-6"]}>
+									<div>
+										<h3 class="text-base font-semibold">{v.title}</h3>
+										<p class="mt-1 text-neutral-content">{v.summary}</p>
+										{changes}
+										{meta}
+									</div>
+									{shot && (
+										<a
+											href={imageUrl(shot)}
+											class="mt-4 block w-44 self-start overflow-hidden rounded-lg border border-base-300 bg-base-200 sm:mt-1 sm:w-auto"
+											{...press}
+										>
+											{isOptimizable(shot) ? (
+												<Image
+													src={shot}
+													alt={v.screenshot!.alt}
+													width={176}
+													densities={[1, 2]}
+													loading="lazy"
+													decoding="async"
+													class="block h-auto w-full rounded-none"
+												/>
+											) : (
+												<img src={imageUrl(shot)} alt={v.screenshot!.alt} loading="lazy" class="block h-auto w-full rounded-none" />
+											)}
+										</a>
+									)}
+								</div>
+							)}
+						</li>
+					);
+				})}
+			</ol>
+		</section>
+	))}
+</div>

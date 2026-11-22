@@ -1,0 +1,338 @@
+{
+  "about": "Version history of jacksalici.com, reconstructed from the git history and rendered by src/components/VersionTimeline.astro on /notes/website.",
+  "scheme": {
+    "major": "x.0.0: the site is rebuilt, on a new framework or with a new structure. Shown with a large screenshot.",
+    "minor": "x.y.0: a change of style (palette, type, layout), or a notable feature on the same base.",
+    "patch": "Content, fixes and dependency updates. Not listed."
+  },
+  "fields": {
+    "date": "Day the version reached the main branch.",
+    "commit": "Commit the screenshot was built from, usually the last one before the next version.",
+    "screenshot": "Homepage built from `commit` and captured in Chrome at 1440x900 (device scale 1.5), light colour scheme."
+  },
+  "versions": [
+    {
+      "version": "5.3.0",
+      "date": "2026-11-22",
+      "title": "Breadcrumbs and a portrait",
+      "summary": "A palette of four colours, breadcrumbs on every page, and papers turned into a research collection with their own lists and filters.",
+      "changes": [
+        "Iconoir icons in place of Lucide; every button shares the same hover behaviour.",
+        "Breadcrumbs on every page, derived from the URL.",
+        "Papers renamed to a research collection; a kind filter over the lists; Projects and Activities index pages.",
+        "Four colours, nothing else: background, ink, grey and a red accent, with text above WCAG AA contrast in both themes.",
+        "A portrait in the homepage hero and a new grid for the apps.",
+        "A Contacts page, linked from the header.",
+        "Sound effects off by default.",
+        "This timeline, which replaces the changelog table of the README."
+      ],
+      "stack": ["Astro 7", "Tailwind CSS 4", "Bun", "Vercel"],
+      "commit": "09c718e",
+      "screenshot": {
+        "src": "/uploads/website/versions/v5.3.0.jpg",
+        "alt": "White homepage: the headline 'A digital craftsman who designs systems that matter.', a short bio, a tilted portrait photo on the right, and the news list below."
+      }
+    },
+    {
+      "version": "5.2.0",
+      "date": "2026-11-15",
+      "title": "One design system",
+      "summary": "The homepage drops the cards for a plain news list, and every page is rebuilt from the same few shared components with a single type scale.",
+      "changes": [
+        "Minimal homepage: the news as a list, with a kind pill on each row.",
+        "Higher contrast, uniform page headers, a research page and a page for each activity.",
+        "Playground renamed to Apps; a simpler header.",
+        "Shared components (page header, section, list, grid, button, chip) and one type scale across pages.",
+        "Sound effects on the shared components, with a mute toggle in the header.",
+        "LaTeX in Markdown, through remark-math and rehype-katex.",
+        "Paper and project pages rewritten with figures and screenshots, plus scripts to export paper figures and to screenshot websites."
+      ],
+      "stack": ["Astro 7", "Tailwind CSS 4", "Bun", "Vercel"],
+      "commit": "a053227",
+      "screenshot": {
+        "src": "/uploads/website/versions/v5.2.0.jpg",
+        "alt": "White homepage with a one-line headline, a two-paragraph bio, plain contact links and a news list with a kind pill on each row."
+      }
+    },
+    {
+      "version": "5.1.0",
+      "date": "2026-10-29",
+      "title": "Inter only, on Vercel",
+      "summary": "A typographic clean-up: Inter for everything, with Space Grotesk and Space Mono gone. Hosting moves from Netlify to Vercel.",
+      "changes": [
+        "Minimal design set entirely in Inter.",
+        "Hosting moved from Netlify to Vercel.",
+        "Simple Analytics replaced by Vercel Web Analytics, still without cookies."
+      ],
+      "stack": ["Astro 7", "Tailwind CSS 4", "Bun", "Vercel"],
+      "commit": "32eaeac",
+      "screenshot": {
+        "src": "/uploads/website/versions/v5.1.0.jpg",
+        "alt": "Light grey homepage in Inter: a large headline, a polaroid portrait and four grey activity cards."
+      }
+    },
+    {
+      "version": "5.0.0",
+      "date": "2026-08-05",
+      "title": "Minimal yet catchy",
+      "summary": "A new structure: a header with navigation and search, research activities as the backbone of the homepage, and a playful layer of sounds, haptics and a dark mode.",
+      "changes": [
+        "New homepage built around activity cards, 'What I am doing right now', and a polaroid portrait.",
+        "A new activities collection grouping papers and projects; activity pages replaced by anchors on the homepage.",
+        "Site header with navigation, full-text search (Pagefind) and links to sections.",
+        "Redesigned playground of small web apps and toys.",
+        "Sound effects (cuelume) and haptic feedback (web-haptics).",
+        "Dark mode, with a toggle.",
+        "Images served as optimised derivatives through astro:assets.",
+        "Package manager moved from npm to Bun."
+      ],
+      "stack": ["Astro 7", "Tailwind CSS 4", "Pagefind", "Bun", "Netlify"],
+      "commit": "1dc1f5c",
+      "screenshot": {
+        "src": "/uploads/website/versions/v5.0.0.jpg",
+        "alt": "Light grey homepage with a header, the words 'systems that matter' in red italics, a polaroid portrait captioned 'Me @ ICCV25, Honolulu', a search field and four activity cards."
+      }
+    },
+    {
+      "version": "4.0.0",
+      "date": "2026-03-10",
+      "title": "Back to the light side",
+      "summary": "Back to a light theme, and a new structure: the homepage becomes a single filterable feed of notes, papers and projects.",
+      "changes": [
+        "Light theme with a red accent.",
+        "Homepage as a news feed, with search, category and type filters, and sorting.",
+        "A one-line news summary for every entry.",
+        "Categories refactored and lower-cased; tags kept for SEO only; redirects for the old URLs.",
+        "Lucide icons.",
+        "Later in this version: Astro 6 (April 2026) and 7, and a map of the conferences where the papers were presented, drawn with MapLibre GL (June 2026)."
+      ],
+      "stack": ["Astro 5", "Tailwind CSS 4", "Netlify"],
+      "commit": "add5be6",
+      "screenshot": {
+        "src": "/uploads/website/versions/v4.0.0.jpg",
+        "alt": "Light homepage with 'digital craftsman' in red, a bio, and a list of notes, papers and projects under search and filter controls."
+      }
+    },
+    {
+      "version": "3.3.0",
+      "date": "2025-12-19",
+      "title": "The batman version",
+      "summary": "A black theme with glass chips, rebuilt on Tailwind CSS 4, plus a playground and a flea market.",
+      "changes": [
+        "Black theme with glass-effect chips and a two-column homepage.",
+        "SCSS and the Tailwind 3 integration replaced by Tailwind CSS 4.",
+        "Space Grotesk, Space Mono and Inter, self-hosted through Fontsource.",
+        "A playground page for small web apps.",
+        "A flea market for things I sell.",
+        "A gallery component with a lightbox, coloured contacts, a better 404 page and a dropdown menu."
+      ],
+      "stack": ["Astro 5", "Tailwind CSS 4", "Netlify"],
+      "commit": "da6dee0",
+      "screenshot": {
+        "src": "/uploads/website/versions/v3.3.0.jpg",
+        "alt": "Black homepage in two columns: an ICLR 2026 news chip, the headline and two pill buttons on the left, the bio on the right."
+      }
+    },
+    {
+      "version": "3.2.0",
+      "date": "2025-04-30",
+      "title": "Systems that matter",
+      "summary": "New colours and a new homepage around the line 'A digital craftsman who designs systems that matter', with large link boxes and new index pages.",
+      "changes": [
+        "New palette: light grey, with black and grey link boxes labelled in Space Mono.",
+        "Projects, Notes and Contacts pages; no footer on the homepage.",
+        "Ongoing projects highlighted.",
+        "Later in this version: the first papers and research activities as content collections (July 2025), then venue acronyms on the papers (August 2025)."
+      ],
+      "stack": ["Astro 5", "Tailwind CSS 3", "Netlify"],
+      "commit": "c81267f",
+      "screenshot": {
+        "src": "/uploads/website/versions/v3.2.0.jpg",
+        "alt": "Light grey homepage with the headline 'A digital craftsman who designs systems that matter.' and four large link boxes, two black and two grey, with monospaced labels."
+      }
+    },
+    {
+      "version": "3.1.0",
+      "date": "2024-04-16",
+      "title": "Bento",
+      "summary": "Back to a light theme: a homepage of rounded blocks in lavender, navy, yellow and pink, set in Space Grotesk and DM Sans.",
+      "changes": [
+        "Homepage made of bento blocks.",
+        "New palette and new fonts, Space Grotesk and DM Sans, in place of Monaspace and Inter (May 2024).",
+        "Menu, footer, homepage and article template refined (September 2024).",
+        "Simple Analytics, without cookies (September 2024).",
+        "Plain Markdown pages, such as the gaze dataset page."
+      ],
+      "stack": ["Astro 4", "Tailwind CSS 3", "Netlify"],
+      "commit": "762a5f7",
+      "screenshot": {
+        "src": "/uploads/website/versions/v3.1.0.jpg",
+        "alt": "Lavender-white homepage made of rounded blocks: a navy headline 'Digital craftsman, creative engineer.', a bio block, a yellow 'Check out my projects!' block and a pink 'Contact me!' block."
+      }
+    },
+    {
+      "version": "3.0.0",
+      "date": "2023-12-05",
+      "title": "Astro",
+      "summary": "Rebuilt from scratch with Astro, for three reasons: it is UI-agnostic, it is component-based from top to bottom, and it is faster than Hugo (+3% on PageSpeed Insights).",
+      "changes": [
+        "Hugo replaced by Astro; posts and projects moved to typed content collections.",
+        "Dark navy theme with a gradient rule under the hero.",
+        "Monaspace and Inter fonts, and all icons, self-hosted.",
+        "No external scripts: Google Analytics removed.",
+        "Better SEO metadata, a facts page, a theme-color meta tag and a 404 page with an easter egg."
+      ],
+      "stack": ["Astro 3", "Tailwind CSS 3", "Netlify"],
+      "commit": "e746e94",
+      "screenshot": {
+        "src": "/uploads/website/versions/v3.0.0.jpg",
+        "alt": "Dark navy homepage with the headline 'Digital craftsman, creative developer.', a monospaced bio, social icons and a rainbow gradient rule."
+      }
+    },
+    {
+      "version": "2.1.0",
+      "date": "2023-09-02",
+      "title": "Covers",
+      "summary": "Thumbnails for posts and projects, on the homepage and in the lists.",
+      "changes": [
+        "Cover images for posts and projects.",
+        "Salinger theme updated to match."
+      ],
+      "stack": ["Hugo 0.112", "Tailwind CSS 3", "DaisyUI 3", "Netlify"],
+      "commit": "dc82252",
+      "screenshot": {
+        "src": "/uploads/website/versions/v2.1.0.jpg",
+        "alt": "Light homepage with the serif headline 'Digital craftsman, creative developer.' and a list of highlighted projects, each with a thumbnail."
+      }
+    },
+    {
+      "version": "2.0.0",
+      "date": "2023-07-08",
+      "title": "Tailwind and DaisyUI",
+      "summary": "A complete rebuild of both this site and the Salinger theme with Tailwind CSS and DaisyUI. The theme goes back to its own repository, used here as a git submodule; it was one of the themes featured at the 2023 Hugo Convention.",
+      "changes": [
+        "Salinger rewritten with Tailwind CSS and DaisyUI and added back as a submodule.",
+        "Selectable DaisyUI colour themes, with a toggle in the menu.",
+        "Newsreader headings with Ubuntu and Ubuntu Mono text.",
+        "Material Symbols as inline SVG icons; Twemoji for the same emoji on every system.",
+        "Table of contents, a hero partial, and taxonomies for categories, languages and tools.",
+        "Google Analytics 4; Netlify configuration pinned to Hugo 0.112.",
+        "A facts page."
+      ],
+      "stack": ["Hugo 0.112", "Tailwind CSS 3", "DaisyUI 3", "Netlify"],
+      "commit": "266f707",
+      "screenshot": {
+        "src": "/uploads/website/versions/v2.0.0.jpg",
+        "alt": "Light grey hero with the serif headline 'Digital craftsman, creative developer.', a monospaced bio and social icons, above a list of highlighted projects."
+      }
+    },
+    {
+      "version": "1.5.0",
+      "date": "2023-07-04",
+      "title": "Less is more",
+      "summary": "A new palette and no more special effects, for the sake of minimalism.",
+      "changes": [
+        "Black background with sand-coloured headings.",
+        "Rotating circular tagline, random-letter title and contact box removed."
+      ],
+      "stack": ["Hugo", "SCSS", "Netlify"],
+      "commit": "92c963e",
+      "screenshot": {
+        "src": "/uploads/website/versions/v1.5.0.jpg",
+        "alt": "Black homepage with the sand-coloured headline 'People call me Jack.', a monospaced bio, social icons and a featured project card."
+      }
+    },
+    {
+      "version": "1.4.0",
+      "date": "2023-02-25",
+      "title": "Theme-less Hugo",
+      "summary": "The theme folder goes away and the layouts live in the site itself. A navy and sand palette, a tagline that turns on a circle, and a contact form on Netlify.",
+      "changes": [
+        "Hugo theming removed: layouts and assets moved into the project.",
+        "Dotted navy background, sand headings in Climate Crisis, text in Roboto Mono.",
+        "Tagline set on a circle with CircleType; random-letter animation on the title.",
+        "Contact form on Netlify Forms with client-side validation; hosting moved from GitHub Pages to Netlify (March 2023).",
+        "Table of contents, 404 and privacy pages, tags and keywords.",
+        "Reveal-on-scroll animations with IntersectionObserver."
+      ],
+      "stack": ["Hugo", "SCSS", "Netlify"],
+      "commit": "a9ec6a9",
+      "screenshot": {
+        "src": "/uploads/website/versions/v1.4.0.jpg",
+        "alt": "Navy dotted homepage: the sand headline 'People call me Jack.' over a blue tagline, 'Creative developer, digital craftsman', set on a circle."
+      }
+    },
+    {
+      "version": "1.3.0",
+      "date": "2022-08-25",
+      "title": "Dark dots",
+      "summary": "A dark blue dotted homepage, with a hover effect on the dots.",
+      "changes": [
+        "Dark blue background with a dot grid and an SVG hover effect.",
+        "Tagline running vertically along the left edge.",
+        "Merriweather Sans and Roboto Mono.",
+        "New navbar and footer; projects tagged by programming language."
+      ],
+      "stack": ["Hugo", "SCSS", "GitHub Pages"],
+      "commit": "e56efc6",
+      "screenshot": {
+        "src": "/uploads/website/versions/v1.3.0.jpg",
+        "alt": "Dark blue dotted homepage with a small centred logo, one line of text and social icons; the tagline runs vertically along the left edge."
+      }
+    },
+    {
+      "version": "1.2.0",
+      "date": "2022-07-08",
+      "title": "Morning gradient",
+      "summary": "Salinger gives way to a custom theme, first prototyped in plain HTML and SCSS: a landing homepage on a cream to light blue gradient.",
+      "changes": [
+        "Custom Hugo theme, prototyped as a static HTML and SCSS page.",
+        "Landing homepage: logo, one line and social links over a giant translucent tagline.",
+        "Montserrat throughout; Twemoji for consistent emoji."
+      ],
+      "stack": ["Hugo", "SCSS", "GitHub Pages"],
+      "commit": "da9c400",
+      "screenshot": {
+        "src": "/uploads/website/versions/v1.2.0.jpg",
+        "alt": "Homepage on a gradient from blue to cream, with a small centred logo and social icons over a giant translucent tagline, 'Creative developer & digital craftsman'."
+      }
+    },
+    {
+      "version": "1.1.0",
+      "date": "2022-03-19",
+      "title": "Howdy",
+      "summary": "A restyle of the Salinger theme: a serif headline, emoji everywhere, social icons and a navigation bar.",
+      "changes": [
+        "Libre Baskerville headings next to Montserrat.",
+        "An emoji-rich introduction and social links.",
+        "A header linking the projects and a new contact page.",
+        "Sections turned into categories; tags."
+      ],
+      "stack": ["Hugo", "Salinger theme", "GitHub Pages"],
+      "commit": "b4d5e49",
+      "screenshot": {
+        "src": "/uploads/website/versions/v1.1.0.jpg",
+        "alt": "White homepage with the large serif headline 'Howdy, people call me Jack.', an emoji-filled bio, social icons and a list of recent projects."
+      }
+    },
+    {
+      "version": "1.0.0",
+      "date": "2021-12-15",
+      "title": "Hugo and Salinger",
+      "summary": "The first version tracked in git: a static site generated by Hugo with Salinger, a theme I wrote and published on its own, deployed to GitHub Pages. Anything older was never versioned and is lost.",
+      "changes": [
+        "Hugo static site, with the Salinger theme as a git submodule.",
+        "Built and deployed to GitHub Pages by a GitHub Actions workflow.",
+        "Google Analytics.",
+        "Custom domain, jacksalici.com (January 2022).",
+        "Montserrat headings and a list of the latest projects on the homepage."
+      ],
+      "stack": ["Hugo", "Salinger theme", "GitHub Pages"],
+      "commit": "eca9694",
+      "screenshot": {
+        "src": "/uploads/website/versions/v1.0.0.jpg",
+        "alt": "White homepage with the bold headline 'Howdy, I'm Jack.' followed by pizza, cactus and laptop emoji, a short bio and a list of the last projects."
+      }
+    }
+  ]
+}

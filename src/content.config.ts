@@ -1,6 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 import { kinds } from './consts';
 
 // Shared schema for common fields
@@ -102,4 +102,23 @@ const market = defineCollection({
 	}),
 });
 
-export const collections = { notes, projects, research, activities, market };
+// Versions of this website, read from the changelog (see its `scheme` for the
+// numbering rules) and rendered as a timeline on /notes/website.
+const versions = defineCollection({
+	loader: file('src/data/changelog.json', {
+		parser: (text) => JSON.parse(text).versions.map((v: { version: string }) => ({ id: v.version, ...v })),
+	}),
+	schema: z.object({
+		// Majors and minors only: patches are not listed.
+		version: z.string().regex(/^\d+\.\d+\.0$/, 'Only x.y.0 versions are listed; patches are left out.'),
+		date: z.coerce.date(), // Day the version reached the main branch
+		title: z.string(),
+		summary: z.string(),
+		changes: z.string().array().min(1),
+		stack: z.string().array().optional(),
+		commit: z.string().regex(/^[0-9a-f]{7,40}$/), // Commit the screenshot was built from
+		screenshot: z.object({ src: z.string(), alt: z.string() }).optional(),
+	}),
+});
+
+export const collections = { notes, projects, research, activities, market, versions };

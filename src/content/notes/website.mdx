@@ -1,0 +1,37 @@
+---
+title: "Is my website's style to my taste?"
+pubDate: 2023-02-02
+updatedDate: 2026-11-22
+slug: website
+description: "I rebuild this website too often."
+news: A timeline of every version of this website, from Hugo in 2021 to Astro today.
+summary: "Every version of my personal website since 2021, rebuilt from its own commit and screenshotted, with what changed and why."
+categories: ["thoughts"]
+kind: notes
+tags: ["website", "portfolio", "changelog"]
+featured: true
+---
+
+import VersionTimeline from "../../components/VersionTimeline.astro";
+
+As you probably have imagined, I built this website myself. Actually, I've rebuilt it several times because I can't decide how I want it. I think that this is due to the fact that as soon as I find new inspiration or a framework I like, I cannot stop thinking about it. If you like to tidy your home before hosting guests, well, I like to tidy MY home, my digital home, that is, in a certain way — the website you are reading. So, it has to be the thing that better represents me, what I did, and what my tastes are, even if this means rebuilding it twice a year. Below is every version of it since I started tracking it in git, with what changed and why.
+
+## How to read the timeline
+
+The versions follow semantic versioning, adapted to a website:
+
+- **Major** (x.0.0): the site is rebuilt, on a new framework or with a new structure. These come with a large screenshot.
+- **Minor** (x.y.0): a change of style (palette, type, layout) or a notable feature on the same base.
+- **Patch**: content, fixes and dependency updates, which make up most of the commits. They are not listed.
+
+Each screenshot is the homepage of that version, rebuilt by the agents from the commit named under it: checked out from git, built with the toolchain it used, served locally and captured in the browser. The date of a version is the day it reached the main branch. Versions older than December 2021 were never tracked in git and are lost, unfortunately.
+
+The data behind this page lives in [changelog.json](https://github.com/jacksalici/jacksalici.com/blob/main/src/data/changelog.json), in the repository of the site.
+
+<VersionTimeline />
+
+## Under the hood
+
+The entire source code of the website is open source and available on [this](https://github.com/jacksalici/jacksalici.com) GitHub repository. Since the website is static, it's really good both in performance and lightweightness, and it makes it possible to pay nothing for hosting. The only expense I'm in charge of is the domain, which I have bought from _Cloudflare_ for a few dollars per year.
+
+I also added some easter eggs that no one will ever notice, so if you are curious, look for a 404 error for one instance of my broken humor...
