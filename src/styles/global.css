@@ -126,7 +126,6 @@ kbd {
 	h6,
 	.font-display {
 		font-weight: 600;
-		letter-spacing: -0.02em;
 		line-height: 1.1;
 		color: var(--color-base-content);
 	}
@@ -168,7 +167,7 @@ img.emoji {
 	/* --- Text --- */
 
 	.eyebrow {
-		@apply text-xs font-bold text-neutral-content
+		@apply font-bold 
 	}
 
 	.link {
@@ -242,7 +241,7 @@ img.emoji {
 	}
 
 	.page-title {
-		@apply text-2xl md:text-3xl font-semibold tracking-tight leading-snug text-balance
+		@apply text-2xl md:text-3xl font-semibold text-balance
 	}
 
 	/* Home only: one notch above the default (28/34px instead of 24/30px). */
@@ -250,8 +249,21 @@ img.emoji {
 		@apply text-[1.75rem] md:text-[2.125rem]
 	}
 
+	/* Home only: more air between the hero's pieces and before the first section. */
+	.page-header[data-size="lg"] {
+		@apply mb-20 md:mb-24 gap-10 md:gap-16
+	}
+
+	.page-header[data-size="lg"] .page-lead {
+		@apply mt-7 space-y-5
+	}
+
+	.page-header[data-size="lg"] .page-header-after {
+		@apply mt-9
+	}
+
 	.page-lead {
-		@apply mt-5 leading-relaxed text-neutral-content space-y-4
+		@apply mt-5 text-neutral-content space-y-4
 	}
 
 	/* Key terms of the lead: full ink and a heavier weight over the grey copy. */
@@ -338,7 +350,7 @@ img.emoji {
 	/* --- Chip --- */
 
 	.chip {
-		@apply inline-flex items-center shrink-0 whitespace-nowrap rounded-full border border-base-300 px-2 py-0.5 text-xs leading-4 font-normal text-neutral-content
+		@apply inline-flex items-center shrink-0 whitespace-nowrap rounded-full border border-base-300 px-2 py-0.5 text-xs font-normal text-neutral-content
 	}
 
 	.chip[data-tone="accent"] {
@@ -396,7 +408,7 @@ img.emoji {
 	}
 
 	.grid-item-title {
-		@apply flex items-baseline justify-between gap-2 text-base font-semibold tracking-normal leading-snug
+		@apply flex items-baseline justify-between gap-2 text-base font-semibold
 	}
 
 	.grid-item-description {
