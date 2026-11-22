@@ -1,15 +1,13 @@
 ---
-import List from "../components/List.astro";
-import ListItem from "../components/ListItem.astro";
 import PageHeader from "../components/PageHeader.astro";
 import Base from "../layouts/Base.astro";
 
 // Addresses are written as patterns to keep them away from scrapers.
 const contacts = [
-  { title: "Academic contacts", address: "name.surname@unimore.it" },
-  { title: "Other projects", address: "name@thisdomain.com" },
-  { title: "Personal stuff", address: "name.surname@the-gmail-mail" },
-  { title: "Certified Mail (PEC)", address: "name.surname@ingpec.eu" },
+  { title: "Academic contacts", address: "giacomo DOT salici AT unimore DOT it" },
+  { title: "Other projects", address: "giacomo AT jacksalici DOT com" },
+  { title: "Personal stuff", address: "giacomo DOT salici AT gmail DOT com" },
+  { title: "Certified Mail (PEC)", address: "giacomo DOT salici AT ingpec DOT eu" },
   { title: "Social & Chats", address: "@jacksalici", note: "everywhere as" },
 ];
 ---
@@ -26,14 +24,16 @@ const contacts = [
       lead="I'd love to hear from you! Whether it's about a project, an idea, or just to say hi, feel free to reach out."
     />
 
-    <List>
+    <ul class="list-disc space-y-4 pl-5 marker:text-neutral-content">
       {contacts.map((contact) => (
-        <ListItem title={contact.title}>
-          <Fragment slot="trail">{contact.note && `${contact.note} `}<code class="text-base-content">{contact.address}</code></Fragment>
-        </ListItem>
+        <li>
+          <span class="font-semibold text-base-content">{contact.title}</span>
+          <div class="mt-0.5 text-sm text-neutral-content">
+            {contact.note && `${contact.note} `}<code class="text-base-content select-all">{contact.address}</code>
+          </div>
+        </li>
       ))}
-    </List>
+    </ul>
 
-    <p class="mt-12 text-sm text-neutral-content">Looking forward to connecting with you!</p>
   </main>
 </Base>
