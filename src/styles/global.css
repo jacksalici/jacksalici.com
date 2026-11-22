@@ -232,9 +232,9 @@ img.emoji {
 	}
 
 	/* Portrait on the home page: the whole photo, softly rounded, tilted like a
-	   print on a desk, with a mild shadow. */
+	   print on a desk, with a faint shadow. */
 	.avatar {
-		@apply block w-32 md:w-44 rounded-xl overflow-hidden bg-base-200 rotate-3 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.35)]
+		@apply block w-32 md:w-44 rounded-xl overflow-hidden bg-base-200 rotate-3 shadow-[0_6px_16px_-8px_rgba(0,0,0,0.2)]
 	}
 
 	.avatar img {

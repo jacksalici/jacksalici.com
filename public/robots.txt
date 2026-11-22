@@ -1,0 +1,5 @@
+# Keep the home-page portrait out of image search (Google Images, Bing, etc.).
+# Astro emits it as /_astro/newphoto.<hash>.<ext>; robots.txt rules match by prefix.
+# vercel.json also sends X-Robots-Tag: noindex on the same files.
+User-agent: *
+Disallow: /_astro/newphoto
