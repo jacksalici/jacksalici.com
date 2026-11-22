@@ -1,5 +1,5 @@
 ---
-title: Time series analysis and anomaly detection for industry
+title: Time series and anomaly detection
 kicker: Industrial projects
 order: 3
 pubDate: 2026-06-01

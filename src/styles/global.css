@@ -2,20 +2,22 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-	/* Light: #0A0A0A text, #C93527 accent, #FFFFFF background.
-	   Dark: #F5F5F6 text, #F24333 accent, #1F1F1F background. The deeper red
-	   reads better on the light base and the brighter one on the dark base. */
+	/* Four colours, nothing else: background, ink, grey, accent.
+	   Light: #FFFFFF bg, #0A0A0A ink (19.8:1), #646669 grey (5.8:1), #C93527 accent.
+	   Dark:  #1F1F1F bg, #F5F5F6 ink (15.1:1), #9A9B9E grey (5.9:1), #F24333 accent.
+	   Ratios are WCAG 2.x against the background; the grey stays above AA (4.5:1)
+	   on the hover fill too. The deeper red reads better on the light base and
+	   the brighter one on the dark base. */
+	--color-base-100: #FFFFFF; /* background */
+	--color-base-content: #0A0A0A; /* ink: titles, body, active states */
+	--color-neutral-content: #646669; /* grey: secondary text, metadata */
 	--color-accent: #C93527;
-	--color-on-accent: #FFFFFF; /* text set on an accent fill */
-	--color-primary: #0A0A0A;
-	--color-surface: #FFFFFF; /* elevated card surface */
-	--color-base-100: #FFFFFF;
-	--color-base-200: #F0F0F0;
-	--color-base-300: #CFCFCF;
-	--color-base-content: #0A0A0A;
-	--color-neutral: #D8D8D8;
-	--color-neutral-content: #55575B; /* secondary text: 7.2:1 on base-100 */
-	--color-muted: #727478; /* faintest text: 4.7:1 on base-100, the AA floor */
+
+	/* Not colours of their own: tints of the ink over the background, so they
+	   follow both themes. Fill for hover and media wells, line for borders. */
+	--color-base-200: color-mix(in srgb, var(--color-base-content) 7%, var(--color-base-100));
+	--color-base-300: color-mix(in srgb, var(--color-base-content) 16%, var(--color-base-100));
+
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, monospace; /* code only */
 	--font-sans: 'InterVariable', sans-serif;
 	--font-display: 'InterVariable', sans-serif;
@@ -30,31 +32,19 @@
    either direction so an explicit choice always wins. */
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) {
-		--color-accent: #F24333;
-		--color-on-accent: #1F1F1F;
-		--color-surface: #2B2B2B;
 		--color-base-100: #1F1F1F;
-		--color-base-200: #2E2E2E;
-		--color-base-300: #4A4A4A;
 		--color-base-content: #F5F5F6;
-		--color-neutral: #3A3A3A;
-		--color-neutral-content: #A3A4A7;
-		--color-muted: #87888C;
+		--color-neutral-content: #9A9B9E;
+		--color-accent: #F24333;
 	}
 }
 
 :root[data-theme="dark"] {
 	color-scheme: dark;
-	--color-accent: #F24333;
-	--color-on-accent: #1F1F1F;
-	--color-surface: #2B2B2B;
 	--color-base-100: #1F1F1F;
-	--color-base-200: #2E2E2E;
-	--color-base-300: #4A4A4A;
 	--color-base-content: #F5F5F6;
-	--color-neutral: #3A3A3A;
-	--color-neutral-content: #A3A4A7;
-	--color-muted: #87888C;
+	--color-neutral-content: #9A9B9E;
+	--color-accent: #F24333;
 }
 
 :root[data-theme="light"] {
@@ -77,7 +67,7 @@
 	--tw-prose-pre-code: var(--color-base-100);
 	--tw-prose-pre-bg: var(--color-base-content);
 	--tw-prose-th-borders: var(--color-base-300);
-	--tw-prose-td-borders: var(--color-base-200);
+	--tw-prose-td-borders: var(--color-base-300);
 	--tw-prose-invert-body: var(--color-base-100);
 	--tw-prose-invert-headings: var(--color-base-100);
 	--tw-prose-invert-lead: var(--color-base-200);
@@ -215,7 +205,7 @@ img.emoji {
 
 	.breadcrumbs li + li::before {
 		content: "/";
-		@apply font-normal text-muted
+		@apply font-normal
 	}
 
 	/* A long title is already the heading right below: keep its step on one line. */
@@ -290,7 +280,7 @@ img.emoji {
 	/* --- Kind filter --- */
 
 	.filter {
-		@apply relative inline-flex items-center gap-1.5 -my-1 px-2 py-1 rounded-lg text-xs text-neutral-content transition-colors hover:text-base-content hover:bg-base-200 focus-within:text-base-content
+		@apply relative inline-flex items-center gap-1.5 -my-1 px-2 py-1 rounded-lg border border-base-300 text-xs text-neutral-content transition-colors hover:text-base-content hover:bg-base-200 focus-within:text-base-content
 	}
 
 	/* The native select stays for keyboard and screen readers; only its chrome goes. */
@@ -352,7 +342,7 @@ img.emoji {
 	}
 
 	.chip[data-tone="accent"] {
-		@apply border-accent/50 text-accent
+		@apply border-accent text-accent
 	}
 
 	/* --- List item ---
@@ -364,11 +354,11 @@ img.emoji {
 	}
 
 	a.entry {
-		@apply transition-colors hover:bg-base-200/60
+		@apply transition-colors hover:bg-base-200
 	}
 
 	.entry-date {
-		@apply shrink-0 text-sm text-muted sm:w-18
+		@apply shrink-0 text-sm text-neutral-content sm:w-18
 	}
 
 	.entry-body {
@@ -384,7 +374,7 @@ img.emoji {
 	}
 
 	.entry-trail {
-		@apply shrink-0 text-sm text-muted
+		@apply shrink-0 text-sm text-neutral-content
 	}
 
 	/* --- Grid item --- */
@@ -406,7 +396,7 @@ img.emoji {
 	}
 
 	.grid-item-title {
-		@apply mt-4 flex items-baseline justify-between gap-2 text-base font-semibold tracking-normal leading-snug
+		@apply flex items-baseline justify-between gap-2 text-base font-semibold tracking-normal leading-snug
 	}
 
 	.grid-item-description {
@@ -434,13 +424,13 @@ img.emoji {
 	}
 
 	.search-input {
-		@apply w-full bg-surface border border-base-300 rounded-lg px-4 py-2.5 text-sm transition-colors placeholder:text-muted focus:outline-none focus:border-base-content
+		@apply w-full bg-transparent border border-base-300 rounded-lg px-4 py-2.5 text-sm transition-colors placeholder:text-neutral-content focus:outline-none focus:border-base-content
 	}
 
 	/* Pagefind wraps the matched terms of an excerpt in <mark>, which needs a
 	   lighter treatment than the one used inside prose. */
 	.entry-description mark {
-		@apply bg-accent/35 text-base-content px-0.5 py-0 rounded-sm
+		@apply bg-base-200 text-base-content font-medium px-0.5 py-0 rounded-sm
 	}
 }
 
@@ -458,7 +448,7 @@ img.emoji {
 }
 
 mark {
-	@apply bg-accent text-on-accent p-1 rounded
+	@apply bg-accent text-base-100 p-1 rounded
 }
 
 p a {

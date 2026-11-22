@@ -12,7 +12,6 @@ interface App {
   title: string;
   tagline?: string;
   emoji: string;
-  cover?: string;
   /** Where the app runs; the fact generator opens a dialog instead. */
   href?: string;
   modal?: boolean;
@@ -34,7 +33,6 @@ const apps: App[] = (await getCollection("projects"))
       title: play?.title ?? p.data.title ?? p.id,
       tagline: play?.tagline ?? p.data.description,
       emoji: play?.emoji ?? "🎲",
-      cover: p.data.cover,
       href: play?.link ?? page,
       how: play?.how ?? (p.data.hidden ? undefined : page),
       howLabel: play?.howLabel ?? (play?.dead ? "How it worked" : "How it works"),
@@ -48,17 +46,14 @@ const randomFact: App = {
   title: "Random Fact Generator",
   tagline: "One unverified truth per reload. Refresh until you find one worth repeating.",
   emoji: "🃏",
-  cover: "/uploads/sky.jpg",
   modal: true,
   howLabel: "How it works",
 };
 
 const retired = apps.filter((a) => a.dead).sort((a, b) => b.dead!.valueOf() - a.dead!.valueOf());
 
-const sections = [
-  { title: undefined, note: undefined, apps: [...apps.filter((a) => !a.dead), randomFact] },
-  { title: "Retired", note: "No longer running. Their write-ups are still here.", apps: retired },
-].filter((section) => section.apps.length > 0);
+// One grid: live apps first, retired ones at the end, marked by a tomb.
+const grid = [...apps.filter((a) => !a.dead), randomFact, ...retired];
 
 /** "2019–2022" for a retired app, a single year when both coincide. */
 const lifespan = (app: App) =>
@@ -74,31 +69,27 @@ const lifespan = (app: App) =>
   <main>
     <PageHeader
       crumb="Apps"
-      title="A drawer of things that play back."
-      lead="Small toys built for the pleasure of building them: no sign-up, no purpose, no roadmap. Open one, poke at it, close the tab. No continuity guarantee."
+      title="Small apps, toys, and experiments."
+      lead="Stuff built for the pleasure of building them: no sign-up, no purpose, no roadmap. Open one, poke at it, close the tab. No continuity guarantee. Other small diversions are quietly taking shape in the workshop. They will land here as soon as they stop crashing.
+"
     />
 
-    {sections.map((section) => (
-      <Section title={section.title} note={section.note}>
-        <Grid>
-          {section.apps.map((app) => (
-            <GridItem title={app.title} description={app.tagline} image={app.cover} emoji={app.emoji} meta={lifespan(app)} muted={!!app.dead}>
-              {!app.dead && app.modal && (
-                <Button variant="link" class="stretched" data-fact-open data-haptic-press="light">Draw a fact <Icon name="arrow-up-right" size={16} /></Button>
-              )}
-              {!app.dead && !app.modal && app.href && (
-                <Button variant="link" class="stretched" href={app.href} data-haptic-press="light">Play <Icon name="arrow-up-right" size={16} /></Button>
-              )}
-              {app.how && <Button variant="link" href={app.how}>{app.howLabel}</Button>}
-            </GridItem>
-          ))}
-        </Grid>
-      </Section>
-    ))}
+    <Section>
+      <Grid>
+        {grid.map((app) => (
+          <GridItem title={app.title} description={app.dead ? `[Retired] ${app.tagline ?? ""}`.trim() : app.tagline} emoji={app.dead ? "🪦" : app.emoji} meta={lifespan(app)} muted={!!app.dead}>
+            {!app.dead && app.modal && (
+              <Button variant="link" class="stretched" data-fact-open data-haptic-press="light">Draw a fact <Icon name="arrow-up-right" size={16} /></Button>
+            )}
+            {!app.dead && !app.modal && app.href && (
+              <Button variant="link" class="stretched" href={app.href} data-haptic-press="light">Play <Icon name="arrow-up-right" size={16} /></Button>
+            )}
+            {app.how && <Button variant="link" href={app.how}>{app.howLabel}</Button>}
+          </GridItem>
+        ))}
+      </Grid>
+    </Section>
 
-    <p class="mt-12 text-sm text-neutral-content">
-      Other small diversions are quietly taking shape in the workshop. They will land here as soon as they stop crashing.
-    </p>
 
     <!-- The fact generator has no page of its own: it plays inside this dialog. -->
     <dialog id="fact-dialog" class="dialog" aria-label="Random fact">

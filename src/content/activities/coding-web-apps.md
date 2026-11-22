@@ -1,5 +1,5 @@
 ---
-title: Coding and web applications, designed and built end to end
+title: Coding and web applications
 kicker: Engineering projects
 order: 4
 pubDate: 2026-03-13

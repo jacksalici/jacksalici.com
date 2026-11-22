@@ -1,39 +1,24 @@
 ---
-// The one card used in grids: picture, title, one line, and actions.
+// The one card used in grids: emoji, title, one line, and actions.
 // Give an action the `stretched` class to make the whole card its target.
-import { Image } from "astro:assets";
-import { imageUrl, isOptimizable, resolveImage } from "../utils/images";
 
 interface Props {
 	title: string;
 	description?: string;
-	/** Path of the picture, as written in frontmatter. */
-	image?: string;
-	/** Shown in place of a missing picture. */
+	/** Glyph shown above the title. */
 	emoji?: string;
 	/** Short metadata at the end of the title line. */
 	meta?: string;
-	/** Greys the picture out, for items that are no longer active. */
+	/** Greys the title out, for items that are no longer active. */
 	muted?: boolean;
 }
 
-const { title, description, image, emoji, meta, muted } = Astro.props;
-const source = resolveImage(image);
+const { title, description, emoji, meta, muted } = Astro.props;
 ---
 
 <article class="grid-item">
-	<div class="grid-media">
-		{source ? (
-			isOptimizable(source) ? (
-				<Image src={source} alt="" width={760} densities={[1, 2]} loading="lazy" decoding="async" class:list={{ grayscale: muted }} />
-			) : (
-				<img src={imageUrl(source)} alt="" loading="lazy" decoding="async" class:list={{ grayscale: muted }} />
-			)
-		) : (
-			<span class="text-6xl leading-none" aria-hidden="true">{emoji}</span>
-		)}
-	</div>
-	<h3 class="grid-item-title">
+	{emoji && <span class="mb-3 text-3xl leading-none" aria-hidden="true">{emoji}</span>}
+	<h3 class:list={["grid-item-title", { "text-neutral-content": muted }]}>
 		{title}
 		{meta && <span class="entry-trail font-normal tabular-nums">{meta}</span>}
 	</h3>

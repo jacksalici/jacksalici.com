@@ -53,7 +53,6 @@ const projects = defineCollection({
 					link: z.string(),
 					tagline: z.string().optional(), // Playful one-liner used on the card
 					emoji: z.string().optional(), // Card glyph, falls back to a dice
-					icon: z.string().optional(), // Image used as the glyph instead of the emoji
 					how: z.string().optional(),
 					howLabel: z.string().optional(),
 					dead: z.coerce.date().optional(), // When set, the toy moves to the graveyard instead of the live grid

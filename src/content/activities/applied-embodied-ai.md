@@ -1,5 +1,5 @@
 ---
-title: Applied and embodied AI, from social robots to connected vehicles
+title: Applied and embodied AI
 kicker: Research projects
 order: 1
 pubDate: 2025-10-20
