@@ -37,9 +37,14 @@ const hasMeta = props.pubDate || props.updatedDate || props.categories || props.
 					{props.venue && <p class="mt-1 font-medium text-base-content">{props.venue}</p>}
 					{hasMeta && (
 						<p class="eyebrow">
-							{props.pubDate && <span>Published <FormattedDate date={props.pubDate} /></span>}
-							{props.updatedDate && <span>~ Updated <FormattedDate date={props.updatedDate} /></span>}
-							{props.categories && <span>~ {props.categories.map((c: string) => categories[c] ?? c).join(', ')}</span>}
+							{/* One inline run, so the tildes get plain word spaces rather than the flex gap. */}
+							{(props.pubDate || props.updatedDate || props.categories) && (
+								<span>
+									{props.pubDate && <span>Published <FormattedDate date={props.pubDate} /></span>}
+									{props.updatedDate && <span> ~ Updated <FormattedDate date={props.updatedDate} /></span>}
+									{props.categories && <span> ~ {props.categories.map((c: string) => categories[c] ?? c).join(', ')}</span>}
+								</span>
+							)}
 							{props.featured && <Chip tone="accent">Featured</Chip>}
 							{props.trending && <Chip tone="accent">Trending</Chip>}
 						</p>
