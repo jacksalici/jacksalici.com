@@ -1,5 +1,6 @@
 ---
-// A labelled block of a page.
+// A labelled block of a page. The `action` slot puts a control (e.g. a
+// KindFilter) on the right of the title.
 interface Props {
 	title?: string;
 	/** One line under the title. */
@@ -9,10 +10,18 @@ interface Props {
 }
 
 const { title, note, ...rest } = Astro.props;
+const hasAction = Astro.slots.has("action");
 ---
 
 <section class="section" {...rest}>
-	{title && <h2 class="eyebrow">{title}</h2>}
+	{hasAction ? (
+		<div class="section-head">
+			{title ? <h2 class="eyebrow">{title}</h2> : <span />}
+			<slot name="action" />
+		</div>
+	) : (
+		title && <h2 class="eyebrow">{title}</h2>
+	)}
 	{note && <p class="text-sm text-neutral-content mb-5">{note}</p>}
 	<slot />
 </section>

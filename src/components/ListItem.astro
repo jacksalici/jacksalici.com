@@ -19,14 +19,16 @@ interface Props {
 	trail?: string;
 	/** Kept out of view until something reveals it. */
 	hidden?: boolean;
+	/** Kind of the entry, read by a KindFilter over the list. */
+	kind?: string;
 }
 
-const { href, title, description, date, chip, trail, hidden } = Astro.props;
+const { href, title, description, date, chip, trail, hidden, kind } = Astro.props;
 const Row = href ? "a" : "div";
 const hasTrail = Boolean(chip || trail) || Astro.slots.has("trail");
 ---
 
-<li data-entry hidden={hidden}>
+<li data-entry hidden={hidden} data-kind={kind}>
 	<Row href={href} class="entry" data-haptic-press={href ? "light" : undefined} data-cuelume-hover={href ? "tick" : undefined} data-cuelume-press={href ? "" : undefined}>
 		{date && <span class="entry-date"><FormattedDate date={date} /></span>}
 		<span class="entry-body">

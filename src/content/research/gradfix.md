@@ -9,6 +9,7 @@ acronym: "ICLR 2026"
 location: "Rio de Janeiro, Brazil"
 coordinates: [-43.1729, -22.9068]
 categories: ["ai-ml"]
+kind: research
 activities: ["modular-deep-learning"]
 cta:
   - { url: "https://arxiv.org/pdf/2510.09658", label: "Link to the paper" }

@@ -10,6 +10,7 @@ playground:
   link: "https://padelle.jacksalici.com/"
   tagline: "A size converter for adapting recipes to different pans."
   emoji: "🥘"
+kind: development
 ---
 
 A baking recipe is written for one pan, and the pan in the cupboard is usually a different one. Whether a 20 × 30 cm tray can be replaced by a round tin is a small geometry problem that nobody wants to solve with floury hands.

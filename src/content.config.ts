@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
+import { kinds } from './consts';
 
 // Shared schema for common fields
 const baseSchema = z.object({
@@ -27,9 +28,13 @@ const baseSchema = z.object({
 	hidden: z.boolean().optional().default(false),
 });
 
+// Kind of work, shown as a chip and used to filter lists. Values in consts.ts.
+const kind = z.enum(kinds);
+
 const notes = defineCollection({
 	loader: glob({ base: './src/content/notes', pattern: '**/*.{md,mdx}' }),
 	schema: baseSchema.extend({
+		kind,
 		featured: z.boolean().optional().default(false),
 	}),
 });
@@ -37,6 +42,7 @@ const notes = defineCollection({
 const projects = defineCollection({
 	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
 	schema: baseSchema.extend({
+		kind,
 		featured: z.boolean().optional().default(false),
 		trending: z.boolean().optional().default(false),
 		stack: z.string().array().optional(), // Tech stack: languages, frameworks, tools
@@ -65,9 +71,10 @@ const activities = defineCollection({
 	}),
 });
 
-const papers = defineCollection({
-	loader: glob({ base: './src/content/papers', pattern: '**/*.{md,mdx}' }),
+const research = defineCollection({
+	loader: glob({ base: './src/content/research', pattern: '**/*.{md,mdx}' }),
 	schema: baseSchema.extend({
+		kind,
 		authors: z.string().optional(),
 		venue: z.string().optional(), // Conference/journal name
 		acronym: z.string().optional(), // e.g., "ICSR 2025"
@@ -96,4 +103,4 @@ const market = defineCollection({
 	}),
 });
 
-export const collections = { notes, projects, papers, activities, market };
+export const collections = { notes, projects, research, activities, market };

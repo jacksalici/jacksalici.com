@@ -1,12 +1,13 @@
 ---
 import Button from "../components/Button.astro";
+import KindFilter from "../components/KindFilter.astro";
 import Icon from "../components/Icon.astro";
 import List from "../components/List.astro";
 import ListItem from "../components/ListItem.astro";
 import PageHeader from "../components/PageHeader.astro";
 import Section from "../components/Section.astro";
 import Base from "../layouts/Base.astro";
-import { newsKindLabels } from "../consts";
+import { kindLabels } from "../consts";
 import { getNews } from "../utils/news";
 
 const news = await getNews();
@@ -43,14 +44,15 @@ const props = { image: "/uploads/sky.jpg" };
     </PageHeader>
 
     <Section title="News" id="news" data-pagefind-ignore>
+      <KindFilter slot="action" for="news-list" items={news.map((item) => item.kind)} />
       <List id="news-list">
         {news.map((item, i) => (
-          <ListItem href={item.href} title={item.title} date={item.date} chip={newsKindLabels[item.kind]} hidden={i >= LATEST} />
+          <ListItem href={item.href} title={item.title} date={item.date} chip={kindLabels[item.kind]} kind={item.kind} hidden={i >= LATEST} />
         ))}
       </List>
 
       {news.length > LATEST && (
-        <Button variant="link" class="mt-4" data-news-more data-haptic-press="light">
+        <Button variant="link" class="mt-4" data-news-more data-more-for="news-list" data-haptic-press="light">
           All {news.length} updates
           <Icon name="arrow-down" size={16} />
         </Button>

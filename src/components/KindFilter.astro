@@ -1,0 +1,55 @@
+---
+// A drop-down that narrows a List to one kind (research, engineering, …).
+// Pass the id of the List and the kind of each of its rows; each ListItem
+// carries its own through the `kind` prop. Only the kinds present in the list
+// are offered, with their row counts, so no choice ever empties it, and the
+// filter is left out when the list holds a single kind.
+// Choosing a kind also reveals the rows a "show more" button was holding
+// back, and removes that button (marked with `data-more-for="<list id>"`).
+import Icon from "./Icon.astro";
+import { kindLabels, kinds, type Kind } from "../consts";
+
+interface Props {
+	/** id of the List to filter. */
+	for: string;
+	/** The kind of every row of the list. */
+	items: Kind[];
+}
+
+const { for: listId, items } = Astro.props;
+
+// In the order of `kinds` in consts.ts.
+const options = kinds
+	.map((kind) => [kind, items.filter((k) => k === kind).length] as const)
+	.filter(([, n]) => n > 0);
+---
+
+{options.length > 1 && (
+	<label class="filter" data-cuelume-hover="tick">
+		<Icon name="filter" size={14} />
+		<span class="sr-only">Filter by kind</span>
+		<select data-kind-filter={listId} data-haptic-press="selection">
+			<option value="">All kinds</option>
+			{options.map(([kind, n]) => <option value={kind}>{kindLabels[kind]} ({n})</option>)}
+		</select>
+		<Icon name="nav-arrow-down" size={12} />
+	</label>
+)}
+
+<script>
+	// One delegated listener: module scripts run once and the document outlives
+	// ClientRouter swaps, so this works on first load and after every navigation.
+	document.addEventListener("change", (event) => {
+		const select = (event.target as Element).closest<HTMLSelectElement>("select[data-kind-filter]");
+		if (!select) return;
+		const listId = select.dataset.kindFilter!;
+		const list = document.getElementById(listId);
+		if (!list) return;
+
+		const value = select.value;
+		list.querySelectorAll<HTMLElement>("[data-entry]").forEach((entry) => {
+			entry.hidden = value !== "" && entry.dataset.kind !== value;
+		});
+		document.querySelectorAll(`[data-more-for="${listId}"]`).forEach((more) => more.remove());
+	});
+</script>

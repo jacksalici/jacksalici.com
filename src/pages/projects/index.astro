@@ -1,0 +1,69 @@
+---
+import { getCollection } from "astro:content";
+import KindFilter from "../../components/KindFilter.astro";
+import List from "../../components/List.astro";
+import ListItem from "../../components/ListItem.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
+import Base from "../../layouts/Base.astro";
+import { kindLabels } from "../../consts";
+import { getActivities } from "../../utils/news";
+
+const projects = (await getCollection("projects", (p) => p.data.draft !== true && p.data.hidden !== true)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// The activities with at least one project behind them, as /research does with papers.
+const activities = (await getActivities())
+  .filter((a) => a.data.hidden !== true)
+  .map((activity) => ({
+    activity,
+    projects: projects.filter((p) => p.data.activities?.includes(activity.id)).length,
+  }))
+  .filter((entry) => entry.projects > 0);
+---
+
+<Base
+  title="Projects"
+  description="Software, hardware, and design projects by Giacomo Salici: web apps, robotics, AI tools, and things made by hand."
+  keywords={["giacomo salici", "projects", "portfolio", "web development", "robotics", "making"]}
+>
+  <main>
+    <PageHeader crumb="Projects" title="Projects and the activities behind them.">
+      <p>
+        What I designed and built outside of papers: software, hardware, and the occasional piece of design, from degree theses to weekend experiments.
+      </p>
+    </PageHeader>
+
+    {activities.length > 0 && (
+      <Section title="Activities" id="activities">
+        <List>
+          {activities.map(({ activity, projects }) => (
+            <ListItem
+              href={"/activities/" + activity.id}
+              title={activity.data.title ?? activity.id}
+              description={activity.data.description}
+              trail={`${projects} project${projects === 1 ? "" : "s"}`}
+            />
+          ))}
+        </List>
+      </Section>
+    )}
+
+    <Section title="Projects" id="projects">
+      <KindFilter slot="action" for="projects-list" items={projects.map((p) => p.data.kind)} />
+      <List id="projects-list">
+        {projects.map((project) => (
+          <ListItem
+            href={"/projects/" + project.id}
+            title={project.data.title ?? project.id}
+            description={project.data.description}
+            date={project.data.pubDate}
+            chip={kindLabels[project.data.kind]}
+            kind={project.data.kind}
+          />
+        ))}
+      </List>
+    </Section>
+  </main>
+</Base>

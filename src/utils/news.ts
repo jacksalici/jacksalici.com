@@ -1,10 +1,10 @@
 import { getCollection } from "astro:content";
-import { projectKinds, type NewsKind } from "../consts";
+import type { Kind } from "../consts";
 
 /** One row of the news list: a paper, a project or a note. */
 export interface NewsItem {
-  collection: "papers" | "projects" | "notes";
-  kind: NewsKind;
+  collection: "research" | "projects" | "notes";
+  kind: Kind;
   href: string;
   title: string;
   date: Date;
@@ -17,25 +17,24 @@ const isPublic = (entry: { data: { draft?: boolean; hidden?: boolean } }) =>
 /** Papers, projects and notes in one list, newest first. */
 export async function getNews(): Promise<NewsItem[]> {
   const [papers, projects, notes] = await Promise.all([
-    getCollection("papers", isPublic),
+    getCollection("research", isPublic),
     getCollection("projects", isPublic),
     getCollection("notes", isPublic),
   ]);
 
   const items: NewsItem[] = [
     ...papers.map((paper) => ({
-      collection: "papers" as const,
-      kind: "research" as const,
-      href: "/papers/" + paper.id,
+      collection: "research" as const,
+      kind: paper.data.kind,
+      href: "/research/" + paper.id,
       title: paper.data.news ?? paper.data.title ?? paper.id,
       date: paper.data.pubDate,
       activities: paper.data.activities,
     })),
     ...projects.map((project) => {
-      const category = project.data.categories?.[0];
       return {
         collection: "projects" as const,
-        kind: (category && projectKinds[category]) || "development",
+        kind: project.data.kind,
         href: "/projects/" + project.id,
         title: project.data.news ?? project.data.title ?? project.id,
         date: project.data.pubDate,
@@ -44,7 +43,7 @@ export async function getNews(): Promise<NewsItem[]> {
     }),
     ...notes.map((note) => ({
       collection: "notes" as const,
-      kind: "notes" as const,
+      kind: note.data.kind,
       href: "/notes/" + note.id,
       title: note.data.news ?? note.data.title ?? note.id,
       date: note.data.pubDate,

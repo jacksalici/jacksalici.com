@@ -32,8 +32,9 @@ import Icon from "./Icon.astro";
   const MAX_RESULTS = 8;
 
   // Human label for a result, derived from the first segment of its URL.
+  // Only detail pages (two segments) get one: "/research" itself is a page.
   const TYPES: Record<string, string> = {
-    papers: "Paper",
+    research: "Paper",
     projects: "Project",
     notes: "Note",
     market: "Garage sale",
@@ -41,8 +42,8 @@ import Icon from "./Icon.astro";
   };
 
   function typeOf(url: string) {
-    const segment = url.replace(/^\//, "").split("/")[0];
-    return TYPES[segment] ?? "Page";
+    const [segment, slug] = url.replace(/^\//, "").split("/");
+    return (slug && TYPES[segment]) || "Page";
   }
 
   let pagefind: any = null;

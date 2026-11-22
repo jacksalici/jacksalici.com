@@ -8,6 +8,7 @@ acronym: "Ital-IA 2026"
 location: "Rome, Italy"
 coordinates: [12.4964, 41.9028]
 categories: ["ai-ml"]
+kind: research
 activities: ["anomaly-detection-tsa"]
 news: My latest work on industrial anomaly detection, made in collaboration with SEW-Eurodrive, will be presented at Ital-IA 2026! See you in Rome!
 cta:

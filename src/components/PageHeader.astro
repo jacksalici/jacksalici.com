@@ -1,20 +1,38 @@
 ---
-// Opening block of every page: eyebrow, title, lead, in that order.
-// Slots: `eyebrow` and the default one (lead) take rich content in place of
-// the props; `after` holds whatever closes the header (links, authors).
+// Opening block of every page: breadcrumbs, title, lead, in that order.
+// The trail is derived from the URL (see utils/breadcrumbs.ts) and ends with
+// `crumb`, or with the page's slug when it has no short name.
+// Slots: the default one (lead) takes rich content in place of the prop;
+// `after` holds whatever closes the header (links, authors, dates).
+import { getBreadcrumbs } from "../utils/breadcrumbs";
+
 interface Props {
 	title: string;
-	eyebrow?: string;
+	/** Short name of the page, as the last step of the breadcrumbs. */
+	crumb?: string;
 	lead?: string;
 }
 
-const { title, eyebrow, lead } = Astro.props;
+const { title, crumb, lead } = Astro.props;
+const crumbs = getBreadcrumbs(Astro.url.pathname, crumb);
 ---
 
 <header class="page-header">
-	{(eyebrow || Astro.slots.has("eyebrow")) && (
-		<p class="eyebrow">{eyebrow}<slot name="eyebrow" /></p>
-	)}
+	{crumbs.length > 0 && <nav aria-label="Breadcrumb" class="breadcrumbs">
+		<ol>
+			{crumbs.map((step) => (
+				<li>
+					{step.current ? (
+						<span aria-current="page">{step.label}</span>
+					) : step.href ? (
+						<a href={step.href} class="link" data-cuelume-hover="tick" data-cuelume-press data-haptic-press="light">{step.label}</a>
+					) : (
+						<span>{step.label}</span>
+					)}
+				</li>
+			))}
+		</ol>
+	</nav>}
 	<h1 class="page-title">{title}</h1>
 	{lead && <p class="page-lead">{lead}</p>}
 	{Astro.slots.has("default") && <div class="page-lead"><slot /></div>}

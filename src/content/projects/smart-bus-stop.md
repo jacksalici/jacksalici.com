@@ -5,6 +5,7 @@ slug: smart-bus-stop
 description: An IoT project aimed to enhance bus stops.
 news: Smart Bus Stop is an IoT system to improve public transport via real-time data and sensors.
 categories: ["iot-and-v2x"]
+kind: engineering
 activities: ["applied-embodied-ai"]
 stack: ["Flask", "Arduino", "ESP32"]
 cover: /uploads/smart-bus-stop/architecture.jpg

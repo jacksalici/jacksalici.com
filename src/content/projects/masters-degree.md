@@ -6,6 +6,7 @@ description: "Gaze-Driven Human-Robot Interaction is the core of my thesis."
 news: My M.Sc. thesis on gaze-driven human-robot interaction is now available online.
 summary: "A summary of my M.Sc. thesis in Computer Engineering: a framework that uses Project Aria eye-tracking glasses and Structure from Motion to locate human gaze in 3D outside the laboratory, and a dataset of human-robot interactions recorded with it."
 categories: ["ai-ml", "robotics"]
+kind: engineering
 activities: ["applied-embodied-ai"]
 stack: ["Python"]
 featured: true

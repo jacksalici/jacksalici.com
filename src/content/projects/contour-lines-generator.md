@@ -6,6 +6,7 @@ description: "A pure JavaScript generator of parametric contour lines, exported 
 news: Contour Lines Generator is an app to make parametric line art, now online.
 cover: "/uploads/contours.png"
 categories: ["coding"]
+kind: development
 activities: ["coding-web-apps"]
 stack: ["JavaScript", "SVG"]
 playground:

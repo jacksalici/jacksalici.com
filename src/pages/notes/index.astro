@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import KindFilter from "../../components/KindFilter.astro";
+import List from "../../components/List.astro";
+import ListItem from "../../components/ListItem.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
+import Base from "../../layouts/Base.astro";
+
+const notes = (await getCollection("notes", (n) => n.data.draft !== true && n.data.hidden !== true)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Base
+  title="Notes"
+  description="Notes, updates, and thoughts by Giacomo Salici."
+  keywords={["giacomo salici", "notes", "blog", "thoughts"]}
+>
+  <main>
+    <PageHeader
+      crumb="Notes"
+      title="Notes, updates, and thoughts."
+      lead="Longer write-ups that are neither a paper nor a project: how something was built, what changed, what I think about it."
+    />
+
+    <Section title="Notes" id="notes">
+      <KindFilter slot="action" for="notes-list" items={notes.map((n) => n.data.kind)} />
+      <List id="notes-list">
+        {notes.map((note) => (
+          <ListItem
+            href={"/notes/" + note.id}
+            title={note.data.title ?? note.id}
+            description={note.data.description}
+            date={note.data.pubDate}
+            kind={note.data.kind}
+          />
+        ))}
+      </List>
+    </Section>
+  </main>
+</Base>

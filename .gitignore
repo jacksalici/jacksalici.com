@@ -11,3 +11,4 @@ dist
 .codex
 CLAUDE.md
 __pycache__
+paper-pdf/

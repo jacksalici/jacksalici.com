@@ -7,6 +7,7 @@ venue: "17th International Conference on Social Robotics + AI (ICSR+AI 2025)"
 location: "Naples, Italy"
 coordinates: [14.2681, 40.8518]
 categories: ["robotics"]
+kind: research
 news: '“LLMs and Humanoid Robot Diversity: The Pose Generation Challenge” has been accepted at ICSR 2025!'
 activities: ["applied-embodied-ai"]
 acronym: "ICSR 2025"

@@ -8,6 +8,7 @@ acronym: "CCNC 2026"
 location: "Las Vegas, USA"
 coordinates: [-115.1398, 36.1699]
 categories: ["iot-and-v2x"]
+kind: research
 news: Our work on the complete PIENO refueling workflow has been accepted at CCNC 2026!
 cta:
   - { url: "https://iris.unimore.it/bitstream/11380/1390192/1/2025407464.pdf", label: "Link to the paper" }
@@ -22,7 +23,7 @@ cover: "/uploads/papers/pieno-workflow/figure1.jpg"
 
 ## A closer look
 
-Where and when to refuel is a decision drivers take over and over with little information, although fuel prices, detours and personal habits all bear on it. [RI-PIENO](/papers/ripieno), our framework for refueling itinerary optimization, was first presented through its modules and its results; how data actually travels from the car to the recommendation was left implicit. This short paper writes that pipeline down, step by step, so that it can be reproduced and extended.
+Where and when to refuel is a decision drivers take over and over with little information, although fuel prices, detours and personal habits all bear on it. [RI-PIENO](/research/ripieno), our framework for refueling itinerary optimization, was first presented through its modules and its results; how data actually travels from the car to the recommendation was left implicit. This short paper writes that pipeline down, step by step, so that it can be reproduced and extended.
 
 ![An ESP32 board wired to a CAN transceiver and to the OBD-II connector of the car](../../assets/uploads/papers/pieno-workflow/figure1.jpg)
 *Figure 1 — The CAN Access Module: an ESP32 microcontroller reads the vehicle CAN bus through the OBD-II port.*

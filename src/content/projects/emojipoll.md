@@ -5,6 +5,7 @@ slug: "emojipoll"
 description: "EmojiPoll: create polls using random emoji."
 news: EmojiPoll lets you create fun emoji-based polls to share on any messaging app.
 categories: ["web"]
+kind: development
 activities: ["coding-web-apps"]
 stack: ["Vue"]
 cover: "/uploads/emojipoll/logo2.png"

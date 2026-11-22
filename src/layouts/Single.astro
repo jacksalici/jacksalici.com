@@ -11,7 +11,8 @@ import { categories } from '../consts';
 
 const { ...props } = Astro.props;
 
-const hasEyebrow = props.pubDate || props.updatedDate || props.categories || props.featured || props.trending;
+// Dates, categories and badges: a metadata line closing the header.
+const hasMeta = props.pubDate || props.updatedDate || props.categories || props.featured || props.trending;
 ---
 
 <Base
@@ -30,19 +31,19 @@ const hasEyebrow = props.pubDate || props.updatedDate || props.categories || pro
 >
 	<main>
 		<PageHeader title={props.title} lead={props.summary ?? props.description}>
-			{hasEyebrow && (
-				<Fragment slot="eyebrow">
-					{props.pubDate && <span>Published <FormattedDate date={props.pubDate} /></span>}
-					{props.updatedDate && <span>~ Updated <FormattedDate date={props.updatedDate} /></span>}
-					{props.categories && <span>~ {props.categories.map((c: string) => categories[c] ?? c).join(', ')}</span>}
-					{props.featured && <Chip tone="accent">Featured</Chip>}
-					{props.trending && <Chip tone="accent">Trending</Chip>}
-				</Fragment>
-			)}
-			{(props.authors || props.venue) && (
+			{(props.authors || props.venue || hasMeta) && (
 				<Fragment slot="after">
 					{props.authors && <p>{props.authors}</p>}
 					{props.venue && <p class="mt-1 font-medium text-base-content">{props.venue}</p>}
+					{hasMeta && (
+						<p class="eyebrow">
+							{props.pubDate && <span>Published <FormattedDate date={props.pubDate} /></span>}
+							{props.updatedDate && <span>~ Updated <FormattedDate date={props.updatedDate} /></span>}
+							{props.categories && <span>~ {props.categories.map((c: string) => categories[c] ?? c).join(', ')}</span>}
+							{props.featured && <Chip tone="accent">Featured</Chip>}
+							{props.trending && <Chip tone="accent">Trending</Chip>}
+						</p>
+					)}
 				</Fragment>
 			)}
 		</PageHeader>

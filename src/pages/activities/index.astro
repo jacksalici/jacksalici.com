@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import List from "../../components/List.astro";
+import ListItem from "../../components/ListItem.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
+import Base from "../../layouts/Base.astro";
+import { getActivities } from "../../utils/news";
+
+const isPublic = (entry: { data: { draft?: boolean; hidden?: boolean } }) =>
+  entry.data.draft !== true && entry.data.hidden !== true;
+
+const [papers, projects] = await Promise.all([
+  getCollection("research", isPublic),
+  getCollection("projects", isPublic),
+]);
+
+const count = (n: number, noun: string) => (n > 0 ? `${n} ${noun}${n === 1 ? "" : "s"}` : undefined);
+
+// Every activity, with what is filed under it: papers and projects.
+const activities = (await getActivities())
+  .filter((a) => a.data.hidden !== true)
+  .map((activity) => {
+    const of = (list: typeof papers | typeof projects) =>
+      list.filter((entry) => entry.data.activities?.includes(activity.id)).length;
+    return {
+      activity,
+      trail: [count(of(papers), "paper"), count(of(projects), "project")].filter(Boolean).join(" · "),
+    };
+  });
+---
+
+<Base
+  title="Activities"
+  description="The lines of work behind Giacomo Salici's papers and projects, from embodied AI to web applications."
+  keywords={["giacomo salici", "research activities", "projects", "embodied ai", "anomaly detection"]}
+>
+  <main>
+    <PageHeader
+      crumb="Activities"
+      title="The lines of work behind papers and projects."
+      lead="Each activity groups the papers and the projects that came out of the same line of work. Those with papers are also listed on the Research page, those with projects on the Projects page."
+    />
+
+    <Section title="Activities" id="activities">
+      <List>
+        {activities.map(({ activity, trail }) => (
+          <ListItem
+            href={"/activities/" + activity.id}
+            title={activity.data.title ?? activity.id}
+            description={activity.data.description}
+            trail={trail || undefined}
+          />
+        ))}
+      </List>
+    </Section>
+  </main>
+</Base>

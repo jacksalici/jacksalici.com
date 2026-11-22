@@ -155,7 +155,8 @@ img.emoji {
    by a component in src/components:
 
      .shell        page width, shared by <main> and the header
-     .page-header  PageHeader.astro  eyebrow + title + lead
+     .page-header  PageHeader.astro  breadcrumbs + title + lead
+     .filter       KindFilter.astro  kind drop-down over a List
      .section      Section.astro     labelled block of a page
      .btn          Button.astro      solid | outline | link | icon
      .chip         Chip.astro        small label
@@ -177,7 +178,7 @@ img.emoji {
 	/* --- Text --- */
 
 	.eyebrow {
-		@apply text-xs font-medium text-neutral-content
+		@apply text-xs font-bold text-neutral-content
 	}
 
 	.link {
@@ -194,8 +195,31 @@ img.emoji {
 		@apply mb-12 max-w-2xl
 	}
 
-	.page-header > .eyebrow {
-		@apply mb-3 flex flex-wrap items-center gap-x-2 gap-y-1
+	/* Same type as the eyebrow; the current page is the last, unlinked step. */
+	.breadcrumbs {
+		@apply mb-3 text-xs font-bold text-neutral-content
+	}
+
+	.breadcrumbs ol {
+		@apply flex flex-wrap items-center gap-x-1.5 gap-y-1 min-w-0
+	}
+
+	.breadcrumbs li {
+		@apply flex items-center gap-x-1.5 min-w-0
+	}
+
+	.breadcrumbs li + li::before {
+		content: "/";
+		@apply font-normal text-muted
+	}
+
+	/* A long title is already the heading right below: keep its step on one line. */
+	.breadcrumbs [aria-current="page"] {
+		@apply text-base-content truncate max-w-[24ch] sm:max-w-[40ch]
+	}
+
+	.page-header-after .eyebrow {
+		@apply mt-4 flex flex-wrap items-center gap-x-2 gap-y-1
 	}
 
 	.page-title {
@@ -214,8 +238,33 @@ img.emoji {
 		@apply mt-12 first:mt-0
 	}
 
-	.section > .eyebrow {
+	.section > .eyebrow,
+	.section-head {
 		@apply mb-3
+	}
+
+	/* Title on the left, a control (e.g. the KindFilter) on the right. */
+	.section-head {
+		@apply flex items-center justify-between gap-4
+	}
+
+	/* --- Kind filter --- */
+
+	.filter {
+		@apply relative inline-flex items-center gap-1.5 -my-1 px-2 py-1 rounded-lg text-xs text-neutral-content transition-colors hover:text-base-content hover:bg-base-200 focus-within:text-base-content
+	}
+
+	/* The native select stays for keyboard and screen readers; only its chrome goes. */
+	.filter select {
+		@apply appearance-none bg-transparent pr-4 cursor-pointer focus:outline-none
+	}
+
+	.filter select + .icon {
+		@apply pointer-events-none absolute right-2
+	}
+
+	.filter:has(select:focus-visible) {
+		@apply outline-2 outline-offset-2 outline-accent
 	}
 
 	/* The header is not sticky, so anchors only need a little breathing room. */

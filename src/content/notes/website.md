@@ -7,6 +7,7 @@ description: "I rebuild this website too often."
 news: A note on why I keep rebuilding this website, and how it moved from Hugo to Astro.
 summary: "A brief overview of the major versions of my personal website and the reasons behind my choices."
 categories: ["thoughts"]
+kind: notes
 tags: ["website", "portfolio"]
 featured: true
 ---

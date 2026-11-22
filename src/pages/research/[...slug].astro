@@ -4,13 +4,13 @@ import Single from '../../layouts/Single.astro';
 
 
 export async function getStaticPaths() {
-	const papers = await getCollection('papers');
+	const papers = await getCollection('research');
 	return papers.map((paper) => ({
 		params: { slug: paper.id },
 		props: paper,
 	}));
 }
-type Props = CollectionEntry<'papers'>;
+type Props = CollectionEntry<'research'>;
 
 const paper = Astro.props;
 const { Content } = await render(paper);

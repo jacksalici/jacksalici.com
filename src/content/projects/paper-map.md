@@ -10,6 +10,7 @@ playground:
   link: "/map"
   tagline: "A map with a pin for every venue where we have a paper."
   emoji: "🌍"
+kind: development
 ---
 
 A list of publications says what was published and when, but not where: every conference paper is also a trip to the city where it was presented. This page puts the venues of my papers on a world map, one pin per paper.

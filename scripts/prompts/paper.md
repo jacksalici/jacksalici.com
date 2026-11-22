@@ -6,7 +6,7 @@ Put the PDF in `paper-pdf/<slug>.pdf` first, named after the paper `slug`.
 ---
 
 Write the page of the paper in `paper-pdf/<slug>.pdf`, as
-`src/content/papers/<file>.md`.
+`src/content/research/<file>.md`.
 
 ## 1. Read the paper
 

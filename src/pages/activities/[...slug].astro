@@ -1,12 +1,13 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
+import KindFilter from "../../components/KindFilter.astro";
 import List from "../../components/List.astro";
 import ListItem from "../../components/ListItem.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import Prose from "../../components/Prose.astro";
 import Section from "../../components/Section.astro";
 import Base from "../../layouts/Base.astro";
-import { newsKindLabels } from "../../consts";
+import { kindLabels } from "../../consts";
 import { getActivities, getNews } from "../../utils/news";
 
 export async function getStaticPaths() {
@@ -37,7 +38,6 @@ const { Content } = await render(activity);
 >
   <main>
     <PageHeader
-      eyebrow={activity.data.kicker}
       title={activity.data.title ?? activity.id}
       lead={activity.data.description}
     />
@@ -48,9 +48,10 @@ const { Content } = await render(activity);
 
     {related.length > 0 && (
       <Section title="Related work" data-pagefind-ignore>
-        <List>
+        <KindFilter slot="action" for="related-list" items={related.map((item) => item.kind)} />
+        <List id="related-list">
           {related.map((item) => (
-            <ListItem href={item.href} title={item.title} date={item.date} chip={newsKindLabels[item.kind]} />
+            <ListItem href={item.href} title={item.title} date={item.date} chip={kindLabels[item.kind]} kind={item.kind} />
           ))}
         </List>
       </Section>

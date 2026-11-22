@@ -8,6 +8,7 @@ acronym: "I-RIM 2026"
 location: "Rome, Italy"
 coordinates: [12.4964, 41.9028]
 categories: ["robotics", "ai-ml"]
+kind: research
 activities: ["applied-embodied-ai", "anomaly-detection-tsa"]
 news: Our paper “Smarter Canes” has been accepted at the I-RIM Conference 2026. See you at Maker Faire Rome!
 cta:

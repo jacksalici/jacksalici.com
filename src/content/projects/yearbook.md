@@ -4,6 +4,7 @@ pubDate: 2019-06-30
 description: My last year high school yearbook.
 news: I designed my high school's 76-page yearbook during my final year.
 categories: ["design"]
+kind: design
 hidden: true
 ---
 

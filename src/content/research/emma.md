@@ -8,6 +8,7 @@ acronym: "ICSR 2025"
 location: "Naples, Italy"
 coordinates: [14.2681, 40.8518]
 categories: ["robotics"]
+kind: research
 news: Our paper titled “Multimodal Dialogue for Empathetic Human-Robot Interaction” has been accepted for publication at ICSR 2025!
 cta:
   - { url: "https://iris.unimore.it/handle/11380/1384168", label: "Link to the paper" }

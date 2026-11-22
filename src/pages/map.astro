@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 import PageHeader from '../components/PageHeader.astro';
 import Base from '../layouts/Base.astro';
 
-const papers = await getCollection('papers');
+const papers = await getCollection('research');
 
 const papersWithCoordinates = papers
   .filter((paper) => paper.data.coordinates)
@@ -27,7 +27,7 @@ const papersWithCoordinates = papers
 >
     <main>
         <PageHeader
-          eyebrow="Research"
+          crumb="Conference map"
           title="The Conference Atlas"
           lead="A map of paper venues and conference locations related to my publications."
         />

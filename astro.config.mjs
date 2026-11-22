@@ -20,12 +20,11 @@ export default defineConfig({
   },
 
   redirects: {
-    // The collections no longer have their own index page: they live as
-    // sections of the homepage.
+    // Old URLs of pages that moved.
     "/papers": "/research",
+    // The papers collection was renamed to research.
+    "/papers/[...slug]": "/research/[...slug]",
     "/playground": "/apps",
-    "/projects": "/#projects",
-    "/notes": "/#writing",
     "/projects/website": "/notes/website",
     "/thesis": "/projects/sfm-gaze-framework"
   },

@@ -8,6 +8,7 @@ acronym: "ICCVW 2025"
 location: "Honolulu, Hawaii, USA"
 coordinates: [-157.8581, 21.3099]
 categories: ["robotics"]
+kind: research
 news: Our paper “LLMs as NAO Robot 3D Motion Planners” has been accepted at ICCVW 2025. See you in Hawaii!
 activities: ["applied-embodied-ai"]
 cta:

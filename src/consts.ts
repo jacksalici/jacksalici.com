@@ -20,25 +20,16 @@ export const categories: Record<string, string> = {
   "thoughts":   "Thoughts",
 };
 
-// Chip shown on each row of the news list: papers are "research", notes are
-// "notes", and a project takes one of the middle three from its first category.
-export type NewsKind = "research" | "engineering" | "development" | "design" | "notes";
+// Kind of a paper, project or note, set by the `kind` field of its frontmatter.
+// It is the chip on each row of the news list and what the lists filter by.
+export const kinds = ["research", "engineering", "development", "design", "notes"] as const;
 
-export const newsKindLabels: Record<NewsKind, string> = {
+export type Kind = (typeof kinds)[number];
+
+export const kindLabels: Record<Kind, string> = {
   research:    "Research",
   engineering: "Engineering",
   development: "Development",
   design:      "Design",
   notes:       "Notes",
-};
-
-export const projectKinds: Record<string, NewsKind> = {
-  "ai-ml":       "engineering",
-  "robotics":    "engineering",
-  "iot-and-v2x": "engineering",
-  "making":      "engineering",
-  "web":         "development",
-  "coding":      "development",
-  "games":       "development",
-  "design":      "design",
 };
