@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import portrait from "../assets/uploads/newphoto.jpg";
 import Button from "../components/Button.astro";
 import KindFilter from "../components/KindFilter.astro";
 import Icon from "../components/Icon.astro";
@@ -25,6 +27,9 @@ const props = { image: "/uploads/sky.jpg" };
 >
   <main>
     <PageHeader size="lg" title="A digital craftsman who designs systems that matter.">
+      <span slot="aside" class="avatar">
+        <Image src={portrait} alt="Giacomo Salici rowing a boat on a lake in the mountains" width={320} loading="eager" />
+      </span>
       <p>
         I am <strong>Giacomo Salici</strong>, an AI &amp; computer engineer, developer, and occasionally designer based in Italy. I work with the <a href="https://aimagelab.unimore.it/">AImageLab</a> research group of UniMORE as a <strong>PhD candidate in ICT</strong>.
       </p>
