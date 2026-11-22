@@ -225,25 +225,28 @@ img.emoji {
 
 	/* --- Button --- */
 
+	/* Every button behaves like the icon buttons of the header: muted at rest,
+	   full contrast on a soft fill on hover. Variants only change the box. */
 	.btn {
-		@apply inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-sm cursor-pointer transition-colors border border-transparent
+		@apply inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-sm cursor-pointer transition-colors border border-transparent text-neutral-content hover:text-base-content hover:bg-base-200
 	}
 
+	/* The primary action keeps its ink fill, so hover only lightens it. */
 	.btn[data-variant="solid"] {
-		@apply bg-base-content text-base-100 hover:opacity-80
+		@apply bg-base-content text-base-100 hover:bg-base-content hover:text-base-100 hover:opacity-80
 	}
 
 	.btn[data-variant="outline"] {
-		@apply border-base-300 hover:border-base-content
+		@apply border-base-300
 	}
 
-	/* Text-only: sits inline with copy, so it drops the box. */
+	/* Text-only: sits inline with copy, so it drops the box and the fill. */
 	.btn[data-variant="link"] {
-		@apply p-0 rounded-none text-neutral-content hover:text-base-content
+		@apply p-0 rounded-none hover:bg-transparent
 	}
 
 	.btn[data-variant="icon"] {
-		@apply p-2 text-neutral-content hover:text-base-content hover:bg-base-200
+		@apply p-2
 	}
 
 	/* Stretches a link or button over its nearest positioned ancestor, so the

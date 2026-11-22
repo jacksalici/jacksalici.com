@@ -1,5 +1,6 @@
 ---
 import Button from "../components/Button.astro";
+import Icon from "../components/Icon.astro";
 import List from "../components/List.astro";
 import ListItem from "../components/ListItem.astro";
 import PageHeader from "../components/PageHeader.astro";
@@ -30,11 +31,14 @@ const props = { image: "/uploads/sky.jpg" };
         My research interests include <span class="text-base-content">AIoT</span>, <span class="text-base-content">embodied AI</span>, <span class="text-base-content">modular DL</span>, and <span class="text-base-content">anomaly detection</span>. I also enjoy (in casual order): open-source software and hardware, good designs (digital and physical), to craft random stuff, 3D printing, the outdoors, swimming, DnD, pizza, and desk plants.
       </p>
 
-      <div slot="after" class="flex flex-wrap gap-x-5 gap-y-2">
-        <Button variant="link" href="/contacts" class="text-base-content">Get in touch</Button>
-        <Button variant="link" href="https://github.com/jacksalici">GitHub</Button>
-        <Button variant="link" href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ">Google Scholar</Button>
-        <Button variant="link" href="https://linkedin.com/in/jacksalici">LinkedIn</Button>
+      <div slot="after" class="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <Button variant="link" href="/contacts" class="text-base-content">Get in touch <Icon name="arrow-up-right" size={16} /></Button>
+        {/* -my-2 keeps the icon buttons' padding from making the row taller than the text link. */}
+        <div class="flex items-center gap-1 -my-2">
+          <Button variant="icon" href="https://github.com/jacksalici" aria-label="GitHub"><Icon name="github" /></Button>
+          <Button variant="icon" href="https://scholar.google.com/citations?user=jMVa-rYAAAAJ" aria-label="Google Scholar"><Icon name="graduation-cap" /></Button>
+          <Button variant="icon" href="https://linkedin.com/in/jacksalici" aria-label="LinkedIn"><Icon name="linkedin" /></Button>
+        </div>
       </div>
     </PageHeader>
 
@@ -47,7 +51,8 @@ const props = { image: "/uploads/sky.jpg" };
 
       {news.length > LATEST && (
         <Button variant="link" class="mt-4" data-news-more data-haptic-press="light">
-          All {news.length} updates ↓
+          All {news.length} updates
+          <Icon name="arrow-down" size={16} />
         </Button>
       )}
     </Section>

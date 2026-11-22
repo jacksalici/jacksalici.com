@@ -1,5 +1,6 @@
 ---
 import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
 import Chip from '../components/Chip.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Gallery from '../components/Gallery.astro';
@@ -61,7 +62,8 @@ const hasEyebrow = props.pubDate || props.updatedDate || props.categories || pro
 			<div class="flex flex-wrap gap-2">
 				{props.cta.map((item: { url: string; label: string }, i: number) => (
 					<Button href={item.url} variant={i === 0 ? "solid" : "outline"}>
-						{item.label}&nbsp;↗
+						{item.label}
+						<Icon name="arrow-up-right" size={16} />
 					</Button>
 				))}
 			</div>

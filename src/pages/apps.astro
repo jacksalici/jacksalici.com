@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import { RefreshCw, X } from "@lucide/astro";
 import Button from "../components/Button.astro";
 import Grid from "../components/Grid.astro";
+import Icon from "../components/Icon.astro";
 import GridItem from "../components/GridItem.astro";
 import PageHeader from "../components/PageHeader.astro";
 import Section from "../components/Section.astro";
@@ -84,10 +84,10 @@ const lifespan = (app: App) =>
           {section.apps.map((app) => (
             <GridItem title={app.title} description={app.tagline} image={app.cover} emoji={app.emoji} meta={lifespan(app)} muted={!!app.dead}>
               {!app.dead && app.modal && (
-                <Button variant="link" class="stretched" data-fact-open data-haptic-press="light">Draw a fact&nbsp;↗</Button>
+                <Button variant="link" class="stretched" data-fact-open data-haptic-press="light">Draw a fact <Icon name="arrow-up-right" size={16} /></Button>
               )}
               {!app.dead && !app.modal && app.href && (
-                <Button variant="link" class="stretched" href={app.href} data-haptic-press="light">Play&nbsp;↗</Button>
+                <Button variant="link" class="stretched" href={app.href} data-haptic-press="light">Play <Icon name="arrow-up-right" size={16} /></Button>
               )}
               {app.how && <Button variant="link" href={app.how}>{app.howLabel}</Button>}
             </GridItem>
@@ -105,7 +105,7 @@ const lifespan = (app: App) =>
       <div class="flex items-center justify-between gap-4 mb-4">
         <p class="eyebrow">Random fact</p>
         <Button variant="icon" class="-m-2" data-fact-close aria-label="Close" data-haptic-press="light">
-          <X size={18} stroke-width={1.75} />
+          <Icon name="xmark" />
         </Button>
       </div>
 
@@ -118,7 +118,7 @@ const lifespan = (app: App) =>
           Served by a public API, so treat it as a rumour worth fact-checking.
         </p>
         <Button variant="outline" class="shrink-0" data-fact-more data-haptic-press="medium">
-          <RefreshCw size={16} stroke-width={1.75} />
+          <Icon name="refresh-double" size={16} />
           Another one
         </Button>
       </div>

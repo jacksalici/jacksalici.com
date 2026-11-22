@@ -5,7 +5,7 @@
 // search only answers on a built site (`npm run build && npm run preview`).
 import Button from "./Button.astro";
 import List from "./List.astro";
-import { X } from "@lucide/astro";
+import Icon from "./Icon.astro";
 ---
 
 <dialog id="search-dialog" class="dialog" aria-label="Search the site">
@@ -20,7 +20,7 @@ import { X } from "@lucide/astro";
       aria-label="Search the site"
     />
     <Button variant="icon" data-search-close aria-label="Close search">
-      <X size={18} stroke-width={1.75} />
+      <Icon name="xmark" />
     </Button>
   </div>
 

@@ -1,6 +1,6 @@
 ---
 import Button from "./Button.astro";
-import { Menu, Search as SearchIcon, Volume2, VolumeX, Sun, Moon, SunMoon } from "@lucide/astro";
+import Icon from "./Icon.astro";
 
 let links = [
   { href: "/", label: "About" },
@@ -62,19 +62,19 @@ function isActive(href: string) {
 
     <div class="ml-auto md:ml-0 flex items-center gap-1">
         <Button variant="icon" data-search-open aria-label="Search" data-cuelume-press="bloom" data-haptic-press="light">
-        <SearchIcon size={18} stroke-width={1.75} />
+        <Icon name="search" />
       </Button>
       <Button variant="icon" data-sound-toggle aria-label="Mute sound" aria-pressed="false" data-haptic-toggle="selection">
-        <span data-sound-icon-on><Volume2 size={18} stroke-width={1.75} /></span>
-        <span data-sound-icon-off hidden><VolumeX size={18} stroke-width={1.75} /></span>
+        <span data-sound-icon-on><Icon name="sound-high" /></span>
+        <span data-sound-icon-off hidden><Icon name="sound-off" /></span>
       </Button>
       <Button variant="icon" data-theme-toggle aria-label="Theme: auto" data-haptic-toggle="selection">
-        <span data-theme-icon-auto><SunMoon size={18} stroke-width={1.75} /></span>
-        <span data-theme-icon-light hidden><Sun size={18} stroke-width={1.75} /></span>
-        <span data-theme-icon-dark hidden><Moon size={18} stroke-width={1.75} /></span>
+        <span data-theme-icon-auto><Icon name="light-bulb" /></span>
+        <span data-theme-icon-light hidden><Icon name="light-bulb-on" /></span>
+        <span data-theme-icon-dark hidden><Icon name="light-bulb-off" /></span>
       </Button>
       <Button variant="icon" class="md:hidden" data-menu-toggle aria-expanded="false" aria-controls="header-menu" aria-label="Menu" data-cuelume-press="scan" data-haptic-press="light">
-        <Menu size={20} stroke-width={1.75} />
+        <Icon name="menu" size={20} />
       </Button>
     </div>
   </div>

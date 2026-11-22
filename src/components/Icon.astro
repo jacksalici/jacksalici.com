@@ -1,0 +1,37 @@
+---
+// An Iconoir icon (https://iconoir.com), inlined into the HTML at build time.
+// `name` is the file name of the icon in iconoir/icons/regular, e.g. "search".
+// The icon is decorative: the button around it carries the accessible name.
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+
+type Props = {
+	name: string;
+	/** Width and height in px. */
+	size?: number;
+	strokeWidth?: number;
+	class?: string;
+};
+
+const { name, size = 18, strokeWidth = 1.5, class: className } = Astro.props;
+
+// Read from disk at build time, so only the icons in use reach the page.
+const file = join(process.cwd(), "node_modules/iconoir/icons/regular", `${name}.svg`);
+if (!existsSync(file)) throw new Error(`Icon "${name}" not found in iconoir/icons/regular`);
+const svg = readFileSync(file, "utf8");
+
+// Keep only the shapes; the outer <svg> is rebuilt below with our own attributes.
+const body = svg.replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
+---
+
+<svg
+	width={size}
+	height={size}
+	viewBox="0 0 24 24"
+	fill="none"
+	stroke-width={strokeWidth}
+	aria-hidden="true"
+	focusable="false"
+	class:list={["icon", className]}
+	set:html={body}
+/>
