@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
+import { getCollection } from "astro:content";
 
 import Analytics from '@vercel/analytics/astro';
 
@@ -15,6 +16,15 @@ const pathname = new URL(Astro.request.url).pathname;
 // Pagefind indexes only what is inside `data-pagefind-body`, so the header and
 // the footer stay out of every result. Pages hidden from crawlers stay out too.
 const indexable = props.noindex !== true && pathname !== "/404";
+
+// Latest version in the changelog, linked from the footer to its entry on the timeline.
+const parse = (version: string) => version.split(".").map(Number);
+const latest = (await getCollection("versions"))
+  .map((entry) => entry.data.version)
+  .sort((a, b) => {
+    const [x, y] = [parse(a), parse(b)];
+    return y[0] - x[0] || y[1] - x[1] || y[2] - x[2];
+  })[0];
 
 
 ---
@@ -56,8 +66,14 @@ const indexable = props.noindex !== true && pathname !== "/404";
     </div>
     {props.hideFooter !== true &&
     <footer class="mt-auto p-4 text-neutral-content select-none">
-      <p class="text-center text-xs" data-cuelume-release="error" data-haptic-press="error">
-        2013 - {today.getFullYear()} &copy; Giacomo Salici
+      <p class="text-center text-xs">
+        <span data-cuelume-release="error" data-haptic-press="error">2013 - {today.getFullYear()} &copy; Giacomo Salici</span>
+        {latest && (
+          <>
+            {" / "}
+            <a href={`/notes/website`} class=" hover:text-base-content" data-haptic-press="light">v{latest}</a>
+          </>
+        )}
       </p>
     </footer>
     }
