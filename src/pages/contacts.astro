@@ -1,5 +1,10 @@
 ---
+import Button from "../components/Button.astro";
+import Grid from "../components/Grid.astro";
+import GridItem from "../components/GridItem.astro";
+import Icon from "../components/Icon.astro";
 import PageHeader from "../components/PageHeader.astro";
+import Section from "../components/Section.astro";
 import Base from "../layouts/Base.astro";
 
 // Addresses are written as patterns to keep them away from scrapers.
@@ -35,5 +40,15 @@ const contacts = [
       ))}
     </ul>
 
+    <Section>
+      <Grid>
+        <GridItem
+          title="Got something to prototype?"
+          description="3D printing, design, code, AI, even woodworking: send the project to the Factory, and draw it if words fall short."
+        >
+          <Button variant="link" class="stretched" href="https://factory.jacksalici.com/" data-haptic-press="light">Open the Factory <Icon name="arrow-up-right" size={16} /></Button>
+        </GridItem>
+      </Grid>
+    </Section>
   </main>
 </Base>
