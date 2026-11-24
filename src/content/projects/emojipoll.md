@@ -13,7 +13,7 @@ cta:
   - { url: "https://emojipoll.jacksalici.com", label: "Try EmojiPoll" }
 playground:
   link: "/projects/emojipoll/"
-  tagline: "Create polls for Whatsapp using random emoji. Killed by Whatsapp Polls, introduced one month after the creation of this app. Seriously."
+  tagline: "Create polls for WhatsApp using random emoji. Killed by WhatsApp Polls, introduced one month after the creation of this app. Seriously."
   emoji: "🗳️"
   how: "/projects/emojipoll/"
   dead: 2022-09-15

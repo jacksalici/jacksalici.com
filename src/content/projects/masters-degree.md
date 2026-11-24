@@ -3,7 +3,7 @@ title: "Leveraging Gaze Estimation in Human-Robot Interaction"
 pubDate: 2024-10-17
 slug: sfm-gaze-framework
 description: "Gaze-Driven Human-Robot Interaction is the core of my thesis."
-news: My M.Sc. thesis on gaze-driven human-robot interaction is now available online.
+news: My M.Sc. thesis is a framework to locate human gaze in 3D outside the laboratory, for human-robot interaction.
 summary: "A summary of my M.Sc. thesis in Computer Engineering: a framework that uses Project Aria eye-tracking glasses and Structure from Motion to locate human gaze in 3D outside the laboratory, and a dataset of human-robot interactions recorded with it."
 categories: ["ai-ml", "robotics"]
 kind: engineering
@@ -12,7 +12,7 @@ stack: ["Python"]
 featured: true
 cta:
   - { url: "https://github.com/jacksalici/sfm-gaze-framework", label: "Project Repository" }
-  - { url: "https://morethesis.unimore.it/theses/available/etd-09262024-135659/", label: "Full text thesis" }
+  - { url: "https://morethesis.unimore.it/theses/available/etd-09262024-135659/", label: "Thesis in the university archive" }
 cover: "/uploads/masters-degree/fw-example.png"
 ---
 

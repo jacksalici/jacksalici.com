@@ -70,8 +70,7 @@ const lifespan = (app: App) =>
     <PageHeader
       crumb="Apps"
       title="Small apps, toys, and experiments."
-      lead="Stuff built for the pleasure of building them: no sign-up, no purpose, no roadmap. Open one, poke at it, close the tab. No continuity guarantee. Other small diversions are quietly taking shape in the workshop. They will land here as soon as they stop crashing.
-"
+      lead="Things built for the pleasure of building them: no sign-up, no purpose, no roadmap. Open one, poke at it, close the tab. Other small diversions are quietly taking shape in the workshop and will land here when they are ready."
     />
 
     <Section>
@@ -141,7 +140,7 @@ const lifespan = (app: App) =>
         text!.textContent = data[0].fact + ".";
         play("ready");
       } catch (e) {
-        text!.textContent = "Ops, an error occurred.";
+        text!.textContent = "Oops, an error occurred.";
         play("error");
       }
     }

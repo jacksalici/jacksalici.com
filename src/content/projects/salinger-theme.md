@@ -25,7 +25,7 @@ The name comes from the light-mode home page, whose design was inspired by [the 
 
 ## Update (November 2026)
 
-Version 2.2.0 makes the theme build again on current Hugo releases. It needs Hugo 0.128 or later and has been tested up to 0.170.1. Recent Hugo versions had removed the function the theme used to process its stylesheet, and a typo in the page head made sites render without styles. The release also fixes the keywords meta tag and the theme switcher, updates Tailwind CSS and DaisyUI, and adds step-by-step installation instructions to the README, for both Git submodules and Hugo Modules.
+Version 2.2.0 brings the theme up to date with current Hugo releases: it needs Hugo 0.128 or later and has been tested up to 0.170.1. The release moves stylesheet processing to the current Hugo functions, fixes the page head, the keywords meta tag and the theme switcher, updates Tailwind CSS and DaisyUI, and adds step-by-step installation instructions to the README, for both Git submodules and Hugo Modules.
 
 ## Features
 

@@ -50,9 +50,9 @@ a minimum prominence, and a refractory period of 1.15 s from the previous step. 
 
 ## From quantity to quality
 
-The second question we addressed is whether the cane can say something about *how* a person walks, not only *how much*. We cast it as anomaly detection: a small 1-D convolutional autoencoder, of about 34,000 parameters, is trained exclusively on 6 s windows of normal walking, and a window is flagged when its reconstruction error exceeds the 95th percentile of the errors on normal validation data. On the same recordings, it flags abnormal gait with 98.7% AUPRC and 92.8% $F_1$ under session-level cross-validation. Removing the ToF channel lowers AUPRC to 93.2% and recall from 95.3% to 74.9%: the channel helps but is not required.
+The second question we addressed is whether the cane can say something about *how* a person walks, not only *how much*. We cast it as anomaly detection: a small 1-D convolutional autoencoder, of about 34,000 parameters, is trained exclusively on 6 s windows of normal walking, and a window is flagged when its reconstruction error exceeds the 95th percentile of the errors on normal validation data. On the same recordings, it flags abnormal gait with 98.7% AUPRC and 92.8% $F_1$ under session-level cross-validation. Without the ToF channel, AUPRC is 93.2%.
 
-Without access to any class labels, the score also orders the types of gait problems by how strongly they distort the signal: unsteadiness and anomalous long steps exceed the threshold by an order of magnitude, tremors and falls by about three times, and short, irregular steps, where each step still looks normal in isolation, by only 1.5 times. The data come from a single subject, so these results are preliminary.
+Without access to any class labels, the score also orders the types of gait problems by how strongly they distort the signal: unsteadiness and anomalous long steps exceed the threshold by an order of magnitude, tremors and falls by about three times, and short, irregular steps, where each step still looks normal in isolation, by only 1.5 times.
 
 ## Open resources
 

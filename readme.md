@@ -1,7 +1,7 @@
 
 
 # Just my website. 🥸💅
-![Scores](https://github.com/jacksalici/jacksalici.com/blob/main/public/uploads/scores.png)
+![Scores](src/assets/uploads/scores.png)
 
 
 Howdy! If you are reading this, you probably already know that the website simultaneously represents 📺:
@@ -10,14 +10,13 @@ Howdy! If you are reading this, you probably already know that the website simul
 - a kind of online resume 🪪,
 - and a placeholder space for my nickname domain ⚓️.
 
-_This code may not be the prettiest you have ever seen 👀, nor the most grammatically correct text. Please consider it a work in progress and not ready for production. Consider also that the main target of this `readme` is the future myself, so I don't pretend to be serious. 🎭_
 
 
 ## Architecture 🏗️
 
 Currently, the website is powered by Astro.
 
-**Posts are stored in `/content` folder.**
+**Posts are stored in the `src/content` folder.**
 
 ## Commands 🧞
 
@@ -27,10 +26,10 @@ All commands are run from the root of the project, from a terminal:
 | :------------------------ | :----------------------------------------------- |
 | `bun install`             | Installs dependencies                            |
 | `bun run dev`             | Starts local dev server at `localhost:4321`      |
-| `bun run build`           | Build your production site to `./dist/`          |
-| `bun run preview`         | Preview your build locally, before deploying     |
-| `bun run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun run astro -- --help` | Get help using the Astro CLI                     |
+| `bun run build`           | Builds the production site to `./dist/`          |
+| `bun run preview`         | Previews the build locally, before deploying     |
+| `bun run astro ...`       | Runs CLI commands like `astro add`, `astro check` |
+| `bun run astro -- --help` | Shows help for the Astro CLI                     |
 
 Once the edits have been made, *just push the commits*: Vercel will build the website and host it.
 

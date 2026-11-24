@@ -18,6 +18,6 @@ gallery:
     alt: "Scout model 4"
 ---
 
-In scouting, a proficiency badge (in italian, "brevetto") is earned by completing a practical project that demonstrates a specific skill, and the craftsman badge is the one about building things by hand.
+In scouting, a proficiency badge (in Italian, "brevetto") is earned by completing a practical project that demonstrates a specific skill, and the craftsman badge is the one about building things by hand.
 
 During my last year as a boy scout I earned the craftsman badge by building a 1:20 scale model of a patrol area, the space a patrol sets up and lives in during the campouts. The pictures above show the finished model.
