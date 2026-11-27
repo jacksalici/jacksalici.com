@@ -56,6 +56,7 @@ const projects = defineCollection({
 					how: z.string().optional(),
 					howLabel: z.string().optional(),
 					dead: z.coerce.date().optional(), // When set, the toy moves to the graveyard instead of the live grid
+					pinned: z.boolean().optional().default(false), // Shown first on /apps
 				}).optional()
 		}),
 });

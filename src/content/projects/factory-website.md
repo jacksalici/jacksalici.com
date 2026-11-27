@@ -9,6 +9,7 @@ playground:
   link: "https://factory.jacksalici.com/"
   tagline: "Got an idea for a prototype? Describe it, or just draw it."
   emoji: "🏭"
+  pinned: true
 kind: development
 ---
 

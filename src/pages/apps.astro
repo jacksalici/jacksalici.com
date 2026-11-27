@@ -21,6 +21,8 @@ interface App {
   pubDate?: Date;
   /** When set, the app is retired. */
   dead?: Date;
+  /** Shown first. */
+  pinned?: boolean;
 }
 
 const apps: App[] = (await getCollection("projects"))
@@ -38,8 +40,11 @@ const apps: App[] = (await getCollection("projects"))
       howLabel: play?.howLabel ?? (play?.dead ? "How it worked" : "How it works"),
       pubDate: p.data.pubDate,
       dead: play?.dead,
+      pinned: play?.pinned,
     };
-  });
+  })
+  // Pinned apps first; the sort is stable, so each group keeps its date order.
+  .sort((a, b) => Number(!!b.pinned) - Number(!!a.pinned));
 
 // The fact generator has no project page: it plays inside a dialog on this page.
 const randomFact: App = {
