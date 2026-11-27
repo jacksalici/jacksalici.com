@@ -7,7 +7,7 @@ news: "Put a face on a cartoon elf, Santa or snowman, print it on card and hang 
 hidden: true
 stack: ["React", "TypeScript", "Vite", "MediaPipe", "pdf-lib", "Vercel"]
 playground:
-  link: "https://sleighfaces.vercel.app/"
+  link: "https://sleighfaces.jacksalici.com/"
   tagline: "Put a face on a cartoon elf, Santa or snowman, print it on card and hang it on the tree."
   emoji: "🎄"
 kind: development
